@@ -27,6 +27,7 @@ MINIFY_BUNDLES = {
 ROOT_URLCONF = 'make_mozilla.urls'
 
 INSTALLED_APPS = list(INSTALLED_APPS) + [
+    'django.contrib.gis',
     # Application base, containing global templates.
     'make_mozilla.base',
     # Example code. Can (and should) be removed for actual projects.

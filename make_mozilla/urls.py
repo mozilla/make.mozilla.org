@@ -1,15 +1,15 @@
 from django.conf import settings
 from django.conf.urls.defaults import *
 
-from .examples import urls
-
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    (r'', include(urls)),
+    url(r'^$',                        'make_mozilla.base.views.root.index'),
+    url(r'^events/new$',              'make_mozilla.base.views.event.new'),
+    url(r'^events/create$',           'make_mozilla.base.views.event.create', name = 'create-event'),
+    url(r'^events/(?P<event_id>.+)$', 'make_mozilla.base.views.event.detail'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
