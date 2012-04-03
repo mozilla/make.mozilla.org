@@ -31,6 +31,7 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'make_mozilla.base',
     # Example code. Can (and should) be removed for actual projects.
     'make_mozilla.examples',
+    'south'
 ]
 
 
