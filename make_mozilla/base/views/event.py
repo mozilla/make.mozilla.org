@@ -27,7 +27,7 @@ def create(request):
         form = EventForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
-            form.save()
+            event = form.save()
             return http.HttpResponseRedirect(
                 reverse('make_mozilla.base.views.event.detail', kwargs={'event_id': event.pk})
             ) # Redirect after POST
