@@ -8,8 +8,8 @@ import psycopg2
 
 class PatchedPostGISAdapter(PostGISAdapter):
     def __init__(self, geom):
-        super(PostGISAdapter, self).__init__(geom)
-        self._adapter = psycopg2.Binary
+        super(PatchedPostGISAdapter, self).__init__(geom)
+        self._adapter = psycopg2.Binary(self.ewkb)
 
     def prepare(self, conn):
         """
@@ -24,7 +24,7 @@ class PatchedPostGISAdapter(PostGISAdapter):
         return 'ST_GeomFromEWKB(%s)' % self._adapter.getquoted()
 
 class PatchedPostGISOperations(PostGISOperations):
-    Adapter = PostGISAdapter
+    Adapter = PatchedPostGISAdapter
     Adaptor = Adapter # Backwards-compatibility alias.
 
 class DatabaseWrapper(Psycopg2DatabaseWrapper):
