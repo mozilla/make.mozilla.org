@@ -1,6 +1,7 @@
 settings_local.py
 settings/local.py
 */settings/local.py
+venv/*
 *.py[co]
 *.sw[po]
 .coverage
@@ -11,6 +12,7 @@ build
 .DS_Store
 *-min.css
 *-all.css
+*.less.css
 *-min.js
 *-all.js
 .noseids
