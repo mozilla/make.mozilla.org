@@ -3,7 +3,7 @@ from fabric.api import task, env, execute
 
 site.addsitedir(os.path.abspath('fabric'))
 
-import db, git, release, puppet
+import db, git, release, puppet, wsgi_server
 
 env.releases_path = '/var/webapps/make.mozilla.org'
 env.repo_url = 'git://github.com/fidothe/make.mozilla.org.git'

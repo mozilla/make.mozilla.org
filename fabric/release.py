@@ -14,7 +14,7 @@ def initial_setup():
 @task
 def symlink():
     symlink_release_path = '%s/current' % env.releases_path
-    run('ln -sf "%s" "%s"' % (latest_release_path(), symlink_release_path))
+    run('ln -nsf "%s" "%s"' % (latest_release_path(), symlink_release_path))
 
 @task
 def create():
