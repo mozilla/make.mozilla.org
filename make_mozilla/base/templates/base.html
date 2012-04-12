@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--[if (lt IE 9)]><html class="no-js bad-ie" lang="{{ LANG }}" dir="{{ DIR }}"><![endif]-->
+<!--[if (gt IE8)|!(IE)]><html class="no-js" lang="{{ LANG }}" dir="{{ DIR }}"><![endif]-->
+<head>
+    <title>{% block page_title %}{% endblock %}{{ app_name }}</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    {% block site_css %}
+        {{ css('make_devices') }}
+    {% endblock %}
+    {{ css('make_desktop', 'all and (min-width: 30em)') }}
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        {{ css('make_desktop') }}
+    <![endif]-->
+    <link rel="icon" href="{{ MEDIA_URL }}img/favicon.ico" />
+</head>
+<body id="{% block page_id %}{% endblock %}" class="{% block section_class %}{% endblock %}">
+    <script>
+        document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, '');
+    </script>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

@@ -7,11 +7,12 @@ from funfactory.settings_base import *
 # and js files that can be bundled together by the minify app.
 MINIFY_BUNDLES = {
     'css': {
-        'example_css': (
-            'css/examples/main.css',
+        'make_devices': (
+            'css/ext/normalize.css',
+            'css/base.less',
         ),
-        'example_mobile_css': (
-            'css/examples/mobile.css',
+        'make_desktop': (
+            'css/desktop.less',
         ),
     },
     'js': {
