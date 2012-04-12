@@ -40,5 +40,5 @@ def setup():
 
 @task
 def deploy_cold():
-    # execute(setup)
+    execute(setup)
     perform_release(migrate = True, setup = True)
