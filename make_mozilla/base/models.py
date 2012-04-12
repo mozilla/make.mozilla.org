@@ -6,6 +6,6 @@ class Event(models.Model):
     venue_address = models.TextField()
     country = models.CharField(max_length=255)
     event_url = models.CharField(max_length=255)
-    location = models.PointField(geography=True, blank=True)
+    location = models.PointField(blank=True)
 
     objects = models.GeoManager()
