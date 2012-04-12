@@ -19,6 +19,7 @@ class app {
 
   exec { "create_virtualenv":
     command => "sudo -u ${app_user} virtualenv --no-site-packages ${app_root}/virtualenv",
+    onlyif => 'test ! -e ${app_root}/virtualenv/bin/python',
     require => [Class['python'], File[$app_root], User[$app_user]];
   }
 }
