@@ -1,6 +1,10 @@
 from django.conf import settings
 from django.conf.urls.defaults import *
 
+from funfactory.monkeypatches import patch
+patch()
+
+
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
