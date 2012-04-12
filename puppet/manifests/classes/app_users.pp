@@ -39,30 +39,37 @@ define app_dir ( $owner, $group, $mode = 750 ) {
 }
 
 class app_users {
-  # set some defaults
-  $shell = "/bin/false"
-
   app_group { "wsgi":
     gid => "1100",
   }
-  app_group { "make_mozilla":
+  app_group { $app_user:
     gid => "1101",
   }
-  app_user { "make_mozilla":
+  app_user { $app_user:
     ensure => "present",
     uid => "1101",
-    pgroup => 'make_mozilla',
+    pgroup => $app_user,
     groups => ['wsgi'],
-    fullname => "Alice",
+    fullname => "make.mozilla.org",
     home => $app_root,
-    shell => $shell,
+    shell => "/bin/bash",
   }
   file { $all_apps_root:
     ensure => directory, 
     owner => "root", group => "root", mode => 755,
   }
   app_dir { $app_root:
-    owner => "make_mozilla",
+    owner => $app_user,
     group => "wsgi"
+  }
+  file { "${app_root}/.ssh":
+    ensure => directory,
+    owner => $app_user, group => $app_user, mode => 700,
+  }
+  file { "${app_root}/.ssh/authorized_keys":
+    ensure => present,
+    owner => $app_user, group => $app_user, mode => 600,
+    source => '/etc/puppet/files/deploy_keys',
+    require => File["${app_root}/.ssh"];
   }
 }

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 GEOGRAPHY=0
 POSTGIS_SQL=postgis.sql
 

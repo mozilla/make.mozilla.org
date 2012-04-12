@@ -1,5 +1,3 @@
-# Red Hat, CentOS, and Fedora think Apache is the only web server
-# ever, so we have to use a different package on CentOS than Ubuntu.
 class apache {
   package { "apache2-dev":
     ensure => present,
@@ -7,7 +5,7 @@ class apache {
   }
 
   file { "/etc/apache2/sites-enabled/playdoh.conf":
-    source => "puppet:///files/etc/httpd/conf.d/playdoh.conf",
+    source => "/etc/puppet/files/etc/httpd/conf.d/playdoh.conf",
     owner => "root", group => "root", mode => 0644,
     require => [
         Package['apache2-dev']
