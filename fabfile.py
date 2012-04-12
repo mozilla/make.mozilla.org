@@ -6,6 +6,9 @@ site.addsitedir(os.path.abspath('fabric'))
 import db, git, release, puppet
 
 env.releases_path = '/var/webapps/make.mozilla.org'
+env.repo_url = 'git://github.com/fidothe/make.mozilla.org.git'
+env.puppet_user = env.user
+env.user = 'mozilla'
 hosts = {
     'development': ['make.constituentparts.com'],
     'production': [],
@@ -13,24 +16,22 @@ hosts = {
 }
 env.hosts = hosts[os.getenv('TO', 'development')]
 
-def perform_release(migrate = False):
+def perform_release(migrate = False, setup = False):
     execute(release.create)
     execute(release.symlink)
+    if setup:
+        execute(db.setup)
     if migrate:
         execute(db.migrate)
     execute(wsgi_server.restart)
 
-def do_deployment(migrate = False):
-    execute(git.update)
-    perform_release(migrate)
-
 @task
 def deploy():
-    do_deployment()
+    perform_release()
 
 @task
 def deploy_with_migrations():
-    do_deployment()
+    perform_release()
 
 @task
 def setup():
@@ -39,5 +40,5 @@ def setup():
 
 @task
 def deploy_cold():
-    execute(setup)
-    perform_release(migrate = True)
+    # execute(setup)
+    perform_release(migrate = True, setup = True)
