@@ -60,7 +60,8 @@ class app_users {
   }
   app_dir { $app_root:
     owner => $app_user,
-    group => "wsgi"
+    group => "wsgi",
+    mode => 755
   }
   file { "${app_root}/.ssh":
     ensure => directory,
