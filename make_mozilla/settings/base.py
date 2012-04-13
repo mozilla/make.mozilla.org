@@ -31,8 +31,9 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'django.contrib.gis',
     # Application base, containing global templates.
     'make_mozilla.base',
+    # Events and Venues
+    'make_mozilla.events',
     # Example code. Can (and should) be removed for actual projects.
-    'make_mozilla.examples',
     'south'
 ]
 
