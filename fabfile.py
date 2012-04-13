@@ -10,7 +10,8 @@ env.repo_url = 'git://github.com/fidothe/make.mozilla.org.git'
 env.puppet_user = env.user
 env.user = 'mozilla'
 hosts = {
-    'development': ['make.constituentparts.com'],
+    'dev': ['make.constituentparts.com'],
+    'development': ['make-dev1.vm1.labs.sjc1.mozilla.com'],
     'production': [],
     'staging': []
 }

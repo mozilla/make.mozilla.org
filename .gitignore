@@ -1,6 +1,8 @@
 settings_local.py
 settings/local.py
 */settings/local.py
+*/settings/fauxdev.py
+venv/*
 *.py[co]
 *.sw[po]
 .coverage
