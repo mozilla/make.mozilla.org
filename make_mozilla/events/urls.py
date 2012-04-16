@@ -1,7 +1,8 @@
 from django.conf.urls.defaults import patterns, url
+from make_mozilla.events.views import events
 
 urlpatterns = patterns('',
-    url(r'^events/new$',              'make_mozilla.events.views.event.new'),
-    url(r'^events/create$',           'make_mozilla.events.views.event.create', name = 'create-event'),
-    url(r'^events/(?P<event_id>.+)$', 'make_mozilla.events.views.event.detail'),
+    url(r'^new$',              events.new,    name = 'event.new'),
+    # url(r'^create$',           events.create, name = 'event.create'),
+    # url(r'^(?P<event_id>.+)$', events.detail, name = 'event'),
 )
