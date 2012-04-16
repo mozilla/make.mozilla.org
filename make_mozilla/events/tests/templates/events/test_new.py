@@ -1,7 +1,8 @@
 from django.test import TestCase
 from mock import patch, Mock
 from django.test.client import RequestFactory
-from bs4 import BeautifulSoup
+from lxml import etree
+from lxml.cssselect import CSSSelector
 
 # from django.conf import settings
 # from django.core.urlresolvers import resolve
@@ -13,6 +14,36 @@ from make_mozilla.events import forms
 # c = Client()
 rf = RequestFactory()
 
+class WithinElementContext:
+    def __init__(self, context_node):
+        self.context_node = context_node
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        pass
+
+    def _select(self, selector_string):
+        if self.context_node is None:
+            return None
+        selector = CSSSelector(selector_string)
+        node_list = selector(self.context_node)
+        if len(node_list) > 0:
+            return node_list[0]
+        else:
+            return None
+
+    def has_css(self, selector_string):
+        return self._select(selector_string) is not None
+
+    def within_css(self, selector_string):
+        return WithinElementContext(self._select(selector_string))
+
+def html_tester(html_string):
+    root_context = etree.fromstring(html_string)
+    return WithinElementContext(root_context)
+
 class TestEventsNewTemplate(TestCase):
     def setUp(self):
         self.ef = forms.EventForm()
@@ -20,11 +51,12 @@ class TestEventsNewTemplate(TestCase):
         self.request = rf.get('/events/new')
         context = {'event_form': self.ef, 'venue_form': self.vf}
         self.result = jingo.render(self.request, 'events/new.html', context)
-        self.soup = BeautifulSoup(self.result.content, 'lxml')
+        self.html = html_tester(self.result.content)
 
     def test_the_page_contains_form_pointed_at_events_create(self):
-        assert len(self.soup.select('form[action=/events/create]')) > 0
+        assert self.html.has_css('form[action=/events/create]')
 
     def test_the_page_contains_the_event_form_fields(self):
-        assert len(self.soup.select('form[action=/events/create]')[0].select('input[name]')) > 0
+        with self.html.within_css('form[action=/events/create]') as html:
+            assert html.has_css('input[name]')
 
