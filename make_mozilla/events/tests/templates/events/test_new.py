@@ -40,7 +40,7 @@ class WithinElementContext:
     def within_css(self, selector_string):
         return WithinElementContext(self._select(selector_string))
 
-def html_tester(html_string):
+def html_context(html_string):
     root_context = lxml.html.fromstring(html_string)
     return WithinElementContext(root_context)
 
@@ -51,7 +51,7 @@ class TestEventsNewTemplate(TestCase):
         self.request = rf.get('/events/new')
         context = {'event_form': self.ef, 'venue_form': self.vf}
         self.result = jingo.render(self.request, 'events/new.html', context)
-        self.html = html_tester(self.result.content)
+        self.html = html_context(self.result.content)
 
     def test_the_page_contains_form_pointed_at_events_create(self):
         assert self.html.has_css('form[action=/events/create]')
