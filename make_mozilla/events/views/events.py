@@ -1,5 +1,6 @@
 from django import http
 from django.core.urlresolvers import reverse
+from django.views.decorators.http import require_POST
 
 import bleach
 import commonware
@@ -20,3 +21,7 @@ def new(request):
         'event_form': new_event_form,
         'venue_form': new_venue_form
     })
+
+@require_POST
+def create(request):
+    pass

@@ -1,5 +1,6 @@
 from django.utils import unittest
 from mock import patch, Mock
+from django.test import TestCase
 from django.test.client import Client, RequestFactory
 
 from django.conf import settings
@@ -29,3 +30,11 @@ class TestEventViewsNew(unittest.TestCase):
 
         mock_render.assert_called_with(request, 'events/new.html', {'event_form': event_form, 'venue_form': venue_form})
 
+class TestEventViewsCreate(TestCase):
+    def test_that_it_routes(self):
+        self.assertIs(resolve('/events/create').func, events.create)
+
+    def test_that_it_rejects_get_requests(self):
+        request = rf.get('/events/create')
+        response = events.create(request)
+        self.assertEqual(405, response.status_code)
