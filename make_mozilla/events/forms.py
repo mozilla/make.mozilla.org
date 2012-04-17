@@ -1,11 +1,20 @@
 from django import forms
 from make_mozilla.events import models
 
-class EventForm(forms.ModelForm):
+class PrefixedModelForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PrefixedModelForm, self).__init__(*args, **kwargs)
+        self.prefix = self.field_prefix
+
+class EventForm(PrefixedModelForm):
+    field_prefix = 'event'
+
     class Meta:
         model = models.Event
+        exclude = ('venue',)
 
-class VenueForm(forms.ModelForm):
+class VenueForm(PrefixedModelForm):
+    field_prefix = 'venue'
     latitude = forms.FloatField()
     longitude = forms.FloatField()
 
