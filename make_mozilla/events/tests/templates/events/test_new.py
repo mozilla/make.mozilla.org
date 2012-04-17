@@ -1,7 +1,7 @@
 from django.test import TestCase
 from mock import patch, Mock
 from django.test.client import RequestFactory
-from lxml import etree
+import lxml.html
 from lxml.cssselect import CSSSelector
 
 # from django.conf import settings
@@ -41,7 +41,7 @@ class WithinElementContext:
         return WithinElementContext(self._select(selector_string))
 
 def html_tester(html_string):
-    root_context = etree.fromstring(html_string)
+    root_context = lxml.html.fromstring(html_string)
     return WithinElementContext(root_context)
 
 class TestEventsNewTemplate(TestCase):
