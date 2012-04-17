@@ -60,3 +60,11 @@ class TestEventsNewTemplate(TestCase):
         with self.html.within_css('form[action="/events/create"]') as html:
             assert html.has_css('li input[name="%s-name"]' % self.ef.prefix)
 
+    def test_the_form_contains_the_venue_form_fields(self):
+        print self.result.content
+        with self.html.within_css('form[action="/events/create"]') as html:
+            assert html.has_css('li input[name="%s-name"]' % self.vf.prefix)
+
+    def test_the_form_contains_submit_button(self):
+        with self.html.within_css('form[action="/events/create"]') as html:
+            assert html.has_css('input[type=submit]')
