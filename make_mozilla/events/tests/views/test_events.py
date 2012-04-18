@@ -4,6 +4,7 @@ from django.test import TestCase
 from nose.tools import eq_, ok_
 from django.test.client import Client, RequestFactory
 from django.http import QueryDict
+from make_mozilla.base.tests import assert_routing, assert_redirects_to_named_url
 
 from django.conf import settings
 from django.core.urlresolvers import resolve, reverse
@@ -15,14 +16,6 @@ from make_mozilla.events import models
 
 c = Client()
 rf = RequestFactory()
-
-def assert_routing(url, view_function, name = '', kwargs = {}):
-    resolved_route = resolve(url)
-    ok_(resolved_route.func is view_function)
-    if kwargs:
-        eq_(resolved_route.kwargs, kwargs)
-    if name:
-        eq_(reverse(name, kwargs = kwargs), url)
 
 class TestEventViewsNew(unittest.TestCase):
     def test_that_it_routes(self):
@@ -112,10 +105,8 @@ class TestEventViewsCreate(TestCase):
         request = rf.post('/events/create', self.data)
         response = events.create(request)
 
-        expected_redirect_url = reverse('event', kwargs={'event_id': 1})
         mock_create_func.assert_called_with(self.mock_ef, self.mock_vf)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['Location'], expected_redirect_url)
+        assert_redirects_to_named_url(response, 'event', kwargs = {'event_id': 1})
 
     def test_that_create_event_and_venue_does_that_given_valid_data(self):
         ef = forms.EventForm(self.data)
