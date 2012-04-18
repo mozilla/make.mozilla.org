@@ -33,6 +33,11 @@ def create(request):
         event, venue = create_event_and_venue(ef, vf)
         return http.HttpResponseRedirect(reverse('event', kwargs = {'event_id': event.id}))
 
+def process_create_post_data(data):
+    event_form = forms.EventForm(data)
+    venue_form = forms.VenueForm(data)
+    return (event_form, venue_form)
+
 def create_event_and_venue(event_form, venue_form):
     venue = venue_form.save()
     event = event_form.save(commit = False)

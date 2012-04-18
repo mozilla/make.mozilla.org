@@ -73,6 +73,19 @@ class TestEventViewsCreate(TestCase):
 
     @patch.object(forms, 'EventForm')
     @patch.object(forms, 'VenueForm')
+    def test_that_form_helper_correctly_instantiates_form_objects(self, MockVenueForm, MockEntryForm):
+        MockEntryForm.return_value = self.mock_ef
+        MockVenueForm.return_value = self.mock_vf
+
+        ef, vf = events.process_create_post_data(self.data)
+
+        MockEntryForm.assert_called_with(self.data)
+        MockVenueForm.assert_called_with(self.data)
+        self.assertEqual(ef, self.mock_ef)
+        self.assertEqual(vf, self.mock_vf)
+
+    @patch.object(forms, 'EventForm')
+    @patch.object(forms, 'VenueForm')
     def test_that_it_correctly_instantiates_the_form_objects(self, MockVenueForm, MockEntryForm):
         MockEntryForm.return_value = invalid_form()
         MockVenueForm.return_value = invalid_form()
