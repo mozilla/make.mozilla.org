@@ -26,7 +26,7 @@ def assert_routing(url, view_function, name = '', kwargs = {}):
 
 class TestEventViewsNew(unittest.TestCase):
     def test_that_it_routes(self):
-        self.assertIs(resolve('/events/new').func, events.new)
+        assert_routing('/events/new', events.new, name = 'event.new')
 
     @patch('make_mozilla.events.forms.VenueForm')
     @patch('make_mozilla.events.forms.EventForm')
@@ -74,7 +74,7 @@ class TestEventViewsCreate(TestCase):
         self.mock_vf = valid_form()
 
     def test_that_it_routes(self):
-        self.assertIs(resolve('/events/create').func, events.create)
+        assert_routing('/events/create', events.create, name = 'event.create')
 
     def test_that_it_rejects_get_requests(self):
         request = rf.get('/events/create')
