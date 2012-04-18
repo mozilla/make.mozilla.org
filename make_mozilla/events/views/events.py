@@ -31,6 +31,10 @@ def create(request):
     if ef.is_valid() and vf.is_valid():
         event, venue = create_event_and_venue(ef, vf)
         return http.HttpResponseRedirect(reverse('event', kwargs = {'event_id': event.id}))
+    return jingo.render(request, 'events/new.html', {
+        'event_form': ef,
+        'venue_form': vf
+    })
 
 def process_create_post_data(data):
     event_form = forms.EventForm(data)

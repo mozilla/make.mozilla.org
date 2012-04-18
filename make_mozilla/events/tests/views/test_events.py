@@ -117,3 +117,17 @@ class TestEventViewsCreate(TestCase):
         self.assertIsNotNone(venue.id)
         self.assertEqual(venue, event.venue)
 
+    @patch.object(events, 'process_create_post_data')
+    @patch.object(events, 'create_event_and_venue')
+    @patch('jingo.render')
+    def test_that_invalid_data_causes_a_rerender_of_the_new_template(self, mock_render, mock_create_func, mock_forms_func):
+        ef = invalid_form()
+        vf = invalid_form()
+        mock_forms_func.return_value = (ef, vf)
+
+        request = rf.post('/events/create', self.data)
+        response = events.create(request)
+
+        mock_create_func.assert_not_called()
+        mock_render.assert_called_with(request, 'events/new.html', {'event_form': ef, 'venue_form': vf})
+
