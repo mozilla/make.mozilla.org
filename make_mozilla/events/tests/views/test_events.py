@@ -2,9 +2,10 @@ from django.utils import unittest
 from mock import patch, Mock
 from django.test import TestCase
 from django.test.client import Client, RequestFactory
+from django.http import QueryDict
 
 from django.conf import settings
-from django.core.urlresolvers import resolve
+from django.core.urlresolvers import resolve, reverse
 import jingo
 
 from make_mozilla.events.views import events
@@ -30,7 +31,38 @@ class TestEventViewsNew(unittest.TestCase):
 
         mock_render.assert_called_with(request, 'events/new.html', {'event_form': event_form, 'venue_form': venue_form})
 
+def valid_form(valid = True):
+    form = Mock()
+    form.is_valid.return_value = valid
+    return form
+
+def invalid_form():
+    return valid_form(False)
+
+def query_dict_from(data_dict):
+    qd = QueryDict('', mutable = True)
+    qd.update(data_dict)
+    return qd
+
+def mock_persisted_event(id = 1):
+    mock_event = Mock()
+    mock_event.id = id
+    return mock_event
+
 class TestEventViewsCreate(TestCase):
+    def setUp(self):
+        self.data = {
+            'event-name': 'Test Event',
+            'event-url': 'http://example.com/',
+            'venue-name': 'Test Venue',
+            'venue-street_address': '100 Test Street',
+            'venue-country': 'UK',
+            'venue-latitude': '51.0',
+            'venue-longitude': '0.5'
+        }
+        self.mock_ef = valid_form()
+        self.mock_vf = valid_form()
+
     def test_that_it_routes(self):
         self.assertIs(resolve('/events/create').func, events.create)
 
@@ -38,3 +70,42 @@ class TestEventViewsCreate(TestCase):
         request = rf.get('/events/create')
         response = events.create(request)
         self.assertEqual(405, response.status_code)
+
+    @patch.object(forms, 'EventForm')
+    @patch.object(forms, 'VenueForm')
+    def test_that_it_correctly_instantiates_the_form_objects(self, MockVenueForm, MockEntryForm):
+        MockEntryForm.return_value = invalid_form()
+        MockVenueForm.return_value = invalid_form()
+
+        request = rf.post('/events/create', self.data)
+        response = events.create(request)
+
+        MockEntryForm.assert_called_with(query_dict_from(self.data))
+        MockVenueForm.assert_called_with(query_dict_from(self.data))
+
+    @patch.object(forms, 'EventForm')
+    @patch.object(forms, 'VenueForm')
+    @patch.object(events, 'create_event_and_venue')
+    def test_that_valid_data_creates_an_event_and_venue_and_redirects(self, mock_func, MockVenueForm, MockEntryForm):
+        MockEntryForm.return_value = self.mock_ef
+        MockVenueForm.return_value = self.mock_vf
+        mock_func.return_value = (mock_persisted_event(id = 1), None)
+
+        request = rf.post('/events/create', self.data)
+        response = events.create(request)
+
+        expected_redirect_url = reverse('event', kwargs={'event_id': 1})
+        mock_func.assert_called_with(self.mock_ef, self.mock_vf)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], expected_redirect_url)
+
+    def test_that_create_event_and_venue_does_that_given_valid_data(self):
+        ef = forms.EventForm(self.data)
+        vf = forms.VenueForm(self.data)
+
+        event, venue = events.create_event_and_venue(ef, vf)
+
+        self.assertIsNotNone(event.id)
+        self.assertIsNotNone(venue.id)
+        self.assertEqual(venue, event.venue)
+

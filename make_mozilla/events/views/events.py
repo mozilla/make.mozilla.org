@@ -22,6 +22,20 @@ def new(request):
         'venue_form': new_venue_form
     })
 
+def detail(request):
+    pass
+
 @require_POST
 def create(request):
-    pass
+    ef = forms.EventForm(request.POST)
+    vf = forms.VenueForm(request.POST)
+    if ef.is_valid() and vf.is_valid():
+        event, venue = create_event_and_venue(ef, vf)
+        return http.HttpResponseRedirect(reverse('event', kwargs = {'event_id': event.id}))
+
+def create_event_and_venue(event_form, venue_form):
+    venue = venue_form.save()
+    event = event_form.save(commit = False)
+    event.venue = venue
+    event.save()
+    return (event, venue)
