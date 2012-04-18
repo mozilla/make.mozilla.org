@@ -27,8 +27,7 @@ def detail(request):
 
 @require_POST
 def create(request):
-    ef = forms.EventForm(request.POST)
-    vf = forms.VenueForm(request.POST)
+    ef, vf = process_create_post_data(request.POST)
     if ef.is_valid() and vf.is_valid():
         event, venue = create_event_and_venue(ef, vf)
         return http.HttpResponseRedirect(reverse('event', kwargs = {'event_id': event.id}))
