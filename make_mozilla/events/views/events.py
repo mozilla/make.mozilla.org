@@ -11,6 +11,7 @@ from session_csrf import anonymous_csrf
 
 from django.conf import settings
 from make_mozilla.events import forms
+from make_mozilla.events import models
 
 log = commonware.log.getLogger('playdoh')
 
@@ -22,8 +23,9 @@ def new(request):
         'venue_form': new_venue_form
     })
 
-def detail(request):
-    pass
+def details(request, event_id):
+    event = models.Event.objects.get(pk = event_id)
+    return jingo.render(request, 'events/detail.html', {'event': event})
 
 @require_POST
 def create(request):

@@ -1,6 +1,7 @@
 from django.utils import unittest
 from mock import patch, Mock
 from django.test import TestCase
+from nose.tools import eq_, ok_
 from django.test.client import Client, RequestFactory
 from django.http import QueryDict
 
@@ -10,9 +11,18 @@ import jingo
 
 from make_mozilla.events.views import events
 from make_mozilla.events import forms
+from make_mozilla.events import models
 
 c = Client()
 rf = RequestFactory()
+
+def assert_routing(url, view_function, name = '', kwargs = {}):
+    resolved_route = resolve(url)
+    ok_(resolved_route.func is view_function)
+    if kwargs:
+        eq_(resolved_route.kwargs, kwargs)
+    if name:
+        eq_(reverse(name, kwargs = kwargs), url)
 
 class TestEventViewsNew(unittest.TestCase):
     def test_that_it_routes(self):
@@ -131,3 +141,17 @@ class TestEventViewsCreate(TestCase):
         mock_create_func.assert_not_called()
         mock_render.assert_called_with(request, 'events/new.html', {'event_form': ef, 'venue_form': vf})
 
+class TestEventViewsDetail(unittest.TestCase):
+    def test_that_it_routes_correctly(self):
+        assert_routing('/events/abcde', events.details, name = 'event', kwargs = {'event_id': 'abcde'})
+
+    @patch.object(models.Event.objects, 'get')
+    @patch('jingo.render')
+    def test_that_it_correctly_fetches_the_event(self, mock_render, mock_event_get):
+        mock_event = Mock()
+        mock_event_get.return_value = mock_event
+        request = rf.get('/events/abcde')
+        events.details(request, event_id = 'abcde')
+
+        mock_render.assert_called_with(request, 'events/detail.html', {'event': mock_event})
+        mock_event_get.assert_called_with(pk = 'abcde')
