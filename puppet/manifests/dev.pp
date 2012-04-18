@@ -5,7 +5,7 @@ import 'classes/*.pp'
 
 $all_apps_root = '/var/webapps'
 $app_root = '/var/webapps/make.mozilla.org'
-$app_user = 'mozilla'
+$app_user = 'make_mozilla'
 $db = "make_mozilla"
 
 Exec {
