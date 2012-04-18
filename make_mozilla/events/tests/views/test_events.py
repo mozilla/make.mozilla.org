@@ -4,7 +4,7 @@ from django.test import TestCase
 from nose.tools import eq_, ok_
 from django.test.client import Client, RequestFactory
 from django.http import QueryDict
-from make_mozilla.base.tests import assert_routing, assert_redirects_to_named_url
+from make_mozilla.base.tests.assertions import assert_routing, assert_redirects_to_named_url
 
 from django.conf import settings
 from django.core.urlresolvers import resolve, reverse
