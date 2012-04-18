@@ -40,14 +40,14 @@ define app_dir ( $owner, $group, $mode = 750 ) {
 
 class app_users {
   app_group { "wsgi":
-    gid => "1100",
+    gid => "400",
   }
   app_group { $app_user:
-    gid => "1101",
+    gid => "401",
   }
   app_user { $app_user:
     ensure => "present",
-    uid => "1101",
+    uid => "401",
     pgroup => $app_user,
     groups => ['wsgi'],
     fullname => "make.mozilla.org",
