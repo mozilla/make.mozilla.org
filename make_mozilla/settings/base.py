@@ -77,4 +77,8 @@ TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
 #    ('media/js/**.js', 'javascript'),
 # ]
 
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+
+
 LOGGING = dict(loggers=dict(playdoh = {'level': logging.DEBUG}))
