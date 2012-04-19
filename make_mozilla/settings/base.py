@@ -62,4 +62,8 @@ JINGO_EXCLUDE_APPS = [
 #    ('media/js/**.js', 'javascript'),
 # ]
 
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+
+
 LOGGING = dict(loggers=dict(playdoh = {'level': logging.DEBUG}))
