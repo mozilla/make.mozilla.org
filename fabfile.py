@@ -3,7 +3,7 @@ from fabric.api import task, env, execute
 
 site.addsitedir(os.path.abspath('fabric'))
 
-import db, release, puppet
+import db, release, puppet, wsgi_server
 import fab_git as git
 
 
