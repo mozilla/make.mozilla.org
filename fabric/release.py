@@ -1,6 +1,6 @@
 from fabric.api import task, cd, env, run, execute, put
 from fabric.operations import sudo
-import os.path
+import os, os.path
 import fab_git as git
 
 @task
@@ -24,7 +24,7 @@ def create():
     run_pip_install(latest_release_path())
 
 def local_settings_path():
-    path = env.get('settings_path', 'make_mozilla/settings/local.py')
+    path = os.getenv('settings_path', 'make_mozilla/settings/local.py')
     project_root_path = os.path.dirname(env.real_fabfile)
     if os.path.exists(path):
         return path
