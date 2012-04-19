@@ -1,7 +1,7 @@
 from fabric.api import task, cd, env, run, execute, put
 from fabric.operations import sudo
 import os.path
-import git
+import fab_git as git
 
 @task
 def initial_setup():
