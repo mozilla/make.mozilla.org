@@ -15,6 +15,9 @@ from make_mozilla.events import models
 
 log = commonware.log.getLogger('playdoh')
 
+def index(request):
+    pass
+
 def new(request):
     new_event_form = forms.EventForm()
     new_venue_form = forms.VenueForm()

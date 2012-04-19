@@ -35,8 +35,9 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'make_mozilla.events',
     # UserProfiles
     'make_mozilla.users',
-    # Example code. Can (and should) be removed for actual projects.
-    'south'
+    # extra lib stuff
+    'south',
+    'django_browserid',  # Load after auth to monkey-patch it.
 ]
 
 
@@ -44,6 +45,20 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
 # apps here:
 JINGO_EXCLUDE_APPS = [
     'admin',
+]
+
+# Browser ID
+BROWSERID_CREATE_USER = True
+# LOGIN_URL = '/'
+# LOGIN_REDIRECT = 'flicks.videos.upload'
+# LOGIN_REDIRECT_FAILURE = 'flicks.base.home'
+
+AUTHENTICATION_BACKENDS = (
+    'django_browserid.auth.BrowserIDBackend',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
+    'django_browserid.context_processors.browserid_form',
 ]
 
 # Tells the extract script what files to look for L10n in and what function
