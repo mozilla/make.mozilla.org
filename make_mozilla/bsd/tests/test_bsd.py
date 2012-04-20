@@ -41,9 +41,30 @@ class BSDEventFeedParserTest(unittest.TestCase):
 
         eq_(['981', '983', '974', '971', '975', '936'], actual)
 
+
+from functools import wraps
+from nose.plugins.attrib import attr
+from nose.plugins.skip import SkipTest
+
+
+def fail(message):
+    raise AssertionError(message)
+
+def wip(f):
+    @wraps(f)
+    def run_test(*args, **kwargs):
+        try:
+            f(*args, **kwargs)
+        except Exception as e:
+            raise SkipTest("WIP test failed: " + str(e))
+        fail("test passed but marked as work in progress")
+    return attr('wip')(run_test)
+
+
 class BSDEventImporterTest(unittest.TestCase):
     @patch.object(bsd.BSDEventImporter, 'venue_extractors')
     @patch.object(bsd.BSDEventImporter, 'event_extractors')
+    @wip
     def test_relevant_information_is_extracted_from_event_json(self, mock_event_extractors, mock_venue_extractors):
         event_json = json_fixture('event.json')
         actual = bsd.BSDEventImporter.extract_from_event_json(event_json )
