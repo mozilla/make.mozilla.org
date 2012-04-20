@@ -16,7 +16,7 @@ from make_mozilla.events import models
 log = commonware.log.getLogger('playdoh')
 
 def index(request):
-    pass
+    return jingo.render(request, 'events/splash.html', {})
 
 def new(request):
     new_event_form = forms.EventForm()

@@ -49,12 +49,15 @@ JINGO_EXCLUDE_APPS = [
 
 # Browser ID
 BROWSERID_CREATE_USER = True
-# LOGIN_URL = '/'
-# LOGIN_REDIRECT = 'flicks.videos.upload'
-# LOGIN_REDIRECT_FAILURE = 'flicks.base.home'
+BROWSERID_VERIFICATION_URL = 'https://browserid.org/verify'
+LOGIN_REDIRECT_URL = '/events/'
+SITE_URL = 'https://make-dev.mozillalabs.com'
+
+AUTH_PROFILE_MODULE = 'users.Profile'
 
 AUTHENTICATION_BACKENDS = (
     'django_browserid.auth.BrowserIDBackend',
+    'django.contrib.auth.backends.ModelBackend'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [

@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^users/',     include(make_mozilla.users.urls)),
     # browserid endpoints
     url(r'^browserid/', include('django_browserid.urls')),
-
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', kwargs={'next_page': '/events/'}, name='logout'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
