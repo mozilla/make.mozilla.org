@@ -1,3 +1,2 @@
 South
-django-browserid
 -r ../vendor/src/funfactory/funfactory/requirements/prod.txt
