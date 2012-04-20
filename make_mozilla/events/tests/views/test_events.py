@@ -17,9 +17,36 @@ from make_mozilla.events import models
 c = Client()
 rf = RequestFactory()
 
+class TestEventViewsIndex(unittest.TestCase):
+    def test_that_it_routes(self):
+        assert_routing('/events/', events.index, name = 'events')
+
+class TestIndexGeoRSSFeed(unittest.TestCase):
+    def setUp(self):
+        self.feed = events.IndexGeoRSSFeed()
+
+    def test_that_it_routes(self):
+        assert_routing('/events/feed.rss', events.IndexGeoRSSFeed, name = 'events-feed')
+
+    def test_that_it_correctly_fetches_the_item_geometry(self):
+        mock_item = Mock()
+        mock_item.location = 'location'
+
+        eq_('location', self.feed.item_geometry(mock_item))
+
+    def test_that_it_returns_the_correct_url(self):
+        eq_(self.feed.link, reverse('events'))
+
+    @patch.object(models.Event, 'upcoming')
+    def test_that_it_correctly_returns_upcoming_events_for_items(self, mock_query_method):
+        mock_item = Mock()
+        mock_query_method.return_value = [mock_item]
+
+        eq_(self.feed.items(), [mock_item])
+
 class TestEventViewsNew(unittest.TestCase):
     def test_that_it_routes(self):
-        assert_routing('/events/new', events.new, name = 'event.new')
+        assert_routing('/events/new/', events.new, name = 'event.new')
 
     @patch('make_mozilla.events.forms.VenueForm')
     @patch('make_mozilla.events.forms.EventForm')
@@ -29,7 +56,7 @@ class TestEventViewsNew(unittest.TestCase):
         venue_form = Mock()
         MockEventForm.return_value = event_form
         MockVenueForm.return_value = venue_form
-        request = rf.get('/events/new')
+        request = rf.get('/events/new/')
         events.new(request)
 
         mock_render.assert_called_with(request, 'events/new.html', {'event_form': event_form, 'venue_form': venue_form})
@@ -67,10 +94,10 @@ class TestEventViewsCreate(TestCase):
         self.mock_vf = valid_form()
 
     def test_that_it_routes(self):
-        assert_routing('/events/create', events.create, name = 'event.create')
+        assert_routing('/events/create/', events.create, name = 'event.create')
 
     def test_that_it_rejects_get_requests(self):
-        request = rf.get('/events/create')
+        request = rf.get('/events/create/')
         response = events.create(request)
         self.assertEqual(405, response.status_code)
 
@@ -91,7 +118,7 @@ class TestEventViewsCreate(TestCase):
     def test_that_it_correctly_processes_the_post_data(self, mock_func):
         mock_func.return_value = (invalid_form(), invalid_form())
 
-        request = rf.post('/events/create', self.data)
+        request = rf.post('/events/create/', self.data)
         events.create(request)
 
         mock_func.assert_called_with(query_dict_from(self.data))
@@ -102,7 +129,7 @@ class TestEventViewsCreate(TestCase):
         mock_forms_func.return_value = (self.mock_ef, self.mock_vf)
         mock_create_func.return_value = (mock_persisted_event(id = 1), None)
 
-        request = rf.post('/events/create', self.data)
+        request = rf.post('/events/create/', self.data)
         response = events.create(request)
 
         mock_create_func.assert_called_with(self.mock_ef, self.mock_vf)
@@ -126,7 +153,7 @@ class TestEventViewsCreate(TestCase):
         vf = invalid_form()
         mock_forms_func.return_value = (ef, vf)
 
-        request = rf.post('/events/create', self.data)
+        request = rf.post('/events/create/', self.data)
         response = events.create(request)
 
         mock_create_func.assert_not_called()
@@ -134,7 +161,7 @@ class TestEventViewsCreate(TestCase):
 
 class TestEventViewsDetail(unittest.TestCase):
     def test_that_it_routes_correctly(self):
-        assert_routing('/events/abcde', events.details, name = 'event', kwargs = {'event_id': 'abcde'})
+        assert_routing('/events/abcde/', events.details, name = 'event', kwargs = {'event_id': 'abcde'})
 
     @patch.object(models.Event.objects, 'get')
     @patch('jingo.render')

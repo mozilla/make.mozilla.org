@@ -1,6 +1,8 @@
 from django import http
 from django.core.urlresolvers import reverse
 from django.views.decorators.http import require_POST
+from django.contrib.syndication.views import Feed
+from django.contrib.gis.feeds import GeoRSSFeed
 
 import bleach
 import commonware
@@ -14,6 +16,22 @@ from make_mozilla.events import forms
 from make_mozilla.events import models
 
 log = commonware.log.getLogger('playdoh')
+
+# Workaround from http://gis.stackexchange.com/questions/7553/is-there-a-geodjango-tutorial-for-georssfeeds
+class IndexGeoRSSFeed(Feed):
+    title = "Make Mozilla!"
+    link = '/events/'
+    description = "Updates on upcoming events"
+    feed_type = GeoRSSFeed
+
+    def items(self):
+        return models.Event.upcoming()
+
+    def item_extra_kwargs(self, item):
+        return {'geometry' : self.item_geometry(item)}
+
+    def item_geometry(self, item):
+        return item.location
 
 def index(request):
     return jingo.render(request, 'events/splash.html', {})
