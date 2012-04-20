@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from django.contrib.gis import geos
+from datetime import datetime
 
 class Venue(models.Model):
     name = models.CharField(max_length=255)
@@ -34,5 +35,11 @@ class Event(models.Model):
     name = models.CharField(max_length=255)
     event_url = models.CharField(max_length=255, blank = True)
     venue = models.ForeignKey(Venue)
+    start = models.DateTimeField(null = True, blank = True)
+    end = models.DateTimeField(null = True, blank = True)
 
     objects = models.GeoManager()
+
+    @classmethod
+    def upcoming(self):
+        return self.objects.filter(start__gte = datetime.now())
