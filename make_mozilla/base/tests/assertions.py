@@ -1,9 +1,9 @@
 from nose.tools import eq_, ok_
 from django.core.urlresolvers import resolve, reverse
 
-def assert_routing(url, view_function, name = '', kwargs = {}):
+def assert_routing(url, view_function_or_class, name = '', kwargs = {}):
     resolved_route = resolve(url)
-    ok_(resolved_route.func is view_function)
+    ok_((resolved_route.func is view_function_or_class) or (type(resolved_route.func) is view_function_or_class))
     if kwargs:
         eq_(resolved_route.kwargs, kwargs)
     if name:
