@@ -37,6 +37,8 @@ class Event(models.Model):
     venue = models.ForeignKey(Venue)
     start = models.DateTimeField(null = True, blank = True)
     end = models.DateTimeField(null = True, blank = True)
+    source_id = models.CharField(max_length=255)
+    organiser_email = models.CharField(max_length=255)
 
     objects = models.GeoManager()
 

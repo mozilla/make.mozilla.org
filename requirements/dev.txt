@@ -6,4 +6,3 @@
 -r ../vendor/src/funfactory/funfactory/requirements/dev.txt
 
 Fabric==1.4.1
-lxml

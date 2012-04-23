@@ -85,3 +85,5 @@ SESSION_COOKIE_HTTPONLY = True
 
 
 LOGGING = dict(loggers=dict(playdoh = {'level': logging.DEBUG}))
+
+BSD_API_DETAILS = {}

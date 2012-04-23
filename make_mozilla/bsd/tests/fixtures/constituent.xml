@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<api>
+<cons id="26805" modified_dt="1334221135">
+	<guid>ABCDE</guid>
+	<firstname>John</firstname>
+	<middlename></middlename>
+	<lastname>Doe</lastname>
+	<has_account>0</has_account>
+	<is_banned>0</is_banned>
+	<create_dt>2011-09-14 15:27:45</create_dt>
+	<prefix></prefix>
+	<suffix></suffix>
+	<gender></gender>
+	<cons_email id="12345" modified_dt="1316014065">
+		<email>example@mozilla.org</email>
+		<email_type>personal</email_type>
+		<is_subscribed>1</is_subscribed>
+		<is_primary>1</is_primary>
+	</cons_email>
+</cons>
+</api>
