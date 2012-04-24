@@ -3,7 +3,7 @@ from django.utils import unittest
 from contextlib import nested
 from mock import patch, Mock
 from nose.tools import eq_, ok_
-from make_mozilla.base.tests.decorators import wip
+from make_mozilla.base.tests.decorators import wip, integration
 from make_mozilla.bsd.tests.utils import json_fixture
 
 from django.conf import settings
@@ -110,6 +110,20 @@ class BSDClientTest(unittest.TestCase):
 
         mock_client.doRequest.assert_called_with('/event/get_event_details', {'values': json.dumps({'event_id_obfuscated': 'obf_id'})}, https = True)
 
+    @patch.object(bsd.BSDClient, 'create_api_client')
+    def test_that_organiser_email_can_be_added_as_constituent(self,
+            mock_client_func):
+        mock_client = Mock()
+        mock_api_response = Mock()
+        mock_client_func.return_value = mock_client
+        mock_client.doRequest.return_value = mock_api_response
+        mock_api_response.http_status = 200
+
+        ok_(bsd.BSDClient.register_email_address_as_constituent('example@mozilla.org'))
+
+        mock_client.doRequest.assert_called_with('/cons/email_register', {'email': 'example@mozilla.org', 'format': 'json'}, https = True)
+
+
 class BSDEventImporterTest(unittest.TestCase):
     def setUp(self):
         self.importer = bsd.BSDEventImporter()
@@ -185,7 +199,6 @@ class BSDEventImporterTest(unittest.TestCase):
         ok_(self.importer.fetch_existing_event('source_id') is None)
 
         mock_event_objects.get.assert_called_with(source_id = 'source_id')
-
     
     @patch.object(bsd.BSDClient, 'constituent_email_for_constituent_id')
     def test_that_organiser_email_can_be_pulled_from_BSD_API(self, mock_api_func):

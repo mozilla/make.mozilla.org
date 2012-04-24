@@ -36,6 +36,13 @@ class BSDClient(object):
         client_params.update(settings.BSD_API_DETAILS)
         return BSDApiFactory().create(**client_params)
 
+    @classmethod
+    def register_email_address_as_constituent(self, email_address):
+        response = self.create_api_client().doRequest('/cons/email_register', 
+                {'email': email_address, 'format': 'json'},
+                https = True)
+        return response.http_status == 200
+
     def __init__(self):
         self.api_client = self.create_api_client()
 
