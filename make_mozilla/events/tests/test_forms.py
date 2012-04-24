@@ -21,6 +21,9 @@ class EventFormTest(unittest.TestCase):
     def test_does_not_expose_venue(self):
         self.assertNotIn('venue', self.f.fields)
 
+    def test_does_not_expose_organiser_email(self):
+        self.assertNotIn('organiser_email', self.f.fields)
+
 class VenueFormTest(unittest.TestCase):
     def setUp(self):
         self.f = forms.VenueForm()

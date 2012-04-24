@@ -11,7 +11,7 @@ class EventForm(PrefixedModelForm):
 
     class Meta:
         model = models.Event
-        exclude = ('venue',)
+        exclude = ('venue', 'organiser_email')
 
 class VenueForm(PrefixedModelForm):
     field_prefix = 'venue'
