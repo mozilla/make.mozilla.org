@@ -68,5 +68,6 @@ def create_event_and_venue(event_form, venue_form):
     venue = venue_form.save()
     event = event_form.save(commit = False)
     event.venue = venue
+    event.organiser_email = 'ross@mozillafoundation.org' # nasty temp hack while resolving some other email-related things
     event.save()
     return (event, venue)

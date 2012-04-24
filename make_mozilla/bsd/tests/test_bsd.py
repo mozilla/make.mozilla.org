@@ -200,6 +200,7 @@ class BSDEventImporterTest(unittest.TestCase):
 
         mock_event_objects.get.assert_called_with(source_id = 'source_id')
     
+    @wip
     @patch.object(bsd.BSDClient, 'constituent_email_for_constituent_id')
     def test_that_organiser_email_can_be_pulled_from_BSD_API(self, mock_api_func):
         mock_api_func.return_value = 'example@mozilla.org'
