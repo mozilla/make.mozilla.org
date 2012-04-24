@@ -1,0 +1,28 @@
+{% extends "events/base.html" %}
+
+{% block page_id %}events-index{% endblock %}
+{% block page_class %}{{ super() }} brochure-page{% endblock %}
+
+{% block content %}
+<div class="intro-bar">
+    <h2>Teach. Meet. Learn. Share.</h2>
+    <p><a href="" class="button find">Find an Event</a> <em>or</em> <a href="" class="button create">Create an Event</a></p>
+</div>
+
+<h3>What's New with Webmaker Events?</h3>
+
+<ul class="tri-set">
+    <li>
+        <h4><a href=""><span><img src="http://placehold.it/271x165" alt=""></span> Events are live!</a></h4>
+        <p>Learn with Friends Near You</p>
+    </li>
+    <li>
+        <h4><a href=""><span><img src="http://placehold.it/271x165" alt=""></span> Create your event</a></h4>
+        <p>Our Handy Guides will Help!</p>
+    </li>
+    <li>
+        <h4><a href=""><span><img src="http://placehold.it/271x165" alt=""></span> Announcing</a></h4>
+        <p>The Mozilla Summer Campaign</p>
+    </li>
+</ul>
+{% endblock %}
