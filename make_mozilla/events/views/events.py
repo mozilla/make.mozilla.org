@@ -34,7 +34,7 @@ class IndexGeoRSSFeed(Feed):
         return item.location
 
 def index(request):
-    return jingo.render(request, 'events/splash.html', {})
+	return jingo.render(request, 'events/index.html')
 
 def new(request):
     new_event_form = forms.EventForm()
