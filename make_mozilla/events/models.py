@@ -32,13 +32,13 @@ class Venue(models.Model):
         self.location.y = value
 
 class Event(models.Model):
-    name = models.CharField(max_length=255)
-    event_url = models.CharField(max_length=255, blank = True)
+    name = models.CharField(max_length = 255)
+    event_url = models.CharField(max_length = 255, blank = True)
     venue = models.ForeignKey(Venue)
     start = models.DateTimeField(null = True, blank = True)
     end = models.DateTimeField(null = True, blank = True)
-    source_id = models.CharField(max_length=255)
-    organiser_email = models.CharField(max_length=255)
+    source_id = models.CharField(max_length = 255, blank = True)
+    organiser_email = models.CharField(max_length = 255)
 
     objects = models.GeoManager()
 
