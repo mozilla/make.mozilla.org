@@ -34,7 +34,7 @@ def deploy():
 
 @task
 def deploy_with_migrations():
-    perform_release()
+    perform_release(migrate = True)
 
 @task
 def setup():
