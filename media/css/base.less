@@ -1,1 +1,536 @@
+/* ===[ Fonts ]============================================================= */
 
+@font-face {
+	font-family: "Open Sans Light";
+	font-style: normal;
+	font-weight: normal;
+	src: url("../fonts/OpenSans-Light-webfont.eot?#iefix") format("embedded-opentype"),
+	     url("../fonts/OpenSans-Light-webfont.woff") format("woff"),
+	     url("../fonts/OpenSans-Light-webfont.ttf") format("truetype"),
+	     url("../fonts/OpenSans-Light-webfont.svg#OpenSansLight") format("svg");
+}
+
+@font-face {
+	font-family: "Open Sans";
+	font-style: normal;
+	font-weight: normal;
+	src: url("../fonts/OpenSans-Regular-webfont.eot?#iefix") format("embedded-opentype"),
+	     url("../fonts/OpenSans-Regular-webfont.woff") format("woff"),
+	     url("../fonts/OpenSans-Regular-webfont.ttf") format("truetype"),
+	     url("../fonts/OpenSans-Regular-webfont.svg#OpenSansRegular") format("svg");
+}
+
+@font-face {
+	font-family: "Open Sans";
+	font-style: normal;
+	font-weight: bold;
+	src: url("../fonts/OpenSans-Semibold-webfont.eot?#iefix") format("embedded-opentype"),
+	     url("../fonts/OpenSans-Semibold-webfont.woff") format("woff"),
+	     url("../fonts/OpenSans-Semibold-webfont.ttf") format("truetype"),
+	     url("../fonts/OpenSans-Semibold-webfont.svg#OpenSansSemibold") format("svg");
+}
+
+/* ===[ Core ]============================================================== */
+
+body {
+	background: #FFF;
+	font-family: "Open Sans", sans-serif;
+	font-size: 14px;
+}
+
+#tabzilla-panel {
+	z-index: 2;
+}
+
+.constrained {
+	max-width: 900px;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+
+a:link,
+a:visited {
+	text-decoration: none;
+	color: #27AAE1;
+}
+
+/* ===[ Header ]============================================================ */
+
+#header {
+	background: #FFF;
+	background: rgba(255, 255, 255, 0.8);
+	position: relative;
+	z-index: 1;
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+#header p {
+	display: none;
+}
+
+#header h1 {
+	margin: 0;
+}
+
+#header h1 a {
+	display: block;
+	min-width: 85px;
+	height: 70px;
+	line-height: 70px;
+	float: left;
+	padding: 0 15px;
+	margin-left: -15px;
+	color: #48484B;
+}
+
+/* ---[ Main Navigation ]--------------------------------------------------- */
+
+#header ul {
+	height: 70px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-weight: bold;
+}
+
+#header li a {
+	display: block;
+	min-width: 70px;
+	height: 70px;
+	line-height: 70px;
+	margin: 0 0 0 -1px;
+	padding: 0 15px;
+	float: left;
+	text-align: center;
+	border: solid #E1E2E3;
+	border-width: 0 1px;
+	position: relative;
+	-moz-transition: all 0.25s linear 0s;
+	-webkit-transition: all 0.25s linear 0s;
+}
+
+#header li a:hover {
+	background: rgba(255,255,255,0.5);
+}
+
+/* Given the small number of site sections, it's easier to just keep track of
+   which part of the site we're on and use that to select a navigation item */
+
+.section-projects #header .projects a,
+.section-tools #header .tools a,
+.section-events #header .events a {
+	background: #ED1C24;
+	color: #FFF;
+	border: none;
+	margin-right: 1px;
+}
+
+.section-projects #header .projects a::after,
+.section-tools #header .tools a::after,
+.section-events #header .events a::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 0;
+	border: solid transparent;
+	border-width: 25px 50px 0 50px;
+	border-top-color: #ED1C24;
+}
+
+@media screen and (max-width: 700px) {
+	#header ul {
+		clear: both;
+		font-size: 0.8em;
+		height: 30px;
+		text-align: center;
+		background: rgba(255,255,255,0.5);
+		margin: 0 -15px;
+	}
+
+	#header li {
+		display: inline-block;
+	}
+
+	#header li a {
+		min-width: 50px;
+		line-height: 30px;
+		height: 30px;
+		border: none;
+		margin: 0;
+		float: none;
+	}
+
+	.section-projects #header .projects a::after,
+	.section-tools #header .tools a::after,
+	.section-events #header .events a::after {
+		border-width: 20px 40px 0 40px;
+	}
+}
+
+/* ===[ Content ]=========================================================== */
+
+#content {
+	background-color: #F5F1E8;
+	background-repeat: repeat-x;
+	background-image: url(../img/bg-sand.png);
+	min-height: 200px;
+	margin-top: -70px;
+	padding: 110px 0 40px;
+}
+
+/* ---[ Brochure Content ]-------------------------------------------------- */
+
+.brochure-page #content {
+	margin-top: 530px;
+	padding-top: 40px;
+	position: relative;
+	border-top: solid 14px #6D6E71;
+}
+
+.brochure-page #content::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 600px;
+	background-color: #EEE;
+	background-image: -moz-linear-gradient(#AAA, #EEE);
+	background-image: -webkit-linear-gradient(#AAA, #EEE);
+	background-size: cover;
+	background-position: 50% 50%;
+	margin-top: -614px;
+}
+
+@media screen and (max-width: 900px) {
+	.brochure-page #content {
+		margin-top: 330px;
+	}
+
+	.brochure-page #content::before {
+		margin-top: -414px;
+		height: 400px;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.brochure-page #content {
+		margin-top: 200px;
+	}
+
+	.brochure-page #content::before {
+		margin-top: -314px;
+		height: 300px;
+	}
+}
+
+/* ===[ Footer ]============================================================ */
+
+#footer {
+	border-top: solid 1px #E1E2E3;
+	overflow: hidden;
+	padding: 50px 0;
+	line-height: 25px;
+}
+
+#footer h3,
+#footer .col {
+	width: 25%;
+	max-width: 180px;
+	float: left;
+	margin: 0;
+}
+
+#footer h4 {
+	margin: 0;
+}
+
+#footer ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+@media screen and (max-width: 700px) {
+	#footer {
+		padding: 25px 0;
+	}
+
+	#footer h3 {
+		float: none;
+		width: 100%;
+	}
+
+	#footer .col {
+		width: 33.33%;
+		max-width: 500px;
+		margin-top: 25px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	#footer .col {
+		float: none;
+		width: 100%;
+	}
+}
+
+/* ===[ Buttons ]=========================================================== */
+
+.button,
+.button:link,
+.button:visited {
+	-moz-transition: box-shadow 0.25s linear 0s;
+	-webkit-transition: box-shadow 0.25s linear 0s;
+	background-color: #999;
+	background-image: -moz-linear-gradient(#BBB, #777);
+	background-image: -webkit-linear-gradient(#BBB, #777);
+	background-repeat: repeat-x;
+	border: 0 none;
+	border-radius: 0.25em 0.25em 0.25em 0.25em;
+	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), 0 -2px 0 0 rgba(0, 0, 0, 0.2) inset;
+	color: #FFFFFF;
+	display: inline-block;
+	font-family: 'Open Sans',sans-serif;
+	font-size: 1em;
+	height: 2.5em;
+	line-height: 2.5em;
+	padding: 0 1.5em;
+	margin: 0;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+	white-space: nowrap;
+}
+
+.button:hover,
+.button:link:hover,
+.button:visited:hover {
+	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), 0 -2px 0 0 rgba(0, 0, 0, 0.2) inset, 0 12px 24px 2px #AAA inset;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.button:active,
+.button:link:active,
+.button:visited:active {
+	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2) inset, 0 12px 24px 6px rgba(0, 0, 0, 0.2) inset, 0 0 2px 2px rgba(0, 0, 0, 0.2) inset;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.button::after {
+	content: "\00A0\00BB";
+}
+
+/* ---[ Find Button ]------------------------------------------------------- */
+
+.button.find,
+.button.find:link,
+.button.find:visited {
+	background-color: #276195;
+	background-image: -moz-linear-gradient(#3C88CC, #276195);
+	background-image: -webkit-linear-gradient(#3C88CC, #276195);
+}
+
+.button.find:hover,
+.button.find:link:hover,
+.button.find:visited:hover {
+	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), 0 -2px 0 0 rgba(0, 0, 0, 0.2) inset, 0 12px 24px 2px #3089D8 inset;
+}
+
+/* ---[ Create Button ]----------------------------------------------------- */
+
+.button.create,
+.button.create:link,
+.button.create:visited {
+	background-color: #659324;
+	background-image: -moz-linear-gradient(#81BC2E, #659324);
+	background-image: -webkit-linear-gradient(#81BC2E, #659324);
+}
+
+.button.create:hover,
+.button.create:link:hover,
+.button.create:visited:hover {
+	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), 0 -2px 0 0 rgba(0, 0, 0, 0.2) inset, 0 12px 24px 2px #83C822 inset;
+}
+
+/* ===[ Page Components ]=================================================== */
+
+/* ---[ Intro Bar ]--------------------------------------------------------- */
+
+.intro-bar {
+	background-color: #FFF;
+	line-height: 50px;
+	padding: 25px;
+	box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+	-moz-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+	-ie-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+	-o-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+	font-size: 1.714em;
+	font-family: "Open Sans Light", "Open Sans", sans-serif;
+	font-weight: 100;
+	text-align: center;
+}
+
+.intro-bar h2,
+.intro-bar p {
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	display: inline-block;
+}
+
+.intro-bar h2 {
+	margin-right: 15px;
+}
+
+.intro-bar em {
+	font-style: normal;
+	margin: 0 15px;
+}
+
+.intro-bar .button {
+	font-size: 0.75em;
+}
+
+@media screen and (max-width: 600px) {
+	.intro-bar {
+		padding: 10px;
+	}
+
+	.intro-bar h2 {
+		margin: 0;
+	}
+
+	.intro-bar h2,
+	.intro-bar p {
+		display: block;
+	}
+
+	.intro-bar .button {
+		display: block;
+		margin: 10px 0 0;
+	}
+
+	.intro-bar em {
+		display: none;
+	}
+}
+
+/* ---[ Three Item Options ]------------------------------------------------ */
+
+ul.tri-set {
+	margin: 0 -15px;
+	padding: 0 12px 0 0;
+	list-style: none;
+	overflow: hidden;
+	text-align: center;
+}
+
+ul.tri-set li {
+	width: 33.33%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ie-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	padding-left: 18px;
+	margin-left: -3px;
+	display: inline-block;
+	text-align: left;
+	position: relative;
+	left: -3px;
+	vertical-align: top;
+}
+
+ul.tri-set a,
+ul.tri-set p {
+	display: block;
+	padding: 0 8px;
+}
+
+ul.tri-set span {
+	background: #FFF;
+	display: block;
+	padding: 8px;
+	margin: 0 -8px 10px;
+	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+	-moz-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+	-ie-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+	-o-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+	box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+}
+
+ul.tri-set img {
+	display: block;
+	width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+	ul.tri-set {
+		margin: -15px;
+		padding: 15px;
+	}
+
+	ul.tri-set li {
+		width: 100%;
+		display: block;
+		clear: both;
+		margin: 0;
+		padding: 0;
+		position: static;
+	}
+
+	ul.tri-set span {
+		float: left;
+		width: 40%;
+		max-width: 271px;
+		margin: 0 18px 18px 0;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	ul.tri-set li {
+		max-width: 271px;
+		margin: 0 auto;
+	}
+	ul.tri-set span {
+		width: auto;
+		max-width: 500px;
+		margin: 0 -8px 10px;
+		float: none;
+	}
+}
+
+/* ===[ Page Specific Settings ]============================================ */
+
+/* ---[ Events Index Page ]------------------------------------------------- */
+
+.bad-ie #events-index #content::before {
+	background-image: url(http://placehold.it/2000x600);
+}
+
+@media screen and (min-width: 901px) {
+	#events-index #content::before {
+		background-image: url(http://placehold.it/2000x600);
+	}
+}
+
+@media screen and (max-width: 900px) {
+	#events-index #content::before {
+		background-image: url(http://placehold.it/900x400);
+	}
+}
+
+@media screen and (max-width: 700px) {
+	#events-index #content::before {
+		background-image: url(http://placehold.it/700x300);
+	}
+}
+
+#events-index .intro-bar {
+	margin-top: -97px;
+	position: relative;
+}
