@@ -17,17 +17,32 @@ def fetch_and_process_event_feed(feed_url):
 
 class BSDClient(object):
     @classmethod
-    def fetch_event(self, obfuscated_event_id):
-        response = self.create_api_client().doRequest('/event/get_event_details', 
-                {'values': json.dumps({'event_id_obfuscated': obfuscated_event_id})},
+    def _request(self, http_method, endpoint, api_params):
+        client = self.create_api_client()
+        response = client.doRequest(endpoint,
+                api_params = api_params,
+                request_type = http_method,
                 https = True)
+        return response
+
+    @classmethod
+    def _get(self, endpoint, api_params):
+        return self._request('GET', endpoint, api_params)
+
+    @classmethod
+    def _post(self, endpoint, api_params):
+        return self._request('POST', endpoint, api_params)
+
+    @classmethod
+    def fetch_event(self, obfuscated_event_id):
+        response = self._get('/event/get_event_details',
+                {'values': json.dumps({'event_id_obfuscated': obfuscated_event_id})})
         return json.loads(response.body)
 
     @classmethod
     def constituent_email_for_constituent_id(self, constituent_id):
-        response = self.create_api_client().doRequest('/cons/get_constituents_by_id', 
-                {'cons_ids': constituent_id, 'bundles': 'primary_cons_email'},
-                https = True)
+        response = self._get('/cons/get_constituents_by_id',
+                {'cons_ids': constituent_id, 'bundles': 'primary_cons_email'})
         return xml_extractor.constituent_email(response.body)
 
     @classmethod
@@ -38,19 +53,25 @@ class BSDClient(object):
 
     @classmethod
     def register_email_address_as_constituent(self, email_address):
-        response = self.create_api_client().doRequest('/cons/email_register', 
-                {'email': email_address, 'format': 'json'},
-                https = True)
-        return response.http_status == 200
+        response = self._post('/cons/email_register',
+                {'email': email_address, 'format': 'json'})
+        if response.http_status == 200:
+            api_response = json.loads(response.body)
+            return api_response['cons_id']
 
-    def __init__(self):
-        self.api_client = self.create_api_client()
+    @classmethod
+    def add_constituent_id_to_group(self, cons_id, group_id):
+        response = self._post('/cons_group/add_cons_ids_to_group',
+                {'cons_ids': cons_id, 'cons_group_id': group_id})
+        return response.http_status == 202
+
+class BSDRegisterConstituent(object):
+    @classmethod
+    def add_email_to_group(self, email, group_id):
+        constituent_id = BSDClient.register_email_address_as_constituent(email)
+        return BSDClient.add_constituent_id_to_group(constituent_id, group_id)
 
 class BSDEventImporter(object):
-    @classmethod
-    def nu(self):
-        return BSDEventImporter()
-
     @classmethod
     def process_event(self, obfuscated_id):
         event_json = BSDClient.fetch_event(obfuscated_id)

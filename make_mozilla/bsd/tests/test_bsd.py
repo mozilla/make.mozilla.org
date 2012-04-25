@@ -73,56 +73,102 @@ class BSDClientTest(unittest.TestCase):
             settings.BSD_API_DETAILS = orig_settings
 
     @patch.object(bsd.BSDClient, 'create_api_client')
-    def test_that_bsd_client_created_on_instantiation(self, mock_client_creator_func):
-        mock_client = Mock()
-        mock_client_creator_func.return_value = mock_client
-
-        eq_(bsd.BSDClient().api_client, mock_client)
-
-    @patch.object(bsd.extractors.xml, 'constituent_email')
-    @patch.object(bsd.BSDClient, 'create_api_client')
-    def test_that_constituent_email_can_be_queried_given_a_cons_id(self,
-            mock_client_func,
-            mock_email_extractor_func):
+    def test_that_a_get_request_can_be_performed(self,
+            mock_client_func):
         mock_client = Mock()
         mock_client_func.return_value = mock_client
         mock_response = Mock()
         mock_client.doRequest.return_value = mock_response
+
+        eq_(mock_response,
+                bsd.BSDClient._get('/api_method', {'params': 'dict'}))
+
+        mock_client.doRequest.assert_called_with('/api_method',
+                api_params = {'params': 'dict'},
+                https = True,
+                request_type = 'GET')
+
+    @patch.object(bsd.BSDClient, 'create_api_client')
+    def test_that_a_post_request_can_be_performed(self,
+            mock_client_func):
+        mock_client = Mock()
+        mock_client_func.return_value = mock_client
+        mock_response = Mock()
+        mock_client.doRequest.return_value = mock_response
+
+        eq_(mock_response,
+                bsd.BSDClient._post('/api_method', {'params': 'dict'}))
+
+        mock_client.doRequest.assert_called_with('/api_method',
+                api_params = {'params': 'dict'},
+                https = True,
+                request_type = 'POST')
+
+    @patch.object(bsd.extractors.xml, 'constituent_email')
+    @patch.object(bsd.BSDClient, '_get')
+    def test_that_constituent_email_can_be_queried_given_a_cons_id(self,
+            mock_client_func,
+            mock_email_extractor_func):
+        mock_response = Mock()
+        mock_client_func.return_value = mock_response
         mock_response.body  = '<xml>'
         mock_email_extractor_func.return_value = 'example@mozilla.org'
 
         eq_('example@mozilla.org', 
                 bsd.BSDClient.constituent_email_for_constituent_id('abcd'))
 
-        mock_client.doRequest.assert_called_with('/cons/get_constituents_by_id', {'cons_ids': 'abcd', 'bundles': 'primary_cons_email'}, https = True)
+        mock_client_func.assert_called_with('/cons/get_constituents_by_id',
+                {'cons_ids': 'abcd', 'bundles': 'primary_cons_email'})
         mock_email_extractor_func.assert_called_with('<xml>')
 
-    @patch.object(bsd.BSDClient, 'create_api_client')
+    @patch.object(bsd.BSDClient, '_get')
     def test_that_event_can_be_fetched_given_obfuscated_id(self,
             mock_client_func):
-        mock_client = Mock()
         mock_api_response = Mock()
+        mock_client_func.return_value = mock_api_response
         mock_api_response.body = '{"event": "json"}'
-        mock_client_func.return_value = mock_client
-        mock_client.doRequest.return_value = mock_api_response
 
         eq_(bsd.BSDClient.fetch_event('obf_id'), {'event': 'json'})
 
-        mock_client.doRequest.assert_called_with('/event/get_event_details', {'values': json.dumps({'event_id_obfuscated': 'obf_id'})}, https = True)
+        mock_client_func.assert_called_with('/event/get_event_details', 
+                {'values': json.dumps({'event_id_obfuscated': 'obf_id'})})
 
-    @patch.object(bsd.BSDClient, 'create_api_client')
+    @patch.object(bsd.BSDClient, '_post')
     def test_that_organiser_email_can_be_added_as_constituent(self,
             mock_client_func):
-        mock_client = Mock()
         mock_api_response = Mock()
-        mock_client_func.return_value = mock_client
-        mock_client.doRequest.return_value = mock_api_response
+        mock_client_func.return_value = mock_api_response
         mock_api_response.http_status = 200
+        mock_api_response.body = '{"cons_id"  : 34, "email_id" : 234}'
 
-        ok_(bsd.BSDClient.register_email_address_as_constituent('example@mozilla.org'))
+        eq_(34, bsd.BSDClient.register_email_address_as_constituent('example@mozilla.org'))
 
-        mock_client.doRequest.assert_called_with('/cons/email_register', {'email': 'example@mozilla.org', 'format': 'json'}, https = True)
+        mock_client_func.assert_called_with('/cons/email_register', 
+                {'email': 'example@mozilla.org', 'format': 'json'})
 
+    @patch.object(bsd.BSDClient, '_post')
+    def test_that_constituent_id_can_be_added_to_constituent_group(self,
+            mock_client_func):
+        mock_api_response = Mock()
+        mock_client_func.return_value = mock_api_response
+        mock_api_response.http_status = 202
+
+        ok_(bsd.BSDClient.add_constituent_id_to_group('1234', '111'))
+
+        mock_client_func.assert_called_with('/cons_group/add_cons_ids_to_group', 
+                {'cons_ids': '1234', 'cons_group_id': '111'})
+
+class BSDRegisterConstituentTest(unittest.TestCase):
+    @patch.object(bsd.BSDClient, 'add_constituent_id_to_group')
+    @patch.object(bsd.BSDClient, 'register_email_address_as_constituent')
+    def test_email_is_registered_and_added_to_group(self, mock_register_func, mock_group_func):
+        mock_register_func.return_value = 34
+        mock_group_func.return_value = True
+
+        ok_(bsd.BSDRegisterConstituent.add_email_to_group('example@mozilla.org', '1234'))
+
+        mock_register_func.assert_called_with('example@mozilla.org')
+        mock_group_func.assert_called_with(34, '1234')
 
 class BSDEventImporterTest(unittest.TestCase):
     def setUp(self):
