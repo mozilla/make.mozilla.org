@@ -10,7 +10,7 @@ from django.conf import settings
 from django.core.urlresolvers import resolve, reverse
 import jingo
 
-from make_mozilla.events.views import events
+from make_mozilla.events import views as events
 from make_mozilla.events import forms
 from make_mozilla.events import models
 

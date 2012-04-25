@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns, url
-from make_mozilla.events.views import events
+from make_mozilla.events import views as events
 
 urlpatterns = patterns('',
     url(r'^$',                  events.index,             name = 'events'),
