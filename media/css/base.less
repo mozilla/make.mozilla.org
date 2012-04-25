@@ -1,3 +1,7 @@
+@import "mixins";
+
+@panelShadow: 0 2px 3px rgba(0,0,0,0.25);
+
 /* ===[ Fonts ]============================================================= */
 
 @font-face {
@@ -77,11 +81,12 @@ p {
 /* ===[ Header ]============================================================ */
 
 #header {
+	.box-shadow(~"0 0 5px rgba(0,0,0,0.5)");
+
 	background: #FFF;
 	background: rgba(255, 255, 255, 0.8);
 	position: relative;
 	z-index: 1;
-	box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
 #header p {
@@ -114,6 +119,8 @@ p {
 }
 
 #header li a {
+	.transition(all 0.25s linear 0s);
+
 	display: block;
 	min-width: 70px;
 	height: 70px;
@@ -125,11 +132,6 @@ p {
 	border: solid #E1E2E3;
 	border-width: 0 1px;
 	position: relative;
-	-webkit-transition: all 0.25s linear 0s;
-	-moz-transition: all 0.25s linear 0s;
-	-ie-transition: all 0.25s linear 0s;
-	-o-transition: all 0.25s linear 0s;
-	transition: all 0.25s linear 0s;
 }
 
 #header li a:hover {
@@ -301,21 +303,14 @@ p {
 .button,
 .button:link,
 .button:visited {
-	-webkit-transition: box-shadow 0.25s linear 0s;
-	-moz-transition: box-shadow 0.25s linear 0s;
-	-ie-transition: box-shadow 0.25s linear 0s;
-	-o-transition: box-shadow 0.25s linear 0s;
-	transition: box-shadow 0.25s linear 0s;
+	.box-shadow(~"0 2px 0 0 rgba(0, 0, 0, 0.1), 0 -2px 0 0 rgba(0, 0, 0, 0.2) inset");
+	.transition(~"box-shadow 0.25s linear 0s");
+	.gradient(~"#BBB, #777");
+	.border-radius(0.25em);
+
 	background-color: #999;
-	background-image: -webkit-linear-gradient(#BBB, #777);
-	background-image: -moz-linear-gradient(#BBB, #777);
-	background-image: -ie-linear-gradient(#BBB, #777);
-	background-image: -o-linear-gradient(#BBB, #777);
-	background-image: linear-gradient(#BBB, #777);
 	background-repeat: repeat-x;
 	border: 0 none;
-	border-radius: 0.25em 0.25em 0.25em 0.25em;
-	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), 0 -2px 0 0 rgba(0, 0, 0, 0.2) inset;
 	color: #FFFFFF;
 	display: inline-block;
 	font-family: arial, sans-serif;
@@ -333,7 +328,8 @@ p {
 .button:hover,
 .button:link:hover,
 .button:visited:hover {
-	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), 0 -2px 0 0 rgba(0, 0, 0, 0.2) inset, 0 12px 24px 2px #AAA inset;
+	.box-shadow(~"0 2px 0 0 rgba(0, 0, 0, 0.1), 0 -2px 0 0 rgba(0, 0, 0, 0.2) inset, 0 12px 24px 2px #AAA inset");
+
 	color: #FFFFFF;
 	text-decoration: none;
 }
@@ -341,7 +337,8 @@ p {
 .button:active,
 .button:link:active,
 .button:visited:active {
-	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2) inset, 0 12px 24px 6px rgba(0, 0, 0, 0.2) inset, 0 0 2px 2px rgba(0, 0, 0, 0.2) inset;
+	.box-shadow(~"0 2px 0 0 rgba(0, 0, 0, 0.2) inset, 0 12px 24px 6px rgba(0, 0, 0, 0.2) inset, 0 0 2px 2px rgba(0, 0, 0, 0.2) inset");
+
 	color: #FFFFFF;
 	text-decoration: none;
 }
@@ -355,18 +352,15 @@ p {
 .button.find,
 .button.find:link,
 .button.find:visited {
+	.gradient(~"#3C88CC, #276195");
+
 	background-color: #276195;
-	background-image: -webkit-linear-gradient(#3C88CC, #276195);
-	background-image: -moz-linear-gradient(#3C88CC, #276195);
-	background-image: -ie-linear-gradient(#3C88CC, #276195);
-	background-image: -o-linear-gradient(#3C88CC, #276195);
-	background-image: linear-gradient(#3C88CC, #276195);
 }
 
 .button.find:hover,
 .button.find:link:hover,
 .button.find:visited:hover {
-	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), 0 -2px 0 0 rgba(0, 0, 0, 0.2) inset, 0 12px 24px 2px #3089D8 inset;
+	.box-shadow(~"0 2px 0 0 rgba(0, 0, 0, 0.1), 0 -2px 0 0 rgba(0, 0, 0, 0.2) inset, 0 12px 24px 2px #3089D8 inset");
 }
 
 /* ---[ Create Button ]----------------------------------------------------- */
@@ -374,18 +368,15 @@ p {
 .button.create,
 .button.create:link,
 .button.create:visited {
+	.gradient(~"#81BC2E, #659324");
+
 	background-color: #659324;
-	background-image: -webkit-linear-gradient(#81BC2E, #659324);
-	background-image: -moz-linear-gradient(#81BC2E, #659324);
-	background-image: -ie-linear-gradient(#81BC2E, #659324);
-	background-image: -o-linear-gradient(#81BC2E, #659324);
-	background-image: linear-gradient(#81BC2E, #659324);
 }
 
 .button.create:hover,
 .button.create:link:hover,
 .button.create:visited:hover {
-	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), 0 -2px 0 0 rgba(0, 0, 0, 0.2) inset, 0 12px 24px 2px #83C822 inset;
+	.box-shadow(~"0 2px 0 0 rgba(0, 0, 0, 0.1), 0 -2px 0 0 rgba(0, 0, 0, 0.2) inset, 0 12px 24px 2px #83C822 inset");
 }
 
 /* ===[ Page Components ]=================================================== */
@@ -393,15 +384,12 @@ p {
 /* ---[ Intro Bar ]--------------------------------------------------------- */
 
 .intro-bar {
+	.box-shadow(@panelShadow);
+
 	background-color: #FFF;
 	line-height: 50px;
 	padding: 25px;
 	margin: 0 0 35px;
-	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
-	-moz-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
-	-ie-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
-	-o-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
-	box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 	font-size: 1.714em;
 	font-family: "Open Sans Light", "Open Sans", sans-serif;
 	font-weight: 100;
@@ -465,12 +453,9 @@ ul.tri-set {
 }
 
 ul.tri-set li {
+	.box-sizing(border-box);
+
 	width: 33.33%;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ie-box-sizing: border-box;
-	-o-box-sizing: border-box;
-	box-sizing: border-box;
 	padding-left: 18px;
 	margin-left: -3px;
 	display: inline-block;
@@ -481,15 +466,12 @@ ul.tri-set li {
 }
 
 ul.tri-set .thumb {
+	.box-shadow(@panelShadow);
+
 	background: #FFF;
 	display: block;
 	padding: 8px;
 	margin: 0 0 18px;
-	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
-	-moz-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
-	-ie-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
-	-o-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
-	box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 }
 
 ul.tri-set img {
@@ -554,16 +536,13 @@ ul.tri-set img {
 }
 
 .meta-ticker .thumb {
+	.box-shadow(@panelShadow);
+
     display: block;
     float: left;
     border: solid 5px #FFF;
 	background: #FFF;
     margin: -25px 10px 0 0;
-	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
-	-moz-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
-	-ie-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
-	-o-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
-	box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 }
 
 .meta-ticker img {
@@ -578,15 +557,12 @@ ul.tri-set img {
 
 @media screen and (min-width: 901px) {
 	.meta-ticker.enabled {
+		.gradient(~"#3C3B3B, #2F2D2E 3px, #282324");
+		.box-shadow(~"0 0 10px rgba(0,0,0,0.5)");
+		.border-radius(5px);
+
 		position: relative;
 		background-color: #231F20;
-		background-image: -webkit-linear-gradient(#3C3B3B, #2F2D2E 3px, #282324);
-		background-image: -moz-linear-gradient(#3C3B3B, #2F2D2E 3px, #282324);
-		background-image: -ie-linear-gradient(#3C3B3B, #2F2D2E 3px, #282324);
-		background-image: -o-linear-gradient(#3C3B3B, #2F2D2E 3px, #282324);
-		background-image: linear-gradient(#3C3B3B, #2F2D2E 3px, #282324);
-		border-radius: 5px;
-		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 		margin-left: 50px;
 		padding: 15px 15px 15px 75px;
 		text-shadow: 0 0 2px #000;
@@ -640,13 +616,14 @@ ul.tri-set img {
 	}
 
 	.meta-ticker.enabled .thumb {
+		.box-shadow(~"0 0 10px rgba(0,0,0,0.5)");
+
 		border-radius: 50%;
 		overflow: hidden;
 		position: absolute;
 		top: 50%;
 		left: 0;
 		margin: -52.5px 0 0 -50px;
-		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	}
 
 	.meta-ticker.enabled img {
