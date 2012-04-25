@@ -19,7 +19,8 @@ class apache {
     'a2enmod proxy':
       onlyif => 'test ! -e /etc/apache2/mods-enabled/proxy.load';
     'a2ensite playdoh': 
-      require => [Package['apache2-dev'], File['/etc/apache2/sites-available/playdoh']];
+      require => [Package['apache2-dev'], File['/etc/apache2/sites-available/playdoh']],
+      onlyif => 'test ! -L /etc/apache2/mods-enabled/playdoh';
   }
 
   service { "apache2":
