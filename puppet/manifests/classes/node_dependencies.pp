@@ -9,4 +9,5 @@ define npm {
 class node_dependencies {
   npm { "less": }
   npm { "uglify-js": }
+  npm { "clean-css": }
 }
