@@ -26,7 +26,7 @@ class postgis {
 
     exec { "create_postgis_template":
         command => "sudo -u postgres /usr/share/postgis/create_template_postgis.sh",
-        unless  => "sudo -u postgres psql -l | awk '{ print $1 }' | grep '^template_postgis$'",
+        unless  => "sudo -u postgres psql -l | awk '{ print \$1 }' | grep '^template_postgis$'",
         require => [File['/usr/share/postgis/create_template_postgis.sh'],
                    Package['postgresql-8.4-postgis', 'postgresql-client'], 
                    Service['postgresql'],

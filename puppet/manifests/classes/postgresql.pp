@@ -17,6 +17,7 @@ class postgresql {
         name => 'postgresql-8.4',
         ensure => running,
         enable => true,
+        hasstatus => true,
         require => [Package['postgresql'], Package['postgresql-client']];
     }
 }

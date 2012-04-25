@@ -21,7 +21,7 @@ def apply():
         with cd('/etc/puppet'):
             sudo('tar -xzf %s' % tarball_path)
         run('rm %s' % tarball_path)
-        sudo('puppet -d /etc/puppet/manifests/dev.pp')
+        sudo('puppet -v /etc/puppet/manifests/dev.pp')
 
 
 
