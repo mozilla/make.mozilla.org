@@ -8,7 +8,7 @@ from lxml.cssselect import CSSSelector
 # from django.core.urlresolvers import resolve
 import jingo
 
-from make_mozilla.events import views as events
+from make_mozilla.events import views
 from make_mozilla.events import forms
 
 # c = Client()
