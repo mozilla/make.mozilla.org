@@ -45,3 +45,8 @@ def setup():
 def deploy_cold():
     execute(setup)
     perform_release(migrate = True, setup = True)
+
+@task
+def update_settings():
+    release.put_updated_settings()
+    execute(wsgi_server.restart)

@@ -9,7 +9,7 @@ def initial_setup():
         run('mkdir -p releases')
         run('mkdir -p shared/settings')
         run('mkdir -p virtualenv')
-        put(local_settings_path(), 'shared/settings/local.py')
+    put_updated_settings()
 
 @task
 def symlink():
@@ -22,6 +22,11 @@ def create():
     copy_release_over()
     symlink_shared()
     run_pip_install(latest_release_path())
+    compress_assets(latest_release_path())
+
+def put_updated_settings():
+    with cd(env.releases_path):
+        put(local_settings_path(), 'shared/settings/local.py')
 
 def local_settings_path():
     path = os.getenv('settings_path', 'make_mozilla/settings/local.py')
@@ -45,7 +50,12 @@ def symlink_shared():
     run('ln -sf %s %s' % (shared_settings_path, release_settings_path))
 
 def latest_release_path():
-    return release_path(env.release_git_tag)
+    if env.has_key('release_git_tag'):
+        return release_path(env.release_git_tag)
+    else:
+        entries = [x.strip() for x in run('ls -1 %s' % release_path('')).split('\n')]
+        entries.sort()
+        return release_path(entries.pop())
 
 def virtualenv_path():
     return '%s/virtualenv' % env.releases_path
@@ -62,4 +72,8 @@ def virtualenv_pip_path():
 def run_pip_install(release_path):
     with cd(release_path):
         run('%s install -r requirements/compiled.txt' % virtualenv_pip_path())
+
+def compress_assets(release_path):
+    with cd(release_path):
+        run('%s manage.py compress_assets' % virtualenv_python_path())
 
