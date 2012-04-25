@@ -21,6 +21,8 @@ class dev {
   include apache
   include app_dependencies
   include app
+  include nodejs
+  include node_dependencies
 }
 
 include dev

@@ -7,3 +7,6 @@
 [submodule "vendor-local/src/bsdapi"]
 	path = vendor-local/src/bsdapi
 	url = git://github.com/bluestatedigital/bsdapi.git
+[submodule "vendor-local/src/redis"]
+	path = vendor-local/src/redis
+	url = git://github.com/andymccurdy/redis-py.git

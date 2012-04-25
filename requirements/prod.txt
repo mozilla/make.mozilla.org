@@ -1,3 +1,4 @@
 South
 pytz
+redis
 -r ../vendor/src/funfactory/funfactory/requirements/prod.txt
