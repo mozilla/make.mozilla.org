@@ -125,8 +125,11 @@ p {
 	border: solid #E1E2E3;
 	border-width: 0 1px;
 	position: relative;
-	-moz-transition: all 0.25s linear 0s;
 	-webkit-transition: all 0.25s linear 0s;
+	-moz-transition: all 0.25s linear 0s;
+	-ie-transition: all 0.25s linear 0s;
+	-o-transition: all 0.25s linear 0s;
+	transition: all 0.25s linear 0s;
 }
 
 #header li a:hover {
@@ -214,8 +217,6 @@ p {
 	width: 100%;
 	height: 600px;
 	background-color: #333;
-	background-image: -moz-linear-gradient(#AAA, #EEE);
-	background-image: -webkit-linear-gradient(#AAA, #EEE);
 	background-size: cover;
 	background-position: 50% 50%;
 	margin-top: -614px;
@@ -300,11 +301,17 @@ p {
 .button,
 .button:link,
 .button:visited {
-	-moz-transition: box-shadow 0.25s linear 0s;
 	-webkit-transition: box-shadow 0.25s linear 0s;
+	-moz-transition: box-shadow 0.25s linear 0s;
+	-ie-transition: box-shadow 0.25s linear 0s;
+	-o-transition: box-shadow 0.25s linear 0s;
+	transition: box-shadow 0.25s linear 0s;
 	background-color: #999;
-	background-image: -moz-linear-gradient(#BBB, #777);
 	background-image: -webkit-linear-gradient(#BBB, #777);
+	background-image: -moz-linear-gradient(#BBB, #777);
+	background-image: -ie-linear-gradient(#BBB, #777);
+	background-image: -o-linear-gradient(#BBB, #777);
+	background-image: linear-gradient(#BBB, #777);
 	background-repeat: repeat-x;
 	border: 0 none;
 	border-radius: 0.25em 0.25em 0.25em 0.25em;
@@ -349,8 +356,11 @@ p {
 .button.find:link,
 .button.find:visited {
 	background-color: #276195;
-	background-image: -moz-linear-gradient(#3C88CC, #276195);
 	background-image: -webkit-linear-gradient(#3C88CC, #276195);
+	background-image: -moz-linear-gradient(#3C88CC, #276195);
+	background-image: -ie-linear-gradient(#3C88CC, #276195);
+	background-image: -o-linear-gradient(#3C88CC, #276195);
+	background-image: linear-gradient(#3C88CC, #276195);
 }
 
 .button.find:hover,
@@ -365,8 +375,11 @@ p {
 .button.create:link,
 .button.create:visited {
 	background-color: #659324;
-	background-image: -moz-linear-gradient(#81BC2E, #659324);
 	background-image: -webkit-linear-gradient(#81BC2E, #659324);
+	background-image: -moz-linear-gradient(#81BC2E, #659324);
+	background-image: -ie-linear-gradient(#81BC2E, #659324);
+	background-image: -o-linear-gradient(#81BC2E, #659324);
+	background-image: linear-gradient(#81BC2E, #659324);
 }
 
 .button.create:hover,
@@ -384,11 +397,11 @@ p {
 	line-height: 50px;
 	padding: 25px;
 	margin: 0 0 35px;
-	box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 	-moz-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 	-ie-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 	-o-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+	box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 	font-size: 1.714em;
 	font-family: "Open Sans Light", "Open Sans", sans-serif;
 	font-weight: 100;
@@ -546,11 +559,11 @@ ul.tri-set img {
     border: solid 5px #FFF;
 	background: #FFF;
     margin: -25px 10px 0 0;
-	box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 	-moz-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 	-ie-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 	-o-box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+	box-shadow: 0 2px 2px rgba(0,0,0,0.25);
 }
 
 .meta-ticker img {
@@ -569,6 +582,9 @@ ul.tri-set img {
 		background-color: #231F20;
 		background-image: -webkit-linear-gradient(#3C3B3B, #2F2D2E 3px, #282324);
 		background-image: -moz-linear-gradient(#3C3B3B, #2F2D2E 3px, #282324);
+		background-image: -ie-linear-gradient(#3C3B3B, #2F2D2E 3px, #282324);
+		background-image: -o-linear-gradient(#3C3B3B, #2F2D2E 3px, #282324);
+		background-image: linear-gradient(#3C3B3B, #2F2D2E 3px, #282324);
 		border-radius: 5px;
 		box-shadow: 0 0 10px rgba(0,0,0,0.5);
 		margin-left: 50px;
