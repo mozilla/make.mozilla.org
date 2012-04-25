@@ -1,4 +1,4 @@
-.box-shadow (@shadow: '0 0 5px rgba(0,0,0,0.5)') {
+.box-shadow (@shadow: ~"0 0 5px rgba(0,0,0,0.5)") {
 	-webkit-box-shadow: @shadow;
 	-moz-box-shadow: @shadow;
 	-ie-box-shadow: @shadow;
@@ -6,7 +6,7 @@
 	box-shadow: @shadow;
 }
 
-.transition (@transition: 'all 1s linear 0s') {
+.transition (@transition: ~"all 1s linear 0s") {
 	-webkit-transition: @transition;
 	-moz-transition: @transition;
 	-ie-transition: @transition;
@@ -14,7 +14,7 @@
 	transition: @transition;
 }
 
-.gradient (@gradient: "#FFF, #000") {
+.gradient (@gradient: ~"#FFF, #000") {
 	background-image: -webkit-linear-gradient(@gradient);
 	background-image: -moz-linear-gradient(@gradient);
 	background-image: -ie-linear-gradient(@gradient);
@@ -22,7 +22,7 @@
 	background-image: linear-gradient(@gradient);
 }
 
-.border-radius (@radius: '') {
+.border-radius (@radius: 5px) {
 	-webkit-border-radius: @radius;
 	-moz-border-radius: @radius;
 	-ie-border-radius: @radius;
@@ -30,10 +30,10 @@
 	border-radius: @radius;
 }
 
-.box-sizing (@sizing: '') {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ie-box-sizing: border-box;
-	-o-box-sizing: border-box;
-	box-sizing: border-box;
+.box-sizing (@sizing: border-box) {
+	-webkit-box-sizing: @sizing;
+	-moz-box-sizing: @sizing;
+	-ie-box-sizing: @sizing;
+	-o-box-sizing: @sizing;
+	box-sizing: @sizing;
 }
