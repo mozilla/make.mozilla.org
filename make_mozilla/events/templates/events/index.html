@@ -9,6 +9,18 @@
     <p><a href="" class="button find">Find an Event</a> <em>or</em> <a href="" class="button create">Create an Event</a></p>
 </div>
 
+<div class="meta-ticker" data-label="Event Type">
+    <h3>Event Types</h3>
+    <dl>
+        <dt>Hack Jam</dt>
+            <dd><span class="thumb"><img src="http://placehold.it/95x95" alt=""></span> Throw a learning party! Grow a network in your city by inviting local groups to play and learn together.</dd>
+        <dt>Thing 2</dt>
+            <dd><span class="thumb"><img src="http://placehold.it/95x95" alt=""></span> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</dd>
+        <dt>Thing 3</dt>
+            <dd><span class="thumb"><img src="http://placehold.it/95x95" alt=""></span> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</dd>
+    </dl>
+</div>
+
 <h3>What's New with Webmaker Events?</h3>
 
 <ul class="tri-set">
@@ -28,4 +40,9 @@
         <p><a href="">The Mozilla Summer Campaign</a></p>
     </li>
 </ul>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{{ js('core_js') }}
 {% endblock %}
