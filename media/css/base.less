@@ -60,7 +60,7 @@ a:visited {
 	color: #27AAE1;
 }
 
-h1 {
+h2 {
 	font-family: "Open Sans Light", "Open Sans", sans-serif;
 	font-size: 2.571em;
 	color: #6D6E71;
@@ -101,7 +101,8 @@ p {
 
 #header h1 {
 	margin: 0;
-	font-size: 1.429em;
+	font-size: 2em;
+	text-transform: lowercase;
 }
 
 #header h1 a {
@@ -113,6 +114,16 @@ p {
 	padding: 0 15px;
 	margin-left: -15px;
 	color: #48484B;
+	position: relative;
+}
+
+#header h1 span {
+	font-size: 0.357em;
+	position: absolute;
+	bottom: 50%;
+	right: 50%;
+	margin: 0 4em 1em 0;
+	line-height: 1em;
 }
 
 /* ---[ Main Navigation ]--------------------------------------------------- */
@@ -269,7 +280,7 @@ p {
 	line-height: 25px;
 }
 
-#footer h3,
+#footer h2,
 #footer .col {
 	width: 25%;
 	max-width: 180px;
@@ -278,8 +289,18 @@ p {
 	color: inherit;
 }
 
-#footer h4 {
+#footer h2 {
+	font-size: 1.571em;
+	font-family: "Open Sans", sans-serif;
+	line-height: 1em;
+}
+
+#footer h3 {
 	margin: 0;
+	font-size: 1em;
+	line-height: 1em;
+	padding: 0.571em 0;
+	color: #939598;
 }
 
 #footer ul {
@@ -293,7 +314,7 @@ p {
 		padding: 25px 0;
 	}
 
-	#footer h3 {
+	#footer h2 {
 		float: none;
 		width: 100%;
 	}
@@ -301,7 +322,7 @@ p {
 	#footer .col {
 		width: 33.33%;
 		max-width: 500px;
-		margin-top: 25px;
+		margin-top: 1em;
 	}
 }
 
