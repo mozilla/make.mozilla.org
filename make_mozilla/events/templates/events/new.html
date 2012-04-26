@@ -1,17 +1,17 @@
 {% extends "events/base.html" %}
 
 {% block content %}
-<form action="/events/create">
-  <fieldset>
-    <ul>
-      {{ event_form.as_ul() }}
-    </ul>
-  </fieldset>
-  <fieldset>
-    <ul>
-      {{ venue_form.as_ul() }}
-    </ul>
-  </fieldset>
-  <p><input type="submit"></p>
+<form action="/events/create" class="primary">
+    <fieldset>
+        <ul>
+            {{ event_form.as_ul() }}
+        </ul>
+    </fieldset>
+    <fieldset>
+        <ul>
+            {{ venue_form.as_ul() }}
+        </ul>
+    </fieldset>
+    <p class="buttons"><input type="submit" class="button submit"></p>
 </form>
 {% endblock %}

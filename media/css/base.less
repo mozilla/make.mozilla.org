@@ -203,6 +203,13 @@ p {
 	position: relative;
 }
 
+@media screen and (max-width: 700px) {
+	#content {
+		margin-top: -100px;
+		padding-top: 140px;
+	}
+}
+
 /* ---[ Brochure Content ]-------------------------------------------------- */
 
 .brochure-page #content {
@@ -365,6 +372,9 @@ p {
 
 /* ---[ Create Button ]----------------------------------------------------- */
 
+.button.submit,
+.button.submit:link,
+.button.submit:visited,
 .button.create,
 .button.create:link,
 .button.create:visited {
@@ -373,6 +383,9 @@ p {
 	background-color: #659324;
 }
 
+.button.submit:hover,
+.button.submit:link:hover,
+.button.submit:visited:hover,
 .button.create:hover,
 .button.create:link:hover,
 .button.create:visited:hover {
@@ -672,6 +685,102 @@ ul.tri-set img {
 		display: block;
 		float: left;
 		text-indent: -999em;
+	}
+}
+
+/* ---[ Forms ]------------------------------------------------------------- */
+
+form.primary {
+	.box-shadow(@panelShadow);
+
+	background: #FFF;
+	margin: 0;
+	padding: 50px;
+}
+
+form.primary fieldset {
+	border: none;
+	border-bottom: solid 1px #E1E3E3;
+	margin: 0 0 35px;
+	padding: 0 18px 10px 0;
+}
+
+form.primary ul,
+form.primary li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+form.primary li {
+	margin-bottom: 25px;
+}
+
+form.primary .buttons {
+	margin: 0;
+	padding: 0;
+	font-size: 1.286em;
+}
+
+form.primary li,
+form.primary .buttons {
+	margin-left: 165px;
+}
+
+form.primary label {
+	display: block;
+	width: 143px;
+	margin-left: -165px;
+	text-align: right;
+	float: left;
+	font-size: 1.143em;
+	line-height: 2.125em;
+}
+
+form.primary textarea,
+form.primary input[type="email"],
+form.primary input[type="password"],
+form.primary input[type="text"] {
+	.transition(all linear .1s);
+	.border-radius(6px);
+	.box-shadow(~"0 2px 1px rgba(0,0,0,0.1) inset");
+
+	height: 1.714em;
+	width: 100%;
+	max-width: 450px;
+	background: #FAFAFA;
+	border-color: #DBDBDB;
+	border-style: solid;
+	border-width: 1px;
+	padding: 4px 8px;
+	font-size: inherit;
+	line-height: 1.714em;
+}
+
+form.primary textarea {
+	resize: vertical;
+}
+
+form.primary textarea:focus,
+form.primary input[type="email"]:focus,
+form.primary input[type="password"]:focus,
+form.primary input[type="text"]:focus {
+	.box-shadow(~"0 2px 1px rgba(0,0,0,0.1) inset,0 0 8px 0 rgba(103,167,208,0.6)");
+
+	border-color: #BBB;
+	outline: none;
+}
+
+@media screen and (max-width: 600px) {
+	form.primary li,
+	form.primary .buttons {
+		margin-left: 0;
+	}
+
+	form.primary label {
+		margin-left: 0;
+		text-align: left;
+		float: none;
 	}
 }
 
