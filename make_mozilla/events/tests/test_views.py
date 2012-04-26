@@ -135,15 +135,17 @@ class TestEventViewsCreate(TestCase):
         mock_create_func.assert_called_with(self.mock_ef, self.mock_vf)
         assert_redirects_to_named_url(response, 'event', kwargs = {'event_id': 1})
 
-    def test_that_create_event_and_venue_does_that_given_valid_data(self):
+    @patch.object(views.tasks, 'register_email_address_as_constituent')
+    def test_that_create_event_and_venue_does_that_given_valid_data(self, mock_task_func):
         ef = forms.EventForm(self.data)
         vf = forms.VenueForm(self.data)
 
         event, venue = views.create_event_and_venue(ef, vf)
 
-        self.assertIsNotNone(event.id)
-        self.assertIsNotNone(venue.id)
-        self.assertEqual(venue, event.venue)
+        mock_task_func.delay.assert_called_with('ross@mozillafoundation.org', '111')
+        ok_(event.id is not None)
+        ok_(venue.id is not None)
+        eq_(venue, event.venue)
 
     @patch.object(views, 'process_create_post_data')
     @patch.object(views, 'create_event_and_venue')

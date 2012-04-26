@@ -14,6 +14,7 @@ from session_csrf import anonymous_csrf
 from django.conf import settings
 from make_mozilla.events import forms
 from make_mozilla.events import models
+from make_mozilla.events import tasks
 
 log = commonware.log.getLogger('playdoh')
 
@@ -68,6 +69,8 @@ def create_event_and_venue(event_form, venue_form):
     venue = venue_form.save()
     event = event_form.save(commit = False)
     event.venue = venue
-    event.organiser_email = 'ross@mozillafoundation.org' # nasty temp hack while resolving some other email-related things
+    organiser_email = 'ross@mozillafoundation.org' # nasty temp hack while resolving some other email-related things
+    event.organiser_email = organiser_email
+    tasks.register_email_address_as_constituent.delay(organiser_email , '111')
     event.save()
     return (event, venue)
