@@ -46,3 +46,8 @@ class EventTest(unittest.TestCase):
 
             mock_query_set.assert_called_with(start__gte = mock_now)
 
+    # TO DO - do this with real DB objects...
+    # @patch.object(models, 'Point')
+    # @patch.object(models.Event.objects, 'filter')
+    # def test_upcoming_events_can_be_retrieved(self, mock_query_set):
+    #     pass

@@ -1,5 +1,6 @@
 from django.utils import unittest
 from mock import patch, Mock
+from contextlib import nested
 from django.test import TestCase
 from nose.tools import eq_, ok_
 from django.test.client import Client, RequestFactory
@@ -13,6 +14,7 @@ import jingo
 from make_mozilla.events import views
 from make_mozilla.events import forms
 from make_mozilla.events import models
+from make_mozilla.events import paginators
 
 c = Client()
 rf = RequestFactory()
@@ -175,3 +177,83 @@ class TestEventViewsDetail(unittest.TestCase):
 
         mock_render.assert_called_with(request, 'events/detail.html', {'event': mock_event})
         mock_event_get.assert_called_with(pk = 'abcde')
+
+class TestEventViewsNear(unittest.TestCase):
+    def test_that_it_routes_correctly_for_the_map(self):
+        assert_routing('/events/near/', views.near, name = 'events.near')
+
+    def test_that_it_routes_correctly_for_the_list(self):
+        assert_routing('/events/near/list/', views.near_list, name = 'events.near.list')
+
+    def setUp(self):
+        self.near = views.Near()
+        self.mock_page = Mock()
+
+    def test_that_latlon_search_params_are_extracted(self):
+        (lat, lon) = self.near.extract_latlon(rf.get('/?lat=51.0&lng=-0.4'))
+        eq_(lat, '51.0')
+        eq_(lon, '-0.4')
+
+    def test_that_page_defaults_to_1(self):
+        eq_(1, self.near.extract_page(rf.get('/')))
+
+    def test_that_page_is_returned_verbatim_if_present(self):
+        eq_('fnord', self.near.extract_page(rf.get('/?page=fnord')))
+
+    @patch.object(models.Event, 'near')
+    @patch.object(paginators, 'results_page')
+    def test_that_results_page_is_correctly_returned(self,
+            mock_results_page, mock_query):
+        mock_query_set = Mock()
+        mock_query.return_value = mock_query_set
+        mock_paginated_results = Mock()
+        mock_results_page.return_value = mock_paginated_results
+
+        eq_(self.near.paginated_results('lat', 'lon', 999, 1),
+                mock_paginated_results)
+
+        mock_query.assert_called_with('lat', 'lon')
+        mock_results_page.assert_called_with(mock_query_set, 999, page = 1)
+
+    @patch('jingo.render')
+    def test_that_a_template_can_be_rendered_correctly(self,
+            mock_render):
+        with nested(
+                patch.object(self.near, 'extract_latlon'),
+                patch.object(self.near, 'extract_page'),
+                patch.object(self.near, 'paginated_results')
+                ) as (mock_latlon, mock_page, mock_results):
+            request = rf.get('/')
+            mock_paginated_results = Mock()
+            mock_latlon.return_value = ('lat', 'lon')
+            mock_page.return_value = 1
+            mock_results.return_value = mock_paginated_results
+            mock_response = Mock()
+            mock_render.return_value = mock_response
+
+            self.near.render(request, 'template-path', 999)
+
+            mock_latlon.assert_called_with(request)
+            mock_page.assert_called_with(request)
+            mock_results.assert_called_with('lat', 'lon', 999, 1)
+            mock_render.assert_called_with(request, 'template-path', {'results': mock_paginated_results})
+
+    @patch.object(views.near_view, 'render')
+    def test_that_it_correctly_renders_for_maps(self, 
+            mock_near_view):
+        mock_response = Mock()
+        mock_near_view.return_value = mock_response
+        request = rf.get('/events/near?lat=51.0&lng=-0.4')
+
+        eq_(views.near(request), mock_response)
+        mock_near_view.assert_called_with(request, 'events/near-map.html', 24)
+
+    @patch.object(views.near_view, 'render')
+    def test_that_it_correctly_renders_for_lists(self, 
+            mock_near_view):
+        mock_response = Mock()
+        mock_near_view.return_value = mock_response
+        request = rf.get('/events/near?lat=51.0&lng=-0.4')
+
+        eq_(views.near_list(request), mock_response)
+        mock_near_view.assert_called_with(request, 'events/near-list.html', 4)

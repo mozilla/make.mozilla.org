@@ -31,6 +31,9 @@ class Venue(models.Model):
     def longitude(self, value):
         self.location.y = value
 
+def _upcoming(qs):
+    return qs.filter(start__gte = datetime.now())
+
 class Event(models.Model):
     name = models.CharField(max_length = 255)
     event_url = models.CharField(max_length = 255, blank = True)
@@ -44,4 +47,9 @@ class Event(models.Model):
 
     @classmethod
     def upcoming(self):
-        return self.objects.filter(start__gte = datetime.now())
+        return _upcoming(self.objects)
+
+    @classmethod
+    def near(self, latitude, longitude):
+        return _upcoming(self.objects).filter(location__distance_lte=(pnt, geos.D(mi=20)))
+
