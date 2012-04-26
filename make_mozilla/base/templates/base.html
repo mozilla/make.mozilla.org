@@ -2,7 +2,7 @@
 <!--[if (lt IE 9)]><html class="no-js bad-ie" lang="{{ LANG }}" dir="{{ DIR }}"><![endif]-->
 <![if (gt IE 8)]><html class="no-js" lang="{{ LANG }}" dir="{{ DIR }}"><![endif]>
     <head>
-        <title>{% block page_title %}{{ app_name }}{% endblock %}</title>
+        <title>{% block page_title %}Mozilla Webmaker{% endblock %}</title>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta name="viewport" content="initial-scale=1.0, width=device-width">
         <link rel="stylesheet" href="//www.mozilla.org/tabzilla/media/css/tabzilla.css">
@@ -16,7 +16,7 @@
         <![endif]-->
         <link rel="icon" href="{{ MEDIA_URL }}img/favicon.ico" />
     </head>
-    <body id="{% block page_id %}{% endblock %}" class="{% block page_class %}section-{% block section_type %}global{% endblock %}{% endblock %}">
+    <body id="{% block page_id %}generic-page{% endblock %}" class="{% block page_class %}section-{% block section_type %}global{% endblock %}{% endblock %}">
         <script>
             document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, '');
         </script>
