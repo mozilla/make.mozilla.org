@@ -51,5 +51,6 @@ class Event(models.Model):
 
     @classmethod
     def near(self, latitude, longitude):
-        return _upcoming(self.objects).filter(location__distance_lte=(pnt, geos.D(mi=20)))
+        point = geos.Point(float(longitude), float(latitude))
+        return _upcoming(self.objects).filter(location__distance_lte=(point, geos.D(mi=20)))
 
