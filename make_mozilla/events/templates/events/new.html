@@ -1,6 +1,9 @@
 {% extends "events/base.html" %}
 
+{% block page_title %}Create a New Event | {{ super() }}{% endblock %}
+
 {% block content %}
+<h2>Create a New Event</h2>
 <form action="/events/create" class="primary">
     <fieldset>
         <ul>
