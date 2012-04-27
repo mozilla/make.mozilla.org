@@ -1,5 +1,6 @@
 from django import http
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_GET
 from django.contrib.syndication.views import Feed
 from django.contrib.gis.feeds import GeoRSSFeed
@@ -44,6 +45,7 @@ def index(request):
     return jingo.render(request, 'events/index.html')
 
 
+@login_required
 def new(request):
     new_event_form = forms.EventForm()
     new_venue_form = forms.VenueForm()
@@ -78,10 +80,11 @@ def details(request, event_id):
 
 
 @require_POST
+@login_required
 def create(request):
     ef, vf = process_create_post_data(request.POST)
     if ef.is_valid() and vf.is_valid():
-        event, venue = create_event_and_venue(ef, vf)
+        event, venue = create_event_and_venue(request.user, ef, vf)
         return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
     return jingo.render(request, 'events/new.html', {
         'event_form': ef,
@@ -95,11 +98,11 @@ def process_create_post_data(data):
     return (event_form, venue_form)
 
 
-def create_event_and_venue(event_form, venue_form):
+def create_event_and_venue(user, event_form, venue_form):
     venue = venue_form.save()
     event = event_form.instance
     event.venue = venue
-    organiser_email = 'ross@mozillafoundation.org'  # nasty temp hack while resolving some other email-related things
+    organiser_email = user.email
     event.organiser_email = organiser_email
     tasks.register_email_address_as_constituent.delay(organiser_email, '111')
     event.save()

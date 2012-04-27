@@ -59,6 +59,7 @@ class TestEventViewsNew(unittest.TestCase):
         MockEventForm.return_value = event_form
         MockVenueForm.return_value = venue_form
         request = rf.get('/events/new/')
+        request.user = Mock()
         views.new(request)
 
         mock_render.assert_called_with(request, 'events/new.html', {'event_form': event_form, 'venue_form': venue_form})
@@ -117,24 +118,28 @@ class TestEventViewsCreate(TestCase):
         self.assertEqual(vf, self.mock_vf)
 
     @patch.object(views, 'process_create_post_data')
-    def test_that_it_correctly_processes_the_post_data(self, mock_func):
-        mock_func.return_value = (invalid_form(), invalid_form())
+    @patch('jingo.render')
+    def test_that_it_correctly_invokes_the_form_processor(self, mock_render, mock_forms_func):
+        mock_forms_func.return_value = (invalid_form(), invalid_form())
 
         request = rf.post('/events/create/', self.data)
+        request.user = Mock()
         views.create(request)
 
-        mock_func.assert_called_with(query_dict_from(self.data))
+        mock_forms_func.assert_called_with(query_dict_from(self.data))
 
     @patch.object(views, 'process_create_post_data')
     @patch.object(views, 'create_event_and_venue')
     def test_that_valid_data_creates_an_event_and_venue_and_redirects(self, mock_create_func, mock_forms_func):
         mock_forms_func.return_value = (self.mock_ef, self.mock_vf)
         mock_create_func.return_value = (mock_persisted_event(id = 1), None)
+        mock_user = Mock()
 
         request = rf.post('/events/create/', self.data)
+        request.user = mock_user
         response = views.create(request)
 
-        mock_create_func.assert_called_with(self.mock_ef, self.mock_vf)
+        mock_create_func.assert_called_with(mock_user, self.mock_ef, self.mock_vf)
         assert_redirects_to_named_url(response, 'event', kwargs = {'event_id': 1})
 
     @patch.object(views.tasks, 'register_email_address_as_constituent')
@@ -144,10 +149,12 @@ class TestEventViewsCreate(TestCase):
         self.data['event-kind'] = str(event_kind.id)
         ef = forms.EventForm(self.data)
         vf = forms.VenueForm(self.data)
+        mock_user = Mock()
+        mock_user.email = 'example@mozilla.org'
 
-        event, venue = views.create_event_and_venue(ef, vf)
+        event, venue = views.create_event_and_venue(mock_user, ef, vf)
 
-        mock_task_func.delay.assert_called_with('ross@mozillafoundation.org', '111')
+        mock_task_func.delay.assert_called_with('example@mozilla.org', '111')
         ok_(event.id is not None)
         ok_(venue.id is not None)
         eq_(venue, event.venue)
@@ -161,6 +168,7 @@ class TestEventViewsCreate(TestCase):
         mock_forms_func.return_value = (ef, vf)
 
         request = rf.post('/events/create/', self.data)
+        request.user = Mock()
         response = views.create(request)
 
         mock_create_func.assert_not_called()
