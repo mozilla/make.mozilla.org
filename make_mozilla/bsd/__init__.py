@@ -104,12 +104,10 @@ class BSDEventImporter(object):
         except Event.DoesNotExist:
             return None
 
-    # def fetch_organiser_email_from_bsd(self, event_json):
-    #     constituent_id = event_json['creator_cons_id']
-
-    #     return BSDClient.constituent_email_for_constituent_id(constituent_id)
     def fetch_organiser_email_from_bsd(self, event_json):
-        return 'ross@mozillafoundation.com'
+        constituent_id = event_json['creator_cons_id']
+
+        return BSDClient.constituent_email_for_constituent_id(constituent_id)
 
     def venue_for_event(self, event):
         if event is not None:
