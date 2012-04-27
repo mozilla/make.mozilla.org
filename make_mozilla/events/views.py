@@ -54,9 +54,10 @@ def search(request):
     location = request.GET.get('location')
 
     if location:
+        import urllib
         import urllib2
         import json
-        url="http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % location
+        url="http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % urllib.quote_plus(location)
         response = urllib2.urlopen(url)
         results = json.loads(response.read()).get('results', ())
     else:
