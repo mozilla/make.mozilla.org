@@ -132,12 +132,12 @@ near_view = Near()
 
 @require_GET
 def near(request):
-    return near_view.render(request, 'events/near-list.html', 24)
+    return near_view.render(request, 'events/near-list.html', 4)
 
 
 @require_GET
 def near_map(request):
-    return near_view.render(request, 'events/near-map.html', 4)
+    return near_view.render(request, 'events/near-map.html', 24)
 
 
 def guides_all(request):
