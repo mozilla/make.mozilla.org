@@ -19,6 +19,9 @@ MINIFY_BUNDLES = {
         'core_js': (
             'js/core.js',
         ),
+        'maps_js': (
+            'js/map.js',
+        ),
         'example_js': (
             'js/examples/libs/jquery-1.4.4.min.js',
             'js/examples/libs/jquery.cookie.js',

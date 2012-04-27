@@ -1,0 +1,17 @@
+{% extends "events/base.html" %}
+
+{% block page_class %}{{ super() }} map-page{% endblock %}
+
+{% block content_wrapper -%}
+<div id="content">
+    <div id="map-container"></div>
+    <div class="constrained">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{{ js('maps_js') }}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "events/base.maps.html" %}
+
+{% block page_title %}Search | {{ super() }}{% endblock %}
+{% block page_id %}events-search{% endblock %}
+
+{% block content %}
+<div class="search-results">
+    {% include "events/_search-form.html" %}
+</div>
+{% endblock %}

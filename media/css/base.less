@@ -1,6 +1,6 @@
 @import "mixins";
 
-@panelShadow: 0 2px 3px rgba(0,0,0,0.25);
+@panelShadow: 0 2px 4px rgba(0,0,0,0.25);
 
 /* ===[ Fonts ]============================================================= */
 
@@ -63,6 +63,7 @@ a:visited {
 h2 {
 	font-family: "Open Sans Light", "Open Sans", sans-serif;
 	font-size: 2.571em;
+	font-weight: normal;
 	color: #6D6E71;
 }
 
@@ -103,6 +104,7 @@ p {
 	margin: 0;
 	font-size: 2em;
 	text-transform: lowercase;
+	font-weight: normal;
 }
 
 #header h1 a {
@@ -271,6 +273,25 @@ p {
 	}
 }
 
+/* ---[ Map Content ]------------------------------------------------------- */
+
+.map-page #content {
+/*	min-height: 600px;*/
+}
+
+.map-page #map-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.map-page #content .constrained {
+	position: relative;
+	z-index: 1;
+}
+
 /* ===[ Footer ]============================================================ */
 
 #footer {
@@ -400,9 +421,6 @@ p {
 
 /* ---[ Create Button ]----------------------------------------------------- */
 
-.button.submit,
-.button.submit:link,
-.button.submit:visited,
 .button.create,
 .button.create:link,
 .button.create:visited {
@@ -411,9 +429,6 @@ p {
 	background-color: #659324;
 }
 
-.button.submit:hover,
-.button.submit:link:hover,
-.button.submit:visited:hover,
 .button.create:hover,
 .button.create:link:hover,
 .button.create:visited:hover {
@@ -719,7 +734,7 @@ ul.tri-set img {
 
 /* ---[ Forms ]------------------------------------------------------------- */
 
-form.primary {
+form {
 	.box-shadow(@panelShadow);
 
 	background: #FFF;
@@ -727,36 +742,36 @@ form.primary {
 	padding: 50px;
 }
 
-form.primary fieldset {
+form fieldset {
 	border: none;
 	border-bottom: solid 1px #E1E3E3;
 	margin: 0 0 35px;
 	padding: 0 18px 10px 0;
 }
 
-form.primary ul,
-form.primary li {
+form ul,
+form li {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-form.primary li {
+form li {
 	margin-bottom: 25px;
 }
 
-form.primary .buttons {
+form .buttons {
 	margin: 0;
 	padding: 0;
 	font-size: 1.286em;
 }
 
-form.primary li,
-form.primary .buttons {
+form li,
+form .buttons {
 	margin-left: 165px;
 }
 
-form.primary label {
+form label {
 	display: block;
 	width: 143px;
 	margin-left: -165px;
@@ -766,11 +781,11 @@ form.primary label {
 	line-height: 2.125em;
 }
 
-form.primary textarea,
-form.primary input[type="email"],
-form.primary input[type="password"],
-form.primary input[type="text"] {
-	.transition(all linear .1s);
+form textarea,
+form input[type="email"],
+form input[type="password"],
+form input[type="text"] {
+	.transition(box-shadow linear .1s);
 	.border-radius(6px);
 	.box-shadow(~"0 2px 1px rgba(0,0,0,0.1) inset");
 
@@ -786,14 +801,14 @@ form.primary input[type="text"] {
 	line-height: 1.714em;
 }
 
-form.primary textarea {
+form textarea {
 	resize: vertical;
 }
 
-form.primary textarea:focus,
-form.primary input[type="email"]:focus,
-form.primary input[type="password"]:focus,
-form.primary input[type="text"]:focus {
+form textarea:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form input[type="text"]:focus {
 	.box-shadow(~"0 2px 1px rgba(0,0,0,0.1) inset,0 0 8px 0 rgba(103,167,208,0.6)");
 
 	border-color: #BBB;
@@ -801,12 +816,12 @@ form.primary input[type="text"]:focus {
 }
 
 @media screen and (max-width: 600px) {
-	form.primary li,
-	form.primary .buttons {
+	form li,
+	form .buttons {
 		margin-left: 0;
 	}
 
-	form.primary label {
+	form label {
 		margin-left: 0;
 		margin-right: -18px;
 		padding-bottom: 5px;
@@ -814,6 +829,123 @@ form.primary input[type="text"]:focus {
 		float: none;
 		line-height: 1em;
 		width: auto
+	}
+}
+
+/* ---[ Search Results, etc ]----------------------------------------------- */
+
+.search-results {
+	.box-shadow(@panelShadow);
+
+	background: #FFF;
+	background: rgba(255,255,255,0.5);
+/*	padding-bottom: 100px;*/
+}
+
+.search-results form {
+	.box-shadow(none);
+	.box-sizing(border-box);
+
+	display: table;
+	border-collapse: collapse;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: solid transparent;
+	border-width: 25px 35px;
+}
+
+.search-results form .wrapper {
+	display: table-row;
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+
+.search-results form .item {
+	display: table-cell;
+	white-space: nowrap;
+	padding: 0 0 0 18px;
+	margin: 0;
+	border: none;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.search-results h2.item {
+	font-size: 1em;
+	width: 0;
+	padding: 0 18px 0 0;
+}
+
+.search-results label {
+	float: none;
+	margin: 0;
+	padding: 0;
+	font-size: 1.714em;
+	line-height: 1.714em;
+	width: auto;
+	text-align: left;
+}
+
+.search-results input[type="text"] {
+	margin-left: -18px;
+}
+
+.search-results input[type="text"]::-webkit-input-placeholder {
+	text-transform: uppercase;
+	font-size: 0.8em;
+	line-height: 2.5em;
+}
+
+.search-results input[type="text"]:-moz-placeholder {
+	text-transform: uppercase;
+	font-size: 0.8em;
+	line-height: 2.5em;
+}
+
+.search-results .buttons {
+	margin: 0;
+}
+
+@media screen and (max-width: 900px) {
+	.search-results form .wrapper {
+		display: block;
+	}
+
+	.search-results h2.item {
+		width: 100%;
+		padding: 0;
+		display: block;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.search-results .buttons.item {
+		display: block;
+		text-align: right;
+		padding: 10px 35px 0 0;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.search-results form .item {
+		display: block;
+		margin: 10px 0 0;
+		padding: 0;
+		width: auto;
+	}
+
+	.search-results .item.location {
+		margin-left: 18px;
+	}
+
+	.search-results select {
+		width: 100%;
+	}
+
+	.search-results .buttons.item {
+		padding-right: 0;
 	}
 }
 
