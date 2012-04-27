@@ -1,10 +1,11 @@
 {% extends "events/base.html" %}
 
 {% block page_title %}Create a New Event | {{ super() }}{% endblock %}
+{% block page_id %}events-new{% endblock %}
 
 {% block content %}
 <h2>Create a New Event</h2>
-<form action="/events/create" class="primary">
+<form action="/events/create">
     <fieldset>
         <ul>
             {{ event_form.as_ul() }}
@@ -15,6 +16,6 @@
             {{ venue_form.as_ul() }}
         </ul>
     </fieldset>
-    <p class="buttons"><input type="submit" class="button submit"></p>
+    <p class="buttons"><input type="submit" class="button create"></p>
 </form>
 {% endblock %}
