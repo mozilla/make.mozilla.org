@@ -4,9 +4,9 @@
 [submodule "vendor-local/src/django-browserid"]
 	path = vendor-local/src/django-browserid
 	url = git://github.com/mozilla/django-browserid.git
-[submodule "vendor-local/src/bsdapi"]
-	path = vendor-local/src/bsdapi
-	url = git://github.com/bluestatedigital/bsdapi.git
 [submodule "vendor-local/src/redis"]
 	path = vendor-local/src/redis
 	url = git://github.com/andymccurdy/redis-py.git
+[submodule "vendor-local/src/bsdapi"]
+	path = vendor-local/src/bsdapi
+	url = git://github.com/fidothe/bsdapi.git
