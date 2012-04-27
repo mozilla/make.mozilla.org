@@ -1,0 +1,42 @@
+{% extends "events/base.html" %}
+
+{% block page_id %}guides-index{% endblock %}
+{% block page_class %}{{ super() }} guides{% endblock %}
+
+{% block content %}
+<div class="masthead">
+    <h2 class="plaque">Guides</h2>
+    <p>How to host 101</p>
+</div>
+
+<h3 class="shout">Choose the type of event you would like to host:</h3>
+
+<ul class="tri-set">
+    <li>
+        <a href="">
+            <img class="thumb" src="http://placehold.it/271x165" alt="">
+            <h3>Events are live!</h3>
+        </a>
+        <p>Learn with Friends Near You</p>
+    </li>
+    <li>
+        <a href="">
+            <img class="thumb" src="http://placehold.it/271x165" alt="">
+            <h3>Create your event</h3>
+        </a>
+        <p>Our Handy Guides will Help!</p>
+    </li>
+    <li>
+        <a href="" >
+            <img class="thumb" src="http://placehold.it/271x165" alt="">
+            <h3>Announcing:</h3>
+        </a>
+        <p>The Mozilla Summer Campaign</p>
+    </li>
+</ul>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{{ js('core_js') }}
+{% endblock %}

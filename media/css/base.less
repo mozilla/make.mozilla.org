@@ -60,7 +60,8 @@ a:visited {
 	color: #27AAE1;
 }
 
-h2 {
+h2,
+.shout {
 	font-family: "Open Sans Light", "Open Sans", sans-serif;
 	font-size: 2.571em;
 	font-weight: normal;
@@ -523,6 +524,7 @@ ul.tri-set li {
 
 ul.tri-set .thumb {
 	.box-shadow(@panelShadow);
+	.box-sizing(border-box);
 
 	background: #FFF;
 	display: block;
@@ -997,4 +999,70 @@ form input[type="text"]:focus {
 #events-index ul.tri-set p {
 	font-size: 1em;
 	margin-top: 0;
+}
+
+/* ---[ Guides ]-------------------------------------------------- */
+.masthead {
+	text-align: center;
+  	padding-top: 60px;
+  	text-transform: uppercase;
+  	width: 320px;
+  	margin: 0 auto;
+}
+.masthead .plaque {
+  	background: #2bb673;
+  	color: #fff;
+  	display: inline-block;
+  	margin-bottom: 0;
+  	font-size: 1em;
+  	letter-spacing: 2px;
+  	padding: 0.5em 20px;
+  	position: relative;
+}
+.masthead .plaque:after,
+.masthead .plaque:before {
+  	border-bottom: 17px solid #2bb673;
+  	border-top: 17px solid #2bb673;
+  	content: "";
+  	position: absolute;
+  	top: 0;
+}
+.masthead .plaque:after {
+  	border-right: 17px solid transparent;
+  	right: -17px;
+}
+.masthead .plaque:before {
+  	border-left: 17px solid transparent;
+  	left: -17px;
+}
+.masthead p {
+  	padding: 0 60px;
+  	position: relative;
+  	margin: 1em 20px;
+}
+.masthead p:after,
+.masthead p:before {
+  	position: absolute;
+  	top: 50%;
+  	background: #d3d1d2;
+  	height: 1px;
+  	width: 60px;
+  	content: "";
+  	display: block;
+}
+.masthead p:after {
+	right: 0;
+}
+.masthead p:before {
+	left: 0;
+}
+#guides-index h3.shout {
+    text-align: center;
+}
+#guides-index .tri-set h3 {
+	color: #27AAE1;
+  	margin-bottom: 0;
+}
+#guides-index .tri-set p {
+  	margin-top: 0;
 }
