@@ -42,6 +42,10 @@ class Event(models.Model):
     end = models.DateTimeField(null = True, blank = True)
     source_id = models.CharField(max_length = 255, blank = True)
     organiser_email = models.CharField(max_length = 255)
+    campaign = models.ForeignKey('Campaign', null = True)
+    kind = models.ForeignKey('EventKind', null = True)
+    verified = models.BooleanField(default = False)
+    official = models.BooleanField(default = False)
 
     objects = models.GeoManager()
 
@@ -53,4 +57,16 @@ class Event(models.Model):
     def near(self, latitude, longitude):
         point = geos.Point(float(longitude), float(latitude))
         return _upcoming(self.objects).filter(location__distance_lte=(point, geos.D(mi=20)))
+
+class Campaign(models.Model):
+    name = models.CharField(max_length = 255)
+    description = models.TextField()
+    slug = models.SlugField()
+    start = models.DateField()
+    end = models.DateField()
+
+class EventKind(models.Model):
+    name = models.CharField(max_length = 255)
+    description = models.TextField()
+    slug = models.SlugField()
 
