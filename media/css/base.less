@@ -1090,3 +1090,72 @@ form input[type="text"]:focus {
 #guides-index .tri-set p {
   	margin-top: 0;
 }
+/* inner guide pages */
+.guides-inner #content .constrained {
+	margin-top: -500px;
+	position: relative;
+	width: 60%;
+	.box-sizing(border-box);
+}
+.major {
+	background: rgba(255, 255, 255, 0.5);
+	padding-bottom: 3em;
+}
+.major nav {
+	background: #fff;
+	padding: 2em 50px;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+	overflow: hidden;
+}
+.major nav ol {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+.major nav li {
+	padding-left: 0;
+	float: left;
+	font-size: 16px;
+	line-height: 2em;
+}
+.major nav a,
+.major nav span {
+	padding: 0 10px;
+	border-right: 1px solid #939598;
+}
+.major nav li:first-child a,
+.major nav li:first-child span {
+	padding-left: 0;
+}
+.major nav li:last-child a,
+.major nav li:last-child span {
+border-right: none;
+}
+.major nav .button {
+	float: right;
+}
+.major article {
+	margin: 3em 50px 0;
+	padding: 0 50px;
+	background: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+	padding-bottom: 2em;
+	position: relative;
+}
+.major article:after {
+	content: "";
+	position: absolute;
+	top: -3em;
+	left: 0;
+	border-left: 17px solid transparent;
+	border-right: 17px solid transparent;
+	border-top: 17px solid #fff;
+}
+.major section {
+	border-top: 1px solid #939598;
+	margin-top: 2em;
+	padding-top: 2em;
+}
+.major section:first-child {
+	border-top: none;
+}

@@ -1,0 +1,51 @@
+{% extends "events/base.html" %}
+
+{% block page_id %}guides-template{% endblock %}
+{% block page_class %}{{ super() }} guides-inner brochure-page{% endblock %}
+
+{% block content %}
+<div class="masthead">
+    <h2 class="plaque">Guides</h2>
+    <p>How to host 101</p>
+</div>
+
+<div class="major">
+    <nav class="cf">
+        <ol>
+            <li><span>Planning</span></li>
+            <li><a href="#">People</a></li>
+            <li><a href="#">Promotion</a></li>
+            <li><a href="#">Logistics</a></li>
+        </ol>
+        <a href="#" class="button create">Create an event</a>
+    </nav>
+    <article>
+        <section>
+            <h3>Goals</h3>
+            <p>From coffee shops to co-working spaces, any location can be a classroom. We put together a list of places that our users have hosted Skillshare classes at - go ahead and get in touch directly, they're expecting you! They'll tell you about rates and help you with logistics.</p>
+            <a href="external">Hacktivity Kit (pdf)</a>
+        </section>
+        <section>
+            <h3>Goals</h3>
+            <p>From coffee shops to co-working spaces, any location can be a classroom. We put together a list of places that our users have hosted Skillshare classes at - go ahead and get in touch directly, they're expecting you! They'll tell you about rates and help you with logistics.</p>
+            <a href="external">Hacktivity Kit (pdf)</a>
+        </section>
+        <section>
+            <h3>Goals</h3>
+            <p>From coffee shops to co-working spaces, any location can be a classroom. We put together a list of places that our users have hosted Skillshare classes at - go ahead and get in touch directly, they're expecting you! They'll tell you about rates and help you with logistics.</p>
+            <a href="external">Hacktivity Kit (pdf)</a>
+        </section>
+        <section>
+            <h3>Goals</h3>
+            <p>From coffee shops to co-working spaces, any location can be a classroom. We put together a list of places that our users have hosted Skillshare classes at - go ahead and get in touch directly, they're expecting you! They'll tell you about rates and help you with logistics.</p>
+            <a href="external">Hacktivity Kit (pdf)</a>
+        </section>
+    </article>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{{ js('core_js') }}
+{% endblock %}

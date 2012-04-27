@@ -142,3 +142,7 @@ def near_map(request):
 
 def guides_all(request):
     return jingo.render(request, 'events/guides/index.html', {})
+
+
+def guides_template(request):
+    return jingo.render(request, 'events/guides/template.html', {})
