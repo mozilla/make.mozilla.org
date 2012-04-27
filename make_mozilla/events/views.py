@@ -97,7 +97,7 @@ def process_create_post_data(data):
 
 def create_event_and_venue(event_form, venue_form):
     venue = venue_form.save()
-    event = event_form.save(commit=False)
+    event = event_form.instance
     event.venue = venue
     organiser_email = 'ross@mozillafoundation.org'  # nasty temp hack while resolving some other email-related things
     event.organiser_email = organiser_email

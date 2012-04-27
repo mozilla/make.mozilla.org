@@ -139,6 +139,9 @@ class TestEventViewsCreate(TestCase):
 
     @patch.object(views.tasks, 'register_email_address_as_constituent')
     def test_that_create_event_and_venue_does_that_given_valid_data(self, mock_task_func):
+        event_kind = models.EventKind(name = "Test", slug = "test", description = "Test")
+        event_kind.save()
+        self.data['event-kind'] = str(event_kind.id)
         ef = forms.EventForm(self.data)
         vf = forms.VenueForm(self.data)
 
