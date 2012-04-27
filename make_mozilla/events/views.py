@@ -133,9 +133,5 @@ def near_map(request):
     return near_view.render(request, 'events/near-map.html', 4)
 
 
-def near_list(request):
-    return near_view.render(request, 'events/near-list.html', 4)
-
-
 def guides_all(request):
     return jingo.render(request, 'events/guides/index.html', {})
