@@ -841,7 +841,6 @@ form input[type="text"]:focus {
 
 	background: #FFF;
 	background: rgba(255,255,255,0.5);
-/*	padding-bottom: 100px;*/
 }
 
 .search-results form {
@@ -908,6 +907,31 @@ form input[type="text"]:focus {
 
 .search-results .buttons {
 	margin: 0;
+}
+
+.search-results h3 {
+	padding: 20px 30px 0;
+	margin-bottom: 20px;
+	border-top: solid 1px #DCDDDE;
+}
+
+.search-results ul,
+.search-results ol {
+	margin: 0;
+	padding: 0 35px 35px;
+	list-style: none;
+}
+
+.search-results li {
+	.box-shadow(@panelShadow);
+
+	background: #FFF;
+	margin-top: 15px;
+}
+
+.search-results ul li a {
+	display: block;
+	padding: 20px 30px;
 }
 
 @media screen and (max-width: 900px) {

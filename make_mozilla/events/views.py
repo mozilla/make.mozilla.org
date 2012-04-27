@@ -51,7 +51,18 @@ def new(request):
 
 
 def search(request):
-    return jingo.render(request, 'events/search.html')
+    location = request.GET.get('location')
+
+    if location:
+        import urllib2
+        import json
+        url="http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % location
+        response = urllib2.urlopen(url)
+        results = json.loads(response.read()).get('results', ())
+    else:
+        results = ()
+
+    return jingo.render(request, 'events/search.html', {'results': results, 'location': location})
 
 
 def details(request, event_id):
