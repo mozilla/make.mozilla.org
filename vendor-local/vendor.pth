@@ -1,1 +1,3 @@
+src/bsdapi/django-browserid
+src/bsdapi/redis
 src/bsdapi/python
