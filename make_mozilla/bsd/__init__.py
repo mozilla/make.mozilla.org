@@ -5,6 +5,7 @@ from django.conf import settings
 from make_mozilla.events.models import Event, Venue
 from make_mozilla.bsd.extractors import json as json_extractor
 from make_mozilla.bsd.extractors import xml as xml_extractor
+import email.parser
 
 def parse_event_feed(feed_url):
     return process_events_json(json.load(urllib2.urlopen(feed_url)))
@@ -40,10 +41,19 @@ class BSDClient(object):
         return json.loads(response.body)
 
     @classmethod
+    def _api_response_charset(self, api_response):
+        content_type_header = api_response.http_response.getheader('content-type',
+                'text/xml; charset=utf-8')
+        m = email.parser.Parser().parsestr("Content-Type: %s" % content_type_header)
+        charset = (m.get_param('charset') or 'utf-8')
+        return charset
+
+    @classmethod
     def constituent_email_for_constituent_id(self, constituent_id):
         response = self._get('/cons/get_constituents_by_id',
                 {'cons_ids': constituent_id, 'bundles': 'primary_cons_email'})
-        return xml_extractor.constituent_email(response.body)
+        charset = self._api_response_charset(response)
+        return xml_extractor.constituent_email(response.body.encode(charset))
 
     @classmethod
     def create_api_client(self):

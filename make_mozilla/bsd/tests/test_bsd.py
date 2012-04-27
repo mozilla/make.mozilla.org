@@ -12,6 +12,13 @@ from make_mozilla.events import models
 import urllib2
 import json
 
+class MockHTTPResponse(object):
+    def __init__(self, headers = {}):
+        self._headers = dict([(k.lower(), v) for (k,v) in headers.items()])
+
+    def getheader(self, name, default):
+        return self._headers.get(name.lower(), default)
+
 class BSDEventFeedParserTest(unittest.TestCase):
     @patch.object(bsd, 'parse_event_feed')
     @patch.object(bsd.BSDEventImporter, 'process_event')
@@ -104,13 +111,31 @@ class BSDClientTest(unittest.TestCase):
                 https = True,
                 request_type = 'POST')
 
+    def test_that_encoding_can_be_extracted_from_api_response(self):
+        mock_response = Mock()
+        mock_response.http_response = MockHTTPResponse({'Content-Type': 'text/xml; charset=UTF-8'})
+        eq_(bsd.BSDClient._api_response_charset(mock_response), 'UTF-8')
+
+    def test_that_encoding_extracted_from_api_response_without_charset_defaults_to_utf_8(self):
+        mock_response = Mock()
+        mock_response.http_response = MockHTTPResponse({'Content-Type': 'text/xml'})
+        eq_(bsd.BSDClient._api_response_charset(mock_response), 'utf-8')
+
+    def test_that_encoding_extracted_from_api_response_without_content_type_defaults_to_utf_8(self):
+        mock_response = Mock()
+        mock_response.http_response = MockHTTPResponse()
+        eq_(bsd.BSDClient._api_response_charset(mock_response), 'utf-8')
+
     @patch.object(bsd.extractors.xml, 'constituent_email')
+    @patch.object(bsd.BSDClient, '_api_response_charset')
     @patch.object(bsd.BSDClient, '_get')
     def test_that_constituent_email_can_be_queried_given_a_cons_id(self,
             mock_client_func,
+            mock_charset_func,
             mock_email_extractor_func):
         mock_response = Mock()
         mock_client_func.return_value = mock_response
+        mock_charset_func.return_value = 'utf-8'
         mock_response.body  = '<xml>'
         mock_email_extractor_func.return_value = 'example@mozilla.org'
 
@@ -119,6 +144,7 @@ class BSDClientTest(unittest.TestCase):
 
         mock_client_func.assert_called_with('/cons/get_constituents_by_id',
                 {'cons_ids': 'abcd', 'bundles': 'primary_cons_email'})
+        mock_charset_func.assert_called_with(mock_response)
         mock_email_extractor_func.assert_called_with('<xml>')
 
     @patch.object(bsd.BSDClient, '_get')
