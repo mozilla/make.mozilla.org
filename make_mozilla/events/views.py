@@ -46,6 +46,9 @@ def new(request):
         'venue_form': new_venue_form
     })
 
+def search(request):
+	return jingo.render(request, 'events/search.html')
+
 def details(request, event_id):
     event = models.Event.objects.get(pk = event_id)
     return jingo.render(request, 'events/detail.html', {'event': event})
@@ -101,8 +104,8 @@ near_view = Near()
 
 @require_GET
 def near(request):
-    return near_view.render(request, 'events/near-map.html', 24)
+    return near_view.render(request, 'events/near-list.html', 24)
 
 @require_GET
-def near_list(request):
-    return near_view.render(request, 'events/near-list.html', 4)
+def near_map(request):
+    return near_view.render(request, 'events/near-map.html', 4)
