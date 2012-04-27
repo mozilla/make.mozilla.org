@@ -1,0 +1,17 @@
+{% extends "events/base.maps.html" %}
+
+{% block page_title %}Near | {{ super() }}{% endblock %}
+{% block page_id %}events-list{% endblock %}
+
+{% block content %}
+<div class="search-results">
+    {% include "events/_search-form.html" %}
+    {% if results %}
+        <ol>
+        {% for result in results %}
+            <li>{{ result }}</li>
+        {% endfor %}
+        </ol>
+    {% endif %}
+</div>
+{% endblock %}
