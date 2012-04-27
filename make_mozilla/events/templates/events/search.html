@@ -6,13 +6,17 @@
 {% block content %}
 <div class="search-results">
     {% include "events/_search-form.html" %}
-    {% if results %}
-        <h3>Did you mean:</h3>
-        <ul>
-        {% for result in results %}
-            <li><a href="/events/near/?lat={{ result.geometry.location.lat }}&lng={{ result.geometry.location.lng}}">{{ result.formatted_address }}</a></li>
-        {% endfor %}
-        </ul>
+    {% if location %}
+        {% if results %}
+            <h3>Did you mean:</h3>
+            <ul>
+            {% for result in results %}
+                <li><a href="/events/near/?lat={{ result.geometry.location.lat }}&lng={{ result.geometry.location.lng}}">{{ result.formatted_address }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <h3>No results found</h3>
+        {% endif %}
     {% endif %}
 </div>
 {% endblock %}

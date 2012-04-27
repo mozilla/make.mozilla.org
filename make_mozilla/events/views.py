@@ -3,7 +3,10 @@ from django.core.urlresolvers import reverse
 from django.views.decorators.http import require_POST, require_GET
 from django.contrib.syndication.views import Feed
 from django.contrib.gis.feeds import GeoRSSFeed
+from django.utils.http import urlquote_plus, urlencode
 
+import urllib2
+import json
 import bleach
 import commonware
 import jingo
@@ -54,14 +57,17 @@ def search(request):
     location = request.GET.get('location')
 
     if location:
-        import urllib
-        import urllib2
-        import json
-        url="http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % urllib.quote_plus(location)
+        url="http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % urlquote_plus(location)
         response = urllib2.urlopen(url)
         results = json.loads(response.read()).get('results', ())
     else:
         results = ()
+
+    if len(results) == 1:
+        return http.HttpResponseRedirect("%s?%s" % (reverse('events.near'), urlencode({
+            'lat': results[0].get('geometry',{}).get('location',{}).get('lat',''),
+            'lng': results[0].get('geometry',{}).get('location',{}).get('lng',''),
+        })))
 
     return jingo.render(request, 'events/search.html', {'results': results, 'location': location})
 
