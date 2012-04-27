@@ -1,5 +1,5 @@
 from django.contrib.gis.db import models
-from django.contrib.gis import geos
+from django.contrib.gis import geos, measure
 from datetime import datetime
 
 class Venue(models.Model):
@@ -56,7 +56,7 @@ class Event(models.Model):
     @classmethod
     def near(self, latitude, longitude):
         point = geos.Point(float(longitude), float(latitude))
-        return _upcoming(self.objects).filter(location__distance_lte=(point, geos.D(mi=20)))
+        return _upcoming(self.objects).filter(location__distance_lte=(point, measure.D(mi=20)))
 
 class Campaign(models.Model):
     name = models.CharField(max_length = 255)
