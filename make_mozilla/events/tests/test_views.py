@@ -180,10 +180,10 @@ class TestEventViewsDetail(unittest.TestCase):
 
 class TestEventViewsNear(unittest.TestCase):
     def test_that_it_routes_correctly_for_the_map(self):
-        assert_routing('/events/near/', views.near, name = 'events.near')
+        assert_routing('/events/near/map/', views.near_map, name = 'events.near.map')
 
     def test_that_it_routes_correctly_for_the_list(self):
-        assert_routing('/events/near/list/', views.near_list, name = 'events.near.list')
+        assert_routing('/events/near/', views.near, name = 'events.near')
 
     def setUp(self):
         self.near = views.Near()
@@ -245,7 +245,7 @@ class TestEventViewsNear(unittest.TestCase):
         mock_near_view.return_value = mock_response
         request = rf.get('/events/near?lat=51.0&lng=-0.4')
 
-        eq_(views.near(request), mock_response)
+        eq_(views.near_map(request), mock_response)
         mock_near_view.assert_called_with(request, 'events/near-map.html', 24)
 
     @patch.object(views.near_view, 'render')
@@ -255,5 +255,5 @@ class TestEventViewsNear(unittest.TestCase):
         mock_near_view.return_value = mock_response
         request = rf.get('/events/near?lat=51.0&lng=-0.4')
 
-        eq_(views.near_list(request), mock_response)
+        eq_(views.near(request), mock_response)
         mock_near_view.assert_called_with(request, 'events/near-list.html', 4)
