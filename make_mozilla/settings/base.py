@@ -44,6 +44,7 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     # extra lib stuff
     'south',
     'django_browserid',  # Load after auth to monkey-patch it.
+    'cronjobs'
 ]
 
 
@@ -93,3 +94,9 @@ SESSION_COOKIE_HTTPONLY = True
 LOGGING = dict(loggers=dict(playdoh = {'level': logging.DEBUG}))
 
 BSD_API_DETAILS = {}
+
+BSD_EVENT_JSON_FEED_URLS = (
+    ('hack_jam', 'https://donate.mozilla.org/page/event/search_results?format=json&wrap=no&orderby[0]=date&orderby[1]=desc&event_type=2&mime=application/json&limit=10&country=*'),
+    ('kitchen_table', 'https://donate.mozilla.org/page/event/search_results?format=json&wrap=no&orderby[0]=date&orderby[1]=desc&event_type=1&mime=application/json&limit=10&country=*'),
+    ('pop_up', 'https://donate.mozilla.org/page/event/search_results?format=json&wrap=no&orderby[0]=date&orderby[1]=desc&event_type=3&mime=application/json&limit=10&country=*'),
+)
