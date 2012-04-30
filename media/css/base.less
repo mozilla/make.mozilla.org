@@ -786,7 +786,9 @@ form label {
 form textarea,
 form input[type="email"],
 form input[type="password"],
-form input[type="text"] {
+form input[type="text"],
+form input[type="date"],
+form input[type="time"] {
 	.transition(box-shadow linear .1s);
 	.border-radius(6px);
 	.box-shadow(~"0 2px 1px rgba(0,0,0,0.1) inset");
@@ -803,6 +805,13 @@ form input[type="text"] {
 	line-height: 1.714em;
 }
 
+form input[type="date"],
+form input[type="time"] {
+	width: 40%;
+	max-width: 200px;
+	margin-right: 5%;
+}
+
 form textarea {
 	resize: vertical;
 }
@@ -810,7 +819,9 @@ form textarea {
 form textarea:focus,
 form input[type="email"]:focus,
 form input[type="password"]:focus,
-form input[type="text"]:focus {
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form input[type="time"]:focus {
 	.box-shadow(~"0 2px 1px rgba(0,0,0,0.1) inset,0 0 8px 0 rgba(103,167,208,0.6)");
 
 	border-color: #BBB;

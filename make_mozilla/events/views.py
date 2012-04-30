@@ -45,13 +45,22 @@ def index(request):
     return jingo.render(request, 'events/index.html')
 
 
-@login_required
+# @login_required
 def new(request):
     new_event_form = forms.EventForm()
     new_venue_form = forms.VenueForm()
+
+    fieldsets = (
+        forms.Fieldset(new_event_form, ('kind',)),
+        forms.Fieldset(new_event_form, ('name',)),
+        forms.Fieldset(new_event_form, ('start', 'end',)),
+        forms.Fieldset(new_venue_form, new_venue_form.fields),
+    )
+
     return jingo.render(request, 'events/new.html', {
         'event_form': new_event_form,
-        'venue_form': new_venue_form
+        'venue_form': new_venue_form,
+        'fieldsets': fieldsets
     })
 
 

@@ -6,16 +6,22 @@
 {% block content %}
 <h2>Create a New Event</h2>
 <form action="/events/create">
-    <fieldset>
-        <ul>
-            {{ event_form.as_ul() }}
-        </ul>
-    </fieldset>
-    <fieldset>
-        <ul>
-            {{ venue_form.as_ul() }}
-        </ul>
-    </fieldset>
+    {% for fieldset in fieldsets %}
+        <fieldset{% if fieldset.className %} class="{{ fieldset.className }}"{% endif %}>
+            {% if fieldset.legend %}<legend>{{ fieldset.legend }}</legend>{% endif %}
+            <ul>
+                {% for field in fieldset %}
+                    <li{% if field.errors %} class="error"{% endif %}>
+                        {{ field.label_tag() }}
+                        {{ field }}
+                        {% for error in field.errors -%}
+                            <span class="error_message">{{ error }}</span>
+                        {%- endfor %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </fieldset>
+    {% endfor %}
     <p class="buttons"><input type="submit" class="button create"></p>
 </form>
 {% endblock %}
