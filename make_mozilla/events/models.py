@@ -4,7 +4,7 @@ from datetime import datetime
 
 class Venue(models.Model):
     name = models.CharField(max_length=255)
-    street_address = models.TextField() 
+    street_address = models.TextField()
     country = models.CharField(max_length=255)
     location = models.PointField(blank=True)
 
@@ -36,12 +36,12 @@ def _upcoming(qs):
 
 class Event(models.Model):
     name = models.CharField(max_length = 255)
-    event_url = models.CharField(max_length = 255, blank = True)
+    event_url = models.URLField(blank = True)
     venue = models.ForeignKey(Venue)
     start = models.DateTimeField(null = True, blank = True)
     end = models.DateTimeField(null = True, blank = True)
     source_id = models.CharField(max_length = 255, blank = True)
-    organiser_email = models.CharField(max_length = 255)
+    organiser_email = models.EmailField(max_length = 255)
     campaign = models.ForeignKey('Campaign', null = True)
     kind = models.ForeignKey('EventKind', null = True)
     verified = models.BooleanField(default = False)
