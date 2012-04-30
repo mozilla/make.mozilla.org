@@ -3,8 +3,8 @@ import json, urllib2, re
 from bsdapi.BsdApi import Factory as BSDApiFactory
 from django.conf import settings
 from make_mozilla.events.models import Event, Venue
-from make_mozilla.bsd.extractors import json as json_extractor
-from make_mozilla.bsd.extractors import xml as xml_extractor
+from make_mozilla.bsd.extractors import json as json_extractors
+from make_mozilla.bsd.extractors import xml as xml_extractors
 import email.parser
 
 def parse_event_feed(feed_url):
@@ -13,8 +13,8 @@ def parse_event_feed(feed_url):
 def process_events_json(events_json):
     return [re.split(r'/', event['url'])[-1] for event in events_json['results']]
 
-def fetch_and_process_event_feed(feed_url):
-    [BSDEventImporter.process_event(id) for id in parse_event_feed(feed_url)]
+def fetch_and_process_event_feed(event_kind, feed_url):
+    [BSDEventImporter.process_event(event_kind, id) for id in parse_event_feed(feed_url)]
 
 class BSDClient(object):
     @classmethod
@@ -53,7 +53,7 @@ class BSDClient(object):
         response = self._get('/cons/get_constituents_by_id',
                 {'cons_ids': constituent_id, 'bundles': 'primary_cons_email'})
         charset = self._api_response_charset(response)
-        return xml_extractor.constituent_email(response.body.encode(charset))
+        return xml_extractors.constituent_email(response.body.encode(charset))
 
     @classmethod
     def create_api_client(self):
@@ -83,10 +83,10 @@ class BSDRegisterConstituent(object):
 
 class BSDEventImporter(object):
     @classmethod
-    def process_event(self, obfuscated_id):
+    def process_event(self, event_kind, obfuscated_id):
         event_json = BSDClient.fetch_event(obfuscated_id)
         # BSDEventImporter() rather than self() because of test mocking
-        BSDEventImporter().process_event_from_json(event_json)
+        BSDEventImporter().process_event_from_json(event_kind, event_json)
 
     def event_extractors(self):
         return [json_extractors.event_name, json_extractors.event_times]
@@ -110,7 +110,7 @@ class BSDEventImporter(object):
         return BSDClient.constituent_email_for_constituent_id(constituent_id)
 
     def venue_for_event(self, event):
-        if event is not None:
+        if event.id is not None:
             return event.venue
         return Venue()
 
@@ -135,7 +135,7 @@ class BSDEventImporter(object):
         venue = Venue(**model_data['venue'])
         return (event, venue)
 
-    def process_event_from_json(self, event_json):
+    def process_event_from_json(self, event_kind, event_json):
         source_id = self.event_source_id(event_json)
         event = self.fetch_existing_event(source_id)
         if event is None:
@@ -152,6 +152,7 @@ class BSDEventImporter(object):
             if event.id:
                 new_event.id = event.id
             event = new_event
+        event.kind = event_kind
         event.venue = venue
         event.save()
 

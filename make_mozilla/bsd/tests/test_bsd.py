@@ -25,11 +25,12 @@ class BSDEventFeedParserTest(unittest.TestCase):
     def test_that_the_event_feed_can_be_fetched_and_processed(self, 
             mock_process_func, mock_feed_parser):
         mock_feed_parser.return_value = ['rtw']
+        mock_event_kind = Mock()
 
-        bsd.fetch_and_process_event_feed('http://feed.url/')
+        bsd.fetch_and_process_event_feed(mock_event_kind, 'http://feed.url/')
 
         mock_feed_parser.assert_called_with('http://feed.url/')
-        mock_process_func.assert_called_with('rtw')
+        mock_process_func.assert_called_with(mock_event_kind, 'rtw')
 
     @patch.object(bsd, 'process_events_json')
     @patch.object(json, 'load')
@@ -205,13 +206,14 @@ class BSDEventImporterTest(unittest.TestCase):
         klass = bsd.BSDEventImporter
         with patch.object(bsd, 'BSDEventImporter') as MockEventImporter:
             mock_event_importer = Mock()
+            mock_event_kind = Mock()
             MockEventImporter.return_value = mock_event_importer
             mock_client_func.return_value = {'event': 'json'}
 
-            klass.process_event('obf_id')
+            klass.process_event(mock_event_kind, 'obf_id')
 
             mock_client_func.assert_called_with('obf_id')
-            mock_event_importer.process_event_from_json.assert_called_with({'event': 'json'})
+            mock_event_importer.process_event_from_json.assert_called_with(mock_event_kind, {'event': 'json'})
 
     @patch.object(bsd, 'Event')
     def test_that_the_importer_can_import_a_new_event(self, MockEvent):
@@ -230,6 +232,7 @@ class BSDEventImporterTest(unittest.TestCase):
             mock_event = Mock()
             mock_null_venue = Mock()
             mock_venue = Mock()
+            mock_event_kind = Mock()
 
             mock_fetch_event_func.return_value = None
             MockEvent.return_value = mock_null_event
@@ -239,7 +242,7 @@ class BSDEventImporterTest(unittest.TestCase):
             mock_new_models_func.return_value = (mock_event, mock_venue)
             mock_identical_func.return_value = False
 
-            self.importer.process_event_from_json(event_json)
+            self.importer.process_event_from_json(mock_event_kind, event_json)
 
             MockEvent.assert_called_with()
             mock_source_id_func.assert_called_with(event_json)
@@ -247,6 +250,7 @@ class BSDEventImporterTest(unittest.TestCase):
             mock_fetch_organiser_func.assert_called_with(event_json)
             mock_venue_func.assert_called_with(mock_null_event)
             mock_new_models_func.assert_called_with(event_json)
+            eq_(mock_event.kind, mock_event_kind)
             ok_(((mock_null_event, mock_event),) in mock_identical_func.call_args_list)
             ok_(((mock_null_venue, mock_venue),) in mock_identical_func.call_args_list)
             mock_event.save.assert_called
@@ -283,17 +287,18 @@ class BSDEventImporterTest(unittest.TestCase):
 
     def test_that_the_venue_for_an_existing_event_is_returned(self):
         mock_event = Mock()
+        mock_event.id = 1
         mock_venue = Mock()
         mock_event.venue = mock_venue
 
         eq_(self.importer.venue_for_event(mock_event), mock_venue)
 
     @patch.object(bsd, 'Venue')
-    def test_that_the_venue_for_an_existing_event_is_returned(self, MockVenue):
+    def test_that_a_new_Venue_for_a_new_Event_is_returned(self, MockVenue):
         mock_venue = Mock()
         MockVenue.return_value = mock_venue
 
-        eq_(self.importer.venue_for_event(None), mock_venue)
+        eq_(self.importer.venue_for_event(models.Event()), mock_venue)
         MockVenue.assert_called_with()
 
     def test_that_identical_model_instances_can_be_compared_properly(self):
