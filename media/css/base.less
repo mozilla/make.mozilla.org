@@ -522,7 +522,8 @@ ul.tri-set li {
 	vertical-align: top;
 }
 
-ul.tri-set .thumb {
+ul.tri-set .thumb,
+.event-type .thumb {
 	.box-shadow(@panelShadow);
 	.box-sizing(border-box);
 
@@ -674,7 +675,8 @@ ul.tri-set img {
 		border-left: solid 1px #333;
 	}
 
-	.meta-ticker.enabled .thumb {
+	.meta-ticker.enabled .thumb,
+    .event-type .thumb {
 		.box-shadow(~"0 0 10px rgba(0,0,0,0.5)");
 
 		border-radius: 50%;
@@ -685,7 +687,8 @@ ul.tri-set img {
 		margin: -52.5px 0 0 -50px;
 	}
 
-	.meta-ticker.enabled img {
+	.meta-ticker.enabled img,
+    .event-type .thumb img {
 		border-radius: 50%;
 	}
 
@@ -1108,6 +1111,26 @@ form input[type="time"]:focus {
 	position: relative;
 	width: 60%;
 	.box-sizing(border-box);
+}
+.event-type {
+    overflow: hidden;
+    margin: 2em 0;
+    padding: 0 100px;
+}
+.event-type h3 {
+    font-weight: normal;
+    font-size: 2em;
+}
+.event-type h3,
+.event-type p {
+    color: #fff;
+}
+.event-type .thumb {
+    float: left;
+    margin: 0 20px 0 0;
+    position: static;
+    left: 0;
+    top: 0;
 }
 .major {
 	background: rgba(255, 255, 255, 0.5);
