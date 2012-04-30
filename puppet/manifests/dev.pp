@@ -23,6 +23,7 @@ class dev {
   include app
   include nodejs
   include node_dependencies
+  include redis
 }
 
 include dev
