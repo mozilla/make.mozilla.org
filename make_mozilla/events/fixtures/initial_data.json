@@ -1,0 +1,29 @@
+[
+  {
+    "pk": 1, 
+    "model": "events.eventkind", 
+    "fields": {
+      "slug": "kitchen_table", 
+      "name": "Kitchen Table", 
+      "description": "Learn with friends! Teach each other how to make things around your kitchen table."
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "events.eventkind", 
+    "fields": {
+      "slug": "hack_jam", 
+      "name": "Hack Jam", 
+      "description": "Make something! Team up to transform your ideas into real world solutions."
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "events.eventkind", 
+    "fields": {
+      "slug": "pop_up", 
+      "name": "Pop Up", 
+      "description": "Throw a learning party! Grow a network in your city by inviting local groups to play and learn together."
+    }
+  }
+]
