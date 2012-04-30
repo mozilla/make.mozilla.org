@@ -15,23 +15,23 @@ class VenueTest(unittest.TestCase):
         venue = models.Venue()
         venue.latitude = 51.456
 
-        self.assertEqual(venue.location, geos.Point(51.456, 0))
+        eq_(venue.location, geos.Point(0, 51.456))
     
     def test_latitude_can_be_gotten(self):
         venue = models.Venue(location = geos.Point(42, 24))
 
-        self.assertEqual(venue.latitude, 42.0)
+        eq_(venue.latitude, 24.0)
 
     def test_longitude_can_be_gotten(self):
         venue = models.Venue(location = geos.Point(42, 24))
 
-        self.assertEqual(venue.longitude, 24.0)
+        eq_(venue.longitude, 42.0)
 
     def test_longitude_can_be_set(self):
         venue = models.Venue()
         venue.longitude = 51.456
 
-        self.assertEqual(venue.location, geos.Point(0, 51.456))
+        eq_(venue.location, geos.Point(51.456, 0))
 
 class EventTest(unittest.TestCase):
     @patch.object(models.Event.objects, 'filter')

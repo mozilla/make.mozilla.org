@@ -17,19 +17,19 @@ class Venue(models.Model):
 
     @property
     def latitude(self):
-        return self.location.x
+        return self.location.y
     
     @latitude.setter
     def latitude(self, value):
-        self.location.x = value
+        self.location.y = value
 
     @property
     def longitude(self):
-        return self.location.y
+        return self.location.x
 
     @longitude.setter
     def longitude(self, value):
-        self.location.y = value
+        self.location.x = value
 
 def _upcoming(qs):
     return qs.filter(start__gte = datetime.now())
