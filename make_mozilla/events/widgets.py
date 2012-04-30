@@ -1,37 +1,32 @@
-from django import forms
+from django.forms import widgets
 
-
-class DateInput(forms.DateInput):
+class DateInput(widgets.DateInput):
     input_type = 'date'
 
 
-class TimeInput(forms.TimeInput):
+class TimeInput(widgets.TimeInput):
     input_type = 'time'
 
 
-class DateTimeInput(forms.DateTimeInput):
+class DateTimeInput(widgets.DateTimeInput):
     input_type = 'datetime'
 
 
-class SplitDateTimeWidget(forms.MultiWidget):
+class SplitDateTimeWidget(widgets.MultiWidget):
     def __init__(self, attrs=None, date_format=None, time_format=None):
         if attrs is not None:
             date_attrs = {}
             time_attrs = {}
 
             if 'date_class' in attrs:
-                date_attrs['class'] = attrs.get('date_class')
-                del attrs['date_class']
+                date_attrs['class'] = attrs.pop('date_class')
             if 'date_placeholder' in attrs:
-                date_attrs['placeholder'] = attrs.get('date_placeholder')
-                del attrs['date_placeholder']
+                date_attrs['placeholder'] = attrs.pop('date_placeholder')
 
             if 'time_class' in attrs:
-                time_attrs['class'] = attrs.get('time_class')
-                del attrs['time_class']
+                time_attrs['class'] = attrs.pop('time_class')
             if 'time_placeholder' in attrs:
-                time_attrs['placeholder'] = attrs.get('time_placeholder')
-                del attrs['time_placeholder']
+                time_attrs['placeholder'] = attrs.pop('time_placeholder')
 
             date_attrs = dict(attrs.items() + date_attrs.items())
             time_attrs = dict(attrs.items() + time_attrs.items())

@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from django.contrib.gis import geos, measure
+from django.utils.safestring import mark_safe
 from datetime import datetime
 
 class Venue(models.Model):
@@ -70,3 +71,5 @@ class EventKind(models.Model):
     description = models.TextField()
     slug = models.SlugField()
 
+    def __unicode__(self):
+        return mark_safe(u'<strong>%s</strong> <span>%s</span>' % (self.name, self.description))

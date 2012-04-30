@@ -20,12 +20,16 @@ class PrefixedModelForm(forms.ModelForm):
 
 class EventForm(PrefixedModelForm):
     field_prefix = 'event'
+    kind = forms.ModelChoiceField(queryset=models.EventKind.objects.all(),
+                empty_label=None,
+                label='Choose event type',
+                widget=forms.RadioSelect)
+    name = forms.CharField(label='Name your event')
 
     class Meta:
         model = models.Event
         fields = ('name', 'event_url', 'start', 'end', 'kind')
         widgets = {
-            'kind': forms.RadioSelect,
             'start': widgets.SplitDateTimeWidget(attrs={'date_placeholder': 'Date', 'time_placeholder': 'Time'}),
             'end': widgets.SplitDateTimeWidget(attrs={'date_placeholder': 'Date', 'time_placeholder': 'Time'}),
         }
