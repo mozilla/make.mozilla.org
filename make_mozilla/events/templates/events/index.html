@@ -29,17 +29,17 @@
     </li>
 </ul>
 
+{% if event_kinds %}
 <div class="meta-ticker" data-label="Event Type">
     <h3>Event Types</h3>
     <dl>
-        <dt>Kitchen Table</dt>
-            <dd><span class="thumb"><img src="http://placehold.it/95x95" alt=""></span> Learn with friends! Teach each other how to make things around your kitchen table.</dd>
-        <dt>Hack Jam</dt>
-            <dd><span class="thumb"><img src="http://placehold.it/95x95" alt=""></span> Make something! Team up to transform your ideas into real world solutions.</dd>
-        <dt>Pop Up</dt>
-            <dd><span class="thumb"><img src="http://placehold.it/95x95" alt=""></span> Throw a learning party! Grow a network in your city by inviting local groups to play and learn together.</dd>
+        {% for kind in event_kinds %}
+            <dt>{{ kind.name }}</dt>
+                <dd><span class="thumb"><img src="http://placehold.it/95x95" alt=""></span> {{ kind.description }}</dd>
+        {% endfor %}
     </dl>
 </div>
+{% endif %}
 {% endblock %}
 
 {% block footer %}
