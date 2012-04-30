@@ -10,13 +10,7 @@ class app_dependencies {
   }
 
   package { "redis-server":
-    ensure => present,
-    before => Class['app'];
-  }
-
-  service { "redis-server":
-    ensure => running,
-    enable => true,
-    require => Package['redis-server'];
+    ensure => purged,
+    before => [Class['app'], Exec['download-redis']];
   }
 }
