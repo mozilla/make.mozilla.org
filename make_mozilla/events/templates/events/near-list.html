@@ -6,12 +6,21 @@
 {% block content %}
 <div class="search-results">
     {% include "events/_search-form.html" %}
-    {% if results %}
+    {% if results.object_list %}
         <ol>
-        {% for result in results %}
+        {# Can't iterate directly over results until Django 1.4 #}
+        {% for result in results.object_list %}
             <li>{{ result }}</li>
         {% endfor %}
         </ol>
+    {% else %}
+        <p>No results found</p>
     {% endif %}
 </div>
+<script>
+    window.map_config = {
+        latitude: "{{ latitude }}",
+        longitude: "{{ longitude }}"
+    };
+</script>
 {% endblock %}

@@ -127,6 +127,8 @@ class Near(object):
         page = self.extract_page(request)
 
         return jingo.render(request, template, {
+            'latitude': lat,
+            'longitude': lon,
             'results': self.paginated_results(lat, lon, results_per_page, page)
         })
 
