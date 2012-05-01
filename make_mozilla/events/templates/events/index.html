@@ -13,17 +13,17 @@
 
 <ul class="tri-set">
     <li>
-        <a href="" class="thumb"><img src="http://placehold.it/271x165" alt=""></a>
+        <a href="" class="thumb"><img src="../media/img/events_map.png" alt=""></a>
         <h4>Events are live!</h4>
         <p><a href="">Learn with Friends Near You</a></p>
     </li>
     <li>
-        <a href="" class="thumb"><img src="http://placehold.it/271x165" alt=""></a>
+        <a href="" class="thumb"><img src="../media/img/guides.gif" alt=""></a>
         <h4>Create your event</h4>
         <p><a href="">Our Handy Guides will Help!</a></p>
     </li>
     <li>
-        <a href="" class="thumb"><img src="http://placehold.it/271x165" alt=""></a>
+        <a href="" class="thumb"><img src="../media/img/code_party.jpg" alt=""></a>
         <h4>Announcing:</a></h4>
         <p><a href="">The Mozilla Summer Campaign</a></p>
     </li>
@@ -35,7 +35,7 @@
     <dl>
         {% for kind in event_kinds %}
             <dt>{{ kind.name }}</dt>
-                <dd><span class="thumb"><img src="http://placehold.it/95x95" alt=""></span> {{ kind.description }}</dd>
+                <dd><span class="thumb"><img src="{{ MEDIA_URL }}/img/{{ kind.name|lower|replace(' ', '-') }}_stub.jpg" alt="" width="95" height="95"></span> {{ kind.description }}</dd>
         {% endfor %}
     </dl>
 </div>

@@ -1018,12 +1018,12 @@ ul.tri-set img {
 /* ---[ Events Index Page ]------------------------------------------------- */
 
 .bad-ie #events-index #content::before {
-	background-image: url(http://placehold.it/2000x600/333);
+	background-image: url(../img/photos/events_index.jpg);
 }
 
 @media screen and (min-width: 901px) {
 	#events-index #content::before {
-		background-image: url(http://placehold.it/2000x600/333);
+		background-image: url(../img/photos/events_index.jpg);
 	}
 
 	#events-index .meta-ticker.enabled {
@@ -1037,13 +1037,13 @@ ul.tri-set img {
 
 @media screen and (max-width: 900px) {
 	#events-index #content::before {
-		background-image: url(http://placehold.it/900x400/333);
+		background-image: url(../img/photos/tablet/events_index.jpg);
 	}
 }
 
 @media screen and (max-width: 700px) {
 	#events-index #content::before {
-		background-image: url(http://placehold.it/700x300/333);
+		background-image: url(../img/photos/handheld/events_index.jpg);
 	}
 }
 
@@ -1064,12 +1064,35 @@ ul.tri-set img {
 }
 
 /* ---[ Guides ]-------------------------------------------------- */
+.bad-ie .guides-inner #content::before {
+	background-image: url(../img/photos/pop-up_blur.jpg);
+}
+
+@media screen and (min-width: 901px) {
+	.guides-inner #content::before {
+		background-image: url(../img/photos/pop-up_blur.jpg);
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.guides-inner #content::before {
+		background-image: url(../img/photos/tablet/pop-up_blur.jpg);
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.guides-inner #content::before {
+		background-image: url(../img/photos/handheld/pop-up_blur.jpg);
+	}
+}
+
 .masthead {
 	text-align: center;
-  	padding-top: 60px;
+  	padding-top: 30px;
   	text-transform: uppercase;
   	width: 320px;
   	margin: 0 auto;
+    background: transparent url(../img/guide_book.png) no-repeat top center;
 }
 .masthead .plaque {
   	background: #2bb673;
