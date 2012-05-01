@@ -15,6 +15,7 @@
             {{ css('make_desktop') }}
         <![endif]-->
         <link rel="icon" href="{{ MEDIA_URL }}img/favicon.ico" />
+        {{ js('jquery') }}
     </head>
     <body id="{% block page_id %}generic-page{% endblock %}" class="{% block page_class %}section-{% block section_type %}global{% endblock %}{% endblock %}">
         <script>

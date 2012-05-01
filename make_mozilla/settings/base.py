@@ -16,6 +16,10 @@ MINIFY_BUNDLES = {
         ),
     },
     'js': {
+        'jquery': (
+            'js/jquery-1.7.2.min.js',
+            'js/jquery-ui-1.8.20.date.autocomplete.min.js',
+        ),
         'core_js': (
             'js/core.js',
         ),
