@@ -1076,9 +1076,10 @@ ul.tri-set img {
   	color: #fff;
   	display: inline-block;
   	margin-bottom: 0;
-  	font-size: 1em;
+  	font-size: 14px;
+    line-height: 1;
   	letter-spacing: 2px;
-  	padding: 0.5em 20px;
+  	padding: 10px 20px;
   	position: relative;
 }
 .masthead .plaque:after,
@@ -1135,10 +1136,31 @@ ul.tri-set img {
 	width: 60%;
 	.box-sizing(border-box);
 }
+.guide_nav a {
+    position: absolute;
+    width: 80px;
+    display: block;
+    height: 80px;
+    top: 20px;
+    left: 0;
+    text-indent: -9999em;
+    background: transparent url(../img/prev_arrow.png) no-repeat left center;
+    opacity: 0.6;
+}
+.guide_nav .next {
+    right: 0;
+    left: auto;
+    background-image: url(../img/next_arrow.png);
+}
+.guide_nav a:hover, 
+.guide_nav a:focus {
+    opacity: 1;
+}
 .event-type {
     overflow: hidden;
     margin: 2em 0;
     padding: 0 100px;
+    position: relative;
 }
 .event-type h3 {
     font-weight: normal;
