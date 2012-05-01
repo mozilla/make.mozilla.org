@@ -736,7 +736,7 @@ ul.tri-set img {
 
 /* ---[ Forms ]------------------------------------------------------------- */
 
-form {
+#content form {
 	.box-shadow(@panelShadow);
 
 	background: #FFF;
@@ -744,40 +744,40 @@ form {
 	padding: 50px;
 }
 
-form fieldset {
+#content form fieldset {
 	border: none;
 	border-bottom: solid 1px #E1E3E3;
 	margin: 0 0 35px;
 	padding: 0 18px 10px 0;
 }
 
-form ul,
-form li {
+#content form ul,
+#content form li {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-form li {
+#content form li {
 	margin-bottom: 25px;
 }
 
-form .buttons {
+#content form .buttons {
 	margin: 0;
 	padding: 0;
 	font-size: 1.286em;
 }
 
-form li,
-form .buttons {
+#content form li,
+#content form .buttons {
 	margin-left: 165px;
 }
 
-form li li {
+#content form li li {
 	margin-left: 0;
 }
 
-form label {
+#content form label {
 	display: block;
 	width: 143px;
 	margin-left: -165px;
@@ -787,7 +787,7 @@ form label {
 	line-height: 2.125em;
 }
 
-form li li label {
+#content form li li label {
 	width: auto;
 	margin: 0;
 	float: none;
@@ -797,21 +797,21 @@ form li li label {
 	text-indent: -2.25em;
 }
 
-form li li input {
+#content form li li input {
 	margin-right: 1em;
 }
 
-form li li span {
+#content form li li span {
 	display: block;
 	text-indent: 0;
 }
 
-form textarea,
-form input[type="email"],
-form input[type="password"],
-form input[type="text"],
-form input[type="date"],
-form input[type="time"] {
+#content form textarea,
+#content form input[type="email"],
+#content form input[type="password"],
+#content form input[type="text"],
+#content form input[type="date"],
+#content form input[type="time"] {
 	.transition(box-shadow linear .1s);
 	.border-radius(6px);
 	.box-shadow(~"0 2px 1px rgba(0,0,0,0.1) inset");
@@ -828,23 +828,23 @@ form input[type="time"] {
 	line-height: 1.714em;
 }
 
-form input[type="date"],
-form input[type="time"] {
+#content form input[type="date"],
+#content form input[type="time"] {
 	width: 40%;
 	max-width: 200px;
 	margin-right: 5%;
 }
 
-form textarea {
+#content form textarea {
 	resize: vertical;
 }
 
-form textarea:focus,
-form input[type="email"]:focus,
-form input[type="password"]:focus,
-form input[type="text"]:focus,
-form input[type="date"]:focus,
-form input[type="time"]:focus {
+#content form textarea:focus,
+#content form input[type="email"]:focus,
+#content form input[type="password"]:focus,
+#content form input[type="text"]:focus,
+#content form input[type="date"]:focus,
+#content form input[type="time"]:focus {
 	.box-shadow(~"0 2px 1px rgba(0,0,0,0.1) inset,0 0 8px 0 rgba(103,167,208,0.6)");
 
 	border-color: #BBB;
@@ -852,12 +852,12 @@ form input[type="time"]:focus {
 }
 
 @media screen and (max-width: 600px) {
-	form li,
-	form .buttons {
+	#content form li,
+	#content form .buttons {
 		margin-left: 0;
 	}
 
-	form label {
+	#content form label {
 		margin-left: 0;
 		margin-right: -18px;
 		padding-bottom: 5px;
@@ -897,7 +897,7 @@ form input[type="time"]:focus {
 	border: none;
 }
 
-.search-results form .item {
+#content .search-results form .item {
 	display: table-cell;
 	white-space: nowrap;
 	padding: 0 0 0 18px;
@@ -907,13 +907,13 @@ form input[type="time"]:focus {
 	width: 100%;
 }
 
-.search-results h2.item {
+#content .search-results h2.item {
 	font-size: 1em;
 	width: 0;
 	padding: 0 18px 0 0;
 }
 
-.search-results label {
+#content .search-results label {
 	float: none;
 	margin: 0;
 	padding: 0;
@@ -939,7 +939,7 @@ form input[type="time"]:focus {
 	line-height: 2.5em;
 }
 
-.search-results .buttons {
+#content .search-results .buttons {
 	margin: 0;
 }
 
