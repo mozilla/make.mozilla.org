@@ -5,7 +5,7 @@
 
 {% block content %}
 <h2>Create a New Event</h2>
-<form action="/events/create">
+<form method="post">
     {% for fieldset in fieldsets %}
         <fieldset{% if fieldset.className %} class="{{ fieldset.className }}"{% endif %}>
             {% if fieldset.legend %}<legend>{{ fieldset.legend }}</legend>{% endif %}
@@ -23,5 +23,6 @@
         </fieldset>
     {% endfor %}
     <p class="buttons"><input type="submit" class="button create"></p>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 </form>
 {% endblock %}
