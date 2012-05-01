@@ -1,10 +1,22 @@
 var map = (function (config) {
 
+	var location = [
+		[ 37.387807, -122.082656], // Mountain View
+		[-36.866596,  174.777106], // Auckland
+		[ 39.909901,  116.434050], // Beijing
+		[ 51.510718,   -0.127072], // London
+		[ 48.871356,    2.343891], // Paris
+		[ 37.789031, -122.389326], // San Francisco
+		[ 35.685021,  139.738455], // Tokyo
+		[ 43.647523,  -79.394025], // Toronto
+		[ 49.282076, -123.107774]  // Vancouver
+	].sort(function() {return 0.5 - Math.random()})[0];
+
 	var default_config = {
 		container: 'map-container',
-		latitude: 0,
-		longitude: 0,
-		zoom: 12,
+		latitude: location[0],
+		longitude: location[1],
+		zoom: 13,
 		controls: false,
 		draggable: false
 	}
