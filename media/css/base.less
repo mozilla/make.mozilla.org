@@ -833,8 +833,7 @@ ul.tri-set img {
 
 #content form input[type="date"],
 #content form input[type="time"] {
-	width: 40%;
-	max-width: 200px;
+	max-width: 100px;
 	margin-right: 5%;
 }
 
@@ -930,6 +929,10 @@ ul.tri-set img {
 	margin-left: -18px;
 }
 
+#content .search-results form input[type="text"].with-results {
+	.border-radius(~"6px 6px 0 0");
+}
+
 .search-results input[type="text"]::-webkit-input-placeholder {
 	text-transform: uppercase;
 	font-size: 0.8em;
@@ -940,6 +943,27 @@ ul.tri-set img {
 	text-transform: uppercase;
 	font-size: 0.8em;
 	line-height: 2.5em;
+}
+
+.search-results ul.ui-autocomplete {
+	position: absolute;
+}
+
+#content .search-results form ul.ui-autocomplete li {
+	margin: 0;
+	cursor: pointer;
+	background-color: rgba(255,255,255,0.9);
+}
+
+#content .search-results form ul.ui-autocomplete a {
+	padding: 10px 15px;
+	border-bottom: solid 1px #EEE;
+}
+
+#content .search-results form ul.ui-autocomplete a.ui-state-hover,
+#content .search-results form ul.ui-autocomplete a.ui-state-active {
+	color: #000;
+	background: #FFF;
 }
 
 #content .search-results .buttons {
