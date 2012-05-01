@@ -1,0 +1,8 @@
+{% extends "events/base.html" %}
+
+{% block page_title %}{{ event.name }} | {{ super() }}{% endblock %}
+{% block page_id %}event-details{% endblock %}
+
+{% block content %}
+{{ event.name }}
+{% endblock %}
