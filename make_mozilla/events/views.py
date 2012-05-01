@@ -5,6 +5,7 @@ from django.views.decorators.http import require_POST, require_GET
 from django.contrib.syndication.views import Feed
 from django.contrib.gis.feeds import GeoRSSFeed
 from django.utils.http import urlquote_plus, urlencode
+from django.views.decorators.csrf import csrf_protect
 
 import urllib2
 import json
@@ -46,21 +47,29 @@ def index(request):
     return jingo.render(request, 'events/index.html', {'event_kinds': event_kinds})
 
 
-# @login_required
+@login_required
+@csrf_protect
 def new(request):
-    new_event_form = forms.EventForm()
-    new_venue_form = forms.VenueForm()
+    if (request.method == 'POST'):
+        event_form = forms.EventForm(request.POST)
+        venue_form = forms.VenueForm(request.POST)
+        if event_form.is_valid() and venue_form.is_valid():
+            event, venue = create_event_and_venue(request.user, event_form, venue_form)
+            return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
+    else:
+        event_form = forms.EventForm()
+        venue_form = forms.VenueForm()
 
     fieldsets = (
-        forms.Fieldset(new_event_form, ('kind',)),
-        forms.Fieldset(new_event_form, ('name',)),
-        forms.Fieldset(new_event_form, ('start', 'end',)),
-        forms.Fieldset(new_venue_form, new_venue_form.fields),
+        forms.Fieldset(event_form, ('kind',)),
+        forms.Fieldset(event_form, ('name',)),
+        forms.Fieldset(event_form, ('start', 'end',)),
+        forms.Fieldset(venue_form, venue_form.fields),
     )
 
     return jingo.render(request, 'events/new.html', {
-        'event_form': new_event_form,
-        'venue_form': new_venue_form,
+        # 'event_form': event_form,
+        # 'venue_form': venue_form,
         'fieldsets': fieldsets
     })
 
@@ -89,23 +98,24 @@ def details(request, event_id):
     return jingo.render(request, 'events/detail.html', {'event': event})
 
 
-@require_POST
-@login_required
-def create(request):
-    ef, vf = process_create_post_data(request.POST)
-    if ef.is_valid() and vf.is_valid():
-        event, venue = create_event_and_venue(request.user, ef, vf)
-        return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
-    return jingo.render(request, 'events/new.html', {
-        'event_form': ef,
-        'venue_form': vf
-    })
-
-
-def process_create_post_data(data):
-    event_form = forms.EventForm(data)
-    venue_form = forms.VenueForm(data)
-    return (event_form, venue_form)
+# @require_POST
+# @login_required
+# def create(request):
+#     ef, vf = process_create_post_data(request.POST)
+#     if ef.is_valid() and vf.is_valid():
+#         event, venue = create_event_and_venue(request.user, ef, vf)
+#         return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
+# 
+#     return jingo.render(request, 'events/new.html', {
+#         'event_form': ef,
+#         'venue_form': vf
+#     })
+# 
+# 
+# def process_create_post_data(data):
+#     event_form = forms.EventForm(data)
+#     venue_form = forms.VenueForm(data)
+#     return (event_form, venue_form)
 
 
 def create_event_and_venue(user, event_form, venue_form):
