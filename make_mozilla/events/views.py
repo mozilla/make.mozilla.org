@@ -47,31 +47,9 @@ def index(request):
     return jingo.render(request, 'events/index.html', {'event_kinds': event_kinds})
 
 
-# @login_required
-# @csrf_protect
+@login_required
 def new(request):
-    if (request.method == 'POST'):
-        event_form = forms.EventForm(request.POST)
-        venue_form = forms.VenueForm(request.POST)
-        if event_form.is_valid() and venue_form.is_valid():
-            event, venue = create_event_and_venue(request.user, event_form, venue_form)
-            return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
-    else:
-        event_form = forms.EventForm()
-        venue_form = forms.VenueForm()
-
-    fieldsets = (
-        forms.Fieldset(event_form, ('kind',)),
-        forms.Fieldset(event_form, ('name', 'event_url', 'description', 'public')),
-        forms.Fieldset(event_form, ('start', 'end',)),
-        forms.Fieldset(venue_form, venue_form.fields),
-    )
-
-    return jingo.render(request, 'events/new.html', {
-        # 'event_form': event_form,
-        # 'venue_form': venue_form,
-        'fieldsets': fieldsets
-    })
+    return render_event_creation_form(request, forms.EventForm(), forms.VenueForm())
 
 
 def search(request):
@@ -100,15 +78,28 @@ def details(request, event_id):
 
 @require_POST
 @login_required
+@csrf_protect
 def create(request):
     ef, vf = process_create_post_data(request.POST)
     if ef.is_valid() and vf.is_valid():
         event, venue = create_event_and_venue(request.user, ef, vf)
         return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
 
+    return render_event_creation_form(request, ef, vf)
+
+
+def render_event_creation_form(request, event_form, venue_form):
+    fieldsets = (
+        forms.Fieldset(event_form, ('kind',)),
+        forms.Fieldset(event_form, ('name', 'event_url', 'description', 'public')),
+        forms.Fieldset(event_form, ('start', 'end',)),
+        forms.Fieldset(venue_form, venue_form.fields),
+    )
+
     return jingo.render(request, 'events/new.html', {
-        'event_form': ef,
-        'venue_form': vf
+        # 'event_form': event_form,
+        # 'venue_form': venue_form,
+        'fieldsets': fieldsets
     })
 
 
