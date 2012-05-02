@@ -62,7 +62,7 @@ def new(request):
 
     fieldsets = (
         forms.Fieldset(event_form, ('kind',)),
-        forms.Fieldset(event_form, ('name',)),
+        forms.Fieldset(event_form, ('name', 'event_url',)),
         forms.Fieldset(event_form, ('start', 'end',)),
         forms.Fieldset(venue_form, venue_form.fields),
     )
