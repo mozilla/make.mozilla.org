@@ -30,4 +30,37 @@
     <p class="buttons"><input type="submit" class="button create"></p>
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 </form>
+<script>
+    (function($) {
+        $('input[type="date"]').datepicker({
+            altField: '#id_event-end_0'
+        });
+        $('input[type="time"]').autocomplete({
+            delay: 100,
+            source: (function () {
+                var options = [],
+                    hour, hour_str,
+                    hour_12, hour_str_12,
+                    min, min_str,
+                    am_pm;
+
+                for (hour = 0; hour < 24; ++hour) {
+                    hour_12 = hour % 12 === 0 ? 12 : hour % 12;
+                    hour_str = (hour < 10 ? '0' : '') + hour;
+                    hour_str_12 = hour_12;
+                    am_pm = (hour < 12) ? 'AM' : 'PM';
+                    for (min = 0; min < 60; min += 30) {
+                        min_str = (min < 10 ? '0' : '') + min;
+                        options.push({
+                            label: hour_str + ':' + min_str + ' (' + hour_str_12 + ':' + min_str + ' ' + am_pm + ')',
+                            value: hour_str + ':' + min_str
+                        });
+                    }
+                }
+
+                return options;
+            })()
+        });
+    })(jQuery);
+</script>
 {% endblock %}
