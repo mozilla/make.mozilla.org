@@ -5,7 +5,7 @@
 
 {% block content %}
 <h2>Create a New Event</h2>
-<form method="post">
+<form method="post" action="/events/create">
     {% for fieldset in fieldsets %}
         <fieldset{% if fieldset.className %} class="{{ fieldset.className }}"{% endif %}>
             {% if fieldset.legend %}<legend>{{ fieldset.legend }}</legend>{% endif %}
@@ -17,6 +17,7 @@
                         <li{% if field.errors %} class="error"{% endif %}>
                             {{ field.label_tag() }}
                             {{ field }}
+                            {% if field.help_text %}<label for="id_{{ field.html_name }}" class="help">{{ field.help_text }}</label>{% endif %}
                             {% for error in field.errors -%}
                                 <span class="error_message">{{ error }}</span>
                             {%- endfor %}

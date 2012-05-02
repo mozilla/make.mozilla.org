@@ -26,6 +26,7 @@ class EventForm(PrefixedModelForm):
                 widget=forms.RadioSelect)
     name = forms.CharField(label='Name your event')
     event_url = forms.URLField(label='Event URL', widget=widgets.UrlInput(attrs={'placeholder': 'http://'}))
+    public = forms.BooleanField(help_text='This event should be made available in search results.')
 
     class Meta:
         model = models.Event

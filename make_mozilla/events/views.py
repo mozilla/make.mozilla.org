@@ -47,8 +47,8 @@ def index(request):
     return jingo.render(request, 'events/index.html', {'event_kinds': event_kinds})
 
 
-@login_required
-@csrf_protect
+# @login_required
+# @csrf_protect
 def new(request):
     if (request.method == 'POST'):
         event_form = forms.EventForm(request.POST)
@@ -62,7 +62,7 @@ def new(request):
 
     fieldsets = (
         forms.Fieldset(event_form, ('kind',)),
-        forms.Fieldset(event_form, ('name', 'event_url',)),
+        forms.Fieldset(event_form, ('name', 'event_url', 'description', 'public')),
         forms.Fieldset(event_form, ('start', 'end',)),
         forms.Fieldset(venue_form, venue_form.fields),
     )
@@ -98,24 +98,24 @@ def details(request, event_id):
     return jingo.render(request, 'events/detail.html', {'event': event})
 
 
-# @require_POST
-# @login_required
-# def create(request):
-#     ef, vf = process_create_post_data(request.POST)
-#     if ef.is_valid() and vf.is_valid():
-#         event, venue = create_event_and_venue(request.user, ef, vf)
-#         return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
-# 
-#     return jingo.render(request, 'events/new.html', {
-#         'event_form': ef,
-#         'venue_form': vf
-#     })
-# 
-# 
-# def process_create_post_data(data):
-#     event_form = forms.EventForm(data)
-#     venue_form = forms.VenueForm(data)
-#     return (event_form, venue_form)
+@require_POST
+@login_required
+def create(request):
+    ef, vf = process_create_post_data(request.POST)
+    if ef.is_valid() and vf.is_valid():
+        event, venue = create_event_and_venue(request.user, ef, vf)
+        return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
+
+    return jingo.render(request, 'events/new.html', {
+        'event_form': ef,
+        'venue_form': vf
+    })
+
+
+def process_create_post_data(data):
+    event_form = forms.EventForm(data)
+    venue_form = forms.VenueForm(data)
+    return (event_form, venue_form)
 
 
 def create_event_and_venue(user, event_form, venue_form):
