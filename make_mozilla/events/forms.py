@@ -25,6 +25,7 @@ class EventForm(PrefixedModelForm):
                 label='Choose event type',
                 widget=forms.RadioSelect)
     name = forms.CharField(label='Name your event')
+    event_url = forms.URLField(label='Event URL', widget=widgets.UrlInput(attrs={'placeholder': 'http://'}))
 
     class Meta:
         model = models.Event
@@ -36,8 +37,8 @@ class EventForm(PrefixedModelForm):
 
 class VenueForm(PrefixedModelForm):
     field_prefix = 'venue'
-    latitude = forms.FloatField()
-    longitude = forms.FloatField()
+    latitude = forms.FloatField(widget=forms.HiddenInput)
+    longitude = forms.FloatField(widget=forms.HiddenInput)
 
     class Meta:
         model = models.Venue
