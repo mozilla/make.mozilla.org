@@ -78,7 +78,6 @@ def details(request, event_id):
 
 @require_POST
 @login_required
-@csrf_protect
 def create(request):
     ef, vf = process_create_post_data(request.POST)
     if ef.is_valid() and vf.is_valid():
