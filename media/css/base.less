@@ -790,6 +790,7 @@ ul.tri-set img {
 	line-height: 2.125em;
 }
 
+#content form label.error,
 #content form label.help,
 #content form li li label {
 	width: auto;
@@ -798,6 +799,13 @@ ul.tri-set img {
 	text-align: left;
 	font-size: 1em;
 	display: inline;
+}
+
+#content form label.error {
+	display: block;
+	color: #DB9B9B;
+	font-weight: bold;
+	font-style: italic;
 }
 
 #content form li li label {
@@ -868,6 +876,18 @@ ul.tri-set img {
 
 	border-color: #BBB;
 	outline: none;
+}
+
+#content form .error textarea,
+#content form .error select,
+#content form .error input[type="email"],
+#content form .error input[type="password"],
+#content form .error input[type="text"],
+#content form .error input[type="url"],
+#content form .error input[type="date"],
+#content form .error input[type="time"] {
+	background: #FAEAEA;
+	border-color: #DB9B9B;
 }
 
 @media screen and (max-width: 600px) {
