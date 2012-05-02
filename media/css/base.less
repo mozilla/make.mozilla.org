@@ -790,14 +790,20 @@ ul.tri-set img {
 	line-height: 2.125em;
 }
 
+#content form label.help,
 #content form li li label {
 	width: auto;
 	margin: 0;
 	float: none;
 	text-align: left;
 	font-size: 1em;
+	display: inline;
+}
+
+#content form li li label {
 	margin-left: 2.25em;
 	text-indent: -2.25em;
+	display: block;
 }
 
 #content form li li input {
@@ -810,6 +816,7 @@ ul.tri-set img {
 }
 
 #content form textarea,
+#content form select,
 #content form input[type="email"],
 #content form input[type="password"],
 #content form input[type="text"],
@@ -840,13 +847,17 @@ ul.tri-set img {
 
 #content form textarea {
 	height: 6.856em;
-}
-
-#content form textarea {
 	resize: vertical;
 }
 
+#content form input[type="radio"],
+#content form input[type="checkbox"],
+#content form select {
+	margin: 4px 8px;
+}
+
 #content form textarea:focus,
+#content form select,
 #content form input[type="email"]:focus,
 #content form input[type="password"]:focus,
 #content form input[type="text"]:focus,
