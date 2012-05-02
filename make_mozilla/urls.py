@@ -8,10 +8,11 @@ import make_mozilla.events.urls
 import make_mozilla.users.urls
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
+
     url(r'^$',          'make_mozilla.base.views.root.index'),
     url(r'^events/',    include(make_mozilla.events.urls)),
     url(r'^users/',     include(make_mozilla.users.urls)),
@@ -22,7 +23,7 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # (r'^admin/', include(admin.site.urls)),
+    (r'^admin/', include(admin.site.urls)),
 )
 
 ## In DEBUG mode, serve media files through Django.

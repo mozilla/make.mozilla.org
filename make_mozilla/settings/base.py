@@ -48,7 +48,8 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     # extra lib stuff
     'south',
     'django_browserid',  # Load after auth to monkey-patch it.
-    'cronjobs'
+    'cronjobs',
+    'django.contrib.admin',
 ]
 
 
