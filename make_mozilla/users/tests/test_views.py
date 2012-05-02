@@ -7,9 +7,7 @@ from make_mozilla.base.tests.assertions import assert_routing
 
 from make_mozilla.users import views
 
-rf = RequestFactory()
-
 class LoginJumpPageTest(unittest.TestCase):
     def test_that_it_routes(self):
-        assert_routing('/users/login', views.login, name = 'login')
+        assert_routing('/users/login/', views.login, name = 'login')
 
