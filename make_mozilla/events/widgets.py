@@ -1,5 +1,9 @@
 from django.forms import widgets
 
+class UrlInput(widgets.TextInput):
+    input_type = 'url'
+
+
 class DateInput(widgets.DateInput):
     input_type = 'date'
 
