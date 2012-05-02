@@ -49,7 +49,14 @@ class TestEventsNewTemplate(TestCase):
         self.ef = forms.EventForm()
         self.vf = forms.VenueForm()
         self.request = rf.get('/events/new')
-        context = {'event_form': self.ef, 'venue_form': self.vf}
+        self.fieldsets = (
+            forms.Fieldset(self.ef, ('kind',)),
+            forms.Fieldset(self.ef, ('name', 'event_url', 'description', 'public')),
+            forms.Fieldset(self.ef, ('start', 'end',)),
+            forms.Fieldset(self.vf, self.vf.fields),
+        )
+        context = {'event_form': self.ef, 'venue_form': self.vf, 'fieldsets': self.fieldsets}
+
         self.result = jingo.render(self.request, 'events/new.html', context)
         self.html = html_context(self.result.content)
 
