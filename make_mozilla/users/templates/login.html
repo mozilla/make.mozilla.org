@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="masthead">
+    <h2 class="plaque">Login</h2>
+    <p>Comforting message here</p>
+</div>
+
+{% if not user.is_authenticated() %}
+    <a id="browserid" href="#">Sign In</a>
+    <form method="POST" action="{{ url('browserid_verify')+ "?next=/events/new/" }}">
+      {{ csrf() }}
+      {{ browserid_form.as_p() }}
+    </form>
+    <script language="javascript" src="//browserid.org/include.js"></script>
+    <script language="javascript">
+      $(document).ready(function() {
+          $('#browserid').bind('click', function(e) {
+              e.preventDefault();
+              navigator.id.getVerifiedEmail(function(assertion) {
+                  if (assertion) {
+                      var $e = $('#id_assertion');
+                      $e.val(assertion.toString());
+                      $e.parent().submit();
+                  }
+              });
+          });
+      });
+    </script>
+{% else %}
+    <a class="logout" href="{{ url('logout') }}">{{ _("I'm a celebrity get me out of here") }}</a>
+{% endif %}
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+<script language="javascript" type="application/javascript" src="http://browserid.org/include.js"></script>
+{{ js('core_js') }}
+{% endblock %}

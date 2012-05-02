@@ -62,6 +62,7 @@ JINGO_EXCLUDE_APPS = [
 BROWSERID_CREATE_USER = True
 BROWSERID_VERIFICATION_URL = 'https://browserid.org/verify'
 LOGIN_REDIRECT_URL = '/events/'
+LOGIN_URL = '/users/login/'
 SITE_URL = 'https://make-dev.mozillalabs.com'
 
 AUTH_PROFILE_MODULE = 'users.Profile'
@@ -93,7 +94,7 @@ TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
 
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
-
+BROWSERID_CREATE_USER = True
 
 # needed to make CSRF function on anonymous forms
 ANON_ALWAYS = True
