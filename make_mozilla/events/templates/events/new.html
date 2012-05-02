@@ -11,13 +11,17 @@
             {% if fieldset.legend %}<legend>{{ fieldset.legend }}</legend>{% endif %}
             <ul>
                 {% for field in fieldset %}
-                    <li{% if field.errors %} class="error"{% endif %}>
-                        {{ field.label_tag() }}
+                    {% if field.is_hidden %}
                         {{ field }}
-                        {% for error in field.errors -%}
-                            <span class="error_message">{{ error }}</span>
-                        {%- endfor %}
-                    </li>
+                    {% else %}
+                        <li{% if field.errors %} class="error"{% endif %}>
+                            {{ field.label_tag() }}
+                            {{ field }}
+                            {% for error in field.errors -%}
+                                <span class="error_message">{{ error }}</span>
+                            {%- endfor %}
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </fieldset>
