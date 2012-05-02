@@ -23,7 +23,8 @@ class EventForm(PrefixedModelForm):
     kind = forms.ModelChoiceField(queryset=models.EventKind.objects.all(),
                 empty_label=None,
                 label='Choose event type',
-                widget=forms.RadioSelect)
+                widget=forms.RadioSelect,
+                error_messages={'required': 'Please select an event type'})
     name = forms.CharField(label='Name your event')
     event_url = forms.URLField(label='Event URL', widget=widgets.UrlInput(attrs={'placeholder': 'http://'}), required=False)
     public = forms.BooleanField(help_text='This event should be made available in search results.', required=False)
