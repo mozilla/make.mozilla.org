@@ -1,4 +1,5 @@
 South
 pytz
 redis
+django-countries
 -r ../vendor/src/funfactory/funfactory/requirements/prod.txt

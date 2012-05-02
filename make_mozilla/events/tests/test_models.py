@@ -37,12 +37,12 @@ class VenueTest(unittest.TestCase):
 class EventTest(django.test.TestCase):
     def setup_events(self):
         london = models.Venue(name = "Test Venue", street_address = "0 Somewhere St", 
-                country = "UK")
+                country = "GB")
         london.latitude = 51.510345
         london.longitude = -0.127072
         london.save()
         berlin = models.Venue(name = "Berlin test Venue", street_address = "Somewhere Str. 0", 
-                country = "Germany")
+                country = "DE")
         berlin.latitude = 52.50693980
         berlin.longitude = 13.42415920
         berlin.save()

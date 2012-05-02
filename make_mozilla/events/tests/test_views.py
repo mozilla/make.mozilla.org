@@ -89,7 +89,7 @@ class TestEventViewsCreate(TestCase):
             'event-url': 'http://example.com/',
             'venue-name': 'Test Venue',
             'venue-street_address': '100 Test Street',
-            'venue-country': 'UK',
+            'venue-country': 'GB',
             'venue-latitude': '51.0',
             'venue-longitude': '0.5'
         }

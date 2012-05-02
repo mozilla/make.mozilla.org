@@ -28,7 +28,7 @@ class EventForm(PrefixedModelForm):
 
     class Meta:
         model = models.Event
-        fields = ('name', 'event_url', 'start', 'end', 'kind')
+        fields = ('name', 'description', 'event_url', 'start', 'end', 'kind', 'public')
         widgets = {
             'start': widgets.SplitDateTimeWidget(attrs={'date_placeholder': 'Date', 'time_placeholder': 'Time'}),
             'end': widgets.SplitDateTimeWidget(attrs={'date_placeholder': 'Date', 'time_placeholder': 'Time'}),

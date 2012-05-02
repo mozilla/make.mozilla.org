@@ -1,12 +1,13 @@
 from django.contrib.gis.db import models
 from django.contrib.gis import geos, measure
+from django_countries import CountryField
 from django.utils.safestring import mark_safe
 from datetime import datetime
 
 class Venue(models.Model):
     name = models.CharField(max_length=255)
     street_address = models.TextField()
-    country = models.CharField(max_length=255)
+    country = CountryField()
     location = models.PointField(blank=True)
 
     objects = models.GeoManager()
@@ -37,6 +38,7 @@ def _upcoming(qs):
 
 class Event(models.Model):
     name = models.CharField(max_length = 255)
+    description = models.TextField()
     event_url = models.URLField(blank = True)
     venue = models.ForeignKey(Venue)
     start = models.DateTimeField(null = True, blank = True)
@@ -47,6 +49,7 @@ class Event(models.Model):
     kind = models.ForeignKey('EventKind', null = True)
     verified = models.BooleanField(default = False)
     official = models.BooleanField(default = False)
+    public = models.BooleanField(default = False)
 
     objects = models.GeoManager()
 
