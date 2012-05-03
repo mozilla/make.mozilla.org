@@ -24,6 +24,7 @@ class dev {
   include nodejs
   include node_dependencies
   include redis
+  include celery
 }
 
 include dev

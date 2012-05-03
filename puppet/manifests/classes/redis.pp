@@ -1,3 +1,22 @@
+define create_system_user ($group, $homedir, $shell = "/bin/false") {
+  exec { "create-${group}-system-group":
+    command => "addgroup --system ${group}",
+    unless => "getent group ${group}";
+  }
+
+  exec { "create-${name}-system-user":
+    command => "adduser --system --disabled-login --ingroup ${group} --home \"${homedir}\" --gecos \"${group} server\" --shell \"${shell}\" ${name}",
+    unless => "getent passwd ${name}",
+    require => Exec["create-${group}-system-group"];
+  }
+
+  file { $homedir:
+    ensure => directory,
+    mode => '755', owner => $name, group => $group,
+    require => Exec["create-$name-system-user"];
+  }
+}
+
 class redis {
   $redis_version = "2.4.12"
   $redis_sha1 = "dbdcf631aec2caa9ff427fc07b1bf2c57cebb11b"
@@ -9,6 +28,7 @@ class redis {
   $redis_bin_path = "/usr/local/bin/redis"
   $redis_user = "redis"
   $redis_group = "redis"
+  $redis_home_dir = "/var/lib/redis"
   
   file { $redis_tmp_dir:
     ensure => directory;
@@ -46,34 +66,22 @@ class redis {
     content => $redis_sha1;
   }
 
-  file { "/var/lib/redis":
-    ensure => directory,
-    mode => '750', owner => $redis_user, group => $redis_group,
-    require => Exec['create-redis-system-user'];
-  }
-
   file { "/var/log/redis":
     ensure => directory,
     mode => '755', owner => $redis_user, group => $redis_group,
-    require => Exec['create-redis-system-user'];
+    require => Create_system_user[$redis_user];
   }
 
-  exec { "create-redis-system-group":
-    command => "addgroup --system ${redis_group}",
-    unless => "getent group ${redis_group}";
-  }
-
-  exec { "create-redis-system-user":
-    command => "adduser --system --disabled-login --ingroup ${redis_group} --home /var/lib/redis --gecos \"${redis_group} server\" --shell /bin/false ${redis_user}",
-    unless => "getent passwd ${redis_user}",
-    require => Exec["create-redis-system-group"];
+  create_system_user { $redis_user:
+    group => $redis_group,
+    homedir => $redis_home_dir;
   }
 
   exec { "build-redis":
     cwd => $redis_src_dir,
     command => "make install",
     onlyif => "test \"`cat /etc/redis/puppet-ver`\" != \"$redis_sha1\"",
-    require => [Exec["unpack-redis"], File['/var/lib/redis'], File['/etc/redis/redis.conf']],
+    require => [Exec["unpack-redis"], File['/etc/redis/redis.conf'], Create_system_user[$redis_user]],
     before => File['/etc/redis/puppet-ver'];
   }
 
@@ -88,5 +96,9 @@ class redis {
     enable => true,
     hasstatus => true,
     require => [File['/etc/init.d/redis-server'], File['/var/log/redis']];
+  }
+
+  file { "/var/lib/funfact":
+    content => $::my_fun_fact;
   }
 }

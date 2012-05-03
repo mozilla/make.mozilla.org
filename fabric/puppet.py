@@ -1,6 +1,6 @@
 from fabric.api import task, cd, env, run, local, cd, lcd, put, settings
 from fabric.operations import sudo
-import uuid
+import uuid, StringIO
 
 @task
 def setup():
@@ -21,7 +21,32 @@ def apply():
         with cd('/etc/puppet'):
             sudo('tar -xzf %s' % tarball_path)
         run('rm %s' % tarball_path)
-        sudo('puppet -v /etc/puppet/manifests/dev.pp')
+        sudo('puppet -d /etc/puppet/manifests/dev.pp')
 
+@task
+def facts():
+    with settings(user = env.puppet_user):
+        env_settings = __import__('make_mozilla.settings.%s' % env.deploy_env)
+        db_user = env_settings.DATABASES['default']['USER']
+        db_pass = env_settings.DATABASES['default']['PASSWORD']
+        facts = """require 'facter'
 
+Facter.add("db_user") do 
+  setcode do 
+    "%s"
+  end
+end
 
+Facter.add("db_pass") do
+  setcode do
+    "%s"
+  end
+end
+""" % (db_user, db_pass)
+        fact_io = StringIO.StringIO(facts)
+        fact_tmp_path = '/tmp/make-moz-facts-%s.rb' % uuid.uuid4().hex
+        fact_path = '/var/lib/puppet/lib/facter/make_moz_db.rb'
+        put(fact_io, fact_tmp_path)
+        sudo('mv %s %s' % (fact_tmp_path, fact_path))
+        sudo('chown root:root %s' % fact_path)
+        sudo('chmod 700 %s' % fact_path)

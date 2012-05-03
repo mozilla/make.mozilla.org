@@ -17,7 +17,8 @@ hosts = {
     'production': [],
     'staging': []
 }
-env.hosts = hosts[os.getenv('TO', 'development')]
+env.deploy_env = os.getenv('TO', 'development')
+env.hosts = hosts[env.deploy_env]
 
 def perform_release(migrate = False, setup = False):
     execute(release.create)

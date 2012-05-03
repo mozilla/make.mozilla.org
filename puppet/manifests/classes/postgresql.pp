@@ -20,4 +20,9 @@ class postgresql {
         hasstatus => true,
         require => [Package['postgresql'], Package['postgresql-client']];
     }
+
+    exec { "create_db_user",
+        command => "echo \"CREATE ROLE $::db_user NOSUPERUSER NOCREATEDB NOCREATEROLE NOCREATEUSER PASSWORD '$::db_pass'\;" | sudo -u postgres psql -f -",
+        unless => "";
+    }
 }
