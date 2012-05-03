@@ -34,6 +34,11 @@ class VenueTest(unittest.TestCase):
 
         eq_(venue.location, geos.Point(51.456, 0))
 
+    def test_lat_lng_can_be_set_on_instantiation(self):
+        venue = models.Venue(latitude = "51.0", longitude = "4")
+
+        eq_(venue.location, geos.Point(4.0, 51.0))
+
 class EventTest(django.test.TestCase):
     def setup_events(self):
         london = models.Venue(name = "Test Venue", street_address = "0 Somewhere St", 

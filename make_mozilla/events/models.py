@@ -15,7 +15,9 @@ class Venue(models.Model):
     def __init__(self, *args, **kwargs):
         super(Venue, self).__init__(*args, **kwargs)
         if self.location is None:
-            self.location = geos.Point(0, 0)
+            longitude = float(kwargs.get('longitude', '0'))
+            latitude = float(kwargs.get('latitude', '0'))
+            self.location = geos.Point(longitude, latitude)
 
     @property
     def latitude(self):
