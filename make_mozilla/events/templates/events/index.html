@@ -6,21 +6,21 @@
 {% block content %}
 <div class="intro-bar">
     <h2>Teach. Meet. Learn. Share.</h2>
-    <p><a href="" class="button find">Find an Event</a> <em>or</em> <a href="" class="button create">Create an Event</a></p>
+    <p><a href="{{ url('events.search') }}" class="button find">Find an Event</a> <em>or</em> <a href="https://donate.mozilla.org/page/event/create/" class="button create">Create an Event</a></p>
 </div>
 
 <h3>What's New with Webmaker Events?</h3>
 
 <ul class="tri-set">
     <li>
-        <a href="" class="thumb"><img src="../media/img/events_map.png" alt=""></a>
+        <a href="{{ url('events.search') }}" class="thumb"><img src="../media/img/events_map.png" alt=""></a>
         <h4>Events are live!</h4>
-        <p><a href="">Learn with Friends Near You</a></p>
+        <p><a href="{{ url('events.search') }}">Learn with Friends Near You</a></p>
     </li>
     <li>
-        <a href="" class="thumb"><img src="../media/img/guides.gif" alt=""></a>
+        <a href="{{ url('guides_all') }}" class="thumb"><img src="../media/img/guides.gif" alt=""></a>
         <h4>Create your event</h4>
-        <p><a href="">Our Handy Guides will Help!</a></p>
+        <p><a href="{{ url('guides_all') }}">Our Handy Guides will Help!</a></p>
     </li>
     <li>
         <a href="" class="thumb"><img src="../media/img/code_party.jpg" alt=""></a>
@@ -34,8 +34,8 @@
     <h3>Event Types</h3>
     <dl>
         {% for kind in event_kinds %}
-            <dt>{{ kind.name }}</dt>
-                <dd><span class="thumb"><img src="{{ MEDIA_URL }}/img/{{ kind.name|lower|replace(' ', '-') }}_stub.jpg" alt="" width="95" height="95"></span> {{ kind.description }}</dd>
+            <dt><a href="{{ url('guides_%s' % kind.name|lower|replace(" ", "-")) }}">{{ kind.name }} <span class="thumb"><img src="{{ MEDIA_URL }}/img/{{ kind.name|lower|replace(' ', '-') }}_stub.jpg" alt="" width="95" height="95"></span></a></dt>
+                <dd>{{ kind.description }}</dd>
         {% endfor %}
     </dl>
 </div>

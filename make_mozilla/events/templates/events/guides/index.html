@@ -14,7 +14,7 @@
 <ul class="tri-set">
     {% for kind in event_kinds %}
     <li>
-        <a href="{{ kind.name|lower|replace(' ', '-') }}/">
+        <a href="{{ url('guides_%s' % kind.name|lower|replace(' ', '-')) }}">
             <img class="thumb" src="{{ MEDIA_URL }}/img/{{ kind.name|lower|replace(' ', '-')}}_thumb.jpg" alt="" />
             <h3>{{ kind.name }}</h3>
         </a>

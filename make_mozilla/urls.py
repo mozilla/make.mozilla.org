@@ -12,7 +12,7 @@ import make_mozilla.users.urls
 #admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$',          'make_mozilla.base.views.root.index'),
+    url(r'^$',          'make_mozilla.base.views.root.index', name="splash"),
     url(r'^events/',    include(make_mozilla.events.urls)),
     url(r'^users/',     include(make_mozilla.users.urls)),
     # browserid endpoints

@@ -1,5 +1,6 @@
-from django.shortcuts import render_to_response
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 
 def index(request):
-    return render_to_response('root/index.html', {})
+    return HttpResponseRedirect(reverse('events'))
 
