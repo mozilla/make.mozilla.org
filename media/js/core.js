@@ -37,7 +37,7 @@ if (document && document.querySelectorAll) {
 					$$metas[i].setAttribute('data-label', label);
 				}
 
-				var title = $$titles[i].innerHTML,
+				var title = $$titles[i].innerText,
 				    $navItem = document.createElement('li');
 
 				$navItem.title = title;
