@@ -34,7 +34,7 @@
     <h3>Event Types</h3>
     <dl>
         {% for kind in event_kinds %}
-            <dt><a href="{{ url('guides_%s' % kind.name|lower|replace(" ", "-")) }}">{{ kind.name }} <span class="thumb"><img src="{{ MEDIA_URL }}/img/{{ kind.name|lower|replace(' ', '-') }}_stub.jpg" alt="" width="95" height="95"></span></a></dt>
+            <dt><a href="{{ url('guides_%s' % kind.slug) }}">{{ kind.name }} <span class="thumb"><img src="{{ MEDIA_URL }}/img/{{ kind.name|lower|replace(' ', '-') }}_stub.jpg" alt="" width="95" height="95"></span></a></dt>
                 <dd>{{ kind.description }}</dd>
         {% endfor %}
     </dl>

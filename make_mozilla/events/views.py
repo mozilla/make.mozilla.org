@@ -162,5 +162,23 @@ def guides_all(request):
     })
 
 
-def guides_template(request): 
-    return jingo.render(request, 'events/guides/template.html', {})
+def guides_kitchen_table(request):
+    page_data = models.EventKind.objects.get(slug='kitchen_table')
+    return jingo.render(request, 'events/guides/kitchen-table.html', {
+        'page_data': page_data,
+    })
+
+
+def guides_hack_jam(request):
+    page_data = models.EventKind.objects.get(slug='hack_jam')
+    return jingo.render(request, 'events/guides/hack-jam.html', {
+        'page_data': page_data,
+    })
+
+
+def guides_pop_up(request):
+    page_data = models.EventKind.objects.get(slug='pop_up')
+    return jingo.render(request, 'events/guides/pop-up.html', {
+        'page_data': page_data,
+    })
+
