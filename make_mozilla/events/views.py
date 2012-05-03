@@ -109,7 +109,10 @@ def process_create_post_data(data):
 
 
 def create_event_and_venue(user, event_form, venue_form):
-    venue = venue_form.save()
+    venue = venue_form.instance
+    venue.latitude = venue_form['latitude'].field.to_python(venue_form['latitude'].data)
+    venue.longitude = venue_form['longitude'].field.to_python(venue_form['longitude'].data)
+    venue.save()
     event = event_form.instance
     event.venue = venue
     organiser_email = user.email

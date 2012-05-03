@@ -157,6 +157,7 @@ class TestEventViewsCreate(TestCase):
         mock_task_func.delay.assert_called_with('example@mozilla.org', '111')
         ok_(event.id is not None)
         ok_(venue.id is not None)
+        eq_(venue.location.y, 51.0)
         eq_(venue, event.venue)
 
     @patch.object(views, 'process_create_post_data')
