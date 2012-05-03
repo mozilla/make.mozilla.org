@@ -48,7 +48,8 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     # extra lib stuff
     'south',
     'django_browserid',  # Load after auth to monkey-patch it.
-    'cronjobs'
+    'cronjobs',
+    'waffle',
 ]
 
 
@@ -74,6 +75,10 @@ AUTHENTICATION_BACKENDS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
     'django_browserid.context_processors.browserid_form',
+]
+
+MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
+    'waffle.middleware.WaffleMiddleware',
 ]
 
 # Tells the extract script what files to look for L10n in and what function
