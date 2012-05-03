@@ -1,7 +1,8 @@
 settings_local.py
 settings/local.py
 */settings/local.py
-*/settings/dev-local.py
+*/settings/dev.py
+*/settings/development.py
 */settings/fauxdev.py
 */settings/server.py
 venv/*
