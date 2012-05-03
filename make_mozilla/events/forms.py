@@ -43,6 +43,25 @@ class VenueForm(PrefixedModelForm):
     latitude = forms.FloatField(widget=forms.HiddenInput)
     longitude = forms.FloatField(widget=forms.HiddenInput)
 
+    def __init__(self, *args, **kwargs):
+        super(VenueForm, self).__init__(*args, **kwargs)
+
+        if kwargs.has_key('instance'):
+            instance = kwargs['instance']
+            self.initial['latitude'] = instance.latitude
+            self.initial['longitude'] = instance.longitude 
+
+    def save(self, commit=True):
+        model = super(VenueForm, self).save(commit=False)
+
+        model.latitude = self.cleaned_data['latitude']
+        model.longitude = self.cleaned_data['longitude']
+
+        if commit:
+            model.save()
+
+        return model
+
     class Meta:
         model = models.Venue
         exclude = ('location',)

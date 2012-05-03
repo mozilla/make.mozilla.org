@@ -22,7 +22,7 @@ class Venue(models.Model):
     @property
     def latitude(self):
         return self.location.y
-    
+
     @latitude.setter
     def latitude(self, value):
         self.location.y = value
