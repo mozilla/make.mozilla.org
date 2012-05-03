@@ -21,8 +21,9 @@ class postgresql {
         require => [Package['postgresql'], Package['postgresql-client']];
     }
 
-    exec { "create_db_user",
-        command => "echo \"CREATE ROLE $::db_user NOSUPERUSER NOCREATEDB NOCREATEROLE NOCREATEUSER PASSWORD '$::db_pass'\;" | sudo -u postgres psql -f -",
-        unless => "";
+    exec { "create_db_user":
+        command => "echo \"CREATE ROLE ${::db_user} NOSUPERUSER NOCREATEDB NOCREATEROLE PASSWORD '${::db_pass}';\" | sudo -u postgres psql -f -",
+        unless => "sudo -u postgres psql -tAc \"SELECT 1 FROM pg_roles WHERE rolname='${::dbuser}';\" | grep 1",
+        require => Service['postgresql'];
     }
 }
