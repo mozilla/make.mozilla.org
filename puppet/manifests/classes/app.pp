@@ -3,15 +3,8 @@
 class app {
   require app_users
 
-  exec { 'create_db_user':
-    command => "sudo -u postgres createuser -D -R -S ${app_user}",
-    unless => "sudo -u $app_user psql -l",
-    logoutput => true,
-    require => [Class['postgis'], Package['postgresql-client']];
-  }
-
   exec { "create_db":
-    command => "sudo -u postgres createdb -O ${app_user} -T template_postgis ${db}",
+    command => "sudo -u postgres createdb -O ${::db_user} -T template_postgis ${db}",
     unless  => "sudo -u postgres psql -l | awk '{ print \$1 }' | grep '^${db}$'",
     logoutput => true,
     require => [Class['postgis'], Exec["create_db_user"]];

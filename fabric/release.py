@@ -29,7 +29,7 @@ def put_updated_settings():
         put(local_settings_path(), 'shared/settings/local.py')
 
 def local_settings_path():
-    path = os.getenv('settings_path', 'make_mozilla/settings/local.py')
+    path = 'make_mozilla/settings/%s.py' % env.deploy_env
     project_root_path = os.path.dirname(env.real_fabfile)
     if os.path.exists(path):
         return path

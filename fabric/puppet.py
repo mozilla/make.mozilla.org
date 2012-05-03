@@ -1,6 +1,7 @@
 from fabric.api import task, cd, env, run, local, cd, lcd, put, settings
 from fabric.operations import sudo
 import uuid, StringIO
+from release import local_settings_path
 
 @task
 def setup():
@@ -26,7 +27,8 @@ def apply():
 @task
 def facts():
     with settings(user = env.puppet_user):
-        env_settings = __import__('make_mozilla.settings.%s' % env.deploy_env)
+        import imp
+        env_settings = imp.load_source('env_settings', local_settings_path())
         db_user = env_settings.DATABASES['default']['USER']
         db_pass = env_settings.DATABASES['default']['PASSWORD']
         facts = """require 'facter'
