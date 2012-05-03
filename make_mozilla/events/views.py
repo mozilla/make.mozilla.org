@@ -22,9 +22,6 @@ from make_mozilla.events import models
 from make_mozilla.events import tasks
 from make_mozilla.events import paginators
 
-log = commonware.log.getLogger('playdoh')
-
-
 # Workaround from http://gis.stackexchange.com/questions/7553/is-there-a-geodjango-tutorial-for-georssfeeds
 class IndexGeoRSSFeed(Feed):
     title = "Make Mozilla!"
