@@ -1,3 +1,4 @@
 src/django-browserid
 src/redis
 src/bsdapi/python
+src/django-waffle
