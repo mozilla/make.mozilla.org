@@ -22,8 +22,8 @@ class postgresql {
     }
 
     exec { "create_db_user":
-        command => "sudo -u postgres psql -c \"CREATE ROLE ${::db_user} NOSUPERUSER NOCREATEDB NOCREATEROLE PASSWORD '${::db_pass}' LOGIN;\"",
-        unless => "sudo -u postgres psql -tAc \"SELECT 1 FROM pg_roles WHERE rolname='${::dbuser}';\" | grep 1",
+        command => "sudo -u postgres psql -c \"CREATE ROLE ${::db_user} NOSUPERUSER NOCREATEDB NOCREATEROLE PASSWORD '${::db_pass}' LOGIN;\";",
+        unless => "sudo -u postgres psql -tAc \"SELECT 1 FROM pg_roles WHERE rolname='${::db_user}';\" | grep 1",
         require => Service['postgresql'];
     }
 }
