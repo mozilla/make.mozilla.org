@@ -38,6 +38,7 @@ MINIFY_BUNDLES = {
 ROOT_URLCONF = 'make_mozilla.urls'
 
 INSTALLED_APPS = list(INSTALLED_APPS) + [
+    'django.contrib.admin',
     'django.contrib.gis',
     # Application base, containing global templates.
     'make_mozilla.base',
@@ -56,6 +57,7 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
 # Because Jinja2 is the default template loader, add any non-Jinja templated
 # apps here:
 JINGO_EXCLUDE_APPS = [
+    'gis',
     'admin',
 ]
 
