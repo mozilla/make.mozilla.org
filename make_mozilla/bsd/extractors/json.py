@@ -12,6 +12,9 @@ def event_times(event_json):
     end = start + timedelta(minutes = int(event_json['duration']))
     return {'start': start, 'end': end}
 
+def event_description(event_json):
+    return {'description': event_json['description']}
+
 def venue_name(event_json):
     return {'name': event_json['venue_name']}
 

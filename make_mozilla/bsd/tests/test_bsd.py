@@ -24,13 +24,13 @@ class BSDEventFeedParserTest(unittest.TestCase):
     @patch.object(bsd.BSDEventImporter, 'process_event')
     def test_that_the_event_feed_can_be_fetched_and_processed(self, 
             mock_process_func, mock_feed_parser):
-        mock_feed_parser.return_value = ['rtw']
+        mock_feed_parser.return_value = ['http://a.url/rtw']
         mock_event_kind = Mock()
 
         bsd.fetch_and_process_event_feed(mock_event_kind, 'http://feed.url/')
 
         mock_feed_parser.assert_called_with('http://feed.url/')
-        mock_process_func.assert_called_with(mock_event_kind, 'rtw')
+        mock_process_func.assert_called_with(mock_event_kind, 'http://a.url/rtw')
 
     @patch.object(bsd, 'process_events_json')
     @patch.object(json, 'load')
@@ -54,10 +54,10 @@ class BSDEventFeedParserTest(unittest.TestCase):
 
         eq_(6, len(actual))
 
-    def test_event_feed_parser_returns_the_right_ids(self):
+    def test_event_feed_parser_returns_the_right_urls(self):
         actual = bsd.process_events_json(json_fixture('event_feed.json'))
 
-        eq_(['w2d', 'w2p', 'w9l', 'w9w', 'w9q', 'wcz'], actual)
+        eq_('http://act.pih.org/page/event/detail/awarenessraisingevent/w2d', actual[0])
 
 class BSDClientTest(unittest.TestCase):
     @patch.object(bsd, 'BSDApiFactory')
@@ -201,19 +201,28 @@ class BSDEventImporterTest(unittest.TestCase):
     def setUp(self):
         self.importer = bsd.BSDEventImporter()
 
+    def test_that_an_obfuscated_event_id_can_be_extracted_from_a_BSD_event_url(self):
+        eq_(bsd.BSDEventImporter.extract_event_obfuscated_id('http://act.pih.org/page/event/detail/awarenessraisingevent/w2d'), 'w2d')
+
     @patch.object(bsd.BSDClient, 'fetch_event')
     def test_that_an_event_can_be_processed(self, mock_client_func):
         klass = bsd.BSDEventImporter
-        with patch.object(bsd, 'BSDEventImporter') as MockEventImporter:
+        with nested(
+                patch.object(bsd.BSDEventImporter, 'extract_event_obfuscated_id'),
+                patch.object(bsd, 'BSDEventImporter'),
+            ) as (mock_event_id_func, MockEventImporter):
             mock_event_importer = Mock()
             mock_event_kind = Mock()
             MockEventImporter.return_value = mock_event_importer
             mock_client_func.return_value = {'event': 'json'}
+            mock_event_id_func.return_value = 'obf_id'
 
-            klass.process_event(mock_event_kind, 'obf_id')
+            klass.process_event(mock_event_kind, 'http://some.url/with/an_id')
 
+            mock_event_id_func.assert_called_with('http://some.url/with/an_id')
             mock_client_func.assert_called_with('obf_id')
-            mock_event_importer.process_event_from_json.assert_called_with(mock_event_kind, {'event': 'json'})
+            mock_event_importer.process_event_from_json.assert_called_with(mock_event_kind, 
+                    'http://some.url/with/an_id', {'event': 'json'})
 
     @patch.object(bsd, 'Event')
     def test_that_the_importer_can_import_a_new_event(self, MockEvent):
@@ -242,7 +251,7 @@ class BSDEventImporterTest(unittest.TestCase):
             mock_new_models_func.return_value = (mock_event, mock_venue)
             mock_identical_func.return_value = False
 
-            self.importer.process_event_from_json(mock_event_kind, event_json)
+            self.importer.process_event_from_json(mock_event_kind, 'http://some.url/', event_json)
 
             MockEvent.assert_called_with()
             mock_source_id_func.assert_called_with(event_json)
@@ -251,6 +260,7 @@ class BSDEventImporterTest(unittest.TestCase):
             mock_venue_func.assert_called_with(mock_null_event)
             mock_new_models_func.assert_called_with(event_json)
             eq_(mock_event.kind, mock_event_kind)
+            eq_(mock_event.event_url, 'http://some.url/')
             ok_(((mock_null_event, mock_event),) in mock_identical_func.call_args_list)
             ok_(((mock_null_venue, mock_venue),) in mock_identical_func.call_args_list)
             mock_event.save.assert_called

@@ -11,7 +11,7 @@ def parse_event_feed(feed_url):
     return process_events_json(json.load(urllib2.urlopen(feed_url)))
 
 def process_events_json(events_json):
-    return [re.split(r'/', event['url'])[-1] for event in events_json['results']]
+    return [event['url'] for event in events_json['results']]
 
 def fetch_and_process_event_feed(event_kind, feed_url):
     [BSDEventImporter.process_event(event_kind, id) for id in parse_event_feed(feed_url)]
@@ -83,13 +83,18 @@ class BSDRegisterConstituent(object):
 
 class BSDEventImporter(object):
     @classmethod
-    def process_event(self, event_kind, obfuscated_id):
+    def extract_event_obfuscated_id(self, event_url):
+        return re.split(r'/', event_url)[-1]
+
+    @classmethod
+    def process_event(self, event_kind, event_url):
+        obfuscated_id = self.extract_event_obfuscated_id(event_url)
         event_json = BSDClient.fetch_event(obfuscated_id)
         # BSDEventImporter() rather than self() because of test mocking
-        BSDEventImporter().process_event_from_json(event_kind, event_json)
+        BSDEventImporter().process_event_from_json(event_kind, event_url, event_json)
 
     def event_extractors(self):
-        return [json_extractors.event_name, json_extractors.event_times]
+        return [json_extractors.event_name, json_extractors.event_times, json_extractors.event_description]
 
     def venue_extractors(self):
         return [json_extractors.venue_name, json_extractors.venue_country, 
@@ -135,7 +140,7 @@ class BSDEventImporter(object):
         venue = Venue(**model_data['venue'])
         return (event, venue)
 
-    def process_event_from_json(self, event_kind, event_json):
+    def process_event_from_json(self, event_kind, event_url, event_json):
         source_id = self.event_source_id(event_json)
         event = self.fetch_existing_event(source_id)
         if event is None:
@@ -143,6 +148,7 @@ class BSDEventImporter(object):
         organiser_email = self.fetch_organiser_email_from_bsd(event_json)
         venue = self.venue_for_event(event)
         (new_event, new_venue) = self.new_models_from_json(event_json)
+        new_event.event_url = event_url
         new_event.source_id = source_id
         new_event.organiser_email = organiser_email
         if not self.are_model_instances_identical(venue, new_venue):

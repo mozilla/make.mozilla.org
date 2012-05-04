@@ -23,6 +23,10 @@ class EventExtractorTest(unittest.TestCase):
         eq_(extractors.event_times(ef()),
             {'start': expected_start, 'end': expected_end})
 
+    def test_description_is_extracted_correctly(self):
+        eq_(extractors.event_description(ef()),
+            {'description': '<p>This is Ben\'s test event. Aint nothin gonna happen.</p>'})
+
 class VenueExtractorTest(unittest.TestCase):
     def test_name_is_extracted_correctly(self):
         eq_(extractors.venue_name(ef()),
@@ -38,5 +42,3 @@ class VenueExtractorTest(unittest.TestCase):
     def test_location_is_extracted_correctly(self):
         eq_(extractors.venue_location(ef()),
             {'latitude': 37.388096, 'longitude': -122.082764})
-
-# class ExtractTest(unittest.TestCase):
