@@ -1,0 +1,37 @@
+{% extends "events/base.html" %}
+
+{% block page_id %}error{% endblock %}
+{% block page_class %}{{ super() }} guides-inner brochure-page{% endblock %}
+
+{% block content %}
+
+<header class="event-type">
+    <span class="thumb"><img src="{{ MEDIA_URL }}/img/error_stub.jpg" alt="" width="120" height="120" /></span>
+    <h3>Oh dear...</h3>
+</header>
+<div class="major">
+    <article>
+        <section id="overview">
+            <h4>Something has just happened that our server wasn't very happy with</h4>
+            
+            <p>It might have been just a temporary blip so please try doing whatever you just did again. Otherwise it might be a larger issue that we can ensure you we're likely looking at fixing right now.</p>
+
+            <p>Many apologies for the inconvenience.</p>
+
+            <h5 class="sub_head">You could also try directly going to:</h5>
+
+            <ul>
+                <li><a href="https://donate.mozilla.org/page/event/create/">Create an event</a></li>
+                <li><a href="{{ url('events.search') }}">Search for an event near you</a></li>
+                <li><a href="{{ url('guides_all') }}">Check out our event guides</a></li>
+            </ul>
+        </section>
+    </article>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{{ js('core_js') }}
+{% endblock %}

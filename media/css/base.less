@@ -223,6 +223,9 @@ p {
 	padding: 110px 0 40px;
 	position: relative;
 }
+#error #content {
+	min-height: 0;
+}
 
 @media screen and (max-width: 700px) {
 	#content {
@@ -266,6 +269,7 @@ p {
 @media screen and (max-width: 700px) {
 	.brochure-page #content {
 		margin-top: 200px;
+		padding-bottom: 0;
 	}
 
 	.brochure-page #content::before {
@@ -1355,6 +1359,10 @@ ul.tri-set img {
 .bad-ie #guides-hack_jam #content::before {
     background-image: url(../img/photos/hack-jam_blur.jpg);
 }
+.bad-ie #error #content::before {
+    background-image: url(../img/photos/error_blur.jpg);
+}
+
 
 @media screen and (min-width: 901px) {
 	.guides-inner #content::before {
@@ -1365,6 +1373,9 @@ ul.tri-set img {
     }
     #guides-hack_jam #content::before {
     	background-image: url(../img/photos/hack-jam_blur.jpg);
+	}
+	#error #content::before {
+    	background-image: url(../img/photos/error_blur.jpg);
 	}
 }
 
@@ -1378,6 +1389,9 @@ ul.tri-set img {
     #guides-hack_jam #content::before {
     	background-image: url(../img/photos/tablet/hack-jam_blur.jpg);
 	}
+	#error #content::before {
+    	background-image: url(../img/photos/tablet/error_blur.jpg);
+	}
 }
 
 @media screen and (max-width: 700px) {
@@ -1389,6 +1403,9 @@ ul.tri-set img {
     }
     #guides-hack_jam #content::before {
     	background-image: url(../img/photos/handheld/hack-jam_blur.jpg);
+	}
+	#error #content::before {
+    	background-image: url(../img/photos/handheld/error_blur.jpg);
 	}
 }
 
@@ -1431,6 +1448,7 @@ ul.tri-set img {
   	padding: 0 60px;
   	position: relative;
   	margin: 1em 20px;
+  	color: #fff;
 }
 .masthead p:after,
 .masthead p:before {
@@ -1464,6 +1482,19 @@ ul.tri-set img {
 	position: relative;
 	width: 60%;
 	.box-sizing(border-box);
+}
+@media screen and (max-width: 900px) {
+	.guides-inner #content .constrained {
+		margin-top: -360px;
+		width: 80%;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.guides-inner #content .constrained {
+		margin-top: -200px;
+		width: 100%;
+	}
 }
 .guide_nav a {
     position: absolute;
@@ -1506,6 +1537,21 @@ ul.tri-set img {
     left: 0;
     top: 0;
 }
+@media screen and (max-width: 700px) {
+	.event-type {
+		margin-top: 6em;
+	}
+	.event-type h3,
+	.event-type p {
+    	color: #939598;
+	}
+	#error .event-type h3 {
+		color: #fff;
+	}
+	#error .event-type {
+		margin-top: 0;
+	}
+}
 .major {
 	background: rgba(255, 255, 255, 0.5);
 	padding-bottom: 3em;
@@ -1515,6 +1561,11 @@ ul.tri-set img {
 	padding: 2em 50px;
 	box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 	overflow: hidden;
+}
+@media screen and (max-width: 700px) {
+	.major nav {
+		padding: 1em 25px;
+	}
 }
 .major nav ol {
 	float: left;
@@ -1560,6 +1611,18 @@ border-right: none;
 	border-right: 17px solid transparent;
 	border-top: 17px solid #fff;
 }
+@media screen and (max-width: 700px) {
+	.major article {
+		margin: 1em 0;
+		padding: 0 25px;
+	}
+	.major article:after {
+		content: none;
+	}
+}
+#error .major article:after {
+	content: none;
+}
 .major section {
 	border-top: 1px solid #939598;
 	margin-top: 2em;
@@ -1597,9 +1660,13 @@ border-right: none;
 	margin-right: 10px;
 	float: left;
 }
+.guides-inner .project-list li {
+	overflow: hidden;
+	margin-bottom: 0.5em;
+}
 .guides-inner .project-list .title {
 	font-size: 1em;
-	margin: 1em 0;
+	margin: 0 0 1em;
 }
 .guides-inner .project-list p {
 	margin: 0.5em 0;
