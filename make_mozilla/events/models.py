@@ -35,8 +35,11 @@ class Venue(models.Model):
     def longitude(self, value):
         self.location.x = value
 
-def _upcoming(qs):
-    return qs.filter(start__gte = datetime.now())
+def _upcoming(qs, sort, include_private):
+    resultset = qs.filter(start__gte = datetime.now()).order_by(sort)
+    if not include_private:
+        resultset = resultset.filter(public=True)
+    return resultset
 
 class Event(models.Model):
     name = models.CharField(max_length = 255)
@@ -56,13 +59,13 @@ class Event(models.Model):
     objects = models.GeoManager()
 
     @classmethod
-    def upcoming(self):
-        return _upcoming(self.objects)
+    def upcoming(self, sort='start', include_private=False):
+        return _upcoming(self.objects, sort, include_private)
 
     @classmethod
-    def near(self, latitude, longitude):
+    def near(self, latitude, longitude, sort='start', include_private=False):
         point = geos.Point(float(longitude), float(latitude))
-        return _upcoming(self.objects).filter(venue__location__distance_lte=(point, measure.D(mi=20)))
+        return _upcoming(self.objects, sort, include_private).filter(venue__location__distance_lte=(point, measure.D(mi=20)))
 
 class Campaign(models.Model):
     name = models.CharField(max_length = 255)

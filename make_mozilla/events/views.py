@@ -128,7 +128,7 @@ class Near(object):
             return ('date', 'start')
 
     def paginated_results(self, latitude, longitude, order, results_per_page, page):
-        results = models.Event.near(latitude, longitude).filter(public=True).order_by(order)
+        results = models.Event.near(latitude, longitude, sort = order)
         return paginators.results_page(results, results_per_page, page=page)
 
     def render(self, request, template, results_per_page):
