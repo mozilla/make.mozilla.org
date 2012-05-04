@@ -1,4 +1,5 @@
 from django.utils import unittest
+from nose.tools import eq_, ok_
 
 from make_mozilla.events import models, forms
 
@@ -51,3 +52,22 @@ class VenueFormTest(unittest.TestCase):
 
     def test_does_not_expose_location(self):
         self.assertNotIn('location', self.f.fields)
+
+    def test_that_an_instance_with_the_good_data_is_valid(self):
+        good_data = {
+            'venue-name': 'Test Venue',
+            'venue-street_address': '100 Test Street',
+            'venue-country': 'GB',
+            'venue-latitude': '51.0',
+            'venue-longitude': '0.5'
+        }
+        ok_(forms.VenueForm(good_data).is_valid())
+
+    def test_that_an_instance_without_lat_lon_is_invalid(self):
+        data = {
+            'venue-name': 'Test Venue',
+            'venue-street_address': '100 Test Street',
+            'venue-country': 'GB',
+        }
+        ok_(not forms.VenueForm(data).is_valid())
+
