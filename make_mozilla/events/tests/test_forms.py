@@ -71,3 +71,10 @@ class VenueFormTest(unittest.TestCase):
         }
         ok_(not forms.VenueForm(data).is_valid())
 
+    def test_that_missing_geocode_adds_an_error_to_street_address(self):
+        data = {
+            'venue-name': 'Test Venue',
+            'venue-street_address': '100 Test Street',
+            'venue-country': 'GB',
+        }
+        ok_(forms.VenueForm(data).errors.has_key('street_address'))
