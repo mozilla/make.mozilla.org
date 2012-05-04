@@ -40,6 +40,14 @@ class VenueTest(unittest.TestCase):
         eq_(venue.location, geos.Point(4.0, 51.0))
 
 class EventTest(django.test.TestCase):
+    def add_event(self, name, venue, offset, public = True):
+        start = datetime.datetime.now() + datetime.timedelta(days = offset)
+        end = start + datetime.timedelta(hours = 3)
+        e = models.Event(name = name, venue = venue, organiser_email = 'moz@example.com',
+                start = start, end = end, public = public)
+        e.save()
+        return e
+
     def setup_events(self):
         london = models.Venue(name = "Test Venue", street_address = "0 Somewhere St", 
                 country = "GB")
@@ -52,27 +60,33 @@ class EventTest(django.test.TestCase):
         berlin.longitude = 13.42415920
         berlin.save()
 
-        start = datetime.datetime.now() + datetime.timedelta(days = 1)
-        end = start + datetime.timedelta(hours = 3)
+        e1 = self.add_event("E1", london, 3)
+        e2 = self.add_event("E2", berlin, 2)
+        e3 = self.add_event("E3", london, 1)
 
-        e1 = models.Event(name = "E1", venue = london, organiser_email = 'moz@example.com',
-                start = start, end = end)
-        e1.save()
-        e2 = models.Event(name = "E2", venue = berlin, organiser_email = 'moz@example.com',
-                start = start, end = end)
-        e2.save()
+        ep = self.add_event("EP", berlin, 10, False)
 
-        return (e1, e2)
+        return (e1, e2, e3, ep)
 
-    def test_upcoming_events_can_be_retrieved(self):
-        (e1, e2) = self.setup_events()
+    def test_upcoming_public_events_can_be_retrieved(self):
+        (e1, e2, e3, ep) = self.setup_events()
         actual = models.Event.upcoming()
-        eq_(len(actual), 2)
+        eq_(len(actual), 3)
         ok_(e1.id in [x.id for x in actual])
         ok_(e2.id in [x.id for x in actual])
 
     def test_upcoming_events_near_london_can_be_retrieved(self):
-        (e1, e2) = self.setup_events()
-        actual = models.Event.near(51.5154460, -0.13165810)
-        eq_(len(actual), 1)
-        eq_(actual[0].id, e1.id)
+        (e1, e2, e3, ep) = self.setup_events()
+        actual = models.Event.near(51.5154460, -0.13165810, sort = 'start')
+        eq_(len(actual), 2)
+        eq_(actual[0].id, e3.id)
+
+    def test_upcoming_events_can_be_ordered_by_name(self):
+        self.setup_events()
+        actual = models.Event.upcoming(sort = 'name')
+        eq_([x.name for x in actual], ["E1", "E2", "E3"])
+
+    def test_all_upcoming_events_near_berlin_can_be_retrieved(self):
+        self.setup_events()
+        actual = models.Event.near(52.50693980, 13.42415920, sort = 'start', include_private = True)
+        eq_([x.name for x in actual], ["E2", "EP"])

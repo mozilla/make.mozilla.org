@@ -234,7 +234,7 @@ class TestEventViewsNear(unittest.TestCase):
         eq_(self.near.paginated_results('lat', 'lon', 'order', 999, 1),
                 mock_paginated_results)
 
-        mock_query.assert_called_with('lat', 'lon')
+        mock_query.assert_called_with('lat', 'lon', sort = 'order')
         mock_results_page.assert_called_with(mock_query_set, 999, page = 1)
 
     @patch('jingo.render')
