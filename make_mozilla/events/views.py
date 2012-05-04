@@ -179,11 +179,3 @@ def guides_pop_up(request):
         'page_data': page_data,
     })
 
-
-def fail(request):
-    return jingo.render(request, '404.html', {})
-
-
-def big_fail(request):
-    return jingo.render(request, '500.html', {})
-

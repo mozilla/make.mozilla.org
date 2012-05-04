@@ -4,8 +4,6 @@ from make_mozilla.events import views
 urlpatterns = patterns('',
     url(r'^$',                     views.index,             name='events'),
     url(r'^feed.rss$',             views.IndexGeoRSSFeed(), name='events-feed'),
-    url(r'^fail/$', views.fail, name='fail'),
-    url(r'^big_fail/$', views.big_fail, name='big_fail'),
     url(r'^new/$',                 views.new,               name='event.new'),
     url(r'^create/$',              views.create,            name='event.create'),
     url(r'^near/$',                views.near,              name='events.near'),
