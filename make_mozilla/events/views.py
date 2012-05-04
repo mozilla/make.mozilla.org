@@ -125,18 +125,27 @@ class Near(object):
     def extract_page(self, request):
         return request.GET.get('page', 1)
 
-    def paginated_results(self, latitude, longitude, results_per_page, page):
-        results = models.Event.near(latitude, longitude)
+    def extract_sort(self, request):
+        sort = request.GET.get('sort')
+        if sort == 'name':
+            return ('name', 'name')
+        else:
+            return ('date', 'start')
+
+    def paginated_results(self, latitude, longitude, order, results_per_page, page):
+        results = models.Event.near(latitude, longitude).filter(public=True).order_by(order)
         return paginators.results_page(results, results_per_page, page=page)
 
     def render(self, request, template, results_per_page):
         (lat, lon) = self.extract_latlon(request)
+        (sort, order) = self.extract_sort(request)
         page = self.extract_page(request)
 
         return jingo.render(request, template, {
             'latitude': lat,
             'longitude': lon,
-            'results': self.paginated_results(lat, lon, results_per_page, page)
+            'sort': sort,
+            'results': self.paginated_results(lat, lon, order, results_per_page, page)
         })
 
 near_view = Near()
