@@ -46,7 +46,51 @@ def index(request):
 
 @login_required
 def new(request):
-    return render_event_creation_form(request, forms.EventForm(), forms.VenueForm())
+    return _render_event_creation_form(request, forms.EventForm(), forms.VenueForm())
+
+
+@require_POST
+@login_required
+def create(request):
+    ef, vf = _process_create_post_data(request.POST)
+    if ef.is_valid() and vf.is_valid():
+        event, venue = _create_event_and_venue(request.user, ef, vf)
+        return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
+
+    return _render_event_creation_form(request, ef, vf)
+
+
+def _render_event_creation_form(request, event_form, venue_form):
+    fieldsets = (
+        forms.Fieldset(event_form, ('kind',)),
+        forms.Fieldset(event_form, ('name', 'event_url', 'description', 'public')),
+        forms.Fieldset(event_form, ('start', 'end',)),
+        forms.Fieldset(venue_form, venue_form.fields),
+    )
+
+    return jingo.render(request, 'events/new.html', {
+        'fieldsets': fieldsets
+    })
+
+def _process_create_post_data(data):
+    event_form = forms.EventForm(data)
+    venue_form = forms.VenueForm(data)
+    return (event_form, venue_form)
+
+def _create_event_and_venue(user, event_form, venue_form):
+    venue = venue_form.save()
+    event = event_form.instance
+    event.venue = venue
+    organiser_email = user.email
+    event.organiser_email = organiser_email
+    tasks.register_email_address_as_constituent.delay(organiser_email, '111')
+    event.save()
+    return (event, venue)
+
+
+def details(request, event_id):
+    event = models.Event.objects.get(pk=event_id)
+    return jingo.render(request, 'events/detail.html', {'event': event})
 
 
 def search(request):
@@ -66,55 +110,6 @@ def search(request):
         })))
 
     return jingo.render(request, 'events/search.html', {'results': results, 'location': location})
-
-
-def details(request, event_id):
-    event = models.Event.objects.get(pk=event_id)
-    return jingo.render(request, 'events/detail.html', {'event': event})
-
-
-@require_POST
-@login_required
-def create(request):
-    ef, vf = process_create_post_data(request.POST)
-    if ef.is_valid() and vf.is_valid():
-        event, venue = create_event_and_venue(request.user, ef, vf)
-        return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
-
-    return render_event_creation_form(request, ef, vf)
-
-
-def render_event_creation_form(request, event_form, venue_form):
-    fieldsets = (
-        forms.Fieldset(event_form, ('kind',)),
-        forms.Fieldset(event_form, ('name', 'event_url', 'description', 'public')),
-        forms.Fieldset(event_form, ('start', 'end',)),
-        forms.Fieldset(venue_form, venue_form.fields),
-    )
-
-    return jingo.render(request, 'events/new.html', {
-        # 'event_form': event_form,
-        # 'venue_form': venue_form,
-        'fieldsets': fieldsets
-    })
-
-
-def process_create_post_data(data):
-    event_form = forms.EventForm(data)
-    venue_form = forms.VenueForm(data)
-    return (event_form, venue_form)
-
-
-def create_event_and_venue(user, event_form, venue_form):
-    venue = venue_form.save()
-    event = event_form.instance
-    event.venue = venue
-    organiser_email = user.email
-    event.organiser_email = organiser_email
-    tasks.register_email_address_as_constituent.delay(organiser_email, '111')
-    event.save()
-    return (event, venue)
-
 
 class Near(object):
     def extract_latlon(self, request):

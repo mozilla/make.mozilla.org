@@ -50,9 +50,9 @@ class TestEventViewsNew(unittest.TestCase):
     def test_that_it_routes(self):
         assert_routing('/events/new/', views.new, name = 'event.new')
 
-    @patch('make_mozilla.events.forms.VenueForm')
-    @patch('make_mozilla.events.forms.EventForm')
-    @patch('jingo.render')
+    @patch.object(forms, 'VenueForm')
+    @patch.object(forms, 'EventForm')
+    @patch.object(views, '_render_event_creation_form')
     def test_that_it_renders_with_the_correct_forms(self, mock_render, MockEventForm, MockVenueForm):
         event_form = Mock()
         venue_form = Mock()
@@ -62,7 +62,7 @@ class TestEventViewsNew(unittest.TestCase):
         request.user = Mock()
         views.new(request)
 
-        mock_render.assert_called_with(request, 'events/new.html', {'event_form': event_form, 'venue_form': venue_form})
+        mock_render.assert_called_with(request, event_form, venue_form)
 
 def valid_form(valid = True):
     form = Mock()
@@ -110,14 +110,14 @@ class TestEventViewsCreate(TestCase):
         MockEntryForm.return_value = self.mock_ef
         MockVenueForm.return_value = self.mock_vf
 
-        ef, vf = views.process_create_post_data(self.data)
+        ef, vf = views._process_create_post_data(self.data)
 
         MockEntryForm.assert_called_with(self.data)
         MockVenueForm.assert_called_with(self.data)
         self.assertEqual(ef, self.mock_ef)
         self.assertEqual(vf, self.mock_vf)
 
-    @patch.object(views, 'process_create_post_data')
+    @patch.object(views, '_process_create_post_data')
     @patch('jingo.render')
     def test_that_it_correctly_invokes_the_form_processor(self, mock_render, mock_forms_func):
         mock_forms_func.return_value = (invalid_form(), invalid_form())
@@ -128,8 +128,8 @@ class TestEventViewsCreate(TestCase):
 
         mock_forms_func.assert_called_with(query_dict_from(self.data))
 
-    @patch.object(views, 'process_create_post_data')
-    @patch.object(views, 'create_event_and_venue')
+    @patch.object(views, '_process_create_post_data')
+    @patch.object(views, '_create_event_and_venue')
     def test_that_valid_data_creates_an_event_and_venue_and_redirects(self, mock_create_func, mock_forms_func):
         mock_forms_func.return_value = (self.mock_ef, self.mock_vf)
         mock_create_func.return_value = (mock_persisted_event(id = 1), None)
@@ -152,7 +152,7 @@ class TestEventViewsCreate(TestCase):
         mock_user = Mock()
         mock_user.email = 'example@mozilla.org'
 
-        event, venue = views.create_event_and_venue(mock_user, ef, vf)
+        event, venue = views._create_event_and_venue(mock_user, ef, vf)
 
         mock_task_func.delay.assert_called_with('example@mozilla.org', '111')
         ok_(event.id is not None)
@@ -160,9 +160,9 @@ class TestEventViewsCreate(TestCase):
         eq_(venue.location.y, 51.0)
         eq_(venue, event.venue)
 
-    @patch.object(views, 'process_create_post_data')
-    @patch.object(views, 'create_event_and_venue')
-    @patch('jingo.render')
+    @patch.object(views, '_process_create_post_data')
+    @patch.object(views, '_create_event_and_venue')
+    @patch.object(views, '_render_event_creation_form')
     def test_that_invalid_data_causes_a_rerender_of_the_new_template(self, mock_render, mock_create_func, mock_forms_func):
         ef = invalid_form()
         vf = invalid_form()
@@ -173,7 +173,7 @@ class TestEventViewsCreate(TestCase):
         response = views.create(request)
 
         mock_create_func.assert_not_called()
-        mock_render.assert_called_with(request, 'events/new.html', {'event_form': ef, 'venue_form': vf})
+        mock_render.assert_called_with(request, ef, vf)
 
 class TestEventViewsDetail(unittest.TestCase):
     def test_that_it_routes_correctly(self):
@@ -257,8 +257,12 @@ class TestEventViewsNear(unittest.TestCase):
 
             mock_latlon.assert_called_with(request)
             mock_page.assert_called_with(request)
-            mock_results.assert_called_with('lat', 'lon', 'start', 999, 1)
-            mock_render.assert_called_with(request, 'template-path', {'results': mock_paginated_results})
+            mock_results.assert_called_with('lat', 'lon', 999, 1)
+            mock_render.assert_called_with(request, 'template-path', {
+                'results': mock_paginated_results,
+                'latitude': 'lat',
+                'longitude': 'lon',
+            })
 
     @patch.object(views.near_view, 'render')
     def test_that_it_correctly_renders_for_maps(self, 
