@@ -209,6 +209,16 @@ class TestEventViewsNear(unittest.TestCase):
     def test_that_page_defaults_to_1(self):
         eq_(1, self.near.extract_page(rf.get('/')))
 
+    def test_that_sort_defaults_to_date(self):
+        (sort, order) = self.near.extract_sort(rf.get('/'))
+        eq_(sort, 'date')
+        eq_(order, 'start')
+
+    def test_that_sort_search_param_is_extracted(self):
+        (sort, order) = self.near.extract_sort(rf.get('/?sort=name'))
+        eq_(sort, 'name')
+        eq_(order, 'name')
+
     def test_that_page_is_returned_verbatim_if_present(self):
         eq_('fnord', self.near.extract_page(rf.get('/?page=fnord')))
 
@@ -221,7 +231,7 @@ class TestEventViewsNear(unittest.TestCase):
         mock_paginated_results = Mock()
         mock_results_page.return_value = mock_paginated_results
 
-        eq_(self.near.paginated_results('lat', 'lon', 999, 1),
+        eq_(self.near.paginated_results('lat', 'lon', 'start', 999, 1),
                 mock_paginated_results)
 
         mock_query.assert_called_with('lat', 'lon')
@@ -247,7 +257,7 @@ class TestEventViewsNear(unittest.TestCase):
 
             mock_latlon.assert_called_with(request)
             mock_page.assert_called_with(request)
-            mock_results.assert_called_with('lat', 'lon', 999, 1)
+            mock_results.assert_called_with('lat', 'lon', 'start', 999, 1)
             mock_render.assert_called_with(request, 'template-path', {'results': mock_paginated_results})
 
     @patch.object(views.near_view, 'render')
