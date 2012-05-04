@@ -19,6 +19,7 @@ class dev {
   include geo_django_deps
   include postgis
   include apache
+  include memcached
   include app_dependencies
   include app
   include nodejs
