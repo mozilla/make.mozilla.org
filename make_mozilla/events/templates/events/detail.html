@@ -4,5 +4,34 @@
 {% block page_id %}event-details{% endblock %}
 
 {% block content %}
-{{ event.name }}
+<div class="details panel">
+    <h2>{{ event.name }}</h2>
+    <p>{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }}</p>
+    {% if event.venue.name %}<p>{{ event.venue.name }}</p>{% endif %}
+    {% if event.url %}<a href="{{ event.url }}" class="button">Register for event</a>{% endif %}
+    <div class="description">
+        <h3>Event Description</h3>
+        <p>{{ event.description|nl2br }}</p>
+    </div>
+</div>
+
+<div class="meta panel">
+    <a href="http://maps.google.com/?q={{ event.venue.street_address|urlencode }}&amp;ll={{ event.venue.latitude }},{{ event.venue.longitude }}" class="image">
+        <img alt="A map showing the location of this event" title="" src="http://maps.googleapis.com/maps/api/staticmap?sensor=false&amp;center={{ event.venue.latitude }},{{ event.venue.longitude }}&amp;zoom=15&amp;size=330x330&amp;format=png">
+        <span class="pulse"></span>
+        <span class="marker" title="{{ event.venue.name }}"></span>
+    </a>
+    <div class="location">
+        {% if event.venue.name %}<p><strong>{{ event.venue.name }}</strong></p>{% endif %}
+        <p>{{ event.venue.street_address|nl2br }}<br>{{ event.venue.country.name }}</p>
+        <p><a href="/events/near/?lat={{ event.venue.latitude }}&amp;lng={{ event.venue.longitude }}">Events nearby</a></p>
+    </div>
+    <div class="date">
+        {% if event.start.date() == event.end.date() %}
+        <p>{{ event.start.strftime('%A, %B %-d, %Y') }}<br>
+           {{ event.start.strftime('%-I:%M %p') }} to {{ event.end.strftime('%-I:%M %p') }}</p>
+        {% else %}
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
