@@ -68,6 +68,7 @@ class BSDClient(object):
         if response.http_status == 200:
             api_response = json.loads(response.body)
             return api_response['cons_id']
+        raise BSDApiError("%s: %s" % (response.http_status, response.http_reason))
 
     @classmethod
     def add_constituent_id_to_group(self, cons_id, group_id):
@@ -162,3 +163,5 @@ class BSDEventImporter(object):
         event.venue = venue
         event.save()
 
+class BSDApiError(BaseException):
+    pass
