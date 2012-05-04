@@ -231,7 +231,7 @@ class TestEventViewsNear(unittest.TestCase):
         mock_paginated_results = Mock()
         mock_results_page.return_value = mock_paginated_results
 
-        eq_(self.near.paginated_results('lat', 'lon', 'start', 999, 1),
+        eq_(self.near.paginated_results('lat', 'lon', 'order', 999, 1),
                 mock_paginated_results)
 
         mock_query.assert_called_with('lat', 'lon')
@@ -243,12 +243,14 @@ class TestEventViewsNear(unittest.TestCase):
         with nested(
                 patch.object(self.near, 'extract_latlon'),
                 patch.object(self.near, 'extract_page'),
+                patch.object(self.near, 'extract_sort'),
                 patch.object(self.near, 'paginated_results')
-                ) as (mock_latlon, mock_page, mock_results):
+                ) as (mock_latlon, mock_page, mock_sort, mock_results):
             request = rf.get('/')
             mock_paginated_results = Mock()
             mock_latlon.return_value = ('lat', 'lon')
             mock_page.return_value = 1
+            mock_sort.return_value = ('sort', 'order')
             mock_results.return_value = mock_paginated_results
             mock_response = Mock()
             mock_render.return_value = mock_response
@@ -257,11 +259,12 @@ class TestEventViewsNear(unittest.TestCase):
 
             mock_latlon.assert_called_with(request)
             mock_page.assert_called_with(request)
-            mock_results.assert_called_with('lat', 'lon', 999, 1)
+            mock_results.assert_called_with('lat', 'lon', 'order', 999, 1)
             mock_render.assert_called_with(request, 'template-path', {
                 'results': mock_paginated_results,
                 'latitude': 'lat',
                 'longitude': 'lon',
+                'sort': 'sort',
             })
 
     @patch.object(views.near_view, 'render')
