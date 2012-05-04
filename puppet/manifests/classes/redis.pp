@@ -56,8 +56,14 @@ class redis {
     require => [Exec["check-redis-sha1"], Exec["download-redis"]];
   }
 
+  file { "/etc/redis":
+    mode => '755', owner => 'root', group => 'root',
+    ensure => directory;
+  }
+
   file { "/etc/redis/redis.conf":
     mode => '755', owner => 'root', group => 'root',
+    require => File['/etc/redis'],
     source => "/etc/puppet/files/redis/redis.conf";
   }
 
