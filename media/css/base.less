@@ -1009,7 +1009,7 @@ ul.tri-set img {
 	background: rgba(255,255,255,0.5);
 }
 
-.search-results form {
+#content .search-results form {
 	.box-shadow(none);
 	.box-sizing(border-box);
 
@@ -1101,10 +1101,30 @@ ul.tri-set img {
 }
 
 .search-results h3,
-.search-results p {
+.search-results .sorting {
 	padding: 20px 30px 0;
 	margin: 0 0 20px;
 	border-top: solid 1px #DCDDDE;
+}
+
+.search-results .sorting a {
+	.border-radius(1.5em);
+
+	padding: 0.3em 0.8em;
+	background-color: #EEE;
+	background-color: rgba(238,238,238,0.75);
+}
+
+.search-results .sorting a.active {
+	background-color: #DDD;
+	background-color: rgba(221,221,221,0.75);
+	color: inherit;
+	font-weight: bold;
+}
+
+.search-results .sorting span {
+	position: absolute;
+	left: -99em;
 }
 
 .search-results ul,
@@ -1124,6 +1144,78 @@ ul.tri-set img {
 .search-results ul li a {
 	display: block;
 	padding: 20px 30px;
+}
+
+.search-results ol li {
+	padding: 0 175px;
+	overflow: hidden;
+}
+
+.search-results ol .about {
+	position: relative;
+	padding: 20px 0 3em;
+	width: 100%;
+	float: right;
+}
+
+.search-results ol .about .type {
+	position: absolute;
+	bottom: 20px;
+	left: 0;
+	text-transform: uppercase;
+	font-size: 0.857em;
+}
+
+.search-results ol div.date {
+	float: left;
+	padding: 20px 30px 500px;
+	margin-bottom: -500px;
+	margin-left: -175px;
+	width: 85px;
+	border-right: solid 1px #E1E2E3;
+	height: 100%;
+	font-family: "Open Sans Light", "Open Sans", sans-serif;
+}
+
+.search-results ol div.date span {
+	display: block;
+}
+
+.search-results ol div.date .month,
+.search-results ol div.date .date {
+	font-size: 1.714em;
+}
+
+.search-results .pagination {
+	background: #FFF;
+	padding: 18px 35px;
+	border-top: solid 1px #E1E2E3;
+}
+
+.search-results .pagination li {
+	.box-shadow(none);
+
+	display: inline;
+	margin: 0;
+	padding: 0 0 5px 0;
+	overflow: hidden;
+}
+
+.search-results .pagination li a {
+	.border-radius(2px);
+
+	padding: 3px 9px;
+}
+
+.search-results .pagination .current a {
+	background: #EEE;
+	color: inherit;
+	font-weight: bold;
+}
+
+.search-results .pagination li span {
+	position: absolute;
+	left: -99em;
 }
 
 @media screen and (max-width: 900px) {
