@@ -19,6 +19,9 @@ class Venue(models.Model):
             latitude = float(kwargs.get('latitude', '0'))
             self.location = geos.Point(longitude, latitude)
 
+    def __unicode__(self):
+        return '%s - %s, %s' % (self.name, self.street_address,  self.country)
+
     @property
     def latitude(self):
         return self.location.y
@@ -50,13 +53,16 @@ class Event(models.Model):
     end = models.DateTimeField(null = True, blank = True)
     source_id = models.CharField(max_length = 255, blank = True)
     organiser_email = models.EmailField(max_length = 255)
-    campaign = models.ForeignKey('Campaign', null = True)
+    campaign = models.ForeignKey('Campaign', null = True, blank=True)
     kind = models.ForeignKey('EventKind', null = True)
     verified = models.BooleanField(default = False)
     official = models.BooleanField(default = False)
     public = models.BooleanField(default = False)
 
     objects = models.GeoManager()
+
+    def __unicode__(self):
+        return self.name
 
     @classmethod
     def upcoming(self, sort='start', include_private=False):
@@ -74,10 +80,13 @@ class Campaign(models.Model):
     start = models.DateField()
     end = models.DateField()
 
+    def __unicode__(self):
+        return '%s - %s to %s' % (self.name, self.start, self.end)
+
 class EventKind(models.Model):
     name = models.CharField(max_length = 255)
     description = models.TextField()
     slug = models.SlugField()
 
     def __unicode__(self):
-        return mark_safe(u'<strong>%s</strong> <span>%s</span>' % (self.name, self.description))
+        return mark_safe(u'%s' % (self.name))
