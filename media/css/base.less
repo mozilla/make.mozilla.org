@@ -591,12 +591,15 @@ ul.tri-set img {
     font-weight: bold;
     clear: both;
     margin: 0;
-    padding: 10px 0 0 115px;
+    padding: 10px 0 0 0;
+    overflow: hidden;
+    min-height: 120px;
 }
 
 .meta-ticker dd {
-    margin: 0;
-    padding: 0;
+    margin: -100px 0 0 0;
+    padding: 0 0 0 115px;
+    min-height: 90px;
 }
 
 .meta-ticker .thumb {
@@ -648,6 +651,7 @@ ul.tri-set img {
 		display: none;
 		margin: 0;
 		padding: 0;
+        min-height: 0;
 	}
 
 	.meta-ticker.enabled .active {
