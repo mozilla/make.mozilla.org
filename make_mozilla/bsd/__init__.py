@@ -161,6 +161,7 @@ class BSDEventImporter(object):
             event = new_event
         event.kind = event_kind
         event.venue = venue
+        event.public = True
         event.save()
 
 class BSDApiError(BaseException):

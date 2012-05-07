@@ -260,6 +260,7 @@ class BSDEventImporterTest(unittest.TestCase):
             mock_venue_func.assert_called_with(mock_null_event)
             mock_new_models_func.assert_called_with(event_json)
             eq_(mock_event.kind, mock_event_kind)
+            eq_(mock_event.public, True)
             eq_(mock_event.event_url, 'http://some.url/')
             ok_(((mock_null_event, mock_event),) in mock_identical_func.call_args_list)
             ok_(((mock_null_venue, mock_venue),) in mock_identical_func.call_args_list)
