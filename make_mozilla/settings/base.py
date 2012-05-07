@@ -106,7 +106,13 @@ BROWSERID_CREATE_USER = True
 # needed to make CSRF function on anonymous forms
 ANON_ALWAYS = True
 
-LOGGING = dict(loggers=dict(playdoh = {'level': logging.DEBUG}))
+LOGGING = {
+    'loggers': {
+        'playdoh': {
+            'level': logging.DEBUG
+        }
+    }
+}
 
 BSD_API_DETAILS = {}
 
