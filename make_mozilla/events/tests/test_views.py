@@ -50,19 +50,23 @@ class TestEventViewsNew(unittest.TestCase):
     def test_that_it_routes(self):
         assert_routing('/events/new/', views.new, name = 'event.new')
 
+    @patch.object(forms, 'PrivacyAndLegalForm')
     @patch.object(forms, 'VenueForm')
     @patch.object(forms, 'EventForm')
     @patch.object(views, '_render_event_creation_form')
-    def test_that_it_renders_with_the_correct_forms(self, mock_render, MockEventForm, MockVenueForm):
+    def test_that_it_renders_with_the_correct_forms(self, mock_render, MockEventForm, MockVenueForm, MockPrivacyAndLegalForm):
         event_form = Mock()
         venue_form = Mock()
+        privacy_and_legal_form = Mock()
+        privacy_and_legal_form = Mock()
         MockEventForm.return_value = event_form
         MockVenueForm.return_value = venue_form
+        MockPrivacyAndLegalForm.return_value = privacy_and_legal_form
         request = rf.get('/events/new/')
         request.user = Mock()
         views.new(request)
 
-        mock_render.assert_called_with(request, event_form, venue_form)
+        mock_render.assert_called_with(request, event_form, venue_form, privacy_and_legal_form)
 
 def valid_form(valid = True):
     form = Mock()
@@ -95,6 +99,7 @@ class TestEventViewsCreate(TestCase):
         }
         self.mock_ef = valid_form()
         self.mock_vf = valid_form()
+        self.mock_lf = valid_form()
 
     def test_that_it_routes(self):
         assert_routing('/events/create/', views.create, name = 'event.create')
@@ -104,23 +109,28 @@ class TestEventViewsCreate(TestCase):
         response = views.create(request)
         self.assertEqual(405, response.status_code)
 
+    @patch.object(forms, 'PrivacyAndLegalForm')
     @patch.object(forms, 'EventForm')
     @patch.object(forms, 'VenueForm')
-    def test_that_form_helper_correctly_instantiates_form_objects_from_post_data(self, MockVenueForm, MockEntryForm):
+    def test_that_form_helper_correctly_instantiates_form_objects_from_post_data(self, 
+            MockVenueForm, MockEntryForm, MockPrivacyAndLegalForm):
         MockEntryForm.return_value = self.mock_ef
         MockVenueForm.return_value = self.mock_vf
+        MockPrivacyAndLegalForm.return_value = self.mock_lf
 
-        ef, vf = views._process_create_post_data(self.data)
+        ef, vf, lf = views._process_create_post_data(self.data)
 
         MockEntryForm.assert_called_with(self.data)
         MockVenueForm.assert_called_with(self.data)
+        MockPrivacyAndLegalForm.assert_called_with(self.data)
         self.assertEqual(ef, self.mock_ef)
         self.assertEqual(vf, self.mock_vf)
+        self.assertEqual(lf, self.mock_lf)
 
     @patch.object(views, '_process_create_post_data')
     @patch('jingo.render')
     def test_that_it_correctly_invokes_the_form_processor(self, mock_render, mock_forms_func):
-        mock_forms_func.return_value = (invalid_form(), invalid_form())
+        mock_forms_func.return_value = (invalid_form(), invalid_form(), invalid_form())
 
         request = rf.post('/events/create/', self.data)
         request.user = Mock()
@@ -128,10 +138,34 @@ class TestEventViewsCreate(TestCase):
 
         mock_forms_func.assert_called_with(query_dict_from(self.data))
 
+    @patch.object(views.tasks, 'register_email_address_as_constituent')
+    def test_that_helper_adds_email_to_BSD_if_permission_was_given(self, mock_task_func):
+        mock_user = Mock()
+        mock_user.email = 'example@mozilla.org'
+        mock_privacy_form = Mock()
+        mock_privacy_form.cleaned_data = {'add_me_to_email_list': True}
+
+        views._add_email_to_bsd(mock_user, mock_privacy_form)
+
+        mock_task_func.delay.assert_called_with('example@mozilla.org', '111')
+
+    @patch.object(views.tasks, 'register_email_address_as_constituent')
+    def test_that_helper_does_not_add_email_to_BSD_if_permission_refused(self, mock_task_func):
+        mock_user = Mock()
+        mock_user.email = 'example@mozilla.org'
+        mock_privacy_form = Mock()
+        mock_privacy_form.cleaned_data = {'add_me_to_email_list': False}
+
+        views._add_email_to_bsd(mock_user, mock_privacy_form)
+
+        eq_(mock_task_func.delay.call_args_list, [])
+
+    @patch.object(views, '_add_email_to_bsd')
     @patch.object(views, '_process_create_post_data')
     @patch.object(views, '_create_event_and_venue')
-    def test_that_valid_data_creates_an_event_and_venue_and_redirects(self, mock_create_func, mock_forms_func):
-        mock_forms_func.return_value = (self.mock_ef, self.mock_vf)
+    def test_that_valid_data_creates_an_event_and_venue_and_redirects(self, mock_create_func, 
+            mock_forms_func, mock_bsd_email_func):
+        mock_forms_func.return_value = (self.mock_ef, self.mock_vf, self.mock_lf)
         mock_create_func.return_value = (mock_persisted_event(id = 1), None)
         mock_user = Mock()
 
@@ -139,11 +173,11 @@ class TestEventViewsCreate(TestCase):
         request.user = mock_user
         response = views.create(request)
 
+        mock_bsd_email_func.assert_called_with(mock_user, self.mock_lf)
         mock_create_func.assert_called_with(mock_user, self.mock_ef, self.mock_vf)
         assert_redirects_to_named_url(response, 'event', kwargs = {'event_id': 1})
 
-    @patch.object(views.tasks, 'register_email_address_as_constituent')
-    def test_that_create_event_and_venue_does_that_given_valid_data(self, mock_task_func):
+    def test_that_create_event_and_venue_does_that_given_valid_data(self):
         event_kind = models.EventKind(name = "Test", slug = "test", description = "Test")
         event_kind.save()
         self.data['event-kind'] = str(event_kind.id)
@@ -154,26 +188,29 @@ class TestEventViewsCreate(TestCase):
 
         event, venue = views._create_event_and_venue(mock_user, ef, vf)
 
-        mock_task_func.delay.assert_called_with('example@mozilla.org', '111')
         ok_(event.id is not None)
         ok_(venue.id is not None)
         eq_(venue.location.y, 51.0)
         eq_(venue, event.venue)
 
+    @patch.object(views, '_add_email_to_bsd')
     @patch.object(views, '_process_create_post_data')
     @patch.object(views, '_create_event_and_venue')
     @patch.object(views, '_render_event_creation_form')
-    def test_that_invalid_data_causes_a_rerender_of_the_new_template(self, mock_render, mock_create_func, mock_forms_func):
+    def test_that_invalid_data_causes_a_rerender_of_the_new_template(self, mock_render, mock_create_func,
+            mock_forms_func, mock_bsd_email_func):
         ef = invalid_form()
         vf = invalid_form()
-        mock_forms_func.return_value = (ef, vf)
+        lf = invalid_form()
+        mock_forms_func.return_value = (ef, vf, lf)
 
         request = rf.post('/events/create/', self.data)
         request.user = Mock()
         response = views.create(request)
 
-        mock_create_func.assert_not_called()
-        mock_render.assert_called_with(request, ef, vf)
+        eq_(mock_create_func.call_args_list, [])
+        eq_(mock_bsd_email_func.call_args_list, [])
+        mock_render.assert_called_with(request, ef, vf, lf)
 
 class TestEventViewsDetail(unittest.TestCase):
     def test_that_it_routes_correctly(self):

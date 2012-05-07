@@ -1,3 +1,4 @@
+# coding=utf-8
 from django import forms
 from make_mozilla.events import models, widgets
 
@@ -72,3 +73,11 @@ class VenueForm(PrefixedModelForm):
     class Meta:
         model = models.Venue
         exclude = ('location',)
+
+class PrivacyAndLegalForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(PrivacyAndLegalForm, self).__init__(*args, **kwargs)
+        self.prefix = 'privacy-and-legal'
+
+    accept_terms = forms.BooleanField(label = '', help_text = u'I’m okay with you handling this info as you explain in your privacy policy.')
+    add_me_to_email_list = forms.BooleanField(required = False, label = '', help_text = 'I want to receive email updates about this event and other Mozilla events, projects, and campaigns.')

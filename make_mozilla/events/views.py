@@ -46,26 +46,28 @@ def index(request):
 
 @login_required
 def new(request):
-    return _render_event_creation_form(request, forms.EventForm(), forms.VenueForm())
+    return _render_event_creation_form(request, forms.EventForm(), forms.VenueForm(), forms.PrivacyAndLegalForm())
 
 
 @require_POST
 @login_required
 def create(request):
-    ef, vf = _process_create_post_data(request.POST)
+    ef, vf, lf = _process_create_post_data(request.POST)
     if ef.is_valid() and vf.is_valid():
         event, venue = _create_event_and_venue(request.user, ef, vf)
+        _add_email_to_bsd(request.user, lf)
         return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
 
-    return _render_event_creation_form(request, ef, vf)
+    return _render_event_creation_form(request, ef, vf, lf)
 
 
-def _render_event_creation_form(request, event_form, venue_form):
+def _render_event_creation_form(request, event_form, venue_form, privacy_and_legal_form):
     fieldsets = (
         forms.Fieldset(event_form, ('kind',)),
         forms.Fieldset(event_form, ('name', 'event_url', 'description', 'public')),
         forms.Fieldset(event_form, ('start', 'end',)),
         forms.Fieldset(venue_form, venue_form.fields),
+        privacy_and_legal_form,
     )
 
     return jingo.render(request, 'events/new.html', {
@@ -75,7 +77,8 @@ def _render_event_creation_form(request, event_form, venue_form):
 def _process_create_post_data(data):
     event_form = forms.EventForm(data)
     venue_form = forms.VenueForm(data)
-    return (event_form, venue_form)
+    privacy_and_legal_form = forms.PrivacyAndLegalForm(data)
+    return (event_form, venue_form, privacy_and_legal_form)
 
 def _create_event_and_venue(user, event_form, venue_form):
     venue = venue_form.save()
@@ -86,6 +89,10 @@ def _create_event_and_venue(user, event_form, venue_form):
     tasks.register_email_address_as_constituent.delay(organiser_email, '111')
     event.save()
     return (event, venue)
+
+def _add_email_to_bsd(user, privacy_form):
+    if privacy_form.cleaned_data['add_me_to_email_list']:
+        tasks.register_email_address_as_constituent.delay(user.email, '111')
 
 
 def details(request, event_id):
