@@ -14,7 +14,7 @@ def process_events_json(events_json):
     return [event['url'] for event in events_json['results']]
 
 def fetch_and_process_event_feed(event_kind, feed_url):
-    [BSDEventImporter.process_event(event_kind, id) for id in parse_event_feed(feed_url)]
+    [BSDEventImporter.process_event(event_kind, url) for url in parse_event_feed(feed_url)]
 
 class BSDClient(object):
     @classmethod
