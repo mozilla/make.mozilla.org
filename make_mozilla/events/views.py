@@ -162,6 +162,10 @@ def near_map(request):
     return near_view.render(request, 'events/near-map.html', 24)
 
 
+def about(request):
+    return jingo.render(request, 'events/about.html', {})
+
+
 def guides_all(request):
     event_kinds = models.EventKind.objects.all()
     return jingo.render(request, 'events/guides/index.html', {
