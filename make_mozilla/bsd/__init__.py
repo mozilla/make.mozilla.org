@@ -18,8 +18,8 @@ def fetch_and_process_event_feed(event_kind, feed_url):
 
 class BSDClient(object):
     @classmethod
-    def _request(self, http_method, endpoint, api_params):
-        client = self.create_api_client()
+    def _request(cls, http_method, endpoint, api_params):
+        client = cls.create_api_client()
         response = client.doRequest(endpoint,
                 api_params = api_params,
                 request_type = http_method,
@@ -27,21 +27,21 @@ class BSDClient(object):
         return response
 
     @classmethod
-    def _get(self, endpoint, api_params):
-        return self._request('GET', endpoint, api_params)
+    def _get(cls, endpoint, api_params):
+        return cls._request('GET', endpoint, api_params)
 
     @classmethod
-    def _post(self, endpoint, api_params):
-        return self._request('POST', endpoint, api_params)
+    def _post(cls, endpoint, api_params):
+        return cls._request('POST', endpoint, api_params)
 
     @classmethod
-    def fetch_event(self, obfuscated_event_id):
-        response = self._get('/event/get_event_details',
+    def fetch_event(cls, obfuscated_event_id):
+        response = cls._get('/event/get_event_details',
                 {'values': json.dumps({'event_id_obfuscated': obfuscated_event_id})})
         return json.loads(response.body)
 
     @classmethod
-    def _api_response_charset(self, api_response):
+    def _api_response_charset(cls, api_response):
         content_type_header = api_response.http_response.getheader('content-type',
                 'text/xml; charset=utf-8')
         m = email.parser.Parser().parsestr("Content-Type: %s" % content_type_header)
@@ -49,21 +49,21 @@ class BSDClient(object):
         return charset
 
     @classmethod
-    def constituent_email_for_constituent_id(self, constituent_id):
-        response = self._get('/cons/get_constituents_by_id',
+    def constituent_email_for_constituent_id(cls, constituent_id):
+        response = cls._get('/cons/get_constituents_by_id',
                 {'cons_ids': constituent_id, 'bundles': 'primary_cons_email'})
-        charset = self._api_response_charset(response)
+        charset = cls._api_response_charset(response)
         return xml_extractors.constituent_email(response.body.encode(charset))
 
     @classmethod
-    def create_api_client(self):
+    def create_api_client(cls):
         client_params = {'port': 80, 'securePort': 443}
         client_params.update(settings.BSD_API_DETAILS)
         return BSDApiFactory().create(**client_params)
 
     @classmethod
-    def register_email_address_as_constituent(self, email_address):
-        response = self._post('/cons/email_register',
+    def register_email_address_as_constituent(cls, email_address):
+        response = cls._post('/cons/email_register',
                 {'email': email_address, 'format': 'json'})
         if response.http_status == 200:
             api_response = json.loads(response.body)
@@ -71,27 +71,27 @@ class BSDClient(object):
         raise BSDApiError("%s: %s" % (response.http_status, response.http_reason))
 
     @classmethod
-    def add_constituent_id_to_group(self, cons_id, group_id):
-        response = self._post('/cons_group/add_cons_ids_to_group',
+    def add_constituent_id_to_group(cls, cons_id, group_id):
+        response = cls._post('/cons_group/add_cons_ids_to_group',
                 {'cons_ids': cons_id, 'cons_group_id': group_id})
         return response.http_status == 202
 
 class BSDRegisterConstituent(object):
     @classmethod
-    def add_email_to_group(self, email, group_id):
+    def add_email_to_group(cls, email, group_id):
         constituent_id = BSDClient.register_email_address_as_constituent(email)
         return BSDClient.add_constituent_id_to_group(constituent_id, group_id)
 
 class BSDEventImporter(object):
     @classmethod
-    def extract_event_obfuscated_id(self, event_url):
+    def extract_event_obfuscated_id(cls, event_url):
         return re.split(r'/', event_url)[-1]
 
     @classmethod
-    def process_event(self, event_kind, event_url):
-        obfuscated_id = self.extract_event_obfuscated_id(event_url)
+    def process_event(cls, event_kind, event_url):
+        obfuscated_id = cls.extract_event_obfuscated_id(event_url)
         event_json = BSDClient.fetch_event(obfuscated_id)
-        # BSDEventImporter() rather than self() because of test mocking
+        # BSDEventImporter() rather than cls() because of test mocking
         BSDEventImporter().process_event_from_json(event_kind, event_url, event_json)
 
     def event_extractors(self):
