@@ -1,7 +1,7 @@
 from celery.task import task
 from make_mozilla.bsd import BSDRegisterConstituent
 import commonware.log
-import make_mozilla.urls # Magic voodoo required to make logging work.
+import funfactory.log_settings # Magic voodoo required to make logging work.
 
 log = commonware.log.getLogger('mk.tasks')
 

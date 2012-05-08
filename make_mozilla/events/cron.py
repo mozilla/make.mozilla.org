@@ -3,7 +3,7 @@ from django.conf import settings
 from make_mozilla.bsd import fetch_and_process_event_feed
 from make_mozilla.events import models
 import commonware.log
-import make_mozilla.urls # Magic voodoo required to make logging work.
+import funfactory.log_settings # Magic voodoo required to make logging work.
 
 log = commonware.log.getLogger('mk.cron')
 

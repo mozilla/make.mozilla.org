@@ -7,7 +7,7 @@ from make_mozilla.bsd.extractors import json as json_extractors
 from make_mozilla.bsd.extractors import xml as xml_extractors
 import email.parser
 import commonware.log
-import make_mozilla.urls # Magic voodoo required to make logging work.
+import funfactory.log_settings # Magic voodoo required to make logging work.
 
 log = commonware.log.getLogger('mk.bsd')
 
