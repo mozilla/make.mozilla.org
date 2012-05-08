@@ -86,7 +86,6 @@ def _create_event_and_venue(user, event_form, venue_form):
     event.venue = venue
     organiser_email = user.email
     event.organiser_email = organiser_email
-    tasks.register_email_address_as_constituent.delay(organiser_email, '111')
     event.save()
     return (event, venue)
 
