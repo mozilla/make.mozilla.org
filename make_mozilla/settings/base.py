@@ -108,9 +108,9 @@ ANON_ALWAYS = True
 
 LOGGING = {
     'loggers': {
-        'playdoh': {
+        'mk': {
             'level': logging.DEBUG
-        }
+        },
     }
 }
 

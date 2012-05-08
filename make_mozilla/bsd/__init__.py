@@ -6,6 +6,10 @@ from make_mozilla.events.models import Event, Venue
 from make_mozilla.bsd.extractors import json as json_extractors
 from make_mozilla.bsd.extractors import xml as xml_extractors
 import email.parser
+import commonware.log
+import make_mozilla.urls # Magic voodoo required to make logging work.
+
+log = commonware.log.getLogger('mk.bsd')
 
 def parse_event_feed(feed_url):
     return process_events_json(json.load(urllib2.urlopen(feed_url)))
@@ -80,7 +84,10 @@ class BSDRegisterConstituent(object):
     @classmethod
     def add_email_to_group(cls, email, group_id):
         constituent_id = BSDClient.register_email_address_as_constituent(email)
-        return BSDClient.add_constituent_id_to_group(constituent_id, group_id)
+        result = BSDClient.add_constituent_id_to_group(constituent_id, group_id)
+        if not result:
+            log.warning('Failed to add email to group')
+        return result
 
 class BSDEventImporter(object):
     @classmethod
@@ -159,6 +166,10 @@ class BSDEventImporter(object):
             if event.id:
                 new_event.id = event.id
             event = new_event
+        if event.id:
+            log.info('Updating event %s from %s' % (event.id, event_url))
+        else:
+            log.info('Adding new event for %s' % event_url)
         event.kind = event_kind
         event.venue = venue
         event.public = True
