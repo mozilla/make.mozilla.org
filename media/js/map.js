@@ -12,6 +12,10 @@ var map = (function (config) {
 		[ 49.282076, -123.107774]  // Vancouver
 	].sort(function() {return 0.5 - Math.random()})[0];
 
+	var months = ['January', 'February', 'March', 'April', 'May', 'June',
+	        'July', 'August', 'September', 'October', 'November', 'December'],
+	    days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
 	var default_config = {
 		container: 'map-container',
 		search: 'input-location',
@@ -45,13 +49,18 @@ var map = (function (config) {
 	    gmap_callback,
 	    gmap,
 	    geocoder,
-	    location;
+	    searchLocation,
+	    eventStack = [],
+	    standardMarker,
+	    largeMarker;
 
 	if (!container) return false;
 
 	gmap_callback = 'gmcb_'+(""+Math.random()).substr(2);
 	window[gmap_callback] = function () {
 		delete window[gmap_callback];
+
+		InfoBox.init();
 
 		geocoder = new google.maps.Geocoder();
 
@@ -72,6 +81,35 @@ var map = (function (config) {
 				position: google.maps.ControlPosition.LEFT_BOTTOM
 			}
 		});
+
+		standardMarker = new google.maps.MarkerImage(
+			'/media/img/map-marker.png',
+			new google.maps.Size(16,16),
+			new google.maps.Point(0,0),
+			new google.maps.Point(8,8)
+		);
+
+		largeMarker = new google.maps.MarkerImage(
+ 			'/media/img/map-marker.png',
+			new google.maps.Size(32,32),
+			new google.maps.Point(16,0),
+			new google.maps.Point(16,16)
+		);
+
+		google.maps.event.addListener(gmap, 'zoom_changed', function () {
+			for (var key in venue_cache) {
+				if (venue_cache.hasOwnProperty(key)) {
+					if (venue_cache[key].visible) {
+						google.maps.event.trigger(venue_cache[key].marker, 'click');
+					}
+				}
+			}
+		});
+
+		if (eventStack.length) {
+			add_event.apply(null, eventStack);
+			eventStack = [];
+		}
 	}
 
 	gmap_script = document.createElement("script");
@@ -80,9 +118,9 @@ var map = (function (config) {
 
 	if (search) {
 		search.form.onsubmit = function () {
-			if (location) {
+			if (searchLocation) {
 				window.location = c('target').replace(/\${(\w+)}/g, function(match, key) {
-					return location.hasOwnProperty(key) ? location[key] : '';
+					return searchLocation.hasOwnProperty(key) ? searchLocation[key] : '';
 				});
 			}
 			return false;
@@ -119,63 +157,16 @@ var map = (function (config) {
 				$(this).removeClass('with-results');
 			},
 			select: function (event, ui) {
-				location = ui.item ? ui.item.location : null;
+				searchLocation = ui.item ? ui.item.location : null;
 			},
 			change: function (event, ui) {
-				location = ui.item ? ui.item.location : null;
+				searchLocation = ui.item ? ui.item.location : null;
 			}
 		});
-
-		/*
-		search.setAttribute("autocomplete", "off");
-		search.form.onsubmit = function () {
-			
-		}
-
-		searchWrapper = document.createElement('span');
-		search.parentNode.insertBefore(searchWrapper, search);
-		searchWrapper.appendChild(search);
-
-		search.onkeyup = function () {
-			clearTimeout(searchTimer);
-
-			var address = search.value;
-
-			searchResults && searchResults.parentNode && searchResults.parentNode.removeChild(searchResults);
-
-			searchTimer = setTimeout(function() {
-				if (address && search.value === address) {
-					geocode(address, function(results) {
-
-						if (results) {
-							searchResults = document.createElement('ol');
-							for (var i = 0, l = results.length; i < l; ++i) {
-								var node = document.createElement('li'),
-								    result = results[i],
-								    data = {},
-								    label,
-								    location = result.geometry.location,
-								    lat = location.lat(),
-								    lng = location.lng();
-
-								for (var i = 0, l = result.address_components.length; i < l; ++i) {
-									data[result.address_components[i].types[0]] = result.address_components[i];
-								}
-
-								node.innerHTML = result.formatted_address + ' (' + lat + ', ' + lng + ')';
-								searchResults.appendChild(node);
-								console.log(result, data);
-							}
-							searchWrapper.appendChild(searchResults);
-						}
-					});
-				}
-			},100);
-		}
-		*/
 	}
 
-	var address_cache = {};
+	var address_cache = {},
+	    venue_cache = {};
 
 	function center_map (lat, lng) {
 		if (!gmap) return false;
@@ -200,9 +191,141 @@ var map = (function (config) {
 		}
 	};
 
+	function add_event (event) {
+		if (!gmap) {
+			eventStack.push.apply(eventStack, arguments);
+		} else {
+			for (var i = 0, l = arguments.length; i < l; ++i) {
+				(function(event) {
+					var address = event.address,
+					    lat = event.latitude,
+					    lng = event.longitude,
+					    venue_hash = (Math.round(lat * 10000) / 10000) + ':' + (Math.round(lng * 10000) / 10000),
+					    venue = venue_cache[venue_hash];
+
+					if (!venue) {
+						var content = document.createElement("div");
+
+						var marker = new google.maps.Marker({
+							position: new google.maps.LatLng(lat, lng),
+							map: gmap,
+							icon: standardMarker
+						});
+
+						var panel = new InfoBox({
+							content: content,
+							alignBottom: true,
+							pixelOffset: new google.maps.Size(-50, -32),
+							infoBoxClearance: new google.maps.Size(40, 40),
+							closeBoxURL: '/media/img/close.png'
+						});
+
+						google.maps.event.addListener(panel, 'closeclick', function () {
+							marker.setIcon(standardMarker);
+						});
+
+						google.maps.event.addListener(panel, 'domready', function () {
+							var box = this.getContent().parentNode,
+							    projection = this.getProjection(),
+							    location = projection.fromLatLngToContainerPixel(marker.position),
+							    targetX = location.x + box.offsetWidth / 2 + (this.pixelOffset_.width||0),
+							    targetY = location.y - box.offsetHeight + (this.pixelOffset_.height||0) + (container.offsetHeight / 2)
+							        - $(search.form).offset().top - search.form.offsetHeight - 40,
+							    target = projection.fromContainerPixelToLatLng(new google.maps.Point(targetX, targetY));
+							
+							gmap.panTo(target);
+						});
+
+						venue = {
+							name: null,
+							address: address,
+							events: [],
+							latitude: lat,
+							longitude: lng,
+							marker: marker,
+							panel: panel,
+							visible: false
+						};
+
+						geocode(address, function(results) {
+							if (results && results.length) {
+								venue.address = results[0].formatted_address;
+								if (venue.visible) {
+									google.maps.event.trigger(marker, 'click');
+								}
+							}
+						});
+
+						google.maps.event.addListener(marker, 'click', function() {
+							for (var key in venue_cache) {
+								if (venue_cache.hasOwnProperty(key)) {
+									venue_cache[key].visible = false;
+									venue_cache[key].panel.close();
+									venue_cache[key].marker.setIcon(standardMarker);
+								}
+							}
+
+							venue.visible = true;
+							marker.setIcon(largeMarker);
+
+							var html = [];
+
+							if (venue.name) {
+								html.push('<h3>'+venue.name+'</h3>');
+								html.push('<h4>'+venue.address+'</h4>');
+							} else {
+								// Shouldn't happen, as venues *should* have names, but just in case...
+								html.push('<h3>'+venue.address+'</h3>');
+							}
+
+							html.push('<ol>');
+
+							for (var i = 0, l = venue.events.length; i < l; ++i) {
+								var event = venue.events[i],
+								    from_ts = '',
+								    from_date = months[event.from.getMonth()] + ' ' + event.from.getDate() + ', ' + event.from.getFullYear(),
+								    from_h = event.from.getHours(),
+								    from_m = event.from.getMinutes(),
+								    from_time = (from_h % 12 === 0 ? 12 : from_h % 12) + ':' + (from_m < 10 ? '0' : '') + from_m + ' ' + (from_h < 12 ? 'AM' : 'PM'),
+								    from = from_date + ' ' + from_time,
+								    to_ts = '',
+								    to_date = months[event.to.getMonth()] + ' ' + event.to.getDate() + ', ' + event.to.getFullYear(),
+								    to_h = event.to.getHours(),
+								    to_m = event.to.getMinutes(),
+								    to_time = (to_h % 12 === 0 ? 12 : to_h % 12) + ':' + (to_m < 10 ? '0' : '') + to_m + ' ' + (to_h < 12 ? 'AM' : 'PM'),
+								    to = from_date === to_date ? to_time : to_date + ' ' + to_time;
+
+								// console.log(event.from, event.to);
+
+								html.push('<li' + (event.official ? ' class="official"' : '') + '>');
+								html.push('<a href="' + event.url + '" class="name">' + event.name + '</a>');
+								html.push('<span class="date"><time class="from" datetime="' + from_ts + '">' + from + '</time><span> to </span><time class="to" datetime="' + to_ts + '">' + to + '</time></span>');
+								html.push('<a href="' + event.type.url + '" class="type">' + event.type.name + '</a>');
+								html.push('</li>');
+							}
+
+							html.push('</ol>');
+
+							content.innerHTML = html.join('\n');
+							panel.open(gmap,marker);
+						});
+
+						venue_cache[venue_hash] = venue;
+					}
+
+					venue.name = venue.name || event.venue;
+					venue.events.push(event);
+					venue.marker.setTitle(venue.name + (venue.events.length > 1 ? ' (' + venue.events.length + ')' : '' ));
+					google.maps.event.trigger(venue.marker, 'click');
+				})(arguments[i]);
+			}
+		}
+	}
+
 	return {
 		center: center_map,
-		geocode: geocode
+		geocode: geocode,
+		add_event: add_event
 	};
 
 })(window.map_config || {});

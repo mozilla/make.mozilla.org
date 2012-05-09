@@ -280,11 +280,12 @@ p {
 
 /* ---[ Map Content ]------------------------------------------------------- */
 
-.map-page #content {
-/*	min-height: 600px;*/
+.map-page #content .constrained {
+	position: relative;
+	z-index: 1;
 }
 
-.map-page #map-container {
+#map-container {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -292,9 +293,75 @@ p {
 	height: 100%;
 }
 
-.map-page #content .constrained {
-	position: relative;
-	z-index: 1;
+#map-container .infoBox {
+	.box-shadow(@panelShadow);
+
+	background: #FFF;
+	padding: 20px 30px;
+	width: 460px;
+	cursor: default;
+}
+
+#map-container .infoBox::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 30px;
+	border: solid;
+	border-color: #FFF transparent transparent;
+	border-width: 20px 20px 0;
+}
+
+#map-container .infoBox h4 {
+	margin: -1.5em 0 1.5em;
+	font-size: 0.857em;
+	font-style: italic;
+	font-weight: normal;
+	color: #CCC;
+}
+
+#map-container .infoBox ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#map-container .infoBox li {
+	margin-top: 1.25em;
+	clear: both;
+	overflow: hidden
+}
+
+#map-container .infoBox .name {
+	font-weight: bold;
+	display: block;
+	float: left;
+}
+
+#map-container .infoBox .date {
+	color: #999;
+	display: block;
+	float: left;
+	clear: left;
+	font-size: 0.857em;
+}
+
+#map-container .infoBox .date span,
+#map-container .infoBox .date .to {
+	.transition(~"all 0.25s linear");
+
+	opacity: 0;
+}
+
+#map-container .infoBox li:hover .date span,
+#map-container .infoBox li:hover .date .to {
+	opacity: 1;
+}
+
+#map-container .infoBox .type {
+	float: right;
+	font-size: 0.857em;
+	text-transform: uppercase;
 }
 
 /* ===[ Footer ]============================================================ */
@@ -1312,6 +1379,12 @@ ul.tri-set img {
 #events-index ul.tri-set p {
 	font-size: 1em;
 	margin-top: 0;
+}
+
+/* ---[ Event Map Search ]---------------------------------------- */
+
+#events-map #content {
+	min-height: 600px;
 }
 
 /* ---[ Event Details ]------------------------------------------- */

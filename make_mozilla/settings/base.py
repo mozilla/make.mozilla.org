@@ -25,6 +25,7 @@ MINIFY_BUNDLES = {
         ),
         'maps_js': (
             'js/map.js',
+            'js/map.infobox.js',
         ),
         'example_js': (
             'js/examples/libs/jquery-1.4.4.min.js',

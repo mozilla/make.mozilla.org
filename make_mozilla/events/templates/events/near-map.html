@@ -1,0 +1,57 @@
+{% extends "events/base.maps.html" %}
+
+{% block page_title %}Near | {{ super() }}{% endblock %}
+{% block page_id %}events-map{% endblock %}
+
+{% block content %}
+<div class="search-results">
+    {% include "events/_search-form.html" %}
+    {% if results.object_list %}
+        {% if results.paginator.num_pages > 1 %}
+            <ol class="pagination">
+                {% for page in range(1, results.paginator.num_pages+1) %}
+                    <li{% if page == results.number %} class="current"{% endif %}><a href="?lat={{ latitude }}&amp;lng={{ longitude }}{% if sort != 'date' %}&amp;sort={{ sort }}{% endif %}{% if page != 1 %}&amp;page={{ page }}{% endif %}"><span>Page</span> {{ page }}</a></li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        window.map_config = {
+            latitude: "{{ latitude }}",
+            longitude: "{{ longitude }}",
+            draggable: true,
+            controls: true,
+            zoom: 12
+        };
+    </script>
+    {{ super() }}
+    {% if results.object_list %}
+        <script>
+            map.add_event.apply(map, [
+                {% for event in results.object_list -%}
+                {
+                    name: '{{ event.name|escape }}',
+                    latitude: {{ event.venue.latitude }},
+                    longitude: {{ event.venue.longitude }},
+                    url: '{{ url('event', event.id)|escape }}',
+                    venue: '{{ event.venue.name|escape }}',
+                    address: '{{ event.venue.street_address|replace('\r', '')|replace('\n', ', ')|escape }}',
+                    from: new Date('{{ event.start.strftime('%a, %d %b %Y %H:%M:%S UTC%z') }}'),
+                    to: new Date('{{ event.end.strftime('%a, %d %b %Y %H:%M:%S UTC%z') }}'),
+                    official: {% if event.official %}true{% else %}false{% endif %},
+                    type: {
+                        name: '{{ event.kind.name|escape }}',
+                        url: '{{ url('guides_%s' % event.kind.slug)|escape }}'
+                    }
+                }{% if not loop.last %},
+                {% endif -%}
+                {%- endfor %}
+
+            ]);
+        </script>
+    {% endif %}
+{% endblock %}

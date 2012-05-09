@@ -42,11 +42,15 @@
         <p class="no-results">No results found</p>
     {% endif %}
 </div>
-<script>
-    window.map_config = {
-        latitude: "{{ latitude }}",
-        longitude: "{{ longitude }}",
-        zoom: 12
-    };
-</script>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        window.map_config = {
+            latitude: "{{ latitude }}",
+            longitude: "{{ longitude }}",
+            zoom: 12
+        };
+    </script>
+    {{ super() }}
 {% endblock %}

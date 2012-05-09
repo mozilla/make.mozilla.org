@@ -12,6 +12,8 @@
 {% endblock %}
 
 {% block footer %}
-{{ super() }}
-{{ js('maps_js') }}
+    {{ super() }}
+    {% block scripts %}
+        {{ js('maps_js') }}
+    {% endblock %}
 {% endblock %}
