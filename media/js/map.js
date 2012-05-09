@@ -317,7 +317,6 @@ var map = (function (config) {
 					venue.name = venue.name || event.venue;
 					venue.events.push(event);
 					venue.marker.setTitle(venue.name + (venue.events.length > 1 ? ' (' + venue.events.length + ')' : '' ));
-					google.maps.event.trigger(venue.marker, 'click');
 				})(arguments[i]);
 			}
 		}
