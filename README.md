@@ -72,12 +72,32 @@ Initial setup
 ```bash
 fab puppet.setup
 fab puppet.apply
-fab deploy:cold
+fab deploy.cold
 ```
 
 `fab puppet.setup` installs the Puppet packages on the box.
 `fab puppet.apply` uploads and applies the current puppet recipes. Note that this is not done from Git, but from the deployers working directory, so be careful about uncommitted changes.
 `fab deploy.cold` Actually deploys the app, performing first-run setup and running DB migrations.
+
+If you're not deploying to the default server (you can change the default on line 21 of `fabfile.py`) then you need to specify which set of hosts to use:
+
+```
+TO=production fab puppet.setup
+TO=production fab puppet.apply
+TO=production fab deploy.cold
+```
+
+If your sudoer's username on the box you're deploying too doesn't match your local username:
+
+```
+fab -u remote_username puppet.setup
+```
+
+If you need to do both the above mods:
+
+```
+TO=production fab -u remote_username puppet.setup
+```
 
 Updates to Puppet
 ----------------
