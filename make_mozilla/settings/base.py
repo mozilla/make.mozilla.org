@@ -106,6 +106,13 @@ BROWSERID_CREATE_USER = True
 
 # needed to make CSRF function on anonymous forms
 ANON_ALWAYS = True
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': ['localhost:11211',],
+        'KEY_PREFIX': 'make_mozilla'
+    }
+}
 
 LOGGING = {
     'loggers': {
