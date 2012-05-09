@@ -1,8 +1,6 @@
 # Create the bare DB, set up the basic app install path
 
 class app {
-  require app_users
-
   exec { "create_db":
     command => "sudo -u postgres createdb -O ${::db_user} -T template_postgis ${db}",
     unless  => "sudo -u postgres psql -l | awk '{ print \$1 }' | grep '^${db}$'",
@@ -19,6 +17,7 @@ class app {
   cron { "import_bsd_events":
     command => "cd ${app_root}/current && ${app_root}/virtualenv/bin/python manage.py cron import_bsd_events",
     user => $app_user,
-    minute => [5,15,25,35,45,55];
+    minute => [5,15,25,35,45,55],
+    require => [File[$app_root], User[$app_user]];
   }
 }

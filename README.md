@@ -3,6 +3,11 @@ make.mozilla.org
 
 This app is built using Mozilla's Playdoh.
 
+Deployment instructions are towards the bottom of this file.
+
+Local development
+=================
+
 We're using PostGIS + GeoDjango for the DB, so you'll also need the following installed
 
 * Postgresql 8.4 +
@@ -41,8 +46,64 @@ GeoDjango is installed as part of Django. You need to take a look at the install
 instructions at [https://docs.djangoproject.com/en/1.3/ref/contrib/gis/install/#post-installation] 
 to get PostGIS configured properly with Django. Ubuntu's version ships with a postgis-template generation script, which you can see used in `./puppet/manifests/classes/postgis.pp`
 
-playdoh
--------
+Deployment
+==========
+
+We're making heavy use of [Fabric][fab] and [Puppet][] to automate deployment. Deployment has been tested on a Ubuntu 10.04 box, and puppet recipes will likely fail on later versions of Ubuntu (or any Debian version), and certainly would on RHEL / CentOS systems.
+
+[fab]: http://docs.fabfile.org/
+[Puppet]: http://puppetlabs.com/
+
+Note that we're using Puppet 0.25, because that's what comes with Ubuntu 10.04. It's old, you'll find a lot of newer recipes and examples out on the web won't run unmodified on it.
+
+Prequisites
+-----------
+
+* A machine set up for local development
+
+* A user with `sudo` access on a Ubuntu 10.04 box with `openssh-server` installed and running. No other pre-puppet dependencies.
+
+* The machine you want to deploy to listed in the hosts dict in `fabfile.py`
+* The SSH pubkey of any developers who should have deploy access contained in `puppet/files/deploy_keys` (this will become the `.ssh/authorized_keys` file for the server user the app runs as.
+
+Initial setup
+-------------
+
+```bash
+fab puppet.setup
+fab puppet.apply
+fab deploy:cold
+```
+
+`fab puppet.setup` installs the Puppet packages on the box.
+`fab puppet.apply` uploads and applies the current puppet recipes. Note that this is not done from Git, but from the deployers working directory, so be careful about uncommitted changes.
+`fab deploy.cold` Actually deploys the app, performing first-run setup and running DB migrations.
+
+Updates to Puppet
+----------------
+
+```bash
+fab puppet.apply
+```
+
+Provided there are no bugs in the puppet recipes, running `fab puppet.apply` should only do something if there's a change to apply - it's safe to run multiple times, and even if there are no new changes.
+
+Regular deployment
+------------------
+
+````bash
+fab deploy
+```
+
+This doesn't run the Migrations. To deploy and run migrations run:
+
+```bash
+fab deploy_with_migrations
+```
+
+
+playdoh: about the framework
+============================
 
 Mozilla's Playdoh is a web application template based on [Django][django].
 
