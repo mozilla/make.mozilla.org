@@ -39,7 +39,7 @@ class Venue(models.Model):
         self.location.x = value
 
 def _upcoming(qs, sort, include_private):
-    resultset = qs.filter(start__gte = datetime.now()).order_by(sort)
+    resultset = qs.filter(start__gte = datetime.now(), verified = True).order_by(sort)
     if not include_private:
         resultset = resultset.filter(public=True)
     return resultset

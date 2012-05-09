@@ -40,11 +40,11 @@ class VenueTest(unittest.TestCase):
         eq_(venue.location, geos.Point(4.0, 51.0))
 
 class EventTest(django.test.TestCase):
-    def add_event(self, name, venue, offset, public = True):
+    def add_event(self, name, venue, offset, public = True, verified = True):
         start = datetime.datetime.now() + datetime.timedelta(days = offset)
         end = start + datetime.timedelta(hours = 3)
         e = models.Event(name = name, venue = venue, organiser_email = 'moz@example.com',
-                start = start, end = end, public = public)
+                start = start, end = end, public = public, verified = verified)
         e.save()
         return e
 
@@ -64,7 +64,8 @@ class EventTest(django.test.TestCase):
         e2 = self.add_event("E2", berlin, 2)
         e3 = self.add_event("E3", london, 1)
 
-        ep = self.add_event("EP", berlin, 10, False)
+        eu = self.add_event("EU", berlin, 9, verified = False)
+        ep = self.add_event("EP", berlin, 10, public = False)
 
         return (e1, e2, e3, ep)
 
@@ -78,8 +79,7 @@ class EventTest(django.test.TestCase):
     def test_upcoming_events_near_london_can_be_retrieved(self):
         (e1, e2, e3, ep) = self.setup_events()
         actual = models.Event.near(51.5154460, -0.13165810, sort = 'start')
-        eq_(len(actual), 2)
-        eq_(actual[0].id, e3.id)
+        eq_([x.name for x in actual], ["E3", "E1"])
 
     def test_upcoming_events_can_be_ordered_by_name(self):
         self.setup_events()
