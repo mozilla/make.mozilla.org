@@ -13,6 +13,7 @@ Exec {
 }
 
 class dev {
+  include app_users
   include git
   include postgresql
   include python
