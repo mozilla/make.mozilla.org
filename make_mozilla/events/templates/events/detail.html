@@ -8,7 +8,7 @@
     <h2>{{ event.name }}</h2>
     <p>{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }}</p>
     {% if event.venue.name %}<p>{{ event.venue.name }}</p>{% endif %}
-    {% if event.url %}<a href="{{ event.url }}" class="button">Register for event</a>{% endif %}
+    {% if event.event_url %}<p><a href="{{ event.event_url }}" class="button find">Register for event</a></p>{% endif %}
     <div class="description">
         <h3>Event Description</h3>
         <p>{{ event.description|nl2br }}</p>
