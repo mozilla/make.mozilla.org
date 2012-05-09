@@ -5,7 +5,7 @@ class apache {
   }
 
   file { "/etc/apache2/sites-available/playdoh":
-    source => "/etc/puppet/files/etc/httpd/conf.d/playdoh.conf",
+    source => "/etc/puppet/files/apache/site.conf",
     owner => "root", group => "root", mode => 0644,
     notify  => Service['apache2'],
     require => [

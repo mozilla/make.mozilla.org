@@ -13,7 +13,7 @@ class postgis {
         mode => '755',
         owner => 'root',
         group => 'root',
-        source => '/etc/puppet/files/usr/share/postgis/create_template_postgis.sh',
+        source => '/etc/puppet/files/postgis/create_template_postgis.sh',
         require => [Package['postgresql-8.4-postgis', 'postgresql-client'],
                    File['/usr/share/postgis']];
     }
