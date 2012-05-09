@@ -2,4 +2,5 @@ South
 pytz
 redis
 django-countries
+python-memcached
 -r ../vendor/src/funfactory/funfactory/requirements/prod.txt
