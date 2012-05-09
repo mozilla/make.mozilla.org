@@ -1240,6 +1240,11 @@ ul.tri-set img {
 	margin-bottom: 0.875em;
 	font-size: 1.142em;
 	font-weight: normal;
+	padding-right: 25px;
+}
+
+.search-results ol .official .about h4 {
+	background: url(../img/event-bullet.png) 100% 0.25em no-repeat;
 }
 
 .search-results ol .about p {
@@ -1304,6 +1309,15 @@ ul.tri-set img {
 .search-results .pagination li span {
 	position: absolute;
 	left: -99em;
+}
+
+.search-results .no-results {
+	.box-shadow(@panelShadow);
+
+	margin: 35px;
+	padding: 20px 30px;
+	background: #FFF;
+	font-size: 1.142em;
 }
 
 @media screen and (max-width: 900px) {
@@ -1399,7 +1413,7 @@ ul.tri-set img {
 
 /* ---[ Event Map Search ]---------------------------------------- */
 
-#events-map #content {
+#events-map #content.full {
 	min-height: 600px;
 }
 

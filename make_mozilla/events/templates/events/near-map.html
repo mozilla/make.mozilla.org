@@ -14,22 +14,25 @@
                 {% endfor %}
             </ol>
         {% endif %}
+    {% else %}
+        <p class="no-results">No events found</p>
     {% endif %}
 </div>
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        window.map_config = {
-            latitude: "{{ latitude }}",
-            longitude: "{{ longitude }}",
-            draggable: true,
-            controls: true,
-            zoom: 12
-        };
-    </script>
-    {{ super() }}
     {% if results.object_list %}
+        <script>
+            window.map_config = {
+                latitude: "{{ latitude }}",
+                longitude: "{{ longitude }}",
+                draggable: true,
+                controls: true,
+                full: true,
+                zoom: 12
+            };
+        </script>
+        {{ super() }}
         <script>
             map.add_event.apply(map, [
                 {% for event in results.object_list -%}
@@ -53,5 +56,13 @@
 
             ]);
         </script>
+    {% else %}
+    <script>
+        window.map_config = {
+            latitude: "{{ latitude }}",
+            longitude: "{{ longitude }}"
+        };
+    </script>
+    {{ super() }}
     {% endif %}
 {% endblock %}

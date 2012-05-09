@@ -11,7 +11,7 @@
         <ol>
         {# Can't iterate directly over results until Django 1.4 #}
         {% for event in results.object_list %}
-            <li>
+            <li{% if event.official %} class="official"{% endif %}>
                 <div class="about">
                     <h4><a href="{{ url('event', event.id) }}">{{ event.name }}</a></h4>
                     {% if event.start.date() == event.end.date() %}
@@ -39,7 +39,7 @@
             </ol>
         {% endif %}
     {% else %}
-        <p class="no-results">No results found</p>
+        <p class="no-results">No events found</p>
     {% endif %}
 </div>
 {% endblock %}

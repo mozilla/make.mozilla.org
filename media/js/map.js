@@ -21,6 +21,7 @@ var map = (function (config) {
 		search: 'input-location',
 		latitude: location[0],
 		longitude: location[1],
+		full: false,
 		zoom: 13,
 		controls: false,
 		draggable: false,
@@ -56,6 +57,10 @@ var map = (function (config) {
 	    shadowMarkerImage;
 
 	if (!container) return false;
+
+	if (c('full')) {
+		document.getElementById('content').className += ' full';
+	}
 
 	gmap_callback = 'gmcb_'+(""+Math.random()).substr(2);
 	window[gmap_callback] = function () {
