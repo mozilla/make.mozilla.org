@@ -51,8 +51,9 @@ var map = (function (config) {
 	    geocoder,
 	    searchLocation,
 	    eventStack = [],
-	    standardMarker,
-	    largeMarker;
+	    standardMarkerImage,
+	    officialMarkerImage,
+	    shadowMarkerImage;
 
 	if (!container) return false;
 
@@ -82,18 +83,25 @@ var map = (function (config) {
 			}
 		});
 
-		standardMarker = new google.maps.MarkerImage(
+		standardMarkerImage = new google.maps.MarkerImage(
 			'/media/img/map-marker.png',
-			new google.maps.Size(16,16),
+			new google.maps.Size(50,75),
 			new google.maps.Point(0,0),
-			new google.maps.Point(8,8)
+			new google.maps.Point(25,75)
 		);
 
-		largeMarker = new google.maps.MarkerImage(
+		officialMarkerImage = new google.maps.MarkerImage(
  			'/media/img/map-marker.png',
-			new google.maps.Size(32,32),
-			new google.maps.Point(16,0),
-			new google.maps.Point(16,16)
+			new google.maps.Size(50,75),
+			new google.maps.Point(50,0),
+			new google.maps.Point(25,75)
+		);
+
+		shadowMarkerImage = new google.maps.MarkerImage(
+			'/media/img/map-marker.png',
+			new google.maps.Size(75,25),
+			new google.maps.Point(100,50),
+			new google.maps.Point(30,25)
 		);
 
 		google.maps.event.addListener(gmap, 'zoom_changed', function () {
@@ -209,19 +217,19 @@ var map = (function (config) {
 						var marker = new google.maps.Marker({
 							position: new google.maps.LatLng(lat, lng),
 							map: gmap,
-							icon: standardMarker
+							icon: standardMarkerImage,
+							shadow: shadowMarkerImage
 						});
 
 						var panel = new InfoBox({
 							content: content,
 							alignBottom: true,
-							pixelOffset: new google.maps.Size(-50, -32),
+							pixelOffset: new google.maps.Size(-50, -100),
 							infoBoxClearance: new google.maps.Size(40, 40),
 							closeBoxURL: '/media/img/close.png'
 						});
 
 						google.maps.event.addListener(panel, 'closeclick', function () {
-							marker.setIcon(standardMarker);
 							venue.visible = false;
 						});
 
@@ -262,12 +270,10 @@ var map = (function (config) {
 								if (venue_cache.hasOwnProperty(key)) {
 									venue_cache[key].visible = false;
 									venue_cache[key].panel.close();
-									venue_cache[key].marker.setIcon(standardMarker);
 								}
 							}
 
 							venue.visible = true;
-							marker.setIcon(largeMarker);
 
 							var html = [];
 
@@ -316,6 +322,7 @@ var map = (function (config) {
 
 					venue.name = venue.name || event.venue;
 					venue.events.push(event);
+					if (event.official) venue.marker.setIcon(officialMarkerImage);
 					venue.marker.setTitle(venue.name + (venue.events.length > 1 ? ' (' + venue.events.length + ')' : '' ));
 				})(arguments[i]);
 			}
