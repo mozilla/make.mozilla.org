@@ -1,16 +1,20 @@
 {% extends "base.html" %}
 
+{% block page_id %}login{% endblock %}
+{% block page_class %}section-events{% endblock %}
+
 {% block content %}
 <div class="masthead">
     <h2 class="plaque">Login</h2>
-    <p>Comforting message here</p>
+    <p>Create an account to enter an event</p>
 </div>
 
-{% if not user.is_authenticated() %}
-    <a id="browserid" href="#">Sign In</a>
+{% if not user.is_authenticated() %} 
     <form method="POST" action="{{ url('browserid_verify') + post_verify_qs }}">
       {{ csrf() }}
       {{ browserid_form.as_p() }}
+      <p>To add an event directly into our system you must first log in. Don't worry, this is super simple and all you need is an email address..</p>
+      <a class="button create" id="browserid" href="#">Log in with browserID</a>
     </form>
     <script language="javascript" src="//browserid.org/include.js"></script>
     <script language="javascript">
