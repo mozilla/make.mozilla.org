@@ -121,6 +121,22 @@ This doesn't run the Migrations. To deploy and run migrations run:
 fab deploy_with_migrations
 ```
 
+Notes on the Puppet setup
+-------------------------
+
+The main Puppet manifest is `puppet/manifests/dev.pp`, which in turn includes all the rest of the resources in a single class, then includes that class - puppet then tries to make sure all the resources described in `puppet/manifests/classes/*.pp` are included and brought up to date. If you need to add more things to the Puppet recipes, add them in a file in `puppet/manifests/classes` and then put an include line into `puppet/manifests/dev.pp`
+
+E.g., add resources to `puppet/manifests/classes/my_file.pp` and then, in `dev.pp`:
+
+```
+class dev {
+  include app_users
+  ...
+  include my_file
+}
+```
+
+I don't think this is an entirely standard way of doing things, but it works well with a single-machine single-OS deployment.
 
 playdoh: about the framework
 ============================
