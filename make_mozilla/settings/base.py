@@ -122,7 +122,7 @@ LOGGING = {
     }
 }
 
-PARTNER_IMAGE_PATH = '/var/webapps/make.mozilla.org/shared/media/img/uploads/partners'
+PARTNER_IMAGE_PATH = '/var/webapps/make.mozilla.org/shared/partner_media'
 #PARTNER_IMAGE_PATH = 'img/uploads/partners'
 
 BSD_API_DETAILS = {}

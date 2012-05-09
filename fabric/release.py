@@ -8,6 +8,7 @@ def initial_setup():
     with cd(env.releases_path):
         run('mkdir -p releases')
         run('mkdir -p shared/settings')
+        run('mkdir -p shared/partner_media')
         run('mkdir -p virtualenv')
     put_updated_settings()
 
