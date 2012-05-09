@@ -5,6 +5,7 @@ settings/local.py
 */settings/development.py
 */settings/fauxdev.py
 */settings/server.py
+media/img/uploads/*
 venv/*
 *.py[co]
 *.sw[po]

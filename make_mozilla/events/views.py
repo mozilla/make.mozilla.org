@@ -163,7 +163,10 @@ def near_map(request):
 
 
 def about(request):
-    return jingo.render(request, 'events/about.html', {})
+    featured_partners = models.Partner.objects.filter(featured=True)
+    return jingo.render(request, 'events/about.html', {
+        'partners': featured_partners,
+    })
 
 
 def guides_all(request):

@@ -1,8 +1,12 @@
+from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.gis import geos, measure
 from django_countries import CountryField
 from django.utils.safestring import mark_safe
+
 from datetime import datetime
+from tower import ugettext_lazy as _
+
 
 class Venue(models.Model):
     name = models.CharField(max_length=255)
@@ -90,3 +94,16 @@ class EventKind(models.Model):
 
     def __unicode__(self):
         return mark_safe(u'%s' % (self.name))
+
+
+class Partner(models.Model):
+    name = models.CharField(max_length=255)
+    website = models.URLField()
+    logo = models.ImageField(upload_to=settings.PARTNER_IMAGE_PATH)
+    featured = models.BooleanField(default=False,
+        help_text=_(u'Featured partners are displayed on the home and campaign page'))
+    for_campaign = models.ForeignKey(Campaign)
+
+    def __unicode__(self):
+        return self.name
+

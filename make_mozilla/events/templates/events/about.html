@@ -62,9 +62,9 @@
 <div class="columns">
     <div class="col main">
         <ul class="our_partners">
-            <li><a href="#">Partner</a></li>
-            <li><a href="#">Partner</a></li>
-            <li><a href="#">Partner</a></li>
+            {% for p in partners %}
+            <li><a href="{{ p.website }}"><img src="{{ MEDIA_URL }}{{ p.logo }}" alt="{{ p.name }}" /></a></li>
+            {% endfor %}
         </ul>
         <p><a href="#">See all 2012 Partners</a></p>
     </div>

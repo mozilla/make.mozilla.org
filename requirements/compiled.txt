@@ -1,3 +1,5 @@
 psycopg2==2.4.1
 lxml
+PIL==1.1.7
+
 -r ../vendor/src/funfactory/funfactory/requirements/compiled.txt
