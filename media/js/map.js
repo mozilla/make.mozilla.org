@@ -222,6 +222,7 @@ var map = (function (config) {
 
 						google.maps.event.addListener(panel, 'closeclick', function () {
 							marker.setIcon(standardMarker);
+							venue.visible = false;
 						});
 
 						google.maps.event.addListener(panel, 'domready', function () {
