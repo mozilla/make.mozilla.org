@@ -117,7 +117,8 @@ CACHES = {
 LOGGING = {
     'loggers': {
         'mk': {
-            'level': 'DEBUG'
+            'level': logging.DEBUG,
+            'handlers': ['syslog', 'console']
         },
     }
 }
