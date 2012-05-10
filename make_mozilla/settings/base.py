@@ -117,7 +117,7 @@ CACHES = {
 LOGGING = {
     'loggers': {
         'mk': {
-            'level': logging.DEBUG
+            'level': 'DEBUG'
         },
     }
 }
