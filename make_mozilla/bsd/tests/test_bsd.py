@@ -166,7 +166,7 @@ class BSDClientTest(unittest.TestCase):
         mock_api_response = Mock()
         mock_client_func.return_value = mock_api_response
         mock_api_response.http_status = 200
-        mock_api_response.body = '{"cons_id"  : 34, "email_id" : 234}'
+        mock_api_response.body = '[{"cons_id"  : 34, "email_id" : 234}]'
 
         eq_(34, bsd.BSDClient.register_email_address_as_constituent('example@mozilla.org'))
 

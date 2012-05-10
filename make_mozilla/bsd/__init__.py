@@ -71,7 +71,7 @@ class BSDClient(object):
                 {'email': email_address, 'format': 'json'})
         if response.http_status == 200:
             api_response = json.loads(response.body)
-            return api_response['cons_id']
+            return api_response[0]['cons_id']
         raise BSDApiError("%s: %s" % (response.http_status, response.http_reason))
 
     @classmethod
