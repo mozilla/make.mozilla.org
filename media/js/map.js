@@ -152,15 +152,17 @@ var map = (function (config) {
 			source: function (request, response) {
 				geocode(request.term, function(results) {
 					var data = [];
-					for (var i = 0, l = Math.min(results.length, 6); i < l; ++i) {
-						data.push({
-							label: results[i].formatted_address,
-							value: results[i].formatted_address,
-							location: {
-								lat: results[i].geometry.location.lat(),
-								lng: results[i].geometry.location.lng()
-							}
-						});
+					if (results && results.length) {
+						for (var i = 0, l = Math.min(results.length, 6); i < l; ++i) {
+							data.push({
+								label: results[i].formatted_address,
+								value: results[i].formatted_address,
+								location: {
+									lat: results[i].geometry.location.lat(),
+									lng: results[i].geometry.location.lng()
+								}
+							});
+						}
 					}
 					response(data);
 				});
