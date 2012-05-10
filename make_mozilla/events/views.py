@@ -6,7 +6,11 @@ from django.contrib.syndication.views import Feed
 from django.contrib.gis.feeds import GeoRSSFeed
 from django.utils.http import urlquote_plus, urlencode
 from django.views.decorators.csrf import csrf_protect
+<<<<<<< HEAD
 from django.shortcuts import redirect
+=======
+from django.shortcuts import get_object_or_404
+>>>>>>> 404 on bad URLs at /events/:id
 
 import urllib2
 import json
@@ -96,7 +100,7 @@ def _add_email_to_bsd(user, privacy_form):
 
 
 def details(request, event_id):
-    event = models.Event.objects.get(pk=event_id)
+    event = get_object_or_404(models.Event, pk=event_id)
     return jingo.render(request, 'events/detail.html', {'event': event})
 
 

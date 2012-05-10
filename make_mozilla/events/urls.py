@@ -14,5 +14,5 @@ urlpatterns = patterns('',
     url(r'^guides/kitchen-table/$', views.guides_kitchen_table, name='guides_kitchen_table'),
     url(r'^guides/hack-jam/$',      views.guides_hack_jam,      name='guides_hack_jam'),
     url(r'^guides/pop-up/$',        views.guides_pop_up,        name='guides_pop_up'),
-    url(r'^(?P<event_id>[^/]+)/$',  views.details,              name='event'),
+    url(r'^(?P<event_id>\d+)/$',    views.details,              name='event'),
 )
