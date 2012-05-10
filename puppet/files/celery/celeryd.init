@@ -134,7 +134,7 @@ case "$1" in
     ;;
 
     status)
-        $CELERYCTL status $CELERYCTL_OPTS
+        $CELERYCTL status $CELERYCTL_OPTS | grep OK
     ;;
 
     restart)
