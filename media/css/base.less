@@ -1085,6 +1085,7 @@ ul.tri-set img {
 
 	background: #FFF;
 	background: rgba(255,255,255,0.5);
+	overflow: hidden;
 }
 
 #content .search-results form {
@@ -1225,15 +1226,15 @@ ul.tri-set img {
 }
 
 .search-results ol li {
-	padding: 0 175px;
+	padding: 0 200px 0 175px;
 	overflow: hidden;
+	position: relative;
 }
 
 .search-results ol .about {
-	position: relative;
 	padding: 20px 0 5em;
 	width: 100%;
-	float: right;
+	float: left;
 }
 
 .search-results ol .about h4 {
@@ -1254,19 +1255,35 @@ ul.tri-set img {
 .search-results ol .about .type {
 	position: absolute;
 	bottom: 20px;
-	left: 0;
+	left: 175px;
 	text-transform: uppercase;
 	font-size: 0.857em;
 }
 
+.search-results ol .campaign {
+	display: block;
+	float: right;
+	width: 130px;
+	margin-right: -200px;
+	padding: 20px;
+	border-left: solid 1px #E1E2E3;
+	text-transform: uppercase;
+	font-size: 0.857em;
+	min-height: 11em;
+}
+
+.search-results ol .campaign img {
+	display: block;
+	margin: 0 auto 2em;
+}
+
 .search-results ol div.date {
-	float: left;
+	position: absolute;
+	top: 0;
+	left: 0;
 	padding: 20px 30px 500px;
-	margin-bottom: -500px;
-	margin-left: -175px;
 	width: 85px;
 	border-right: solid 1px #E1E2E3;
-	height: 100%;
 	font-family: "Open Sans Light", "Open Sans", sans-serif;
 }
 

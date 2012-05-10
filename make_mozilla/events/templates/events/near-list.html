@@ -22,6 +22,12 @@
                     <p>{{ event.venue.street_address|replace('\r\n', ', ') }}</p>
                     <a class="type" href="{{ url('guides_%s' % event.kind.slug) }}">{{ event.kind.name }}</a>
                 </div>
+                {% if event.campaign -%}
+                <a class="campaign" href="{{ url('about') }}">
+                    {# <img src="" width="96" height="95"> #}
+                    Part of {{ event.campaign.name }}
+                </a>
+                {%- endif %}
                 <div class="date">
                     <span class="day">{{ event.start.strftime('%A') }}</span>
                     <span class="month">{{ event.start.strftime('%B') }}</span>
