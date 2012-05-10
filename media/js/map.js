@@ -33,14 +33,16 @@ var map = (function (config) {
 	};
 
 	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function(location) {
-			var lat = location.coords.latitude,
-			    lng = location.coords.longitude;
+		if (c('latitude') !== location[0] || c('longitude') !== location[1]) {
+			navigator.geolocation.getCurrentPosition(function(location) {
+				var lat = location.coords.latitude,
+				    lng = location.coords.longitude;
 
-			default_config.latitude = lat;
-			default_config.longitude = lng;
-			center_map(lat, lng);
-		});
+				default_config.latitude = lat;
+				default_config.longitude = lng;
+				center_map(lat, lng);
+			});
+		}
 	}
 
 	var container = document.getElementById(c('container')),
