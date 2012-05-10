@@ -6,6 +6,7 @@ from django.contrib.syndication.views import Feed
 from django.contrib.gis.feeds import GeoRSSFeed
 from django.utils.http import urlquote_plus, urlencode
 from django.views.decorators.csrf import csrf_protect
+from django.shortcuts import redirect
 
 import urllib2
 import json
@@ -142,11 +143,16 @@ class Near(object):
         (sort, order) = self.extract_sort(request)
         page = self.extract_page(request)
 
+        try:
+            results = self.paginated_results(lat, lon, order, results_per_page, page)
+        except ValueError:
+            return redirect('events.search')
+
         return jingo.render(request, template, {
             'latitude': lat,
             'longitude': lon,
             'sort': sort,
-            'results': self.paginated_results(lat, lon, order, results_per_page, page)
+            'results': results
         })
 
 near_view = Near()
