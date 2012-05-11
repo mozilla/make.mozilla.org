@@ -43,7 +43,6 @@ BLEACH_CACHE_TAG = md5(_bleach_settings_string).hexdigest()
 
 def bleached(source):
     """Render a string through the bleach library, caching the result."""
-    print "HOWZAT!: %s" % source
     render_function = partial(bleach.clean,
                               tags=settings.BLEACH.allowed_tags,
                               attributes=settings.BLEACH.allowed_attrs)
