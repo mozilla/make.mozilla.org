@@ -11,7 +11,9 @@
     {% if event.event_url %}<p><a href="{{ event.event_url }}" class="button find">Register for event</a></p>{% endif %}
     <div class="description">
         <h3>Event Description</h3>
-        <p>{{ event.description|nl2br }}</p>
+        <div>
+            {{ event.bleached_description }}
+        </div>
     </div>
 </div>
 
