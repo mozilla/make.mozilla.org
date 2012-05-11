@@ -156,7 +156,7 @@ var map = (function (config) {
 		$(search).autocomplete({
 			appendTo: searchWrapper,
 			autoFocus: true,
-			delay: 100,
+			delay: 250,
 			source: function (request, response) {
 				geocode(request.term, function(results) {
 					var data = [];
