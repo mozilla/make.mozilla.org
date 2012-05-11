@@ -120,8 +120,8 @@ def search(request):
 
 class Near(object):
     def extract_latlon(self, request):
-        latitude = request.GET['lat']
-        longitude = request.GET['lng']
+        latitude = request.GET.get('lat')
+        longitude = request.GET.get('lng')
         return (latitude, longitude)
 
     def extract_page(self, request):
@@ -145,7 +145,7 @@ class Near(object):
 
         try:
             results = self.paginated_results(lat, lon, order, results_per_page, page)
-        except ValueError:
+        except TypeError, ValueError:
             return redirect('events.search')
 
         return jingo.render(request, template, {
