@@ -33,7 +33,7 @@ var map = (function (config) {
 	};
 
 	if (navigator.geolocation) {
-		if (c('latitude') !== location[0] || c('longitude') !== location[1]) {
+		if (c('latitude') === location[0] && c('longitude') === location[1]) {
 			navigator.geolocation.getCurrentPosition(function(location) {
 				var lat = location.coords.latitude,
 				    lng = location.coords.longitude;
