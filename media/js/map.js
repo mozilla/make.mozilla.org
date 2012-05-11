@@ -136,7 +136,7 @@ var map = (function (config) {
 	}
 
 	gmap_script = document.createElement("script");
-	gmap_script.src = "http://maps.google.com/maps/api/js?sensor=false&callback=" + gmap_callback;
+	gmap_script.src = "//maps.google.com/maps/api/js?sensor=false&callback=" + gmap_callback;
 	document.body.appendChild(gmap_script);
 
 	if (search) {
