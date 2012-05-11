@@ -214,18 +214,18 @@ class TestEventViewsCreate(TestCase):
 
 class TestEventViewsDetail(unittest.TestCase):
     def test_that_it_routes_correctly(self):
-        assert_routing('/events/abcde/', views.details, name = 'event', kwargs = {'event_id': 'abcde'})
+        assert_routing('/events/12/', views.details, name = 'event', kwargs = {'event_id': '12'})
 
-    @patch.object(models.Event.objects, 'get')
+    @patch.object(views, 'get_object_or_404')
     @patch('jingo.render')
     def test_that_it_correctly_fetches_the_event(self, mock_render, mock_event_get):
         mock_event = Mock()
         mock_event_get.return_value = mock_event
-        request = rf.get('/events/abcde')
-        views.details(request, event_id = 'abcde')
+        request = rf.get('/events/1')
+        views.details(request, event_id = '1')
 
         mock_render.assert_called_with(request, 'events/detail.html', {'event': mock_event})
-        mock_event_get.assert_called_with(pk = 'abcde')
+        mock_event_get.assert_called_with(models.Event, pk = '1')
 
 class TestEventViewsNear(unittest.TestCase):
     def test_that_it_routes_correctly_for_the_map(self):

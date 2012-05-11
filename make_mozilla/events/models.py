@@ -7,6 +7,7 @@ from django.utils.safestring import mark_safe
 from datetime import datetime
 from tower import ugettext_lazy as _
 
+from make_mozilla.base.html import bleached
 
 class Venue(models.Model):
     name = models.CharField(max_length=255)
@@ -67,6 +68,10 @@ class Event(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def bleached_description(self):
+        return bleached(self.description)
 
     @classmethod
     def upcoming(self, sort='start', include_private=False):

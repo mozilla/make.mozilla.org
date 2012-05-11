@@ -481,6 +481,32 @@ p {
 	content: "\00A0\00BB";
 }
 
+.button.near-me {
+	margin-left: 10px;
+	position: relative;
+}
+
+.button.near-me img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -8px 0 0 -8px;
+	display: none;
+}
+
+.button.near-me.loading {
+	color: transparent;
+	text-shadow: none;
+}
+
+.button.near-me.loading img {
+	display: inline;
+}
+
+.button.near-me::after {
+	content: "";
+}
+
 /* ---[ Find Button ]------------------------------------------------------- */
 
 .button.find,
@@ -682,7 +708,7 @@ ul.tri-set img {
     float: left;
     border: solid 5px #FFF;
 	background: #FFF;
-    margin: -25px 10px 0 0;
+    margin: 0 10px 0 0;
 }
 
 .meta-ticker img {
@@ -757,8 +783,7 @@ ul.tri-set img {
 		border-left: solid 1px #333;
 	}
 
-	.meta-ticker.enabled .thumb,
-    .event-type .thumb {
+	.meta-ticker.enabled .thumb {
 		.box-shadow(~"0 0 10px rgba(0,0,0,0.5)");
 
 		border-radius: 50%;
@@ -769,8 +794,7 @@ ul.tri-set img {
 		margin: -52.5px 0 0 -50px;
 	}
 
-	.meta-ticker.enabled img,
-    .event-type .thumb img {
+	.meta-ticker.enabled img {
 		border-radius: 50%;
 	}
 
@@ -1335,6 +1359,19 @@ ul.tri-set img {
 	padding: 20px 30px;
 	background: #FFF;
 	font-size: 1.142em;
+	text-align: center;
+	position: relative;
+}
+
+.search-results .no-results::before {
+	content: "";
+	border-top: solid 1px #DCDDDE;
+	display: block;
+	position: absolute;
+	top: -35px;
+	left: -35px;
+	width: 100%;
+	padding: 0 35px;
 }
 
 @media screen and (max-width: 900px) {
@@ -1835,11 +1872,12 @@ ul.tri-set img {
     width: 80px;
     display: block;
     height: 80px;
-    top: 20px;
+    top: 50%;
     left: 0;
     text-indent: -9999em;
     background: transparent url(../img/prev_arrow.png) no-repeat center;
     opacity: 0.6;
+    margin-top: -40px;
 }
 .guide_nav .next {
     right: 0;
@@ -1852,9 +1890,10 @@ ul.tri-set img {
 }
 .event-type {
     overflow: hidden;
-    margin: 2em 0;
-    padding: 0 100px;
+    margin: 0;
+    padding: 2em 100px;
     position: relative;
+    text-shadow: 0 0 5px #000;
 }
 .event-type h3 {
     font-weight: normal;
@@ -1865,15 +1904,26 @@ ul.tri-set img {
     color: #fff;
 }
 .event-type .thumb {
+	.box-shadow(~"0 0 10px rgba(0,0,0,0.5)");
+
     float: left;
     margin: 0 20px 0 0;
     position: static;
     left: 0;
     top: 0;
+	border-radius: 50%;
+	overflow: hidden;
 }
+
+.event-type .thumb img {
+	display: block;
+	border-radius: 50%;
+}
+
 @media screen and (max-width: 700px) {
 	.event-type {
-		margin-top: 6em;
+		margin-top: 4em;
+	    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
 	}
 	.event-type h3,
 	.event-type p {

@@ -54,7 +54,7 @@ def new(request):
 @login_required
 def create(request):
     ef, vf, lf = _process_create_post_data(request.POST)
-    if ef.is_valid() and vf.is_valid():
+    if lf.is_valid() and ef.is_valid() and vf.is_valid():
         event, venue = _create_event_and_venue(request.user, ef, vf)
         _add_email_to_bsd(request.user, lf)
         return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
