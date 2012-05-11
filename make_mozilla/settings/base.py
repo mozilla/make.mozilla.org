@@ -54,6 +54,23 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'waffle',
 ]
 
+class Setting(object):
+    def __init__(self, *args, **kwargs):
+        vars(self).update(kwargs)
+
+# Go! Go! Gadget Bleach!
+BLEACH = Setting(
+    allowed_tags = (
+        'h1', 'h2', 'a', 'b', 'em', 'i', 'strong',
+        'ol', 'ul', 'li', 'blockquote', 'p',
+        'span', 'pre', 'code', 'img'
+    ),
+    allowed_attrs = {
+        'a': ['href', 'title'],
+        'img': ['src', 'alt', 'title'],
+    }
+)
+
 
 # Because Jinja2 is the default template loader, add any non-Jinja templated
 # apps here:
