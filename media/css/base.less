@@ -481,6 +481,32 @@ p {
 	content: "\00A0\00BB";
 }
 
+.button.near-me {
+	margin-left: 10px;
+	position: relative;
+}
+
+.button.near-me img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -8px 0 0 -8px;
+	display: none;
+}
+
+.button.near-me.loading {
+	color: transparent;
+	text-shadow: none;
+}
+
+.button.near-me.loading img {
+	display: inline;
+}
+
+.button.near-me::after {
+	content: "";
+}
+
 /* ---[ Find Button ]------------------------------------------------------- */
 
 .button.find,

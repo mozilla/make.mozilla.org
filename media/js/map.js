@@ -32,19 +32,6 @@ var map = (function (config) {
 		return config.hasOwnProperty(property) ? config[property] : default_config[property];
 	};
 
-	if (navigator.geolocation) {
-		if (c('latitude') === location[0] && c('longitude') === location[1]) {
-			navigator.geolocation.getCurrentPosition(function(location) {
-				var lat = location.coords.latitude,
-				    lng = location.coords.longitude;
-
-				default_config.latitude = lat;
-				default_config.longitude = lng;
-				center_map(lat, lng);
-			});
-		}
-	}
-
 	var container = document.getElementById(c('container')),
 	    search = document.getElementById(c('search')),
 	    searchWrapper,
@@ -59,6 +46,27 @@ var map = (function (config) {
 	    shadowMarkerImage;
 
 	if (!container) return false;
+
+	if (navigator.geolocation) {
+		(function() {
+			var button = $(document.createElement('button'));
+			button.addClass('button near-me');
+			button.html('Near Me <img src="/media/img/loading.gif" alt="" title="" width="16" height="16">');
+			$('.buttons', search.form).append(button);
+			button.click(function() {
+				button.addClass('loading');
+				navigator.geolocation.getCurrentPosition(function(position) {
+					var location = { lat: position.coords.latitude, lng: position.coords.longitude };
+
+					window.location = c('target').replace(/\${(\w+)}/g, function(match, key) {
+						return location.hasOwnProperty(key) ? location[key] : '';
+					});
+				}, function(error) {
+					button.removeClass('loading');
+				});
+			});
+		})();
+	}
 
 	if (c('full')) {
 		document.getElementById('content').className += ' full';
