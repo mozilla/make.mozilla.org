@@ -323,3 +323,22 @@ class TestEventViewsNear(unittest.TestCase):
 
         eq_(views.near(request), mock_response)
         mock_near_view.assert_called_with(request, 'events/near-list.html', 4)
+
+
+class TestEventViewsPartnersList(unittest.TestCase):
+    def test_that_it_routes(self):
+        assert_routing('/events/about/partners/', views.partners, name = 'partners')
+
+    @patch.object(views, 'get_object_or_404')
+    @patch('jingo.render')
+    def test_that_it_correctly_fetches_the_campaign_partners(self, mock_render, mock_campaign_get):
+        mock_campaign = Mock()
+        mock_campaign_get.return_value = mock_campaign
+        mock_partner_list = Mock()
+        mock_campaign.partner_set.all.return_value = mock_partner_list
+        request = rf.get('/about/partners')
+        views.partners(request, slug = 'summer')
+
+        mock_render.assert_called_with(request, 'events/partners.html', 
+                {'campaign': mock_campaign, 'partners': mock_partner_list})
+        mock_campaign_get.assert_called_with(models.Campaign, slug = 'summer')

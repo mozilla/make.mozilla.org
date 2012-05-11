@@ -202,3 +202,8 @@ def guides_pop_up(request):
         'page_data': page_data,
     })
 
+@require_GET
+def partners(request, slug):
+    campaign = get_object_or_404(models.Campaign, slug=slug)
+    return jingo.render(request, 'events/partners.html', 
+            {'campaign': campaign, 'partners': campaign.partner_set.all()})
