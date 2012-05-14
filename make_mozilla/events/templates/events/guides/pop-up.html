@@ -1,12 +1,12 @@
 {% extends "events/base.html" %}
 
-{% block page_id %}{% endblock %}
+{% block page_id %}guides-pop_up{% endblock %}
 {% block page_class %}{{ super() }} guides-inner brochure-page{% endblock %}
 
 {% block content %}
 <div class="masthead">
     <h2 class="plaque">Guides</h2>
-    <p>How to host 101</p>
+    <p>How to host</p>
 </div>
 <header class="event-type">
     <span class="thumb"><img src="{{ MEDIA_URL }}/img/{{ page_data.name|lower|replace(' ', '-') }}_stub.jpg" alt="" width="120" height="120" /></span>
@@ -14,8 +14,8 @@
     <p>{{ page_data.description }}</p>
     <nav class="guide_nav">
         <ul>
-            <li><a href="{{ url('guides_kitchen_table') }}" class="next">next section (foo)</a></li>
-            <li><a href="{{ url('guides_hack_jam') }}" class="prev">previous section (foo)</a></li>
+            <li><a href="{{ url('guides_kitchen_table') }}" class="next">how to host a kitchen table</a></li>
+            <li><a href="{{ url('guides_hack_jam') }}" class="prev">how to host a hack jam</a></li>
         </ul>
     </nav>
 </header>
@@ -30,136 +30,109 @@
         <a href="https://donate.mozilla.org/page/event/create/" class="button create">Create an event</a>
     </nav>
     <article>
-        <section id="overview">
-            <h4>Overview</h4>
-            <p>A Kitchen Table event is a fun way to gather with friends at home around your kitchen table to hang out and make cool things on the web.</p>
-
-            <p>All you need are a few friends to join you, a place to meet, and something you want to learn or make online.</p>
-
-            <p>This guide will help!</p>
+                <section id="overview">
+                    <h4>Overview</h4>
+                  <p>A <b>Pop Up</b> event:</p>
+                          <ul>
+                            <li><b>Brings together local organizations</b></li>
+                            <li>to <b>host learning stations</b> that participants can sample.</li>
+                        </ul>
+                        <p>This guide will help!</p> 
+        <p>
+            It's a <b>community document,</b> so please <a href="https://events.etherpad.mozilla.org/popups" class="external text" rel="nofollow">share your ideas.</a> You can also <b>see what <a href="https://commonspace.wordpress.com/2012/01/24/every-event-is-a-laboratory/" class="external text" rel="nofollow">other hosts did</a></b>.
+        </p>
 
             <h5 class="sub_head">Facts and figures</h5>
 
-            <p>For a kitchen table event you're looking at about:</p>
-
             <ul class="">
-                <li class="mark numbers">1-5 friends</li>
-                <li class="mark duration">One hour</li>
-                <li class="mark venue">At home or in a cafe</li>
+                <li class="mark numbers"> 2-10 organizations, 20-50 participants</li>
+                <li class="mark duration">Half day</li>
+                <li class="mark venue">In an open space</li>
             </ul>
         </section>
         <section id="before">
             <h4>Before</h4>
 
-            <h5 class="sub_head">Decide what you want to make</h5>
+              <h5 class="sub_head">Decide what you want to make</h5>
 
-            <p>We’ve built some fun projects to get you started with making on the web. You can follow these ideas or swap in whatever activities you like.</p>
+                    <ul>
+                        <li>Recruit a <b>handful of organizations</b> interested in webmaking.</li>
+                        <li><b>Each organization will host a learning station,</b> i.e. a simple table-top activity,  based on their programs. </li>
+                        <li>You can also <a href="http://wpm.toolness.org/en-US/projects" class="external text" rel="nofollow">use these webmaker projects</a>as ideas.</li>
+                        <li><b>Agree on shared goals and stations</b> in a collaborative document.</li>
+                    </ul>
 
-            <p>Be sure to think about the interests and skill levels of your group. Adapt accordingly!</p>
+                <h5 class="sub_head">Find a space and a date</h5>
 
-            <h5 class="sub_head">Example projects</h5>
-            
-            <ul class="project-list">
-                <li>
-                    <img src="{{ MEDIA_URL }}img/photos/placeholder.jpg" alt="" />
-                    <h6 class="title">Lovebomb</h6>
-                    <p>Some text about the game</p>
+                    <ul>
+                        <li>Find a <b>comfortable, flexible space.</b> You'll need several tables for each station and room to move about.</li>
+                        <li>Think about <b>wifi and power,</b> good lighting, and snacks.</li>
+                        <li><b>Pick a date.</b> Give yourself enough time and make sure the date works for the organizations.</li>
+                    </ul>
 
-                    <p>Some more text about the game</p>
+                <h5 class="sub_head">Spread the word</h5>
 
-                    <p>Some more text about the game</p>
-                </li>
-                <li>
-                    <img src="{{ MEDIA_URL }}img/photos/placeholder.jpg" alt="" />
-                    <h6 class="title">Lovebomb</h6>
-                    <p>Some text about the game</p>
+                    <ul>
+                        <li><b>Write a short invitation.</b> Use the shared document as a basis.</li>
+                        <li>Encourage the participating organizations to <b>invite their communities.</b></li>
+                        <li><b><a href="https://donate.mozilla.org/page/event/create/" class="external text" rel="nofollow">Create a page for your event,</a></b> and share the link widely.</li>
+                    </ul>
+            </section>
 
-                    <p>Some more text about the game</p>
-
-                    <p>Some more text about the game</p>
-                </li>
-                <li>
-                    <img src="{{ MEDIA_URL }}img/photos/placeholder.jpg" alt="" />
-                    <h6 class="title">Lovebomb</h6>
-                    <p>Some text about the game</p>
-
-                    <p>Some more text about the game</p>
-
-                    <p>Some more text about the game</p>
-                </li>
-            </ul>
-            
-            <h5 class="sub_head">Find a space and a date</h5>
-
-            <p>Find a comfortable, flexible space for the event. Your kitchen or living room are good, or a nearby cafe. Make sure you can move the chairs and sit together in a circle.</p>
-            <p>Think about wifi and power, good lighting, and snacks.</p>
-            <p><strong>Pick a date</strong>. Give yourself enough time and make sure the date works for your friends. An hour during the evening or on the weekend, for example, is often a good choice.</p>
-
-            <h5 class="sub_head">Invite your friends</h5>
-
-            <img class="thumb" src="{{ MEDIA_URL }}img/photos/placeholder_2.jpg" alt="" />
-
-            <h6>Write a short invitation.</h6>
-            <div class="invite">
-            <p>Want to remix a website? Join me in <strong>LOCATION</strong>, <strong>DATE</strong>.</p>
-            <p>I'm going to learn how play with code & thought you might want to, too!</p>
-            <p>On <strong>DATE</strong> we're hanging out in <strong>LOCATION</strong> to make something together online.</p>
-            <p>There will be yummy snacks, hacking, and the company of friends.</p>
-            <p>Bring a computer, if you can.</p>
-            <p>Let me know if you can come.</p>
-            <p>— Sincerely, <strong>YOU</strong></p>
-            </div>
-            <p>You can also customize this <a href="http://jessicaklein.com/kitchen.html">sample invitation</a> using the <a href="http://hackasaurus.org/en-US/goggles/">Hackasaurus X-Ray Goggles</a>.</p>
-        </section>
         <section id="during">
             <h4>During</h4>
-            <h5 class="sub_head">Introduce your event</h5>
 
-            <p>When your friends arrive, make sure everyone is comfortable.<p>
-            <p>Do a quick go round and introduce people.</p>
-            <p>Give a brief overview of the day.</p>
+            <h5 class="sub_head">Welcome everyone</h5>
 
-            <h5 class="sub_head">Try out a learning project</h5>
+          <ul>
+                <li> <b>Set up tables in a large circle.</b> Use posters or other signage to indicate the stations.</li> 
+                <li> <b>Do a quick go-round.</b>Ask participants to introduce themselves and the stations.</li>
+                <li> Give a <b>brief overview.</b> Explain how the stations will work and what's in store for the day.</li>
+          </ul>
 
-            <p>Show your friends the [learning project] you selected. Demonstrate the first few steps so they get the idea.</p>
-            <p>Now let your friends try.</p>
-            <p>Check in with everyone, answer any questions, and make sure the group is ready before going to the next step.</p>
+            <h5 class="sub_head">Visit stations</h5>
 
-            <h5 class="sub_head">Keep hacking</h5>
-
-            <p>If someone wants to try something else, help them select another learning project. Sometimes it’s hard to know how fast a group will go through a project, so it’s good to have a few options prepared.</p>
-            <p>You can also find other activities online to fit their interests and skill level.</p>
-            <p>Check in with your friends to make sure they're doing alright.</p>
+          <ul>
+                <li> <b>Participants sample the stations.</b></li> 
+                <li> Encourage them to <b>follow their interests,</b> either staying at stations as long as they like or moving on.</li>
+                <li> Remind facilitators to <b>welcome newcomers</b> and keep a good flow.</li>
+          </ul>
 
             <h5 class="sub_head">Share your hacks</h5>
+         <ul>
+                <li> After an hour or two, <b>bring the group into a circle.</b></li> 
+                <li> <b>Invite a few participants to share what they made.</b></li>
+                <li> <b>Keep hacking at the stations,</b> if participants are interested.</li>
+                <li> If you like, please <b>share your hacks with the world!</b>
+                    <ul>
+                        <li> <b>Paste the URL</b> in this <a href="https://events.etherpad.mozilla.org/popups" class="external text" rel="nofollow">etherpad</a></li>
+                        <li> or <b>tweet the hacks</b> and tag it #mozparty</li>
+                        <li> or <b>upload a picture</b> to a gallery, such as Flickr, and tag it with #mozparty.</li>
+                    </ul>
+                </li>
+          </ul>
 
-            <img class="inline thumb" src="{{ MEDIA_URL }}img/photos/placeholder_2.jpg" alt="" />
-
-            <p>Hit “Publish” when you’re finished with a hack, or take a screenshot or photo.</p>
-            <p>If you like, share your hacks with the world!</p>
-            <p>Add a picture of the hack to a gallery online and tag it with #mozparty. You can use Flickr, Picasa, Facebook, Twitter or other photosharing sites to do this.</p>
-            <p>Tweet the URL and tag it #mozparty or paste the URL in this etherpad.</p>
-            <p>Show your friends what you made and ask to see their hacks, too.</p>
         </section>
+
+
         <section id="after">
             <h4>After</h4>
             <h5 class="sub_head">Wrap Up</h5>
 
-            <ul>
-                <li><strong>Ask everyone what they learned.</strong> Encourage them to give feedback about the event. If they have suggestions for making it better, be sure to take notes.</li>
-                <li><strong>Talk about whether you want to keep hacking together.</strong> You may want to host another kitchen table event to keep playing with these projects or to try something else. Talk about what your friends would like to do next.</li>
+           <ul>
+                <li> <b>Ask everyone how it went.</b> Encourage feedback about the event and the projects. What did they learn? What did they like? If they have suggestions for making it better, be sure to take notes or invite them to blog about it.</li>
+                <li> <b>Talk about continuing to hack together.</b> You may want to keep playing with these projects or to try new ones later. Talk about what the participants would like to do next, such as organize another event.</li>
+                <li><b>Set a date.</b> If there's interest, <a href="https://donate.mozilla.org/page/event/create/" class="external text" rel="nofollow">pick a date for the next time!</a></li>
+           </ul>
+
+            <h5 class="sub_head">Let us know how it went</h5>
+
+          <ul>
+                <li> Please <b><a href="https://events.etherpad.mozilla.org/popup" class="external text" rel="nofollow">share your experience</a></b> about hosting the event and the projects, including links to the things you made. </li>
+                <li> Weâ€™ll send <b>an email reminder</b> after the event to collect your feedback. </li>
             </ul>
 
-            <h5 class="sub_head">Set a date for the next one</h5>
-            
-            <ul>
-                <li>If there’s interest to do so, set the date and location for the next event!</li>
-                <li>Let us know how it went. We’ll email you after the event to collect your feedback. If your participants agree and sign up for it, we’ll also email them to ask how it went.</li>
-                <li>If there's enough interest, pick a date and location for the next time!</li>
-                <li>If you hosted the event, we’ll email you afterward to hear how it went and get your feedback. We’ll also email your guests, if they signed up and agreed to be contacted.</li>
-            </ul>
-
-            <p><a href="https://donate.mozilla.org/page/event/create/" class="button create">I’ll host one!</a> <a href="mailto:michelle@mozillafoundation.org" class="button">I have a question</a></p>
+            <p><a href="https://donate.mozilla.org/page/events/create/" class="button create">I'll host one!</a> <a href="mailto:michelle@mozillafoundation.org" class="button">I have a question</a></p>
         </section>
     </article>
 </div>
