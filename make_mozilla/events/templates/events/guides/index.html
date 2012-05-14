@@ -19,6 +19,9 @@
             <h3>{{ kind.name }}</h3>
         </a>
         <p>{{ kind.description }}</p>
+        {% if kind.additional %}
+            {{ kind.description }}
+        {% endif %}
     </li>
     {% endfor %}
 </ul>

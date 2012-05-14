@@ -97,6 +97,7 @@ class Campaign(models.Model):
 class EventKind(models.Model):
     name = models.CharField(max_length = 255)
     description = models.TextField()
+    additional = models.TextField(blank=True, null=True)
     slug = models.SlugField()
 
     def __unicode__(self):
