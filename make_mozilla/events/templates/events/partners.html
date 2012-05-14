@@ -9,7 +9,7 @@
 <h2>Who's coming to the party?</h2>
 <ul class="all our_partners">
     {% for p in campaign.partner_set.all() %}
-    <li>{{ p.name }}<a href="{{ p.website }}"><img src="{{ MEDIA_URL }}{{ p.logo }}" alt="{{ p.name }}" /></a></li>
+    <li>{{ p.name }}<a href="{{ p.website }}"><img src="{{ p.logo.url }}" alt="{{ p.name }}" /></a></li>
     {% endfor %}
 </ul>
 </section>

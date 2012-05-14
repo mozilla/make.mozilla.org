@@ -63,7 +63,7 @@
     <div class="col main">
         <ul class="our_partners">
             {% for p in partners %}
-            <li><a href="{{ p.website }}"><img src="{{ MEDIA_URL }}{{ p.logo }}" alt="{{ p.name }}" /></a></li>
+            <li><a href="{{ p.website }}"><img src="{{ p.logo.url }}" alt="{{ p.name }}" /></a></li>
             {% endfor %}
         </ul>
         <p><a href="{{ url('partners') }}">See all 2012 Partners</a></p>

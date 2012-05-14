@@ -58,6 +58,11 @@ class Setting(object):
     def __init__(self, *args, **kwargs):
         vars(self).update(kwargs)
 
+    @property
+    def dict(self):
+        return vars(self)
+
+
 # Go! Go! Gadget Bleach!
 BLEACH = Setting(
     allowed_tags = (
@@ -140,8 +145,10 @@ LOGGING = {
     }
 }
 
-PARTNER_IMAGE_PATH = '/var/webapps/make.mozilla.org/shared/partner_media'
-#PARTNER_IMAGE_PATH = 'img/uploads/partners'
+PARTNER_IMAGES = {
+    'location': '/var/webapps/make.mozilla.org/shared/partner_media',
+    'base_url': '/media/partner_media/'
+}
 
 BSD_API_DETAILS = {}
 

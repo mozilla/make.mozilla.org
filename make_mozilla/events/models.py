@@ -3,6 +3,7 @@ from django.contrib.gis.db import models
 from django.contrib.gis import geos, measure
 from django_countries import CountryField
 from django.utils.safestring import mark_safe
+from django.core.files.storage import FileSystemStorage
 
 from datetime import datetime
 from tower import ugettext_lazy as _
@@ -85,6 +86,7 @@ class Event(models.Model):
 class Campaign(models.Model):
     name = models.CharField(max_length = 255)
     description = models.TextField()
+    logo = models.ImageField(upload_to = 'campaigns', storage = FileSystemStorage(**settings.UPLOADED_IMAGES))
     slug = models.SlugField()
     start = models.DateField()
     end = models.DateField()
@@ -104,7 +106,7 @@ class EventKind(models.Model):
 class Partner(models.Model):
     name = models.CharField(max_length=255)
     website = models.URLField()
-    logo = models.ImageField(upload_to=settings.PARTNER_IMAGE_PATH)
+    logo = models.ImageField(upload_to = 'partners', storage = FileSystemStorage(**settings.UPLOADED_IMAGES))
     featured = models.BooleanField(default=False,
         help_text=_(u'Featured partners are displayed on the home and campaign page'))
     for_campaign = models.ForeignKey(Campaign)
