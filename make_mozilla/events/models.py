@@ -97,6 +97,7 @@ class Campaign(models.Model):
 class EventKind(models.Model):
     name = models.CharField(max_length = 255)
     description = models.TextField()
+    figures = models.TextField(blank=True, null=True)
     additional = models.TextField(blank=True, null=True)
     slug = models.SlugField()
 

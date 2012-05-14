@@ -6,7 +6,7 @@
 {% block content %}
 <div class="masthead">
     <h2 class="plaque">Guides</h2>
-    <p>How to host 101</p>
+    <p>How to host</p>
 </div>
 
 <h3 class="shout">Choose the type of event you would like to host:</h3>
@@ -19,9 +19,16 @@
             <h3>{{ kind.name }}</h3>
         </a>
         <p>{{ kind.description }}</p>
-        {% if kind.additional %}
-            {{ kind.description }}
+        {#
+        Copy comes from VPN restricted admin section
+        #}
+        {% if kind.figures %}
+            {{ kind.figures|safe }}
         {% endif %}
+        {% if kind.additional %}
+            {{ kind.additional|safe }}
+        {% endif %}
+        
     </li>
     {% endfor %}
 </ul>
