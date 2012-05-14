@@ -145,7 +145,7 @@ LOGGING = {
     }
 }
 
-PARTNER_IMAGES = {
+UPLOADED_IMAGES = {
     'location': '/var/webapps/make.mozilla.org/shared/partner_media',
     'base_url': '/media/partner_media/'
 }
