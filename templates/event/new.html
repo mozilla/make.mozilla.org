@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1>NEW EVENT</h1>
-<form method="post" action="{{ url('create-event') }}">
-  {{ csrf() }}
-  {{ form.as_p() }}
-<input type="submit" value="Submit">
-</form>
-{% endblock content %}
