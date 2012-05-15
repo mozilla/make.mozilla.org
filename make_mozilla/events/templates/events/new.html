@@ -17,7 +17,7 @@
                         <li{% if field.errors %} class="error"{% endif %}>
                             {{ field.label_tag() }}
                             {{ field }}
-                            {% if field.help_text %}<label for="id_{{ field.html_name }}" class="help">{{ field.help_text }}</label>{% endif %}
+                            {% if field.help_text %}<label for="id_{{ field.html_name }}" class="help">{{ field.help_text|safe }}</label>{% endif %}
                             {% for error in field.errors -%}
                                 <label for="id_{{ field.html_name }}" class="error">{{ error }}</label>
                             {%- endfor %}
@@ -27,7 +27,7 @@
             </ul>
         </fieldset>
     {% endfor %}
-    <p class="buttons"><input type="submit" class="button create" id="create-submit"></p>
+    <p class="buttons"><input type="submit" class="button create" id="create-submit" value="Submit"></p>
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 </form>
 <script>
