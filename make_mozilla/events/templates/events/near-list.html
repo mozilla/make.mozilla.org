@@ -6,6 +6,7 @@
 {% block content %}
 <div class="search-results">
     {% include "events/_search-form.html" %}
+    <a href="{{ url('events.near.map') }}?lat={{ latitude }}&amp;lng={{ longitude }}" class="switch">switch to map view</a>
     {% if results.object_list %}
         <p class="sorting">Sort by: <a href="?lat={{ latitude }}&amp;lng={{ longitude }}"{% if sort == 'date' %} class="active"{% endif %}>Upcoming first</a> <span>or</span> <a href="?lat={{ latitude }}&amp;lng={{ longitude }}&amp;sort=name"{% if sort == 'name' %} class="active"{% endif %}>A-Z</a></p>
         <ol>

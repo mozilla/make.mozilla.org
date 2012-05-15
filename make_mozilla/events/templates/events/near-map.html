@@ -6,6 +6,7 @@
 {% block content %}
 <div class="search-results">
     {% include "events/_search-form.html" %}
+    <a href="{{ url('events.near') }}?lat={{ latitude }}&amp;lng={{ longitude }}" class="switch">switch to list view</a>
     {% if results.object_list %}
         {% if results.paginator.num_pages > 1 %}
             <ol class="pagination">
