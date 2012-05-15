@@ -29,6 +29,7 @@ def perform_release(migrate = False, setup = False):
     if migrate:
         execute(db.migrate)
     execute(wsgi_server.restart)
+    execute(release.prune_old)
 
 @task
 def deploy():

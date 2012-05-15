@@ -25,6 +25,14 @@ def create():
     run_pip_install(latest_release_path())
     compress_assets(latest_release_path())
 
+@task
+def prune_old():
+    releases = release_list()
+    if len(releases) > 5:
+        old_releases = releases[0:-5]
+        for old_release in old_releases:
+            run('rm -rf %s' % release_path(old_release))
+
 def put_updated_settings():
     with cd(env.releases_path):
         put(local_settings_path(), 'shared/settings/local.py')
@@ -54,9 +62,13 @@ def latest_release_path():
     if env.has_key('release_git_tag'):
         return release_path(env.release_git_tag)
     else:
-        entries = [x.strip() for x in run('ls -1 %s' % release_path('')).split('\n')]
-        entries.sort()
-        return release_path(entries.pop())
+        return release_path(release_list().pop())
+
+def release_list():
+    releases = [x.strip() for x in run('ls -1 %s' % release_path('')).split('\n')]
+    releases.sort()
+    return releases
+
 
 def virtualenv_path():
     return '%s/virtualenv' % env.releases_path
