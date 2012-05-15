@@ -162,10 +162,16 @@ var map = (function (config) {
 		search.parentNode.insertBefore(searchWrapper, search);
 		searchWrapper.appendChild(search);
 
+        $(search).keypress(function(e) {
+            if ( event.which == 10 ) {
+                event.preventDefault();
+            }
+        });
+
 		$(search).autocomplete({
 			appendTo: searchWrapper,
 			autoFocus: false,
-			delay: 250,
+			minLength: 3,
 			source: function (request, response) {
 				geocode(request.term, function(results) {
 					var data = [];
@@ -192,6 +198,9 @@ var map = (function (config) {
 			},
 			select: function (event, ui) {
 				searchLocation = ui.item ? ui.item.location : null;
+				if (event.keyCode && event.keyCode == 13 && searchLocation) {
+					$(search.form).submit();
+				}
 			},
 			change: function (event, ui) {
 				searchLocation = ui.item ? ui.item.location : null;
@@ -211,7 +220,7 @@ var map = (function (config) {
 	function geocode (address, callback) {
 		if (address_cache.hasOwnProperty(address)) {
 			callback(address_cache[address], address);
-		} else if (geocoder && address.length > 2) {
+		} else if (geocoder) {
 			geocoder.geocode({address:address}, function(results, status) {
 				if (status === google.maps.GeocoderStatus.OK) {
 					address_cache[address] = results;
