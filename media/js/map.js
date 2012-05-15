@@ -164,7 +164,7 @@ var map = (function (config) {
 
 		$(search).autocomplete({
 			appendTo: searchWrapper,
-			autoFocus: true,
+			autoFocus: false,
 			delay: 250,
 			source: function (request, response) {
 				geocode(request.term, function(results) {
@@ -211,7 +211,7 @@ var map = (function (config) {
 	function geocode (address, callback) {
 		if (address_cache.hasOwnProperty(address)) {
 			callback(address_cache[address], address);
-		} else if (geocoder) {
+		} else if (geocoder && address.length > 2) {
 			geocoder.geocode({address:address}, function(results, status) {
 				if (status === google.maps.GeocoderStatus.OK) {
 					address_cache[address] = results;
