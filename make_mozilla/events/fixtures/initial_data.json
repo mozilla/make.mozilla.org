@@ -5,7 +5,9 @@
     "fields": {
       "slug": "kitchen_table", 
       "name": "Kitchen Table", 
-      "description": "Learn with friends! Teach each other how to make things around your kitchen table."
+      "description": "Learn with friends! Teach each other how to make things around your kitchen table.",
+      "figures": "<ul class='figures'><li class='mark numbers'>1-5 friends</li><li class='mark duration'>15 minutes - 1 hour.</li><li class='mark venue'>At home or in a cafe</li></ul>",
+      "additional": "<ul><li><b>Gather your friends</b> and family in a comfortable setting.</li><li><b>Make something together</b> on the web using fun projects.</li><li><b>Share what you made</b> and get inspired to explore more.</li></ul>"
     }
   }, 
   {
@@ -14,7 +16,9 @@
     "fields": {
       "slug": "hack_jam", 
       "name": "Hack Jam", 
-      "description": "Make something! Team up to transform your ideas into real world solutions."
+      "description": "Make something! Team up to transform your ideas into real world solutions.",
+      "figures": "<ul class='figures'><li class='mark numbers'>10 - 50 participants</li><li class='mark duration'>1 - 2 days</li><li class='mark venue'>At a school, office or open space</li></ul>",
+      "additional": "<ul><li>Define an <b>interesting challenge</b> or question to explore.</li><li>Team up different skill-sets to <b>brainstorm solutions.</b></li><li>Collaboratively build a <b>"minimum viable prototype"</b> to demonstrate your idea.</li></ul>"
     }
   }, 
   {
@@ -23,7 +27,9 @@
     "fields": {
       "slug": "pop_up", 
       "name": "Pop Up", 
-      "description": "Throw a learning party! Grow a network in your city by inviting local groups to play and learn together."
+      "description": "Throw a learning party! Grow a network in your city by inviting local groups to play and learn together.",
+      "figures": "<ul class='figures'><li class='mark numbers'>2-10 organizations, 20-50 participants</li><li class='mark duration'>Half day</li><li class='mark venue'>In an open space</li></ul>",
+      "additional": "<ul><li><b>Set up learning stations</b> led by local organization.</li><li><b>Sample the activities </b> and hack as long as participants like.</li><li><b>Discuss next steps</b> for a community in your city.</li></ul>"
     }
   }
 ]
