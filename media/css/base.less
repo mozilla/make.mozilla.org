@@ -976,6 +976,12 @@ ul.tri-set img {
 	padding: 50px;
 }
 
+#content form::after {
+	content: "* denotes a required field";
+	display: block;
+	text-align: right;
+}
+
 #content form fieldset {
 	border: none;
 	border-bottom: solid 1px #E1E3E3;
@@ -994,6 +1000,11 @@ ul.tri-set img {
 	margin-bottom: 25px;
 }
 
+#content form li .required {
+	position: absolute;
+	right: 100%;
+}
+
 #content form .buttons {
 	margin: 0;
 	padding: 0;
@@ -1002,7 +1013,7 @@ ul.tri-set img {
 
 #content form li,
 #content form .buttons {
-	margin-left: 165px;
+	margin-left: 175px;
 }
 
 #content form li li {
@@ -1011,12 +1022,20 @@ ul.tri-set img {
 
 #content form label {
 	display: block;
-	width: 143px;
-	margin-left: -165px;
+	width: 153px;
+	margin-left: -175px;
 	text-align: right;
 	float: left;
 	font-size: 1.143em;
 	line-height: 2.125em;
+}
+
+#content form li.required > label:first-child {
+	width: 167px;
+}
+
+#content form li.required > label:first-child::after {
+	content: "\00A0*";
 }
 
 #content form label.error,
