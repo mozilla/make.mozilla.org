@@ -74,6 +74,9 @@ class Event(models.Model):
     def bleached_description(self):
         return bleached(self.description)
 
+    def bsd_hosted(self):
+        return self.source_id.find('bsd:') == 0
+
     @classmethod
     def upcoming(self, sort='start', include_private=False):
         return _upcoming(self.objects, sort, include_private)
