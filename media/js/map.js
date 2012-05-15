@@ -129,6 +129,15 @@ var map = (function (config) {
 			}
 		});
 
+		if (c('mapFooter')) {
+			var footer = document.createElement('div');
+			footer.className = 'footer';
+			footer.innerHTML = '<div class="constrained">' + c('mapFooter') + '</div>';
+
+			container.className += ' has-footer';
+			container.appendChild(footer);
+		}
+
 		if (eventStack.length) {
 			add_event.apply(null, eventStack);
 			eventStack = [];
