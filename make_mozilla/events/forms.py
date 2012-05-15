@@ -67,7 +67,8 @@ class VenueForm(PrefixedModelForm):
         cleaned_data = self.cleaned_data
         if not cleaned_data.has_key('latitude') or not cleaned_data.has_key('longitude'):
             self._errors['street_address'] = self.error_class(["We can't find your address"])
-            del cleaned_data['street_address']
+            if 'street_address' in cleaned_data:
+                del cleaned_data['street_address']
         return cleaned_data
 
     class Meta:
