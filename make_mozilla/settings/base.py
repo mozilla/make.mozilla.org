@@ -136,6 +136,8 @@ CACHES = {
     }
 }
 
+## Log settings
+SYSLOG_TAG = "make_mozilla"  # Make this unique to your project.
 LOGGING = {
     'loggers': {
         'mk': {
@@ -145,6 +147,17 @@ LOGGING = {
     }
 }
 
+BSD_EVENT_JSON_FEED_URLS = (
+    ('hack_jam', 'https://donate.mozilla.org/page/event/search_results?format=json&wrap=no&orderby[0]=date&orderby[1]=desc&event_type=2&mime=application/json&limit=10&country=*'),
+    ('kitchen_table', 'https://donate.mozilla.org/page/event/search_results?format=json&wrap=no&orderby[0]=date&orderby[1]=desc&event_type=1&mime=application/json&limit=10&country=*'),
+    ('pop_up', 'https://donate.mozilla.org/page/event/search_results?format=json&wrap=no&orderby[0]=date&orderby[1]=desc&event_type=3&mime=application/json&limit=10&country=*'),
+)
+
+# Common Event Format logging parameters
+#CEF_PRODUCT = 'Playdoh'
+#CEF_VENDOR = 'Mozilla'
+
+# Potentially sensitive or machine-specific values in the below should be overridden in make_mozilla/settings/local.py
 UPLOADED_IMAGES = {
     'location': '/var/webapps/make.mozilla.org/shared/partner_media',
     'base_url': '/media/partner_media/'
@@ -152,8 +165,29 @@ UPLOADED_IMAGES = {
 
 BSD_API_DETAILS = {}
 
-BSD_EVENT_JSON_FEED_URLS = (
-    ('hack_jam', 'https://donate.mozilla.org/page/event/search_results?format=json&wrap=no&orderby[0]=date&orderby[1]=desc&event_type=2&mime=application/json&limit=10&country=*'),
-    ('kitchen_table', 'https://donate.mozilla.org/page/event/search_results?format=json&wrap=no&orderby[0]=date&orderby[1]=desc&event_type=1&mime=application/json&limit=10&country=*'),
-    ('pop_up', 'https://donate.mozilla.org/page/event/search_results?format=json&wrap=no&orderby[0]=date&orderby[1]=desc&event_type=3&mime=application/json&limit=10&country=*'),
-)
+DATABASES = {
+    'default': {
+        'ENGINE': 'make_mozilla.postgis',
+        'NAME': 'make_mozilla',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+        'OPTIONS': {
+        },
+        'TEST_CHARSET': 'utf8',
+    },
+    # 'slave': {
+    #     ...
+    # },
+}
+SOUTH_DATABASE_ADAPTERS = {
+    'default': "south.db.postgresql_psycopg2"
+}
+
+# Uncomment this and set to all slave DBs in use on the site.
+# SLAVE_DATABASES = ['slave']
+
+# CELERY_ALWAYS_EAGER = False  # required to activate celeryd
+BROKER_URL = "redis://localhost:6379/0"
+SITE_URL = 'http://localhost:8000'
