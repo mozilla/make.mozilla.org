@@ -168,12 +168,18 @@ def near_map(request):
     return near_view.render(request, 'events/near-map.html', 24)
 
 
-def about(request):
-    featured_partners = models.Partner.objects.filter(featured=True)
-    return jingo.render(request, 'events/about.html', {
-        'partners': featured_partners,
-    })
+@require_GET
+def campaign(request, slug):
+    campaign = get_object_or_404(models.Campaign, slug=slug)
+    return jingo.render(request, 'events/campaign.html',
+        {'campaign': campaign, 'partners': campaign.partner_set.filter(featured=True)}
+    )
 
+@require_GET
+def partners(request, slug):
+    campaign = get_object_or_404(models.Campaign, slug=slug)
+    return jingo.render(request, 'events/partners.html', 
+            {'campaign': campaign, 'partners': campaign.partner_set.all()})
 
 def guides_all(request):
     event_kinds = models.EventKind.objects.all()
@@ -202,8 +208,3 @@ def guides_pop_up(request):
         'page_data': page_data,
     })
 
-@require_GET
-def partners(request, slug):
-    campaign = get_object_or_404(models.Campaign, slug=slug)
-    return jingo.render(request, 'events/partners.html', 
-            {'campaign': campaign, 'partners': campaign.partner_set.all()})
