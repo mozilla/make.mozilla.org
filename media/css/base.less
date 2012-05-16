@@ -1490,6 +1490,113 @@ ul.tri-set img {
 
 /* ===[ Page Specific Settings ]============================================ */
 
+/* ---[ Code party homepage ]------------------------------------------------- */
+
+.bad-ie #code-party-index #content::before {
+	background-image: url(../img/photos/codeparty_index.jpg);
+}
+
+#code-party-index .summer_info {
+	padding-left: 280px;
+	background: transparent url(../img/summer/logo-grey.png) no-repeat 10px 0;
+	margin-bottom: 20px;
+}
+#code-party-index .summer_info h2 {
+	font-size: 1.6em;
+	font-weight: bold;
+	margin: 0;
+}
+#code-party-index .summer_info p {
+	font-family: "Open Sans Light";
+	font-size: 1.3em;
+	margin: 0.5em 0;
+}
+#code-party-index .summer_info em {
+	font-style: normal;
+	text-transform: uppercase;
+}
+#code-party-index .summer_info .outcomes {
+	display: none;
+	list-style-type: none;
+	font-size: 1.3em;
+	text-transform: uppercase;
+	padding-left: 0;
+	font-family: "Open Sans Light";
+	overflow: hidden;
+	zoom: 1;
+	background: transparent url(../img/summer/wavyline.png) no-repeat 0 0;
+	padding-top: 20px;
+	margin: 20px 0.5em 0 0.5em;
+}
+#code-party-index .outcomes li {
+	width: 125px;
+	margin: 10px 10px 0 0;
+	text-align: center;
+	float: left;
+	padding-top: 130px;
+	background: transparent url(../img/summer/meet.png) no-repeat top center;
+}
+#code-party-index .outcomes .make {
+	background-image: url(../img/summer/make.png);
+}
+#code-party-index .outcomes .learn {
+	background-image: url(../img/summer/learn.png);
+}
+@media screen and (min-width: 901px) {
+	#code-party-index #content::before {
+		background-image: url(../img/photos/codeparty_index.jpg);
+	}
+
+	#code-party-index .summer_info {
+		position: absolute;
+		bottom: 100%;
+		left: 15px;
+		right: 10%;
+		color: #fff;
+		background-image: url(../img/summer/logo.png);
+		margin-bottom: 20px;
+	}
+	#code-party-index .summer_info h2 {
+		color: #fff;
+	}
+	#code-party-index .summer_info .outcomes {
+		display: block;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	#code-party-index #content::before {
+		background-image: url(../img/photos/tablet/codeparty_index.jpg);
+	}
+}
+
+@media screen and (max-width: 700px) {
+	#code-party-index #content::before {
+		background-image: url(../img/photos/handheld/codeparty_index.jpg);
+	}
+	#code-party-index .summer_info {
+		padding-left: 0;
+		padding-top: 200px;
+		background-position: top center;
+	}
+}
+
+#code-party-index #content .constrained {
+	margin-top: -97px;
+	position: relative;
+}
+
+#code-party-index ul.tri-set h4 {
+	text-transform: uppercase;
+	font-weight: normal;
+	font-size: 0.786em;
+}
+
+#code-party-index ul.tri-set p {
+	font-size: 1em;
+	margin-top: 0;
+}
+
 /* ---[ Events Index Page ]------------------------------------------------- */
 
 .bad-ie #events-index #content::before {
