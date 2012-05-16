@@ -15,7 +15,7 @@ env.user = 'make_mozilla'
 hosts = {
     'dev': ['make.constituentparts.com'],
     'development': ['make-dev1.vm1.labs.sjc1.mozilla.com'],
-    'production': [],
+    'production': ['make-prod1.vm.labs.scl3.mozilla.com'],
     'staging': []
 }
 env.deploy_env = os.getenv('TO', 'development')
