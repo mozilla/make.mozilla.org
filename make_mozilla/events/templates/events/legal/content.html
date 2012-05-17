@@ -1,0 +1,28 @@
+{% extends "events/base.html" %}
+
+{% block page_title %}Content Guidelines | {{ super() }}{% endblock %}
+{% block page_id %}content_guidelines{% endblock %}
+{% block section_type %}events legal{% endblock %}
+
+{% block content %}
+<div class="words">
+<h2>Content Guidelines</h2>
+
+<p>This document describes the various types of content that is inappropriate on the Events Platform. If you are a user of the Events Platform, you must not provide or upload content that violates these guidelines. We may update this list from time to time.</p>
+
+<ul class="faux_ol">
+<li>1. No obscene content or graphic depictions of sexuality or violence.</li>
+<li>2. No content that infringes anyone’s rights, including intellectual property or other proprietary rights or rights or privacy or personhood.</li>
+<li>3. No content that is designed to harm Mozilla or users (such as malicious code, viruses, spyware or malware).</li>
+<li>4. No content that is illegal or promotes illegal activities, including content that is deceptive, misleading, fraudulent or is designed to phish or perform other identity theft.</li>
+<li>5. No content that glamorizes or encourages alcohol, drug or tobacco use.</li>
+<li>6. No content that promotes gambling.</li>
+<li>7. No content that engages in the advertisement of illegal or controlled products or services.</li>
+<li>8. No content that is deceptive or fraudulent.</li>
+<li>9. No content that is harmful to minors.</li>
+<li>10. No content or events that are un-related in anyway to <a href="{{ url('splash') }}">Mozilla’s Webmaker Initiative</a>.</li>
+<li>11. No content that is hate speech or degrades, intimidates, incites violence against, or encourages prejudicial action against someone or a group based on age, gender, race, ethnicity, national origin, religion, sexual orientation, disability, region, geographic location or other protected category.</li>
+</ul>
+
+</div>
+{% endblock %}

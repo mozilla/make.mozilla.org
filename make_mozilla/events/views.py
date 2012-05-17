@@ -23,6 +23,7 @@ from make_mozilla.events import models
 from make_mozilla.events import tasks
 from make_mozilla.events import paginators
 
+
 # Workaround from http://gis.stackexchange.com/questions/7553/is-there-a-geodjango-tutorial-for-georssfeeds
 class IndexGeoRSSFeed(Feed):
     title = "Make Mozilla!"
@@ -75,11 +76,13 @@ def _render_event_creation_form(request, event_form, venue_form, privacy_and_leg
         'fieldsets': fieldsets
     })
 
+
 def _process_create_post_data(data):
     event_form = forms.EventForm(data)
     venue_form = forms.VenueForm(data)
     privacy_and_legal_form = forms.PrivacyAndLegalForm(data)
     return (event_form, venue_form, privacy_and_legal_form)
+
 
 def _create_event_and_venue(user, event_form, venue_form):
     venue = venue_form.save()
@@ -89,6 +92,7 @@ def _create_event_and_venue(user, event_form, venue_form):
     event.organiser_email = organiser_email
     event.save()
     return (event, venue)
+
 
 def _add_email_to_bsd(user, privacy_form):
     if privacy_form.cleaned_data['add_me_to_email_list']:
@@ -117,6 +121,7 @@ def search(request):
         })))
 
     return jingo.render(request, 'events/search.html', {'results': results, 'location': location})
+
 
 class Near(object):
     def extract_latlon(self, request):
@@ -175,11 +180,13 @@ def campaign(request, slug):
         {'campaign': campaign, 'partners': campaign.partner_set.filter(featured=True)}
     )
 
+
 @require_GET
 def partners(request, slug):
     campaign = get_object_or_404(models.Campaign, slug=slug)
     return jingo.render(request, 'events/partners.html', 
             {'campaign': campaign, 'partners': campaign.partner_set.all()})
+
 
 def guides_all(request):
     event_kinds = models.EventKind.objects.all()
@@ -208,3 +215,18 @@ def guides_pop_up(request):
         'page_data': page_data,
     })
 
+
+def privacy_policy(request):
+    return jingo.render(request, 'events/legal/privacy.html', {})
+
+
+def terms(request):
+    return jingo.render(request, 'events/legal/terms.html', {})
+
+
+def content_guidelines(request):
+    return jingo.render(request, 'events/legal/content.html', {})
+
+
+def event_guidelines(request):
+    return jingo.render(request, 'events/legal/guidelines.html', {})

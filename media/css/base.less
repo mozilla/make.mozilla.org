@@ -980,7 +980,8 @@ ul.tri-set img {
 /* ---[ Forms ]------------------------------------------------------------- */
 
 #content form,
-#about .words {
+#about .words,
+.legal .words {
 	.box-shadow(@panelShadow);
 
 	background: #FFF;
@@ -2274,4 +2275,33 @@ border-right: none;
 	-o-transform: rotate(2deg);
 	transform: rotate(2deg);
 	background: #f9f9f9;
+}
+
+/* ---[ Legal ]-------------------------------------------------- */
+.faux_ol {
+	list-style-type: none;
+	padding-left: 20px;
+}
+.legal .words li {
+	font-size: 0.929em;
+}
+.faux_ol li {
+	margin-bottom: 0.5em;
+}
+.legal h2 {
+	margin-top: 0;
+}
+.legal .note {
+	background: #F9F9F9;
+	padding: 1em 10px;
+	border-radius: 4px;
+	margin-bottom: 1em;
+}
+.legal .words em {
+	font-weight: bold;
+	font-style: normal;
+}
+.legal address {
+	font-style: normal;
+	font-size: 0.929em;
 }

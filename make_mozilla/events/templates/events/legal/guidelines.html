@@ -1,0 +1,40 @@
+{% extends "events/base.html" %}
+
+{% block page_title %}Event Guidelines | {{ super() }}{% endblock %}
+{% block page_id %}event_guidelines{% endblock %}
+{% block section_type %}events legal{% endblock %}
+
+{% block content %}
+<div class="words">
+	<h2>Event Guidelines; Being Safe on the Events Platform</h2>
+
+	<p>This publication is intended as a general guide and is not to be taken as professional advice.</p>
+
+	<h3>Planning Safe Events</h3>
+	
+	<ul>	
+		<li><em>Is this the right space?</em> This is not the place to announce private and personal events such as birthday parties</li>
+		<li><em>Events may be public:</em> Event information may show up in public searches, don’t submit information that you don’t want to be shared publicly (i.e.: phone number and address)</li>
+		<li><em>Who are you reaching out to?</em> Be aware of your audience both on the Events Platform and at your event.</li>
+		<li><em>Who uses the Events Platform?</em> The events platform is meant for a broad range of users - please keep your content appropriate.  See the <a href="{{ url('events_content' ) }}">Content Guidelines for details</a></li>
+		<li><em>Venue:</em> Make sure your venue is the right choice (i.e.: size, location and accessibility)</li>
+		<li><em>Releases:</em> If you plan on taking and using recordings, pictures and/or video, be sure to secure releases from your participants</li>
+	</ul>
+
+	<h3>If You are Attending an Event</h3>
+
+	<ul>
+		<li><em>Location:</em> Know where you are going and how you are getting to and from</li>
+		<li><em>Be safe:</em> Do you know who is putting on the event, especially if it is at a private residence?</li>
+	</ul>
+
+	<h3>Special Consideration for Minors</h3>
+
+	<ul>
+		<li><em>Parent involvement:</em> If you are planning an event, keep parents involved, including, if appropriate, that parents accompany their children to the event and sign consent forms</li>
+		<li><em>Interaction between adults and minors:</em> Make sure everyone respects each other’s personal space and that individual adults who are not legal guardians of a minor are not left alone with that minor</li>
+		<li><em>Venue and time:</em> If you expect minors to attend make sure the venue and time are age appropriate</li>
+	</ul>
+
+</div>
+{% endblock %}

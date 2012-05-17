@@ -4,7 +4,7 @@ from make_mozilla.events import views
 from make_mozilla.events import models
 
 summer_campaign = models.Campaign.objects.all()[:1][0]
-about_redirect = RedirectView.as_view(url = '/events/about/%s/' % summer_campaign.slug)
+about_redirect = RedirectView.as_view(url='/events/about/%s/' % summer_campaign.slug)
 
 urlpatterns = patterns('',
     url(r'^$',
@@ -29,6 +29,14 @@ urlpatterns = patterns('',
         views.partners,             name='partners'),
     url(r'^about/partners/$',
         views.partners,             name='partners'),
+    url(r'^legal/privacy-policy/$',
+        views.privacy_policy,       name='events_privacy'),
+    url(r'^legal/terms-of-use/$',
+        views.terms,                name='events_terms'),
+    url(r'^legal/content-guidelines/$',
+        views.content_guidelines,   name='events_content'),
+    url(r'^legal/event-guidelines/$',
+        views.event_guidelines,   name='events_guidelines'),
     url(r'^guides/$',
         views.guides_all,           name='guides_all'),
     url(r'^guides/kitchen-table/$',
