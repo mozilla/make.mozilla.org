@@ -1,5 +1,7 @@
 {% extends "events/base.html" %}
 
+{% block page_title %}How to host a Hack Jam | {{ super() }}{% endblock %}
+
 {% block page_id %}guides-hack_jam{% endblock %}
 {% block page_class %}{{ super() }} guides-inner brochure-page{% endblock %}
 
@@ -52,6 +54,7 @@
             <h5 class="sub_head">Decide what you want to make</h5>
 
             <ul>
+                <li><b><a href="{{ url('events_guidelines') }}">Read our guidelines on planning safe events</a></b></li>
                 <li> <b>Talk with participants</b> about their interests.</li>
                 <li> <b>Decide on a challenge or question</b> to explore together. For example:
                     <ul>

@@ -1,5 +1,7 @@
 {% extends "events/base.html" %}
 
+{% block page_title %}How to host a Pop-Up | {{ super() }}{% endblock %}
+
 {% block page_id %}guides-pop_up{% endblock %}
 {% block page_class %}{{ super() }} guides-inner brochure-page{% endblock %}
 
@@ -54,6 +56,7 @@
               <h5 class="sub_head">Decide what you want to make</h5>
 
                     <ul>
+                        <li><b><a href="{{ url('events_guidelines') }}">Read our guidelines on planning safe events</a></b></li>
                         <li>Recruit a <b>handful of organizations</b> interested in webmaking.</li>
                         <li><b>Each organization will host a learning station,</b> i.e. a simple table-top activity,  based on their programs. </li>
                         <li>You can also <a href="http://wpm.toolness.org/en-US/projects" class="external text" rel="nofollow">use these webmaker projects</a>as ideas.</li>

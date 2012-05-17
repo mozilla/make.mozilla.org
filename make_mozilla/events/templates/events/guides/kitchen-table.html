@@ -1,5 +1,7 @@
 {% extends "events/base.html" %}
 
+{% block page_title %}How to host a Kitchen Table | {{ super() }}{% endblock %}
+
 {% block page_id %}guides-kitchen_table{% endblock %}
 {% block page_class %}{{ super() }} guides-inner brochure-page{% endblock %}
 
@@ -53,9 +55,10 @@
             <h5 class="sub_head">Decide what you want to make</h5>
 
                 <ul>
-                    <li> <b><a href="http://wpm.toolness.org/en-US/projects" class="external text" rel="nofollow">Select a project</a></b> to get you started with making things on the web.</li>
-                    <li> Think about the <b>interests and skill levels</b> of your group. Adapt projects accordingly. </li>
-                    <li> If you try something different, <a href="https://events.etherpad.mozilla.org/kitchentable-hacks" class="external text" rel="nofollow">let us know how it went.</a></li>
+                    <li><b><a href="http://wpm.toolness.org/en-US/projects" class="external text" rel="nofollow">Select a project</a></b> to get you started with making things on the web.</li>
+                    <li><b><a href="{{ url('events_guidelines') }}">Read our guidelines on planning safe events</a></b></li>
+                    <li>Think about the <b>interests and skill levels</b> of your group. Adapt projects accordingly. </li>
+                    <li>If you try something different, <a href="https://events.etherpad.mozilla.org/kitchentable-hacks" class="external text" rel="nofollow">let us know how it went.</a></li>
                 </ul>
             
             <h5 class="sub_head">Find a space and a date</h5>
@@ -111,7 +114,6 @@
                     <ul>
                         <li> <a href="http://p2pu.org/en/schools/school-of-webcraft/" class="external text" rel="nofollow">Peer to Peer University</a> (P2PU)</li>
                         <li> <a href="https://developer.mozilla.org/en-US/" class="external text" rel="nofollow">Mozilla Developer Network</a> (MDN)</li>
-                        <li> <a href="http://www.w3schools.com/html/" class="external text" rel="nofollow">World Wide Web Consortium</a> (W3C)</li>
                         <li> <a href="http://www.codecademy.com/tracks/web" class="external text" rel="nofollow">Code Academy</a></li>
                     </ul>
                 </li>
