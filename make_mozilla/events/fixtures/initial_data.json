@@ -31,5 +31,17 @@
       "figures": "<ul class='figures'><li class='mark numbers'>2-10 organizations, 20-50 participants</li><li class='mark duration'>Half day</li><li class='mark venue'>In an open space</li></ul>",
       "additional": "<ul><li><b>Set up learning stations</b> led by local organization.</li><li><b>Sample the activities </b> and hack as long as participants like.</li><li><b>Discuss next steps</b> for a community in your city.</li></ul>"
     }
+  },
+  {
+    "pk": 1,
+    "model": "events.Campaign",
+    "fields": {
+      "name": "Summer Campaign",
+      "description": "Mozilla Summer Code Party",
+      "logo": "cheese.jpg",
+      "slug": "summer_campaign",
+      "start": "2012-05-14",
+      "end": "2012-09-30"
+    }
   }
 ]
