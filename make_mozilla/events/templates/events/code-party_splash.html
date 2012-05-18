@@ -6,13 +6,14 @@
 {% block content %}
 
 <div class="intro-bar">
-    <h2>Teach. Meet. Learn. Share.</h2>
+    <h2>Join the party:</h2>
     <p><a href="{{ url('events.search') }}" class="button find">Find an Event</a> <em>or</em> <a href="https://donate.mozilla.org/page/event/create/" class="button create">Create an Event</a></p>
 </div>
 
 <div class="summer_info">
-    <h2>Teaching the world to code</h2>
-    <p>We're building a generation of webmakers. First step: invite people everywhere to <em>meet</em> up to <em>make</em> something cool and <em>learn</em> how the code behind the web works. It's called the Summer Code party and it starts June 23rd.</p>
+    <h2>Let's make and learn together</h2>
+    {% if current_campaign %}<span class="date">{{ current_campaign.start.strftime('%b %d') }} - {{ current_campaign.end.strftime('%b %d') }}</span>{% endif %}
+    <p>We want to help you make something amazing on the web this summer -- and maybe learn a little code along the way. Join or volunteer at Summer Code Party events and teach-ins around the world. We’ve got Webmaker TOOLS for you to use, fun PROJECTS to create, and awesome EVENTS to join. Or create your own!</p>
     <a href="{{ url('about') }}" class="button create">Learn more</a>
     <ul class="outcomes">
         <li>meet</li>
@@ -21,23 +22,23 @@
     </ul>
 </div>
 
-<h3>What's New with Webmaker Events?</h3>
+<h3>What's New?</h3>
 
 <ul class="tri-set">
     <li>
         <a href="{{ url('events.search') }}" class="thumb"><img src="../media/img/events_map.png" alt=""></a>
-        <h4>Events are live!</h4>
+        <h4>Around the world</h4>
         <p><a href="{{ url('events.search') }}">Learn with Friends Near You</a></p>
     </li>
     <li>
         <a href="{{ url('guides_all') }}" class="thumb"><img src="../media/img/guides.gif" alt=""></a>
-        <h4>Create your event</h4>
-        <p><a href="{{ url('guides_all') }}">Our Handy Guides will Help!</a></p>
+        <h4>Create your own event</h4>
+        <p><a href="{{ url('guides_all') }}">Our Handy Event Guides make it easy!</a></p>
     </li>
     <li>
         <a href="{{ url('about') }}" class="thumb"><img src="../media/img/code_party.jpg" alt=""></a>
-        <h4>Announcing:</a></h4>
-        <p><a href="{{ url('about') }}">The Mozilla Summer Campaign</a></p>
+        <h4>What's this all about?</a></h4>
+        <p><a href="{{ url('about') }}">Learn more about the Summer Code Party</a></p>
     </li>
 </ul>
 {% endblock %}
