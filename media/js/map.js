@@ -163,8 +163,8 @@ var map = (function (config) {
         searchWrapper.appendChild(search);
 
         $(search).keypress(function(e) {
-            if ( event.which == 10 ) {
-                event.preventDefault();
+            if ( e.which == 10 ) {
+                e.preventDefault();
             }
         });
 
