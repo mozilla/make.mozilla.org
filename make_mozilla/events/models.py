@@ -4,6 +4,7 @@ from django.contrib.gis import geos, measure
 from django_countries import CountryField
 from django.utils.safestring import mark_safe
 from django.core.files.storage import FileSystemStorage
+from django.core.exceptions import ObjectDoesNotExist
 
 from datetime import datetime
 from tower import ugettext_lazy as _
@@ -93,6 +94,14 @@ class Campaign(models.Model):
     slug = models.SlugField()
     start = models.DateField()
     end = models.DateField()
+
+    @classmethod
+    def current(self):
+        today = datetime.today().date()
+        try:
+            return self.objects.filter(start__lte=today, end__gte=today).order_by('start').get()
+        except ObjectDoesNotExist:
+            return None
 
     def __unicode__(self):
         return '%s - %s to %s' % (self.name, self.start, self.end)
