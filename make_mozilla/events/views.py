@@ -43,7 +43,12 @@ class IndexGeoRSSFeed(Feed):
 
 def index(request):
     event_kinds = models.EventKind.objects.all()
-    return jingo.render(request, 'events/code-party_splash.html', {'event_kinds': event_kinds})
+    current_campaign = models.Campaign.current()
+
+    return jingo.render(request, 'events/code-party_splash.html', {
+        'event_kinds': event_kinds,
+        'current_campaign': current_campaign,
+    })
 
 
 @login_required
