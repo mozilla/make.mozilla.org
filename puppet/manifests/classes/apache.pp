@@ -18,7 +18,9 @@ class apache {
       onlyif => 'test ! -e /etc/apache2/mods-enabled/rewrite.load';
     'a2enmod proxy':
       onlyif => 'test ! -e /etc/apache2/mods-enabled/proxy.load';
-    'a2ensite playdoh': 
+    'a2dissite playdoh':
+      onlyif => 'test -L /etc/apache2/sites-enabled/playdoh';
+    'a2ensite playdoh':
       require => [Package['apache2-prefork-dev'], File['/etc/apache2/sites-available/playdoh']],
       onlyif => 'test ! -L /etc/apache2/sites-enabled/playdoh';
   }
