@@ -7,6 +7,7 @@ from django.contrib.gis.feeds import GeoRSSFeed
 from django.utils.http import urlquote_plus, urlencode
 from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import redirect, get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
 
 import urllib2
 import json
@@ -43,7 +44,10 @@ class IndexGeoRSSFeed(Feed):
 
 def index(request):
     event_kinds = models.EventKind.objects.all()
-    current_campaign = models.Campaign.current()
+    try:
+        current_campaign = models.Campaign.objects.get(pk=1)
+    except ObjectDoesNotExist:
+        current_campaign = None
 
     return jingo.render(request, 'events/code-party_splash.html', {
         'event_kinds': event_kinds,
