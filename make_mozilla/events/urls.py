@@ -3,8 +3,12 @@ from django.views.generic import RedirectView
 from make_mozilla.events import views
 from make_mozilla.events import models
 
-summer_campaign = models.Campaign.objects.all()[:1][0]
-about_redirect = RedirectView.as_view(url='/events/about/%s/' % summer_campaign.slug)
+summer_campaign_slug = 'summer-code-party'
+first_campaign_horrid_hack_list = list(models.Campaign.objects.all()[:1])
+if len(first_campaign_horrid_hack_list) > 0:
+    summer_campaign_slug = first_campaign_horrid_hack_list[0].slug
+
+about_redirect = RedirectView.as_view(url='/events/about/%s/' % summer_campaign_slug)
 
 urlpatterns = patterns('',
     url(r'^$',
@@ -26,8 +30,6 @@ urlpatterns = patterns('',
     url(r'^about/(?P<slug>[a-z0-9_-]+)/$',
         views.campaign,             name='campaign'),
     url(r'^about/(?P<slug>[a-z0-9_-]+)/partners/$',
-        views.partners,             name='partners'),
-    url(r'^about/partners/$',
         views.partners,             name='partners'),
     url(r'^legal/privacy-policy/$',
         views.privacy_policy,       name='events_privacy'),

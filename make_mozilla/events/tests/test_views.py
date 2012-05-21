@@ -327,7 +327,7 @@ class TestEventViewsNear(unittest.TestCase):
 
 class TestEventViewsPartnersList(unittest.TestCase):
     def test_that_it_routes(self):
-        assert_routing('/events/about/summer-code-party/partners/', views.partners, name = 'partners')
+        assert_routing('/events/about/summer-code-party/partners/', views.partners, name = 'partners', kwargs = {'slug': 'summer-code-party'})
 
     @patch.object(views, 'get_object_or_404')
     @patch('jingo.render')

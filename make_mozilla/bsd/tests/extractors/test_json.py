@@ -11,6 +11,9 @@ from make_mozilla.bsd.extractors import json as extractors
 def ef():
     return json_fixture('event.json')
 
+def oef():
+    return json_fixture('official_event.json')
+
 class EventExtractorTest(unittest.TestCase):
     def test_name_is_extracted_correctly(self):
         eq_(extractors.event_name(ef()),
@@ -26,6 +29,10 @@ class EventExtractorTest(unittest.TestCase):
     def test_description_is_extracted_correctly(self):
         eq_(extractors.event_description(ef()),
             {'description': '<p>This is Ben\'s test event. Aint nothin gonna happen.</p>'})
+
+    def test_official_status_is_extracted_correctly(self):
+        eq_(extractors.event_official(oef()),
+            {'official': True})
 
 class VenueExtractorTest(unittest.TestCase):
     def test_name_is_extracted_correctly(self):

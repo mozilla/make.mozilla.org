@@ -15,6 +15,12 @@ def event_times(event_json):
 def event_description(event_json):
     return {'description': event_json['description']}
 
+def event_official(event_json):
+    official = False
+    if event_json['is_official'] == '1':
+        official = True
+    return {'official': official}
+
 def venue_name(event_json):
     return {'name': event_json['venue_name']}
 

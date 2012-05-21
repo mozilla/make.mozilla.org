@@ -40,9 +40,13 @@ class BSDClient(object):
 
     @classmethod
     def fetch_event(cls, obfuscated_event_id):
+        return json.loads(cls.fetch_event_body(obfuscated_event_id))
+
+    @classmethod
+    def fetch_event_body(cls, obfuscated_event_id):
         response = cls._get('/event/get_event_details',
                 {'values': json.dumps({'event_id_obfuscated': obfuscated_event_id})})
-        return json.loads(response.body)
+        return response.body
 
     @classmethod
     def _api_response_charset(cls, api_response):
@@ -102,7 +106,7 @@ class BSDEventImporter(object):
         BSDEventImporter().process_event_from_json(event_kind, event_url, event_json)
 
     def event_extractors(self):
-        return [json_extractors.event_name, json_extractors.event_times, json_extractors.event_description]
+        return [json_extractors.event_name, json_extractors.event_times, json_extractors.event_description, json_extractors.event_official]
 
     def venue_extractors(self):
         return [json_extractors.venue_name, json_extractors.venue_country, 
