@@ -80,5 +80,5 @@ class PrivacyAndLegalForm(forms.Form):
         super(PrivacyAndLegalForm, self).__init__(*args, **kwargs)
         self.prefix = 'privacy-and-legal'
 
-    accept_terms = forms.BooleanField(label = '', help_text = u'I’m okay with you handling this info as you explain in your <a href="/events/legal/privacy-policy/">privacy policy</a>.')
+    accept_terms = forms.BooleanField(label = '', help_text = u'I agree to the Mozilla Events Platform <a href="/events/legal/terms-of-use/">Terms of Use</a> and <a href="/events/legal/privacy-policy/">Privacy Policy</a>. ')
     add_me_to_email_list = forms.BooleanField(required = False, label = '', help_text = 'I want to receive email updates about this event and other Mozilla events, projects, and campaigns.')
