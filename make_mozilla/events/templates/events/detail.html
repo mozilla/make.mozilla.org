@@ -6,7 +6,7 @@
 {% block content %}
 <div class="details panel">
     <h2>{{ event.name }}</h2>
-    <p>{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }}</p>
+    {% if event.start %}<p>{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }}</p>{% endif %}
     {% if event.venue.name %}<p>{{ event.venue.name }}</p>{% endif %}
     {% if event.event_url %}<p><a href="{{ event.event_url }}" class="button find">Register for event</a></p>{% endif %}
     <div class="description">
@@ -26,6 +26,7 @@
         <p>{{ event.venue.street_address|nl2br }}<br>{{ event.venue.country.name }}</p>
         <p><a href="/events/near/?lat={{ event.venue.latitude }}&amp;lng={{ event.venue.longitude }}">Events nearby</a></p>
     </div>
+    {% if event.start and event.end %}
     <div class="date">
         {% if event.start.date() == event.end.date() %}
         <p>{{ event.start.strftime('%A, %B %-d, %Y') }}<br>
@@ -33,5 +34,6 @@
         {% else %}
         {% endif %}
     </div>
+    {% endif %}
 </div>
 {% endblock %}
