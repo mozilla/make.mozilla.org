@@ -176,7 +176,7 @@ class TestEventViewsCreate(TestCase):
 
         mock_bsd_email_func.assert_called_with(mock_user, self.mock_lf)
         mock_create_func.assert_called_with(mock_user, self.mock_ef, self.mock_vf)
-        assert_redirects_to_named_url(response, 'event', kwargs = {'event_id': 1})
+        assert_redirects_to_named_url(response, 'event', kwargs = {'event_hash': 'e25388fde'})
 
     def test_that_create_event_and_venue_does_that_given_valid_data(self):
         event_kind = models.EventKind(name = "Test", slug = "test", description = "Test")
