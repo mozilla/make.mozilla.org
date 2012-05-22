@@ -11,6 +11,9 @@ from tower import ugettext_lazy as _
 
 from make_mozilla.base.html import bleached
 
+import hashlib
+
+
 class Venue(models.Model):
     name = models.CharField(max_length=255)
     street_address = models.TextField()
@@ -53,6 +56,7 @@ def _upcoming(qs, sort, include_private):
 
 class Event(models.Model):
     name = models.CharField(max_length = 255)
+    url_hash = models.CharField(max_length = 20, blank = True)
     description = models.TextField()
     event_url = models.URLField(blank = True)
     venue = models.ForeignKey(Venue)
@@ -68,8 +72,21 @@ class Event(models.Model):
 
     objects = models.GeoManager()
 
+    def save(self, *args, **kwargs):
+        super(Event, self).save(*args, **kwargs)
+        if not self.url_hash:
+            # We have to do this after a save, because we need an ID from the DB
+            self.url_hash = hashlib.sha224('%d' % self.id).hexdigest()[:9]
+            self.save()
+
     def __unicode__(self):
         return self.name
+
+    @property
+    def hash(self):
+        if not self.url_hash:
+            self.save()
+        return self.url_hash
 
     @property
     def bleached_description(self):
