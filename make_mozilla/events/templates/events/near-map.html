@@ -42,7 +42,7 @@
                     name: '{{ event.name|escape }}',
                     latitude: {{ event.venue.latitude }},
                     longitude: {{ event.venue.longitude }},
-                    url: '{% if event.bsd_hosted() %}{{ event.event_url|escape }}{% else %}{{ url('event', event.id)|escape }}{% endif %}',
+                    url: '{% if event.bsd_hosted() %}{{ event.event_url|escape }}{% else %}{{ url('event', event.hash)|escape }}{% endif %}',
                     venue: '{{ event.venue.name|escape }}',
                     address: '{{ event.venue.street_address|replace('\r', '')|replace('\n', ', ')|escape }}',
                     from: new Date('{{ event.start.strftime('%a, %d %b %Y %H:%M:%S UTC%z') }}'),

@@ -14,7 +14,7 @@
         {% for event in results.object_list %}
             <li{% if event.official %} class="official"{% endif %}>
                 <div class="about">
-                    <h4><a href="{% if event.bsd_hosted() %}{{ event.event_url }}{% else %}{{ url('event', event.id) }}{% endif %}">{{ event.name }}</a></h4>
+                    <h4><a href="{% if event.bsd_hosted() %}{{ event.event_url }}{% else %}{{ url('event', event.hash) }}{% endif %}">{{ event.name }}</a></h4>
                     {% if event.start.date() == event.end.date() %}
                     <p>{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }} to {{ event.end.strftime('%-I:%M %p') }}</p>
                     {% else %}
