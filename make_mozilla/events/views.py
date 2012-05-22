@@ -67,7 +67,7 @@ def create(request):
     if lf.is_valid() and ef.is_valid() and vf.is_valid():
         event, venue = _create_event_and_venue(request.user, ef, vf)
         _add_email_to_bsd(request.user, lf)
-        return http.HttpResponseRedirect(reverse('event', kwargs={'event_id': event.id}))
+        return http.HttpResponseRedirect(reverse('event', kwargs={'event_hash': event.hash}))
 
     return _render_event_creation_form(request, ef, vf, lf)
 
