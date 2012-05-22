@@ -12,9 +12,7 @@
     {% if event.event_url %}<p><a href="{{ event.event_url }}" class="button find u-url url">Register for event</a></p>{% endif %}
     <div class="p-description description">
         <h3>Event Description</h3>
-        <div>
-            {{ event.bleached_description }}
-        </div>
+        <p>{{ event.bleached_description|replace('<p>','',1)|safe }}
     </div>
 </div>
 
