@@ -81,9 +81,10 @@ def query_dict_from(data_dict):
     qd.update(data_dict)
     return qd
 
-def mock_persisted_event(id = 1):
+def mock_persisted_event(id = 1, hash = 'e25388fde'):
     mock_event = Mock()
     mock_event.id = id
+    mock_event.hash = hash
     return mock_event
 
 class TestEventViewsCreate(TestCase):
