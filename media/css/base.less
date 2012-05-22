@@ -76,6 +76,10 @@ h3 {
 	padding: 0;
 }
 
+h3.shout {
+    text-align: center;
+}
+
 h4 {
 	margin: 0;
 	padding: 0;
@@ -1490,6 +1494,73 @@ ul.tri-set img {
 	}
 }
 
+/* ---[ Mastheads ]--------------------------------------------------------- */
+
+.masthead {
+	text-align: center;
+	padding-top: 30px;
+	text-transform: uppercase;
+	width: 320px;
+	margin: 0 auto;
+	background: transparent 50% 0 no-repeat;
+}
+
+.masthead .plaque {
+	background: #2bb673;
+	color: #fff;
+	display: inline-block;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 1;
+	letter-spacing: 2px;
+	padding: 10px 20px;
+	position: relative;
+}
+
+.masthead .plaque::after,
+.masthead .plaque::before {
+	border-bottom: 17px solid #2bb673;
+	border-top: 17px solid #2bb673;
+	content: "";
+	position: absolute;
+	top: 0;
+}
+
+.masthead .plaque::after {
+	border-right: 17px solid transparent;
+	right: -17px;
+}
+
+.masthead .plaque::before {
+	border-left: 17px solid transparent;
+	left: -17px;
+}
+
+.masthead p {
+	padding: 0 60px;
+	position: relative;
+	margin: 1em 20px;
+	color: #fff;
+}
+
+.masthead p::after,
+.masthead p::before {
+	position: absolute;
+	top: 50%;
+	background: #d3d1d2;
+	height: 1px;
+	width: 60px;
+	content: "";
+	display: block;
+}
+
+.masthead p::after {
+	right: 0;
+}
+
+.masthead p::before {
+	left: 0;
+}
 /* ===[ Page Specific Settings ]============================================ */
 
 /* ---[ Code party homepage ]------------------------------------------------- */
@@ -1986,69 +2057,12 @@ ul.tri-set img {
 	}
 }
 
-.masthead {
-	text-align: center;
-  	padding-top: 30px;
-  	text-transform: uppercase;
-  	width: 320px;
-  	margin: 0 auto;
-    background: transparent url(../img/guide_book.png) no-repeat top center;
-}
-.masthead .plaque {
-  	background: #2bb673;
-  	color: #fff;
-  	display: inline-block;
-  	margin-bottom: 0;
-  	font-size: 14px;
-    line-height: 1;
-  	letter-spacing: 2px;
-  	padding: 10px 20px;
-  	position: relative;
-}
-.masthead .plaque:after,
-.masthead .plaque:before {
-  	border-bottom: 17px solid #2bb673;
-  	border-top: 17px solid #2bb673;
-  	content: "";
-  	position: absolute;
-  	top: 0;
-}
-.masthead .plaque:after {
-  	border-right: 17px solid transparent;
-  	right: -17px;
-}
-.masthead .plaque:before {
-  	border-left: 17px solid transparent;
-  	left: -17px;
-}
-.masthead p {
-  	padding: 0 60px;
-  	position: relative;
-  	margin: 1em 20px;
-  	color: #fff;
+#guides-index .masthead {
+    background-image: url(../img/guide_book.png);
 }
 #guides-index .masthead p,
 #login .masthead p {
     color: #939598;
-}
-.masthead p:after,
-.masthead p:before {
-  	position: absolute;
-  	top: 50%;
-  	background: #d3d1d2;
-  	height: 1px;
-  	width: 60px;
-  	content: "";
-  	display: block;
-}
-.masthead p:after {
-	right: 0;
-}
-.masthead p:before {
-	left: 0;
-}
-#guides-index h3.shout {
-    text-align: center;
 }
 #guides-index .tri-set h3 {
 	color: #27AAE1;
