@@ -108,8 +108,13 @@ def _add_email_to_bsd(user, privacy_form):
         tasks.register_email_address_as_constituent.delay(user.email, '111')
 
 
-def details(request, event_id):
+def from_id(request, event_id):
     event = get_object_or_404(models.Event, pk=event_id)
+    return http.HttpResponseRedirect(reverse('event', kwargs={'event_hash': event.hash}))
+
+
+def details(request, event_hash):
+    event = get_object_or_404(models.Event, url_hash=event_hash)
     return jingo.render(request, 'events/detail.html', {'event': event})
 
 
