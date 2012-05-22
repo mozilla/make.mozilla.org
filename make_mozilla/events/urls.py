@@ -46,5 +46,7 @@ urlpatterns = patterns('',
     url(r'^guides/pop-up/$',
         views.guides_pop_up,        name='guides_pop_up'),
     url(r'^(?P<event_id>\d+)/$',
-        views.details,              name='event'),
+        views.from_id,              name='event.from_id'),
+    url(r'^(?P<event_hash>[a-z0-9]{9,})/$',
+        views.details,              name='event')
 )
