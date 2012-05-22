@@ -222,11 +222,11 @@ class TestEventViewsDetail(unittest.TestCase):
     def test_that_it_correctly_fetches_the_event(self, mock_render, mock_event_get):
         mock_event = Mock()
         mock_event_get.return_value = mock_event
-        request = rf.get('/events/1')
-        views.details(request, event_id = '1')
+        request = rf.get('/events/e25388fde')
+        views.details(request, event_hash = 'e25388fde')
 
         mock_render.assert_called_with(request, 'events/detail.html', {'event': mock_event})
-        mock_event_get.assert_called_with(models.Event, pk = '1')
+        mock_event_get.assert_called_with(models.Event, url_hash = 'e25388fde')
 
 class TestEventViewsNear(unittest.TestCase):
     def test_that_it_routes_correctly_for_the_map(self):
