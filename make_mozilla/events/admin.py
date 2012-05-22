@@ -6,6 +6,7 @@ class EventAdmin(admin.ModelAdmin):
     model = models.Event
     list_display = ('name', 'kind', 'venue')
     list_filter = ('kind', 'campaign', 'verified', 'official', 'public')
+    exclude = ('url_hash',)
 
 
 class PartnerAdmin(admin.ModelAdmin):
