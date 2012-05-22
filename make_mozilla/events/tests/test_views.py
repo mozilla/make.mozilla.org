@@ -215,7 +215,7 @@ class TestEventViewsCreate(TestCase):
 
 class TestEventViewsDetail(unittest.TestCase):
     def test_that_it_routes_correctly(self):
-        assert_routing('/events/12/', views.details, name = 'event', kwargs = {'event_id': '12'})
+        assert_routing('/events/e25388fde/', views.details, name = 'event', kwargs = {'event_hash': 'e25388fde'})
 
     @patch.object(views, 'get_object_or_404')
     @patch('jingo.render')
