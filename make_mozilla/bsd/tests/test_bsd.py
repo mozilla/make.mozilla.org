@@ -232,7 +232,7 @@ class BSDEventImporterTest(unittest.TestCase):
                 patch.object(self.importer, 'fetch_organiser_email_from_bsd'),
                 patch.object(self.importer, 'venue_for_event'),
                 patch.object(self.importer, 'new_models_from_json'),
-                patch.object(self.importer, 'are_model_instances_identical')
+                patch.object(models.EventAndVenueUpdater, 'are_model_instances_identical')
             ) as (mock_source_id_func, mock_fetch_event_func,
                     mock_fetch_organiser_func, mock_venue_func,
                     mock_new_models_func, mock_identical_func):
@@ -313,29 +313,6 @@ class BSDEventImporterTest(unittest.TestCase):
         eq_(self.importer.venue_for_event(models.Event()), mock_venue)
         MockVenue.assert_called_with()
 
-    def test_that_identical_model_instances_can_be_compared_properly(self):
-        e1 = models.Event(id = 1, name = "Hallo")
-        e2 = models.Event(id = 1, name = "Hallo")
-
-        ok_(self.importer.are_model_instances_identical(e1, e2))
-
-    def test_that_non_identical_model_instances_compare_false(self):
-        e1 = models.Event(id = 1, name = "Hallo")
-        e2 = models.Event(id = 1, name = "Boo hoo")
-
-        ok_(not self.importer.are_model_instances_identical(e1, e2))
-
-    def test_that_model_instances_of_different_classes_compare_false(self):
-        e1 = models.Event(id = 1, name = "Hallo")
-        e2 = models.Venue(id = 1, name = "Hallo")
-
-        ok_(not self.importer.are_model_instances_identical(e1, e2))
-
-    def test_that_unset_ids_are_ignored_when_comparing_instances(self):
-        e1 = models.Event(id = 1, name = "Hallo")
-        e2 = models.Event(id = None, name = "Hallo")
-
-        ok_(self.importer.are_model_instances_identical(e1, e2))
 
     @patch.object(bsd, 'Venue')
     @patch.object(bsd, 'Event')

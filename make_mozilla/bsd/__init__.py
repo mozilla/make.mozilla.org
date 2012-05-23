@@ -2,7 +2,7 @@ import json, urllib2, re
 
 from bsdapi.BsdApi import Factory as BSDApiFactory
 from django.conf import settings
-from make_mozilla.events.models import Event, Venue
+from make_mozilla.events.models import Event, Venue, EventAndVenueUpdater
 from make_mozilla.bsd.extractors import json as json_extractors
 from make_mozilla.bsd.extractors import xml as xml_extractors
 import email.parser
@@ -131,14 +131,6 @@ class BSDEventImporter(object):
             return event.venue
         return Venue()
 
-    def are_model_instances_identical(self, instance1, instance2):
-        if not (type(instance1) == type(instance2)):
-            return False
-        local_fields = [f for f in instance1._meta.local_fields if not f.primary_key]
-        def comparator(initial, field):
-            return initial and (field.value_from_object(instance1) == field.value_from_object(instance2))
-        return reduce(comparator, local_fields, True)
-
     def extract_from_event_json(self, event_json):
         event_attrs = {}
         [event_attrs.update(f(event_json)) for f in self.event_extractors()]
@@ -163,22 +155,14 @@ class BSDEventImporter(object):
         new_event.event_url = event_url
         new_event.source_id = source_id
         new_event.organiser_email = organiser_email
-        if not self.are_model_instances_identical(venue, new_venue):
-            venue = new_venue
-        venue.save()
-        if not self.are_model_instances_identical(event, new_event):
-            if event.id:
-                new_event.id = event.id
-            event = new_event
+        new_event.kind = event_kind
+        new_event.public = True
+        new_event.verified = True
         if event.id:
             log.info('Updating event %s from %s' % (event.id, event_url))
         else:
             log.info('Adding new event for %s' % event_url)
-        event.kind = event_kind
-        event.venue = venue
-        event.public = True
-        event.verified = True
-        event.save()
+        EventAndVenueUpdater.update(event, new_event, venue, new_venue)
 
 class BSDApiError(BaseException):
     pass

@@ -101,3 +101,28 @@ class EventTest(django.test.TestCase):
         e = models.Event(name = 'An Event', organiser_email = 'moz@example.com')
         user = auth_models.User(email = 'boz@example.com')
         assert not e.verify_ownership(user)
+
+class TestEventAndVenueUpdater(unittest.TestCase):
+    def test_that_identical_model_instances_can_be_compared_properly(self):
+        e1 = models.Event(id = 1, name = "Hallo")
+        e2 = models.Event(id = 1, name = "Hallo")
+
+        ok_(models.EventAndVenueUpdater.are_model_instances_identical(e1, e2))
+
+    def test_that_non_identical_model_instances_compare_false(self):
+        e1 = models.Event(id = 1, name = "Hallo")
+        e2 = models.Event(id = 1, name = "Boo hoo")
+
+        ok_(not models.EventAndVenueUpdater.are_model_instances_identical(e1, e2))
+
+    def test_that_model_instances_of_different_classes_compare_false(self):
+        e1 = models.Event(id = 1, name = "Hallo")
+        e2 = models.Venue(id = 1, name = "Hallo")
+
+        ok_(not models.EventAndVenueUpdater.are_model_instances_identical(e1, e2))
+
+    def test_that_unset_ids_are_ignored_when_comparing_instances(self):
+        e1 = models.Event(id = 1, name = "Hallo")
+        e2 = models.Event(id = None, name = "Hallo")
+
+        ok_(models.EventAndVenueUpdater.are_model_instances_identical(e1, e2))

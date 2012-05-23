@@ -1,7 +1,7 @@
 {% extends "events/base.html" %}
 
 {% block content %}
-<h2>Create a New Event</h2>
+<h2>{% block page_heading %}{% endblock %}</h2>
 <form method="post" action="{% block form_action %}{% endblock %}" id="create-form" class="with-required">
     {% for fieldset in fieldsets %}
         <fieldset{% if fieldset.className %} class="{{ fieldset.className }}"{% endif %}>

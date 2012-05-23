@@ -230,25 +230,27 @@ class TestEventViewsDetail(unittest.TestCase):
 
 class TestEventViewsEdit(unittest.TestCase):
     def test_that_it_routes_correctly(self):
-        assert_routing('/events/123456789/edit/', views.edit, name = 'event.edit', kwargs = {'event_hash': '123456789'})
+        assert_routing('/events/123456789/edit/', views.edit_or_update, name = 'event.edit', kwargs = {'event_hash': '123456789'})
 
     @patch.object(views, 'get_object_or_404')
-    @patch('jingo.render')
+    @patch.object(views, '_render_event_creation_form')
     def test_that_it_correctly_fetches_the_event(self, mock_render, mock_event_get):
         mock_user = Mock()
-        mock_event = Mock()
+        mock_event = models.Event()
+        mock_event.venue = models.Venue()
         mock_event_get.return_value = mock_event
-        mock_event.verify_ownership.return_value = True
-        request = rf.get('/events/1/edit/')
-        request.user = mock_user
-        views.edit(request, event_hash = '1')
+        with patch.object(mock_event, 'verify_ownership') as mock_verify_ownership:
+            mock_verify_ownership.return_value = True
+            # mock_event.verify_ownership.return_value = True
+            request = rf.get('/events/1/edit/')
+            request.user = mock_user
+            views.edit_or_update(request, event_hash = '1')
 
-        mock_render.assert_called_with(request, 'events/edit.html', {'event': mock_event})
-        mock_event_get.assert_called_with(models.Event, url_hash = '1')
-        mock_event.verify_ownership.assert_called_with(mock_user)
+            mock_event_get.assert_called_with(models.Event, url_hash = '1')
+            mock_verify_ownership.assert_called_with(mock_user)
 
     @patch.object(views, 'get_object_or_404')
-    @patch('jingo.render')
+    @patch.object(views, '_render_event_creation_form')
     def test_that_it_refuses_to_allow_someone_other_than_the_events_creator_in(self, mock_render, mock_event_get):
         mock_user = Mock()
         mock_event = Mock()
@@ -256,7 +258,7 @@ class TestEventViewsEdit(unittest.TestCase):
         mock_event.verify_ownership.return_value = False
         request = rf.get('/events/1/edit/')
         request.user = mock_user
-        response = views.edit(request, event_hash = '1')
+        response = views.edit_or_update(request, event_hash = '1')
 
         assert not mock_render.called
         mock_event.verify_ownership.assert_called_with(mock_user)
