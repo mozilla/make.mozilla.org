@@ -107,6 +107,29 @@ class Event(models.Model):
         point = geos.Point(float(longitude), float(latitude))
         return _upcoming(self.objects, sort, include_private).filter(venue__location__distance_lte=(point, measure.D(mi=20)))
 
+class EventAndVenueUpdater(object):
+    @classmethod
+    def update(cls, event, new_event, venue, new_venue):
+        if not cls.are_model_instances_identical(venue, new_venue):
+            venue = new_venue
+        venue.save()
+        if not cls.are_model_instances_identical(event, new_event):
+            if event.id:
+                new_event.id = event.id
+            event = new_event
+        event.venue = venue
+        event.save()
+
+    @classmethod
+    def are_model_instances_identical(cls, instance1, instance2):
+        if not (type(instance1) == type(instance2)):
+            return False
+        local_fields = [f for f in instance1._meta.local_fields if not f.primary_key]
+        def comparator(initial, field):
+            return initial and (field.value_from_object(instance1) == field.value_from_object(instance2))
+        return reduce(comparator, local_fields, True)
+
+
 class Campaign(models.Model):
     name = models.CharField(max_length = 255)
     description = models.TextField()

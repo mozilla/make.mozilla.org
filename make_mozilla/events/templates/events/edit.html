@@ -1,6 +1,7 @@
 {% extends "events/_edit_or_create_form.html" %}
 
 {% block page_title %}Edit Event | {{ super() }}{% endblock %}
+{% block page_heading %}Edit Event{% endblock %}
 {% block page_id %}events-edit{% endblock %}
-{% block form_action %}{{ url('event.edit', event_id = event.pk) }}{% endblock %}
+{% block form_action %}{{ url('event.edit', event_hash = event.hash) }}{% endblock %}
 {% block submit_phrase %}Save{% endblock %}

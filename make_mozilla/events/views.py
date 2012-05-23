@@ -74,17 +74,39 @@ def create(request):
     return _render_event_creation_form(request, ef, vf, lf)
 
 
+@login_required
+def edit_or_update(request, event_hash):
+    event = get_object_or_404(models.Event, url_hash=event_hash)
+    if not event.verify_ownership(request.user):
+        return http.HttpResponseForbidden(u'Sorry, you’re not allowed in')
+    if request.method == "POST":
+        ef, vf, lf = _process_create_post_data(request.POST)
+        if ef.is_valid() and vf.is_valid():
+            print request.POST
+            new_event = ef.instance
+            new_event.organiser_email = event.organiser_email
+            new_event.verified = event.verified
+            models.EventAndVenueUpdater.update(event, new_event, event.venue, vf.instance)
+            return http.HttpResponseRedirect(reverse('event', kwargs={'event_hash': event.hash}))
+    else:
+        ef = forms.EventForm(instance = event)
+        vf = forms.VenueForm(instance = event.venue)
+        lf = forms.PrivacyAndLegalForm()
+    return _render_event_creation_form(request, ef, vf, lf, template = 'events/edit.html', event = event)
+
 def _render_event_creation_form(request, event_form, venue_form, privacy_and_legal_form, template = 'events/new.html', event = None):
-    fieldsets = (
+    fieldsets = [
         forms.Fieldset(event_form, ('kind',)),
         forms.Fieldset(event_form, ('name', 'event_url', 'description', 'public')),
         forms.Fieldset(event_form, ('start', 'end',)),
         forms.Fieldset(venue_form, venue_form.fields),
-        privacy_and_legal_form,
-    )
+    ]
+
+    if event is None:
+        fieldsets.append(privacy_and_legal_form)
 
     return jingo.render(request, template, {
-        'fieldsets': fieldsets,
+        'fieldsets': tuple(fieldsets),
         'event': event
     })
 
@@ -119,13 +141,6 @@ def from_id(request, event_id):
 def details(request, event_hash):
     event = get_object_or_404(models.Event, url_hash=event_hash)
     return jingo.render(request, 'events/detail.html', {'event': event})
-
-@login_required
-def edit(request, event_hash):
-    event = get_object_or_404(models.Event, url_hash=event_hash)
-    if event.verify_ownership(request.user):
-        return _render_event_creation_form(request, forms.EventForm(event), forms.VenueForm(event.venue), forms.PrivacyAndLegalForm(), template = 'events/edit.html', event = event)
-    return http.HttpResponseForbidden(u'Sorry, you’re not allowed in')
 
 
 def search(request):

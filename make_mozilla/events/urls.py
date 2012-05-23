@@ -52,5 +52,5 @@ urlpatterns = patterns('',
     url(r'^(?P<event_hash>[a-z0-9]{9,})/$',
         views.details,              name='event'),
     url(r'^(?P<event_hash>[a-z0-9]{9,})/edit/$',
-        views.edit,                 name='event.edit'),
+        views.edit_or_update,       name='event.edit'),
 )
