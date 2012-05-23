@@ -198,8 +198,11 @@ def campaign(request, slug):
 @require_GET
 def partners(request, slug):
     campaign = get_object_or_404(models.Campaign, slug=slug)
-    return jingo.render(request, 'events/partners.html', 
-            {'campaign': campaign, 'partners': campaign.partner_set.all()})
+    return jingo.render(request, 'events/partners.html',
+            {
+                'campaign': campaign,
+                'partners': campaign.partner_set.all()
+            })
 
 
 def guides_all(request):

@@ -137,7 +137,10 @@ class EventKind(models.Model):
 class Partner(models.Model):
     name = models.CharField(max_length=255)
     website = models.URLField()
-    logo = models.ImageField(upload_to = 'partners', storage = FileSystemStorage(**settings.UPLOADED_IMAGES))
+    logo = models.ImageField(
+        upload_to='partners',
+        storage=FileSystemStorage(**settings.UPLOADED_IMAGES)
+    )
     featured = models.BooleanField(default=False,
         help_text=_(u'Featured partners are displayed on the home and campaign page'))
     for_campaign = models.ForeignKey(Campaign)
@@ -145,3 +148,5 @@ class Partner(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        ordering = ('name',)

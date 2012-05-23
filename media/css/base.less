@@ -580,6 +580,28 @@ p {
 
 /* ===[ Page Components ]=================================================== */
 
+.message {
+	border-radius: 4px;
+	background: #DFF0D8;
+	border: 1px solid #D6E9C6;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+	padding: 10px;
+	color: #468847;
+	margin-bottom: 2em;
+}
+.message .shout {
+	font-size: 1.4em;
+	margin-top: 0;
+	line-height: 1;
+}
+.warn {
+	background: #FBB450;
+	color: #fff;
+}
+.warn .shout {
+	color: #fff;
+}
+
 /* ---[ Intro Bar ]--------------------------------------------------------- */
 
 .intro-bar {
@@ -1921,6 +1943,13 @@ ul.tri-set img {
 	font-weight: bold;
 	text-align: center;
 	list-style-type: none;
+	margin-bottom: 2em;
+}
+.section-partners .our_partners li:nth-child(4n + 1) {
+	clear: left;
+}
+.section-campaign .our_partners li:nth-child(3n + 1) {
+	clear: left;
 }
 .partners .all.our_partners li {
     width: 24%;
