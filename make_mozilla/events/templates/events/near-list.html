@@ -12,15 +12,21 @@
         <ol>
         {# Can't iterate directly over results until Django 1.4 #}
         {% for event in results.object_list %}
-            <li{% if event.official %} class="official"{% endif %}>
+            <li class="h-event vevent{% if event.official %} official{% endif %}">
                 <div class="about">
-                    <h4><a href="{% if event.bsd_hosted() %}{{ event.event_url }}{% else %}{{ url('event', event.id) }}{% endif %}">{{ event.name }}</a></h4>
+                    <h4><a class="p-name summary u-url url" href="{% if event.bsd_hosted() %}{{ event.event_url }}{% else %}{{ url('event', event.hash) }}{% endif %}">{{ event.name }}</a></h4>
                     {% if event.start.date() == event.end.date() %}
-                    <p>{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }} to {{ event.end.strftime('%-I:%M %p') }}</p>
+                    <p>
+                        <time class="dt-start dtstart" datetime="{{ event.start.strftime('%F %T') }}">{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }}</time> to 
+                        <time class="dt-end dtend" datetime="{{ event.end.strftime('%F %T') }}">{{ event.end.strftime('%-I:%M %p') }}</time>
+                    </p>
                     {% else %}
-                    <p>{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }} to {{ event.end.strftime('%-I:%M %p on %B %-d') }}</p>
+                    <p>
+                        <time class="dt-start dtstart" datetime="{{ event.start.strftime('%F %T') }}">{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }}</time> to 
+                        <time class="dt-end dtend" datetime="{{ event.end.strftime('%F %T') }}">{{ event.end.strftime('%-I:%M %p on %B %-d') }}</time>
+                    </p>
                     {% endif %}
-                    <p>{{ event.venue.street_address|replace('\r\n', ', ') }}</p>
+                    <p class="p-location location">{{ event.venue.street_address|replace('\r\n', ', ') }}</p>
                     <a class="type" href="{{ url('guides_%s' % event.kind.slug) }}">{{ event.kind.name }}</a>
                 </div>
                 {% if event.campaign -%}

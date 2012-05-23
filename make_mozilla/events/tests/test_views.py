@@ -81,9 +81,10 @@ def query_dict_from(data_dict):
     qd.update(data_dict)
     return qd
 
-def mock_persisted_event(id = 1):
+def mock_persisted_event(id = 1, hash = 'e25388fde'):
     mock_event = Mock()
     mock_event.id = id
+    mock_event.hash = hash
     return mock_event
 
 class TestEventViewsCreate(TestCase):
@@ -175,7 +176,7 @@ class TestEventViewsCreate(TestCase):
 
         mock_bsd_email_func.assert_called_with(mock_user, self.mock_lf)
         mock_create_func.assert_called_with(mock_user, self.mock_ef, self.mock_vf)
-        assert_redirects_to_named_url(response, 'event', kwargs = {'event_id': 1})
+        assert_redirects_to_named_url(response, 'event', kwargs = {'event_hash': 'e25388fde'})
 
     def test_that_create_event_and_venue_does_that_given_valid_data(self):
         event_kind = models.EventKind(name = "Test", slug = "test", description = "Test")
@@ -214,18 +215,18 @@ class TestEventViewsCreate(TestCase):
 
 class TestEventViewsDetail(unittest.TestCase):
     def test_that_it_routes_correctly(self):
-        assert_routing('/events/12/', views.details, name = 'event', kwargs = {'event_id': '12'})
+        assert_routing('/events/e25388fde/', views.details, name = 'event', kwargs = {'event_hash': 'e25388fde'})
 
     @patch.object(views, 'get_object_or_404')
     @patch('jingo.render')
     def test_that_it_correctly_fetches_the_event(self, mock_render, mock_event_get):
         mock_event = Mock()
         mock_event_get.return_value = mock_event
-        request = rf.get('/events/1')
-        views.details(request, event_id = '1')
+        request = rf.get('/events/e25388fde')
+        views.details(request, event_hash = 'e25388fde')
 
         mock_render.assert_called_with(request, 'events/detail.html', {'event': mock_event})
-        mock_event_get.assert_called_with(models.Event, pk = '1')
+        mock_event_get.assert_called_with(models.Event, url_hash = 'e25388fde')
 
 class TestEventViewsNear(unittest.TestCase):
     def test_that_it_routes_correctly_for_the_map(self):

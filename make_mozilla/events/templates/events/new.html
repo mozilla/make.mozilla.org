@@ -34,7 +34,8 @@
 <script>
     (function($) {
         $('input[type="date"]').datepicker({
-            altField: '#id_event-end_0'
+            altField: '#id_event-end_0',
+            dateFormat: 'yy-mm-dd'
         });
         $('input[type="time"]').autocomplete({
             delay: 100,
