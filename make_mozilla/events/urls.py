@@ -50,7 +50,7 @@ urlpatterns = patterns('',
     url(r'^(?P<event_id>\d+)/$',
         views.from_id,              name='event.from_id'),
     url(r'^(?P<event_hash>[a-z0-9]{9,})/$',
-        views.details,              name='event')
+        views.details,              name='event'),
     url(r'^(?P<event_hash>[a-z0-9]{9,})/edit/$',
         views.edit,                 name='event.edit'),
 )

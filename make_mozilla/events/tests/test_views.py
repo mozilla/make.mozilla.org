@@ -230,7 +230,7 @@ class TestEventViewsDetail(unittest.TestCase):
 
 class TestEventViewsEdit(unittest.TestCase):
     def test_that_it_routes_correctly(self):
-        assert_routing('/events/12/edit/', views.edit, name = 'event.edit', kwargs = {'event_id': '12'})
+        assert_routing('/events/123456789/edit/', views.edit, name = 'event.edit', kwargs = {'event_hash': '123456789'})
 
     @patch.object(views, 'get_object_or_404')
     @patch('jingo.render')
@@ -241,10 +241,10 @@ class TestEventViewsEdit(unittest.TestCase):
         mock_event.verify_ownership.return_value = True
         request = rf.get('/events/1/edit/')
         request.user = mock_user
-        views.edit(request, event_id = '1')
+        views.edit(request, event_hash = '1')
 
         mock_render.assert_called_with(request, 'events/edit.html', {'event': mock_event})
-        mock_event_get.assert_called_with(models.Event, pk = '1')
+        mock_event_get.assert_called_with(models.Event, url_hash = '1')
         mock_event.verify_ownership.assert_called_with(mock_user)
 
     @patch.object(views, 'get_object_or_404')
@@ -256,7 +256,7 @@ class TestEventViewsEdit(unittest.TestCase):
         mock_event.verify_ownership.return_value = False
         request = rf.get('/events/1/edit/')
         request.user = mock_user
-        response = views.edit(request, event_id = '1')
+        response = views.edit(request, event_hash = '1')
 
         assert not mock_render.called
         mock_event.verify_ownership.assert_called_with(mock_user)
