@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from django import http
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -72,7 +74,7 @@ def create(request):
     return _render_event_creation_form(request, ef, vf, lf)
 
 
-def _render_event_creation_form(request, event_form, venue_form, privacy_and_legal_form):
+def _render_event_creation_form(request, event_form, venue_form, privacy_and_legal_form, template = 'events/new.html', event = None):
     fieldsets = (
         forms.Fieldset(event_form, ('kind',)),
         forms.Fieldset(event_form, ('name', 'event_url', 'description', 'public')),
@@ -81,8 +83,9 @@ def _render_event_creation_form(request, event_form, venue_form, privacy_and_leg
         privacy_and_legal_form,
     )
 
-    return jingo.render(request, 'events/new.html', {
-        'fieldsets': fieldsets
+    return jingo.render(request, template, {
+        'fieldsets': fieldsets,
+        'event': event
     })
 
 
@@ -116,6 +119,13 @@ def from_id(request, event_id):
 def details(request, event_hash):
     event = get_object_or_404(models.Event, url_hash=event_hash)
     return jingo.render(request, 'events/detail.html', {'event': event})
+
+@login_required
+def edit(request, event_id):
+    event = get_object_or_404(models.Event, pk=event_id)
+    if event.verify_ownership(request.user):
+        return _render_event_creation_form(request, forms.EventForm(event), forms.VenueForm(event.venue), forms.PrivacyAndLegalForm(), template = 'events/edit.html', event = event)
+    return http.HttpResponseForbidden(u'Sorry, you’re not allowed in')
 
 
 def search(request):

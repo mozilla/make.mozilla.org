@@ -6,6 +6,7 @@ from django.contrib.gis import geos
 import datetime
 
 from make_mozilla.events import models
+from django.contrib.auth import models as auth_models
 
 class VenueTest(unittest.TestCase):
     def test_location_is_always_initialized_as_a_point_object(self):
@@ -90,3 +91,13 @@ class EventTest(django.test.TestCase):
         self.setup_events()
         actual = models.Event.near(52.50693980, 13.42415920, sort = 'start', include_private = True)
         eq_([x.name for x in actual], ["E2", "EP"])
+
+    def test_that_an_event_can_verify_its_creator(self):
+        e = models.Event(name = 'An Event', organiser_email = 'moz@example.com')
+        user = auth_models.User(email = 'moz@example.com')
+        assert e.verify_ownership(user)
+
+    def test_that_an_event_can_verify_a_user_is_not_its_creator(self):
+        e = models.Event(name = 'An Event', organiser_email = 'moz@example.com')
+        user = auth_models.User(email = 'boz@example.com')
+        assert not e.verify_ownership(user)

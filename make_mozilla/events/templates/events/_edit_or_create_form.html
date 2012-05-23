@@ -1,0 +1,102 @@
+{% extends "events/base.html" %}
+
+{% block content %}
+<h2>Create a New Event</h2>
+<form method="post" action="{% block form_action %}{% endblock %}" id="create-form" class="with-required">
+    {% for fieldset in fieldsets %}
+        <fieldset{% if fieldset.className %} class="{{ fieldset.className }}"{% endif %}>
+            {% if fieldset.legend %}<legend>{{ fieldset.legend }}</legend>{% endif %}
+            <ul>
+                {% for field in fieldset %}
+                    {% if field.is_hidden %}
+                        {{ field }}
+                    {% else %}
+                        <li class="{% if field.field.required %}required{% endif %}{% if field.errors %} error{% endif %}">
+                            {{ field.label_tag() }}
+                            {% if field.field.required and not field.errors %}<span class="required">This field is required</span>{% endif %}
+                            {{ field }}
+                            {% if field.help_text %}<label for="id_{{ field.html_name }}" class="help">{{ field.help_text|safe }}</label>{% endif %}
+                            {% for error in field.errors -%}
+                                <label for="id_{{ field.html_name }}" class="error">{{ error }}</label>
+                            {%- endfor %}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </fieldset>
+    {% endfor %}
+    <p class="buttons"><input type="submit" class="button create" id="create-submit" value="{% block submit_phrase %}Submit{% endblock %}"></p>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+</form>
+<script>
+    (function($) {
+        $('input[type="date"]').datepicker({
+            altField: '#id_event-end_0'
+        });
+        $('input[type="time"]').autocomplete({
+            delay: 100,
+            source: (function () {
+                var options = [],
+                    hour, hour_str,
+                    hour_12, hour_str_12,
+                    min, min_str,
+                    am_pm;
+
+                for (hour = 0; hour < 24; ++hour) {
+                    hour_12 = hour % 12 === 0 ? 12 : hour % 12;
+                    hour_str = (hour < 10 ? '0' : '') + hour;
+                    hour_str_12 = hour_12;
+                    am_pm = (hour < 12) ? 'AM' : 'PM';
+                    for (min = 0; min < 60; min += 30) {
+                        min_str = (min < 10 ? '0' : '') + min;
+                        options.push({
+                            label: hour_str + ':' + min_str + ' (' + hour_str_12 + ':' + min_str + ' ' + am_pm + ')',
+                            value: hour_str + ':' + min_str
+                        });
+                    }
+                }
+
+                return options;
+            })()
+        });
+        $('#create-form').submit(function() {
+            var form = this,
+                address = $('#id_venue-street_address').val() + '\n' + $('#id_venue-country option:selected').text();
+            $('#create-submit').attr('disabled', true);
+
+            geocode(address, function(results) {
+                if (results && results.length) {
+                    var location = results[0].geometry.location;
+                    $('#id_venue-latitude').val(location.lat());
+                    $('#id_venue-longitude').val(location.lng());
+                }
+                form.submit();
+            });
+
+            return false;
+        });
+
+        var geocode = function (address, callback) { callback(null); },
+            gmap_callback = 'gmcb_'+(""+Math.random()).substr(2);
+
+        window[gmap_callback] = function () {
+            delete window[gmap_callback];
+
+            var geocoder = new google.maps.Geocoder();
+            geocode = function (address, callback) {
+                geocoder.geocode({address:address}, function(results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        callback(results);
+                    } else {
+                        callback(null);
+                    }
+                });
+            }
+        }
+
+        gmap_script = document.createElement("script");
+        gmap_script.src = "//maps.google.com/maps/api/js?sensor=false&callback=" + gmap_callback;
+        document.body.appendChild(gmap_script);
+    })(jQuery);
+</script>
+{% endblock %}
