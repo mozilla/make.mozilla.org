@@ -7,7 +7,7 @@
 <div class="h-event vevent">
 <div class="details panel">
     <h2 class="p-name summary">{{ event.name }}</h2>
-    <p>{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }}</p>
+    <p>{{ event.start.strftime('%B %e, %Y %I:%M %p') }}</p>
     {% if event.venue.name %}<p>{{ event.venue.name }}</p>{% endif %}
     {% if event.event_url %}<p><a href="{{ event.event_url }}" class="button find u-url url">Register for event</a></p>{% endif %}
     <div class="p-description description">
@@ -35,13 +35,13 @@
     </div>
     <div class="date">
         {% if event.start.date() == event.end.date() %}
-        <p>{{ event.start.strftime('%A, %B %-d, %Y') }}<br>
-            <time class="dt-start dtstart" datetime="{{ event.start.strftime('%F %T') }}">{{ event.start.strftime('%-I:%M %p') }}</time> to 
-            <time class="dt-end dtend" datetime="{{ event.end.strftime('%F %T') }}">{{ event.end.strftime('%-I:%M %p') }}</time></p>
+        <p>{{ event.start.strftime('%A, %B %e, %Y') }}<br>
+            <time class="dt-start dtstart" datetime="{{ event.start.strftime('%F %T') }}">{{ event.start.strftime('%I:%M %p') }}</time> to 
+            <time class="dt-end dtend" datetime="{{ event.end.strftime('%F %T') }}">{{ event.end.strftime('%I:%M %p') }}</time></p>
         {% else %}
         <p>
-            <time class="dt-start dtstart" datetime="{{ event.start.strftime('%F %T') }}">{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }}</time> to<br>
-            <time class="dt-end dtend" datetime="{{ event.end.strftime('%F %T') }}">{{ event.end.strftime('%B %-d, %Y %-I:%M %p') }}</time>
+            <time class="dt-start dtstart" datetime="{{ event.start.strftime('%F %T') }}">{{ event.start.strftime('%B %e, %Y %I:%M %p') }}</time> to<br>
+            <time class="dt-end dtend" datetime="{{ event.end.strftime('%F %T') }}">{{ event.end.strftime('%B %e, %Y %I:%M %p') }}</time>
         </p>
         {% endif %}
     </div>
