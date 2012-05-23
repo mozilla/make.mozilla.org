@@ -4,12 +4,13 @@
 {% block page_id %}event-details{% endblock %}
 
 {% block content %}
+<div class="h-event vevent">
 <div class="details panel">
-    <h2>{{ event.name }}</h2>
+    <h2 class="p-name summary">{{ event.name }}</h2>
     <p>{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }}</p>
     {% if event.venue.name %}<p>{{ event.venue.name }}</p>{% endif %}
-    {% if event.event_url %}<p><a href="{{ event.event_url }}" class="button find">Register for event</a></p>{% endif %}
-    <div class="description">
+    {% if event.event_url %}<p><a href="{{ event.event_url }}" class="button find u-url url">Register for event</a></p>{% endif %}
+    <div class="p-description description">
         <h3>Event Description</h3>
         <div>
             {{ event.bleached_description }}
@@ -23,17 +24,27 @@
         <span class="pulse"></span>
         <span class="marker" title="{{ event.venue.name }}"></span>
     </a>
-    <div class="location">
-        {% if event.venue.name %}<p><strong>{{ event.venue.name }}</strong></p>{% endif %}
-        <p>{{ event.venue.street_address|nl2br }}<br>{{ event.venue.country.name }}</p>
-        <p><a href="/events/near/?lat={{ event.venue.latitude }}&amp;lng={{ event.venue.longitude }}">Events nearby</a></p>
+    <div class="p-location location">
+        {% if event.venue.name %}<div class="h-card vcard"><p class="p-name fn p-org org"><strong>{{ event.venue.name }}</strong></p>{% endif %}
+        <div class="h-adr adr">
+            <p><span class="p-street-address street-address">{{ event.venue.street_address|nl2br }}</span><br>
+                <span class="p-country-name country-name">{{ event.venue.country.name }}</span>></p>
+            <p><a href="/events/near/?lat={{ event.venue.latitude }}&amp;lng={{ event.venue.longitude }}">Events nearby</a></p>
+        </div>
+        {% if event.venue.name %}</div>{% endif %}
     </div>
     <div class="date">
         {% if event.start.date() == event.end.date() %}
         <p>{{ event.start.strftime('%A, %B %-d, %Y') }}<br>
-           {{ event.start.strftime('%-I:%M %p') }} to {{ event.end.strftime('%-I:%M %p') }}</p>
+            <time class="dt-start dtstart" datetime="{{ event.start.strftime('%F %T') }}">{{ event.start.strftime('%-I:%M %p') }}</time> to 
+            <time class="dt-end dtend" datetime="{{ event.end.strftime('%F %T') }}">{{ event.end.strftime('%-I:%M %p') }}</time></p>
         {% else %}
+        <p>
+            <time class="dt-start dtstart" datetime="{{ event.start.strftime('%F %T') }}">{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }}</time> to<br>
+            <time class="dt-end dtend" datetime="{{ event.end.strftime('%F %T') }}">{{ event.end.strftime('%B %-d, %Y %-I:%M %p') }}</time>
+        </p>
         {% endif %}
     </div>
+</div>
 </div>
 {% endblock %}
