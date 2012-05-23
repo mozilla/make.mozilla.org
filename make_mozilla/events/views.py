@@ -121,8 +121,8 @@ def details(request, event_hash):
     return jingo.render(request, 'events/detail.html', {'event': event})
 
 @login_required
-def edit(request, event_id):
-    event = get_object_or_404(models.Event, pk=event_id)
+def edit(request, event_hash):
+    event = get_object_or_404(models.Event, url_hash=event_hash)
     if event.verify_ownership(request.user):
         return _render_event_creation_form(request, forms.EventForm(event), forms.VenueForm(event.venue), forms.PrivacyAndLegalForm(), template = 'events/edit.html', event = event)
     return http.HttpResponseForbidden(u'Sorry, you’re not allowed in')
