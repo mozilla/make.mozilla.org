@@ -5,6 +5,7 @@ from funfactory.monkeypatches import patch
 patch()
 
 import make_mozilla.events.urls
+import make_mozilla.projects.urls
 import make_mozilla.users.urls
 
 # Uncomment the next two lines to enable the admin:
@@ -14,6 +15,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$',          'make_mozilla.base.views.root.index', name="splash"),
     url(r'^events/',    include(make_mozilla.events.urls)),
+    url(r'^projects/',  include(make_mozilla.projects.urls)),
     url(r'^users/',     include(make_mozilla.users.urls)),
     # browserid endpoints
     url(r'^browserid/', include('django_browserid.urls')),
