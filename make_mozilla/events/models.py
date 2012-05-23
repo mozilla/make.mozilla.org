@@ -95,6 +95,9 @@ class Event(models.Model):
     def bsd_hosted(self):
         return self.source_id.find('bsd:') == 0
 
+    def verify_ownership(self, user):
+        return user.email == self.organiser_email
+
     @classmethod
     def upcoming(self, sort='start', include_private=False):
         return _upcoming(self.objects, sort, include_private)
