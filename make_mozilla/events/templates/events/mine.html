@@ -1,0 +1,25 @@
+{% extends "events/base.html" %}
+
+{% block page_title %}My events | {{ super() }}{% endblock %}
+{% block page_id %}events-list{% endblock %}
+
+{% block content %}
+<div class="my-events">
+    {% if events %}
+    <ol>
+    {% for event in events %}
+        {% include "events/_event-list-item.html" %}
+    {% endfor %}
+    </ol>
+    {% endif %}
+</div>
+<div class="my-moz-events">
+    {% if bsd_events %}
+    <ol>
+    {% for event in bsd_events %}
+        {% include "events/_event-list-item.html" %}
+    {% endfor %}
+    </ol>
+    {% endif %}
+</div>
+{% endblock %}

@@ -144,6 +144,12 @@ def details(request, event_hash):
     event = get_object_or_404(models.Event, url_hash=event_hash)
     return jingo.render(request, 'events/detail.html', {'event': event})
 
+@login_required
+def mine(request):
+    return jingo.render(request, 'events/mine.html', {
+        'events': models.Event.all_user_non_bsd(request.user), 
+        'bsd_events': models.Event.all_user_bsd(request.user)
+    })
 
 def search(request):
     location = request.GET.get('location')
