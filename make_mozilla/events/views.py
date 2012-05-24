@@ -86,7 +86,9 @@ def edit_or_update(request, event_hash):
             new_event = ef.instance
             new_event.organiser_email = event.organiser_email
             new_event.verified = event.verified
-            models.EventAndVenueUpdater.update(event, new_event, event.venue, vf.instance)
+            new_venue = vf.instance
+            vf.add_geo_data_to(new_venue)
+            models.EventAndVenueUpdater.update(event, new_event, event.venue, new_venue)
             return http.HttpResponseRedirect(reverse('event', kwargs={'event_hash': event.hash}))
     else:
         ef = forms.EventForm(instance = event)
