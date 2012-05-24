@@ -4,22 +4,27 @@
 {% block page_id %}events-list{% endblock %}
 
 {% block content %}
-<div class="my-events">
-    {% if events %}
-    <ol>
-    {% for event in events %}
-        {% include "events/_event-list-item.html" %}
-    {% endfor %}
-    </ol>
-    {% endif %}
-</div>
-<div class="my-moz-events">
+<h2>My events</h2>
+<div class="search-results">
+    <h3 class="my-moz-events">My Events (RSVP hosted here)</h3>
     {% if bsd_events %}
     <ol>
     {% for event in bsd_events %}
         {% include "events/_event-list-item.html" %}
     {% endfor %}
     </ol>
+    {% else %}
+    <p class="no-events">You haven’t created any events. Why not <a href="{{ url('event.new') }}">create one</a>?</p>
+    {% endif %}
+    <h3 class="my-events">My Events (RSVP hosted elsewhere)</h3>
+    {% if events %}
+    <ol>
+    {% for event in events %}
+        {% include "events/_event-list-item.html" %}
+    {% endfor %}
+    </ol>
+    {% else %}
+    <p class="no-events">You haven’t created any events elsewhere.</p>
     {% endif %}
 </div>
 {% endblock %}

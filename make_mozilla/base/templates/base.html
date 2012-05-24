@@ -61,6 +61,17 @@
                     {% endif %}
                         <li><a href="{{ url('events') }}">Events</a></li>
                     </ul>
+                    <h3>Your stuff</h3>
+                    <ul>
+                    {% if not (request.user and request.user.is_authenticated()) %}
+                        <li><a href="{{ login_url() }}">Log in</a></li>
+                    {% endif %}
+                    {% block admin_menu_items %}
+                    {% endblock %}
+                    {% if request.user and request.user.is_authenticated() %}
+                        <li><a href="{{ url('logout') }}">Log out</a></li>
+                    {% endif %}
+                    </ul>
                 </div>
             </div>
         </div>
