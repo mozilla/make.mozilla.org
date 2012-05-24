@@ -379,3 +379,9 @@ class TestEventViewsPartnersList(unittest.TestCase):
         mock_render.assert_called_with(request, 'events/partners.html', 
                 {'campaign': mock_campaign, 'partners': mock_partner_list})
         mock_campaign_get.assert_called_with(models.Campaign, slug = 'summer')
+
+
+class MyEventsViewPageTest(unittest.TestCase):
+    def test_that_it_routes(self):
+        assert_routing('/events/mine/', views.mine, name = 'events.mine')
+
