@@ -99,13 +99,21 @@ class Event(models.Model):
         return user.email == self.organiser_email
 
     @classmethod
-    def upcoming(self, sort='start', include_private=False):
-        return _upcoming(self.objects, sort, include_private)
+    def upcoming(cls, sort='start', include_private=False):
+        return _upcoming(cls.objects, sort, include_private)
 
     @classmethod
-    def near(self, latitude, longitude, sort='start', include_private=False):
+    def near(cls, latitude, longitude, sort='start', include_private=False):
         point = geos.Point(float(longitude), float(latitude))
-        return _upcoming(self.objects, sort, include_private).filter(venue__location__distance_lte=(point, measure.D(mi=20)))
+        return _upcoming(cls.objects, sort, include_private).filter(venue__location__distance_lte=(point, measure.D(mi=20)))
+
+    @classmethod
+    def all_user_non_bsd(cls, user):
+        return cls.objects.filter(organiser_email = user.email).exclude(source_id__startswith = 'bsd').order_by('start')
+
+    @classmethod
+    def all_user_bsd(cls, user):
+        return cls.objects.filter(organiser_email = user.email, source_id__startswith = 'bsd').order_by('start')
 
 class EventAndVenueUpdater(object):
     @classmethod
