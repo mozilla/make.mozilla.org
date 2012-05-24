@@ -40,12 +40,18 @@ class VenueTest(unittest.TestCase):
 
         eq_(venue.location, geos.Point(4.0, 51.0))
 
-class EventTest(django.test.TestCase):
+class EventTestHelperMixin(object):
     def add_event(self, name, venue, offset, public = True, verified = True):
         start = datetime.datetime.now() + datetime.timedelta(days = offset)
         end = start + datetime.timedelta(hours = 3)
         e = models.Event(name = name, venue = venue, organiser_email = 'moz@example.com',
                 start = start, end = end, public = public, verified = verified)
+        e.save()
+        return e
+
+    def add_bsd_event(self, name, venue, offset, bsd_id):
+        e = self.add_event(name, venue, offset)
+        e.source_id = 'bsd:%s' % bsd_id
         e.save()
         return e
 
@@ -70,6 +76,9 @@ class EventTest(django.test.TestCase):
 
         return (e1, e2, e3, ep)
 
+
+
+class EventTest(django.test.TestCase, EventTestHelperMixin):
     def test_upcoming_public_events_can_be_retrieved(self):
         (e1, e2, e3, ep) = self.setup_events()
         actual = models.Event.upcoming()
@@ -101,6 +110,27 @@ class EventTest(django.test.TestCase):
         e = models.Event(name = 'An Event', organiser_email = 'moz@example.com')
         user = auth_models.User(email = 'boz@example.com')
         assert not e.verify_ownership(user)
+
+class UserEventListTest(django.test.TestCase, EventTestHelperMixin):
+    def setUp(self):
+        berlin = models.Venue(name = "Berlin test Venue", street_address = "Somewhere Str. 0", 
+                country = "DE")
+        berlin.latitude = 52.50693980
+        berlin.longitude = 13.42415920
+        berlin.save()
+        self.user = Mock()
+        self.user.email = 'moz@example.com'
+        self.e1 = self.add_event("E1", berlin, 3)
+        self.e2 = self.add_event("E2", berlin, 2)
+        self.e3 = self.add_bsd_event("E3", berlin, 1, 'jjj')
+
+    def test_that_all_a_users_non_bsd_events_can_be_fetched(self):
+        actual = models.Event.all_user_non_bsd(self.user)
+        eq_([x.name for x in actual], ["E2", "E1"])
+
+    def test_that_all_a_users_bsd_events_can_be_fetched(self):
+        actual = models.Event.all_user_bsd(self.user)
+        eq_([x.name for x in actual], ["E3"])
 
 class TestEventAndVenueUpdater(unittest.TestCase):
     def test_that_identical_model_instances_can_be_compared_properly(self):
