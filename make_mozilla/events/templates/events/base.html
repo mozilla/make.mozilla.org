@@ -14,7 +14,7 @@
 </ul>
 {% endblock %}
 {% block admin_menu_items %}
-{% if user and user.is_authenticated() %}
+{% if user.is_authenticated() %}
 <li><a href="{{ url('events.mine') }}">My events</a></li>
 {% endif %}
 {% endblock %}
