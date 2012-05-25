@@ -18,7 +18,7 @@ env.user = 'make_mozilla'
 hosts = {
     'dev': ['make.constituentparts.com'],
     'development': ['make-dev1.vm1.labs.sjc1.mozilla.com'],
-    'staging': [],
+    'staging': ['make-stage1.vm.labs.scl3.mozilla.com'],
     'production': ['make-prod1.vm.labs.scl3.mozilla.com']
 }
 # which branch goes to which server
