@@ -10,6 +10,9 @@ class Article(models.Model):
     updated = models.DateTimeField()
     autor = models.CharField(max_length=255)
 
+    def get_summary(self):
+        return self.summary
+
     def __unicode__(self):
         return '%s' % (
             self.title,

@@ -6,6 +6,39 @@
 {% block content %}
 <div class="words">
 <h2>Webmaker news</h2>
+<ol class="news-list" start="{{ start_index }}">
+{% for a in articles.object_list %}
+<li class="article">
+<h3><a href="{{ a.link }}">{{ a.title }}</a></h3>
+<p class="meta">by {{ a.autor }}</p>
+{{ a.get_summary()|safe }}
+</li>
+{% endfor %}
+</ol>
+
+{% if articles.paginator.num_pages > 1 %}
+    <footer class="search-results">
+    <nav class="pagination">
+    {% if articles.has_previous() %}
+        <a href="?page={{ articles.previous_page_number() }}" class="btn">prev</a>
+    {% endif %}
+    <ol>
+    {% for i in range(articles.paginator.num_pages) %}
+        {% if i + 1 == articles.number %}
+            <li class="current"><a href="?page={{ i + 1 }}">{{ i + 1 }}</a>
+        {% else %}
+            <li><a href="?page={{ i + 1 }}">{{ i + 1 }}</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+    </ol>
+    {% if articles.has_next() %}
+        <a href="?page={{ articles.next_page_number() }}" class="btn">next</a>
+    {% endif %}
+    </nav>
+    </footer>
+    {% endif %}
+
 </div>
 {% endblock %}
 
