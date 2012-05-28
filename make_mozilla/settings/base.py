@@ -194,3 +194,8 @@ SOUTH_DATABASE_ADAPTERS = {
 # CELERY_ALWAYS_EAGER = False  # required to activate celeryd
 BROKER_URL = "redis://localhost:6379/0"
 SITE_URL = 'http://localhost:8000'
+
+# RSS feed for planet news
+SITE_FEED_URLS = {
+    'webmaker': 'http://planet.drumbeat.org/rss20.xml',
+}
