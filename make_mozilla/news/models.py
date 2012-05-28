@@ -9,6 +9,7 @@ class Article(models.Model):
     checksum = models.CharField(max_length=32, unique=True)
     updated = models.DateTimeField()
     autor = models.CharField(max_length=255)
+    featured = models.BooleanField(default=False)
 
     def get_summary(self):
         return self.summary
