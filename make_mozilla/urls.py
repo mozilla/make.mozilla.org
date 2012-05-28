@@ -6,6 +6,7 @@ patch()
 
 import make_mozilla.events.urls
 import make_mozilla.users.urls
+import make_mozilla.news.urls
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib.gis import admin
@@ -14,6 +15,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$',          'make_mozilla.base.views.root.index', name="splash"),
     url(r'^events/',    include(make_mozilla.events.urls)),
+    url(r'^news/',    include(make_mozilla.news.urls)),
     url(r'^users/',     include(make_mozilla.users.urls)),
     # browserid endpoints
     url(r'^browserid/', include('django_browserid.urls')),

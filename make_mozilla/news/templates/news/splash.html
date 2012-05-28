@@ -1,0 +1,15 @@
+{% extends "news/base.html" %}
+
+{% block page_id %}about{% endblock %}
+{% block page_class %}{{ super() }} news-index{% endblock %}
+
+{% block content %}
+<div class="words">
+<h2>Webmaker news</h2>
+</div>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{{ js('core_js') }}
+{% endblock %}
