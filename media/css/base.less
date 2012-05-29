@@ -76,6 +76,10 @@ h3 {
 	padding: 0;
 }
 
+h3.shout {
+    text-align: center;
+}
+
 h4 {
 	margin: 0;
 	padding: 0;
@@ -1516,7 +1520,304 @@ ul.tri-set img {
 	}
 }
 
+/* ---[ Mastheads ]--------------------------------------------------------- */
+
+.masthead {
+	text-align: center;
+	padding-top: 30px;
+	text-transform: uppercase;
+	width: 320px;
+	margin: 0 auto;
+	background: transparent 50% 0 no-repeat;
+}
+
+.masthead .plaque {
+	background: #2bb673;
+	color: #fff;
+	display: inline-block;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 1;
+	letter-spacing: 2px;
+	padding: 10px 20px;
+	position: relative;
+}
+
+.masthead .plaque::after,
+.masthead .plaque::before {
+	border-bottom: 17px solid #2bb673;
+	border-top: 17px solid #2bb673;
+	content: "";
+	position: absolute;
+	top: 0;
+}
+
+.masthead .plaque::after {
+	border-right: 17px solid transparent;
+	right: -17px;
+}
+
+.masthead .plaque::before {
+	border-left: 17px solid transparent;
+	left: -17px;
+}
+
+.masthead p {
+	padding: 0 60px;
+	position: relative;
+	margin: 1em 20px;
+	color: #fff;
+}
+
+.masthead p::after,
+.masthead p::before {
+	position: absolute;
+	top: 50%;
+	background: #d3d1d2;
+	height: 1px;
+	width: 60px;
+	content: "";
+	display: block;
+}
+
+.masthead p::after {
+	right: 0;
+}
+
+.masthead p::before {
+	left: 0;
+}
+
+/* ---[ Tool Flyers ]------------------------------------------------------- */
+
+.tool-flyer {
+	padding-left: 100px;
+	padding-right: 10px;
+	min-height: 80px;
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.tool-flyer.featured,
+.tool-flyer .logo {
+	.box-shadow(@panelShadow);
+	.border-radius(5px);
+
+	background: #FFF;
+}
+
+.tool-flyer .logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 80px;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	display: block;
+}
+
+.tool-flyer.featured .logo {
+	.box-shadow(none);
+	.border-radius(0);
+
+	background: none;
+	border-right: solid 1px #E1E2E3;
+}
+
+.tool-flyer.new .logo::after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: -3px;
+	left: -3px;
+	width: 41px;
+	height: 41px;
+	background: url(../img/new-tool.png);
+}
+
+.tool-flyer .logo img {
+	display: inline=block;
+	vertical-align: middle;
+}
+
+.tool-flyer .title {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tool-flyer.featured .title {
+	font-size: 1.286em;
+	font-family: 'Open Sans Light', sans-serif;
+	padding: 0.8em 0 0.2em;
+}
+
+.tool-flyer.featured p {
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tool-flyer-list {
+	margin: -3px 0 0 -20px;
+	padding: 3px 0 0;
+	list-style: none;
+	overflow: hidden; 
+}
+
+.tool-flyer-list .tool-flyer {
+	margin-left: 20px;
+}
+
 /* ===[ Page Specific Settings ]============================================ */
+
+/* ---[ Tools Index ]------------------------------------------------------- */
+
+#tools-index #content::before {
+	background-image: url(http://placehold.it/1200x600/333/444);
+}
+
+#tools-index #content .constrained {
+	margin-top: -500px;
+	overflow: hidden;
+}
+
+#tools-index .masthead {
+    background-image: url(../img/tool-box.png);
+}
+
+#tools-index .shout {
+	margin: 0.5em 0 1em;
+	color: #FFF;
+}
+
+#tools-index #content .header {
+	height: 446px;
+	padding-bottom: 64px;
+	text-shadow: none;
+	position: relative;
+	overflow: hidden;
+}
+
+#tools-index .tool-flyer-list li {
+	float: left;
+	width: 33.333%;
+}
+
+#tools-index .featured-set {
+	margin: 0 10%;
+}
+
+#tools-index .live-set {
+	padding-bottom: 30px;
+}
+
+#tools-index .in-progress-set.adjusted {
+	float: left;
+	width: 66.666%;
+}
+
+#tools-index .featured-set h3,
+#tools-index .live-set h3 {
+	position: absolute;
+	left: -9999em;
+}
+
+#tools-index .in-progress-set.adjusted .tool-flyer-list {
+	padding-right: 6.666px;
+}
+
+#tools-index .featured-set .tool-flyer-list li,
+#tools-index .in-progress-set.adjusted .tool-flyer-list li {
+	width: 50%;
+}
+
+#tools-index .coming-soon-set.adjusted {
+	float: left;
+	width: 33.333%;
+	box-sizing: border-box;
+	padding-left: 13.333px;
+}
+
+#tools-index .coming-soon-set.adjusted .tool-flyer-list li {
+	float: none;
+	width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+	#tools-index #content .constrained {
+		margin-top: -300px;
+	}
+
+	#tools-index #content .header {
+		height: auto;
+		padding-bottom: 30px;
+		overflow: visible;
+	}
+
+	#tools-index #content .header hgroup {
+		height: 246px;
+		padding-bottom: 64px;
+	}
+
+	#tools-index .featured-set {
+		margin: 0;
+	}
+
+	#tools-index .in-progress-set.adjusted,
+	#tools-index .coming-soon-set.adjusted {
+		float: none;
+		width: 100%;
+		padding: 0;
+	}
+
+	#tools-index .in-progress-set.adjusted {
+		padding-bottom: 30px;
+	}
+
+	#tools-index .live-set .tool-flyer-list li,
+	#tools-index .coming-soon-set.adjusted .tool-flyer-list li {
+		width: 50%;
+		float: left;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	#tools-index #content .constrained {
+		margin-top: -200px;
+	}
+
+	#tools-index #content .header {
+		height: auto;
+		padding-bottom: 30px;
+	}
+
+	#tools-index #content .header hgroup {
+		height: auto;
+		padding-bottom: 0;
+	}
+
+	#tools-index #content .masthead {
+		padding-bottom: 90px;
+	}
+
+	#tools-index #content h3.shout {
+		color: #6D6E71;
+	    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+	}
+}
+
+@media screen and (max-width: 600px) {
+	#tools-index .featured-set .tool-flyer-list li,
+	#tools-index .live-set .tool-flyer-list li,
+	#tools-index .in-progress-set.adjusted .tool-flyer-list li,
+	#tools-index .coming-soon-set.adjusted .tool-flyer-list li {
+		float: none;
+		width: 100%;
+	}
+}
 
 /* ---[ Code party homepage ]------------------------------------------------- */
 
@@ -2024,69 +2325,12 @@ ul.tri-set img {
 	}
 }
 
-.masthead {
-	text-align: center;
-  	padding-top: 30px;
-  	text-transform: uppercase;
-  	width: 320px;
-  	margin: 0 auto;
-    background: transparent url(../img/guide_book.png) no-repeat top center;
-}
-.masthead .plaque {
-  	background: #2bb673;
-  	color: #fff;
-  	display: inline-block;
-  	margin-bottom: 0;
-  	font-size: 14px;
-    line-height: 1;
-  	letter-spacing: 2px;
-  	padding: 10px 20px;
-  	position: relative;
-}
-.masthead .plaque:after,
-.masthead .plaque:before {
-  	border-bottom: 17px solid #2bb673;
-  	border-top: 17px solid #2bb673;
-  	content: "";
-  	position: absolute;
-  	top: 0;
-}
-.masthead .plaque:after {
-  	border-right: 17px solid transparent;
-  	right: -17px;
-}
-.masthead .plaque:before {
-  	border-left: 17px solid transparent;
-  	left: -17px;
-}
-.masthead p {
-  	padding: 0 60px;
-  	position: relative;
-  	margin: 1em 20px;
-  	color: #fff;
+#guides-index .masthead {
+    background-image: url(../img/guide_book.png);
 }
 #guides-index .masthead p,
 #login .masthead p {
     color: #939598;
-}
-.masthead p:after,
-.masthead p:before {
-  	position: absolute;
-  	top: 50%;
-  	background: #d3d1d2;
-  	height: 1px;
-  	width: 60px;
-  	content: "";
-  	display: block;
-}
-.masthead p:after {
-	right: 0;
-}
-.masthead p:before {
-	left: 0;
-}
-#guides-index h3.shout {
-    text-align: center;
 }
 #guides-index .tri-set h3 {
 	color: #27AAE1;
