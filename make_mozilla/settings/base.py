@@ -45,6 +45,8 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'make_mozilla.base',
     # Events and Venues
     'make_mozilla.events',
+    # News and feed importer
+    'make_mozilla.news',
     # UserProfiles
     'make_mozilla.users',
     # extra lib stuff
@@ -192,3 +194,8 @@ SOUTH_DATABASE_ADAPTERS = {
 # CELERY_ALWAYS_EAGER = False  # required to activate celeryd
 BROKER_URL = "redis://localhost:6379/0"
 SITE_URL = 'http://localhost:8000'
+
+# RSS feed for planet news
+SITE_FEED_URLS = {
+    'webmaker': 'http://planet.drumbeat.org/rss20.xml',
+}
