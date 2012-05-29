@@ -6,7 +6,7 @@
 {% macro render_tool(tool, type) %}
 <div class="tool-flyer {{ type }}{% if tool.new %} new{% endif %}">
     <h4 class="title"><a href="{{ tool.get_absolute_url() }}">{{ tool.name }}</a></h4>
-    <a href="{{ tool.get_absolute_url() }}" class="logo"><img src="{{ tool.logo.url }}" alt="" title=""></a>
+    <a href="{{ tool.get_absolute_url() }}" class="logo"><img src="{% if tool.logo %}{{ tool.logo.url }}{% else %}{{ MEDIA_URL }}img/default-tool.png{% endif %}" alt="{{ tool.name }}" title=""></a>
     <p>{{ tool.strapline }}</p>
 </div>
 {% endmacro %}
