@@ -6,7 +6,7 @@ from make_mozilla.news.models import Article
 
 def index(request):
 
-    articles = Article.objects.all()
+    articles = Article.objects.all().order_by('-updated')
     paginator = Paginator(articles, 10)
 
     try:
