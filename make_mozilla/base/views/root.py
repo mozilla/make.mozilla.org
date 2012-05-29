@@ -1,11 +1,8 @@
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-
 import jingo
 
 
 def index(request):
-    return HttpResponseRedirect(reverse('events'))
+    return jingo.render(request, 'splash.html', {})
 
 
 def fail(request):
@@ -14,4 +11,3 @@ def fail(request):
 
 def app_fail(request):
     return jingo.render(request, 'base/500.html', {}, status=500)
-

@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block section_type %}homepage{% endblock %}
+
+{% block content %}
+<div class="meat">
+	<section class="wrap tools">
+		<header>
+			<h2><a href="#">Tools</a></h2>
+			<p>Tools for creativity</p>
+		</header>
+		<ul>
+			<li>
+				<a href="#">
+					<h3 class="list-title">Thimble App</h3>
+					<img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
+				</a>
+				<p>Remix, hack, make and share everything</p>
+			</li>
+			<li>
+				<a href="#">
+					<h3 class="list-title">X-Ray Googles</h3>
+					<img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
+				</a>
+				<p>Look under the hood and hack the web.</p>
+			</li>
+			<li>
+				<a href="#">
+					<h3 class="list-title">Popcorn</h3>
+					<img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
+				</a>
+				<p>Make videos work like the web.</p>
+			</li>
+		</ul>
+	</section>
+	<div class="wrap columns">
+		<div class="col main">
+			<section class="projects">
+				<header>
+					<h2><a href="#">Projects</a></h2>
+					<p>Get excited and make things</p>
+				</header>
+				<ul>
+					<li>
+						<a href="#">
+							<img src="{{ MEDIA_URL }}img/projects/test.png" alt="" />
+							<h3 class="list-title">Make a realistic car simulator with MITs Scratch</h3>
+						</a>
+						<footer><p>Contributed by Tumblr</p></footer>
+					</li>
+					<li>
+						<a href="#">
+							<img src="{{ MEDIA_URL }}img/projects/test.png" alt="" />
+							<h3 class="list-title">Make an interactive documentary</h3>
+						</a>
+						<footer><p>Contributed by Tumblr</p></footer>
+					</li>
+				</ul>
+				<a class="lozenge" href="#">Go to Projects</a>
+			</section>
+			<section class="events">
+				<header>
+					<h2><a href="#">Events</a></h2>
+					<p>Connect and learn with others</p>
+				</header>
+				<ol>
+					<li class="vevent">
+						<time>June <span>23</span></time>
+						<h3 class="list-title"><a href="#">Kids and Tech: Exploring a World of Possibilities</a></h3>
+						<p class="location">New York</p>
+					</li>
+					<li class="vevent">
+						<time>June <span>23</span></time>
+						<h3 class="list-title"><a href="#">Learn Python the Fun Way</a></h3>
+						<p class="location">Toronto</p>
+					</li>
+					<li class="vevent">
+						<time>June <span>23</span></time>
+						<h3 class="list-title"><a href="#">Design thinking and making website</a></h3>
+						<p class="location">Brisbane</p>
+					</li>
+				</ol>
+				<a class="lozenge" href="#">Go to Events</a>
+			</section>
+		</div>
+		<div class="col aside">
+			<h2 class="side-title">Share the love</h2>
+			<p>Twitter widget</p>
+			<p>Facebook widget</p>
+			<section class="news">
+				<h2 class="side-title">What's new?</h2>
+				<ol>
+					<li>
+						<a href="#">
+							<img src="{{ MEDIA_URL }}img/news-test.jpg" alt="" />
+							<p>May 22, 2012</p>
+							<h3 class="list-title">Introducing "Mozilla Webmaker": helping the world make the web<h3>
+						</a>
+					</li>
+				</ol>
+			</section>
+			<section class="tweets">
+				<h2 class="side-title">@MozillaWebmaker</h2>
+				<p>And you throught 3rd base coaches were cryptic... The secret hand signals of NYC's famed Stork Club <a href="#">http://t.co./chgrkdn</a></p>
+				<a href="#">about 21 hours ago</a>
+				<p>Twitter follow widget</p>
+			</section>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block admin_menu_items %}
+{% if request.user and request.user.is_authenticated() %}
+<li><a href="{{ url('events.mine') }}">My events</a></li>
+{% endif %}
+{% endblock %}
