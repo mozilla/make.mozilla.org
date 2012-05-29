@@ -11,15 +11,17 @@ TOOL_STATUS_CHOICES = (
 
 
 class Tool(models.Model):
-    name = models.CharField(max_length = 255)
-    strapline = models.CharField(max_length = 100)
-    url = models.URLField(blank = True)
+    name = models.CharField(max_length=255)
+    strapline = models.CharField(max_length=100)
+    url = models.URLField(blank=True, null=True)
     slug = models.SlugField()
-    description = models.TextField(blank = True)
-    featured = models.BooleanField(default = False)
-    new = models.BooleanField(default = True)
-    status = models.CharField(max_length = 1, choices = TOOL_STATUS_CHOICES)
-    logo = models.ImageField(upload_to = 'tools', storage = FileSystemStorage(**settings.UPLOADED_IMAGES))
+    description = models.TextField(blank=True, null=True)
+    featured = models.BooleanField(default=False)
+    new = models.BooleanField(default=True)
+    status = models.CharField(max_length=1, choices=TOOL_STATUS_CHOICES)
+    logo = models.ImageField(
+            blank=True, null=True, upload_to='tools',
+            storage=FileSystemStorage(**settings.UPLOADED_IMAGES))
 
     @models.permalink
     def get_absolute_url(self):
