@@ -94,7 +94,7 @@ class Event(models.Model):
         return bleached(self.description)
 
     def bsd_hosted(self):
-        return self.source_id.find('bsd:') == 0
+        return self.source == 'bsd'
 
     def verify_ownership(self, user):
         return user.email == self.organiser_email
@@ -110,11 +110,11 @@ class Event(models.Model):
 
     @classmethod
     def all_user_non_bsd(cls, user):
-        return cls.objects.filter(organiser_email = user.email).exclude(source_id__startswith = 'bsd').order_by('start')
+        return cls.objects.filter(organiser_email = user.email).exclude(source = 'bsd').order_by('start')
 
     @classmethod
     def all_user_bsd(cls, user):
-        return cls.objects.filter(organiser_email = user.email, source_id__startswith = 'bsd').order_by('start')
+        return cls.objects.filter(organiser_email = user.email, source = 'bsd').order_by('start')
 
 class EventAndVenueUpdater(object):
     @classmethod

@@ -51,7 +51,8 @@ class EventTestHelperMixin(object):
 
     def add_bsd_event(self, name, venue, offset, bsd_id):
         e = self.add_event(name, venue, offset)
-        e.source_id = 'bsd:%s' % bsd_id
+        e.source = 'bsd'
+        e.source_id = bsd_id
         e.save()
         return e
 
