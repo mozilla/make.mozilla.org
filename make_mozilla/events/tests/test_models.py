@@ -41,11 +41,11 @@ class VenueTest(unittest.TestCase):
         eq_(venue.location, geos.Point(4.0, 51.0))
 
 class EventTestHelperMixin(object):
-    def add_event(self, name, venue, offset, public = True, verified = True):
+    def add_event(self, name, venue, offset, public = True, verified = True, pending_deletion = False):
         start = datetime.datetime.now() + datetime.timedelta(days = offset)
         end = start + datetime.timedelta(hours = 3)
         e = models.Event(name = name, venue = venue, organiser_email = 'moz@example.com',
-                start = start, end = end, public = public, verified = verified)
+                start = start, end = end, public = public, verified = verified, pending_deletion = pending_deletion)
         e.save()
         return e
 
@@ -74,6 +74,7 @@ class EventTestHelperMixin(object):
 
         eu = self.add_event("EU", berlin, 9, verified = False)
         ep = self.add_event("EP", berlin, 10, public = False)
+        ed = self.add_event("ED", london, 8, pending_deletion = True)
 
         return (e1, e2, e3, ep)
 

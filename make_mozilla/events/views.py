@@ -74,11 +74,18 @@ def create(request):
     return _render_event_creation_form(request, ef, vf, lf)
 
 
+def verified_ownership(f):
+    def wrapped(request, event_hash):
+        event = get_object_or_404(models.Event, url_hash=event_hash)
+        if not event.verify_ownership(request.user):
+            return http.HttpResponseForbidden(u'sorry, you’re not allowed in')
+        return f(request, event)
+    return wrapped
+
+
 @login_required
-def edit_or_update(request, event_hash):
-    event = get_object_or_404(models.Event, url_hash=event_hash)
-    if not event.verify_ownership(request.user):
-        return http.HttpResponseForbidden(u'Sorry, you’re not allowed in')
+@verified_ownership
+def edit_or_update(request, event):
     if request.method == "POST":
         ef, vf, lf = _process_create_post_data(request.POST)
         if ef.is_valid() and vf.is_valid():
@@ -98,6 +105,20 @@ def edit_or_update(request, event_hash):
         vf = forms.VenueForm(instance = event.venue)
         lf = forms.PrivacyAndLegalForm()
     return _render_event_creation_form(request, ef, vf, lf, template = 'events/edit.html', event = event)
+
+@login_required
+@verified_ownership
+def delete(request, event):
+    if request.method == "POST":
+        if event.bsd_hosted():
+            event.pending_deletion = True
+            event.save()
+            return http.HttpResponseRedirect()
+        else:
+            event.delete()
+            return http.HttpResponseRedirect(reverse('events.mine'))
+    return jingo.render(request, 'events/delete.html', {'event': event})
+
 
 def _render_event_creation_form(request, event_form, venue_form, privacy_and_legal_form, template = 'events/new.html', event = None):
     fieldsets = [
@@ -146,13 +167,6 @@ def from_id(request, event_id):
 def details(request, event_hash):
     event = get_object_or_404(models.Event, url_hash=event_hash)
     return jingo.render(request, 'events/detail.html', {'event': event})
-
-@login_required
-def mine(request):
-    return jingo.render(request, 'events/mine.html', {
-        'events': models.Event.all_user_non_bsd(request.user), 
-        'bsd_events': models.Event.all_user_bsd(request.user)
-    })
 
 @login_required
 def mine(request):

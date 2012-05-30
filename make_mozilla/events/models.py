@@ -49,7 +49,7 @@ class Venue(models.Model):
         self.location.x = value
 
 def _upcoming(qs, sort, include_private):
-    resultset = qs.filter(start__gte = datetime.now(), verified = True).order_by(sort)
+    resultset = qs.filter(start__gte = datetime.now(), verified = True, pending_deletion = False).order_by(sort)
     if not include_private:
         resultset = resultset.filter(public=True)
     return resultset
@@ -70,6 +70,7 @@ class Event(models.Model):
     verified = models.BooleanField(default = False)
     official = models.BooleanField(default = False)
     public = models.BooleanField(default = False)
+    pending_deletion = models.BooleanField(default = False)
 
     objects = models.GeoManager()
 

@@ -31,16 +31,14 @@
     </div>
     {% if editable %}
     <div class="edit-links">
-      <form action="" method="POST">
         <ul>
         {% if event.source == 'bsd' %}
-          <li><a class="button create" href="https://donate.mozilla.org/page/event/edit_details?event_id={{ event.source_id }}">Edit</a></li>
+            <li><a class="button create" href="https://donate.mozilla.org/page/event/edit_details?event_id={{ event.source_id }}">Edit</a></li>
         {% else %}
-          <li><a class="button create" href="{{ url('event.edit', event_hash = event.hash) }}">Edit</a></li>
+            <li><a class="button create" href="{{ url('event.edit', event_hash = event.hash) }}">Edit</a></li>
         {% endif %}
-          <li><input class="button delete" type="Submit" value="Delete"></li>
+            <li><a class="button delete" href="{{ url('event.delete', event_hash = event.hash) }}">Delete</a></li>
         </ul>
-      </form>
     </div>
     {% endif %}
 </li>
