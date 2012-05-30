@@ -1,0 +1,66 @@
+{% extends "tools/base.html" %}
+
+{% block page_id %}tools-index{% endblock %}
+{% block page_class %}{{ super() }} brochure-page{% endblock %}
+
+{% macro render_tool(tool, type) %}
+<div class="tool-flyer {{ type }}{% if tool.new %} new{% endif %}">
+    <h4 class="title"><a href="{{ tool.get_absolute_url() }}">{{ tool.name }}</a></h4>
+    <a href="{{ tool.get_absolute_url() }}" class="logo"><img src="{% if tool.logo %}{{ tool.logo.url }}{% else %}{{ MEDIA_URL }}img/default-tool.png{% endif %}" alt="{{ tool.name }}" title=""></a>
+    <p>{{ tool.strapline }}</p>
+</div>
+{% endmacro %}
+
+{% block content %}
+<div class="header">
+    <hgroup>
+        <div class="masthead">
+            <h2 class="plaque">Beta Tools</h2>
+        </div>
+        <h3 class="shout">Tools to help you make things on the Web</h3>
+    </hgroup>
+    {% if tools.featured %}
+        <div class="featured-set">
+            <h3>Featured</h3>
+            <ul class="tool-flyer-list">
+            {% for tool in tools.featured -%}
+                <li>{{ render_tool(tool, 'featured') }}</li>
+            {%- endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+
+{% if tools.live %}
+    <div class="live-set">
+        <h3>Available</h3>
+        <ul class="tool-flyer-list">
+        {% for tool in tools.live -%}
+            <li>{{ render_tool(tool, 'live') }}</li>
+        {%- endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+{% if tools.in_progress %}
+    <div class="in-progress-set{% if tools.coming_soon %} adjusted{% endif %}">
+        <h3>In Progress</h3>
+        <ul class="tool-flyer-list">
+        {% for tool in tools.in_progress -%}
+            <li>{{ render_tool(tool, 'in-progress') }}</li>
+        {%- endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+{% if tools.coming_soon %}
+    <div class="coming-soon-set{% if tools.in_progress %} adjusted{% endif %}">
+        <h3>Coming Soon</h3>
+        <ul class="tool-flyer-list">
+        {% for tool in tools.coming_soon -%}
+            <li>{{ render_tool(tool, 'coming-soon') }}</li>
+        {%- endfor %}
+        </ul>
+    </div>
+{% endif %}
+{% endblock %}
