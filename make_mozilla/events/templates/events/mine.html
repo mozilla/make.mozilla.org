@@ -11,7 +11,6 @@
     <ol>
     {% for event in bsd_events %}
         {% include "events/_event-list-item.html" %}
-        <li>Edit the <a href="https://donate.mozilla.org/page/event/edit_details?event_id={{ event.source_id }}">original event listing</a></li>
     {% endfor %}
     </ol>
     {% else %}
@@ -22,7 +21,6 @@
     <ol>
     {% for event in events %}
         {% include "events/_event-list-item.html" %}
-        <li>Edit the <a href="{{ url('event.edit', event_hash = event.hash) }}">event listing</a></li>
     {% endfor %}
     </ol>
     {% else %}

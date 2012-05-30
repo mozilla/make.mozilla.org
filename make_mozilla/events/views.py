@@ -158,7 +158,8 @@ def mine(request):
 def mine(request):
     return jingo.render(request, 'events/mine.html', {
         'events': models.Event.all_user_non_bsd(request.user),
-        'bsd_events': models.Event.all_user_bsd(request.user)
+        'bsd_events': models.Event.all_user_bsd(request.user),
+        'editable': True
     })
 
 
