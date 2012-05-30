@@ -82,10 +82,11 @@ def edit_or_update(request, event_hash):
     if request.method == "POST":
         ef, vf, lf = _process_create_post_data(request.POST)
         if ef.is_valid() and vf.is_valid():
-            print request.POST
             new_event = ef.instance
             new_event.organiser_email = event.organiser_email
             new_event.verified = event.verified
+            new_event.official = event.official
+            new_event.campaign = event.campaign
             new_venue = vf.instance
             vf.add_geo_data_to(new_venue)
             models.EventAndVenueUpdater.update(event, new_event, event.venue, new_venue)
