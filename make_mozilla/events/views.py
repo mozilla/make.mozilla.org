@@ -154,6 +154,14 @@ def mine(request):
         'bsd_events': models.Event.all_user_bsd(request.user)
     })
 
+@login_required
+def mine(request):
+    return jingo.render(request, 'events/mine.html', {
+        'events': models.Event.all_user_non_bsd(request.user),
+        'bsd_events': models.Event.all_user_bsd(request.user)
+    })
+
+
 def search(request):
     location = request.GET.get('location')
 
@@ -190,7 +198,7 @@ class Near(object):
             return ('date', 'start')
 
     def paginated_results(self, latitude, longitude, order, results_per_page, page):
-        results = models.Event.near(latitude, longitude, sort = order)
+        results = models.Event.near(latitude, longitude, sort=order)
         return paginators.results_page(results, results_per_page, page=page)
 
     def render(self, request, template, results_per_page):
@@ -283,3 +291,7 @@ def content_guidelines(request):
 
 def event_guidelines(request):
     return jingo.render(request, 'events/legal/guidelines.html', {})
+
+
+def scribble_live(request):
+    return jingo.render(request, 'events/live-updates.html', {})
