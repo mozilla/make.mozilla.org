@@ -87,6 +87,8 @@ def edit_or_update(request, event_hash):
             new_event.verified = event.verified
             new_event.official = event.official
             new_event.campaign = event.campaign
+            new_event.source = event.source
+            new_event.source_id = event.source_id
             new_venue = vf.instance
             vf.add_geo_data_to(new_venue)
             models.EventAndVenueUpdater.update(event, new_event, event.venue, new_venue)

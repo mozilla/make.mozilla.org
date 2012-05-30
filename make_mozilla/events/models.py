@@ -62,6 +62,7 @@ class Event(models.Model):
     venue = models.ForeignKey(Venue)
     start = models.DateTimeField(null = True, blank = True)
     end = models.DateTimeField(null = True, blank = True)
+    source = models.CharField(max_length = 255, blank = True)
     source_id = models.CharField(max_length = 255, blank = True)
     organiser_email = models.EmailField(max_length = 255)
     campaign = models.ForeignKey('Campaign', null = True, blank=True)

@@ -112,12 +112,9 @@ class BSDEventImporter(object):
         return [json_extractors.venue_name, json_extractors.venue_country, 
                 json_extractors.venue_street_address, json_extractors.venue_location]
 
-    def event_source_id(self, event_json):
-        return 'bsd:%s' % event_json['event_id']
-
     def fetch_existing_event(self, source_id):
         try:
-            return Event.objects.get(source_id = source_id)
+            return Event.objects.get(source = 'bsd', source_id = source_id)
         except Event.DoesNotExist:
             return None
 
@@ -145,7 +142,7 @@ class BSDEventImporter(object):
         return (event, venue)
 
     def process_event_from_json(self, event_kind, event_url, event_json):
-        source_id = self.event_source_id(event_json)
+        source_id = event_json['event_id']
         event = self.fetch_existing_event(source_id)
         if event is None:
             event = Event()
@@ -154,6 +151,7 @@ class BSDEventImporter(object):
         (new_event, new_venue) = self.new_models_from_json(event_json)
         new_event.event_url = event_url
         new_event.source_id = source_id
+        new_event.source = 'bsd'
         new_event.organiser_email = organiser_email
         new_event.kind = event_kind
         new_event.public = True
