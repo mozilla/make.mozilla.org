@@ -109,10 +109,10 @@
 				</ol>
 			</section>
 			<section class="tweets">
-				<h2 class="side-title">@MozillaWebmaker</h2>
+				<h2 class="side-title">@mozilla</h2>
 				<p>And you throught 3rd base coaches were cryptic... The secret hand signals of NYC's famed Stork Club <a href="#">http://t.co./chgrkdn</a></p>
 				<a href="#">about 21 hours ago</a>
-				<a href="https://twitter.com/mozillawebmaker" class="twitter-follow-button" data-show-count="false">Follow @mozillawebmaker</a>
+				<a href="https://twitter.com/mozilla" class="twitter-follow-button" data-show-count="false">Follow @mozilla</a>
 			</section>
 		</div>
 	</div>
@@ -120,17 +120,21 @@
 <div class="fish">
 	<section class="wrap partners">
 		<h2>Webmaking goodness brought to you in partnership with these fine folk</h2>
-		<ul>
+		<ul class="maker_partners">
 			<li><a href="#"><img src="{{ MEDIA_URL }}img/partner-popcorn.gif" alt="popcorn" /></a></li>
 			<li><a href="#"><img src="{{ MEDIA_URL }}img/partner-ignite.gif" alt="mozilla ignite" /></a></li>
 			<li><a href="#"><img src="{{ MEDIA_URL }}img/partner-opennews.gif" alt="mozilla opennews" /></a></li>
 			<li><a href="#"><img src="{{ MEDIA_URL }}img/partner-hive.gif" alt="hive NYC" /></a></li>
 		</ul>
-		<div class="intro-bar">
-    		<h2>Get Webmaker updates</h2>
-    		<input type="text" name="cheese" id="cheese" />
-    		<a class="button find" href="/en-US/events/search/">Sign me up</a> 
-		</div>
+			<form>
+    			<label for="cheese">Get Webmaker updates</label>
+    			<div class="form-fields">
+                    <input type="text" name="cheese" id="cheese" placeholder="Your email here" />
+    				<p><input type="checkbox" name="check-1" id="check-1" />
+    				<label class="help" for="check-1">I'm okay with you handling this info as you explain in your <a href="http://www.mozilla.org/en-US/privacy-policy.html">Privacy Policy</a></label></p>
+    			</div>
+    			<a class="button find" href="/en-US/events/search/">Sign me up</a>
+    		</form> 
 	</section>
 </div>
 {% endblock %}

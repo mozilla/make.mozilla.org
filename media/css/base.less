@@ -2368,7 +2368,7 @@ border-right: none;
 /* ---[ Homepage ]-------------------------------------------------- */
 .section-homepage #content {
 	background: #fff;
-	padding: 0 0 3em 0;
+	padding: 0;
 	margin-top: 0;
 }
 .section-homepage #content .constrained {
@@ -2406,16 +2406,22 @@ border-right: none;
 	font-family: "Open Sans";
 	margin: 0;
 }
-.section-homepage section header p {
+.section-homepage section header p,
+.fish h2 {
 	font-family: "Open Sans Light";
 	font-size: 22px;
 	margin: 0;
 	line-height: 1.2;
 }
+.meat {
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+	overflow: hidden;
+	padding: 3em;
+}
 .meat .tools {
 	padding-bottom: 1em;
 	border-bottom: 1px solid #e4e4e5;
-	margin: 3em auto 1em;
+	margin: 1em auto;
 }
 .meat .tools ul {
 	padding-left: 0;
@@ -2549,4 +2555,33 @@ border-right: none;
 }
 .meat .tweets .twitter-follow-button {
 	margin-top: 1em;
+}
+.fish {
+	background: url("../img/bg-stone.png") repeat-x scroll 50% 0 #F9F9F9;
+	overflow: hidden;
+	margin-top: 2px;
+	padding: 2em 0;
+}
+.fish .maker_partners {
+	overflow: hidden;
+	list-style-type: none;
+	margin: 2em 0;
+}
+.fish .maker_partners li {
+	float: left;
+	margin-right: 20px;
+}
+#content .fish form {
+	overflow: hidden;
+}
+#content .fish form label {
+	width: auto;
+	margin: 0 10px 0 0;
+}
+#content .fish .form-fields {
+	float: left;
+	width: 60%;
+}
+#content .fish .help {
+	width: 60%;
 }
