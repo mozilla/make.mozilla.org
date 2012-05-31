@@ -29,16 +29,16 @@ class app {
       require => [File[$app_root], User[$app_user]];
     }
   }
-  reap_bsd_events { "1"
+  reap_bsd_events { "1":
     minutes => [3,23,43];
   }
-  reap_bsd_events { "2"
+  reap_bsd_events { "2":
     minutes => [8,28,48];
   }
-  reap_bsd_events { "3"
+  reap_bsd_events { "3":
     minutes => [13,33,53];
   }
-  reap_bsd_events { "4"
+  reap_bsd_events { "4":
     minutes => [18,38,58];
   }
 }
