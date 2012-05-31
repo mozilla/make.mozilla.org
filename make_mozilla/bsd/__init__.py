@@ -176,7 +176,7 @@ class BSDReaper(object):
                 yield event
 
     def process(self):
-        input_query = Event.upcoming_bsd()
+        input_query = Event.all_upcoming_bsd()
         if input_query.count() > 50:
             input_query = self.subset(input_query)
         for event in input_query:

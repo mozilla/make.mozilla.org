@@ -95,8 +95,13 @@ class Event(models.Model):
         return user.email == self.organiser_email
 
     @classmethod
+    def all_upcoming(cls, sort='start'):
+        resultset = cls.objects.filter(start__gte = datetime.now()).order_by(sort)
+        return resultset
+
+    @classmethod
     def upcoming(cls, sort='start', include_private=False):
-        resultset = cls.objects.filter(start__gte = datetime.now(), verified = True, pending_deletion = False).order_by(sort)
+        resultset = cls.all_upcoming(sort).filter(verified = True, pending_deletion = False)
         if not include_private:
             resultset = resultset.filter(public=True)
         return resultset
@@ -115,8 +120,8 @@ class Event(models.Model):
         return cls.objects.filter(organiser_email = user.email, source = 'bsd').order_by('start')
 
     @classmethod
-    def upcoming_bsd(cls):
-        return cls.upcoming(include_private=True).filter(source = 'bsd')
+    def all_upcoming_bsd(cls):
+        return cls.all_upcoming.filter(source = 'bsd')
 
 class EventAndVenueUpdater(object):
     @classmethod
