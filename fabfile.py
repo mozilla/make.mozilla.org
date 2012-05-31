@@ -10,7 +10,7 @@ import fab_git as git
 env.releases_path = '/var/webapps/make.mozilla.org'
 env.repo_url = 'git://github.com/rossbruniges/make.mozilla.org.git'
 env.forward_agent = True
-env.puppet_user = env.user
+env.puppet_user = os.getenv('AS', env.user)
 env.user = 'make_mozilla'
 hosts = {
     'dev': ['make.constituentparts.com'],
