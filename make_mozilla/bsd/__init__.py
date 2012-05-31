@@ -182,7 +182,7 @@ class BSDReaper(object):
         for event in input_query:
             response = requests.head(event.event_url)
             if response.status_code == 404:
-                log.info('Deleting event %s' % event_url)
+                log.info('Deleting event %s' % event.event_url)
                 event.delete()
 
 class BSDApiError(BaseException):
