@@ -3,43 +3,82 @@
 {% block section_type %}homepage{% endblock %}
 
 {% block content %}
+<div class="amuse">
+    <ol class="carousel">
+    	<li>
+        	<img src="{{ MEDIA_URL }}img/carousel/faux.jpg" alt="" />
+        	<a href="http:mozilla.org/webmaker/videos/" class="carousel-text">
+        		<h2 class="carousel-title">Make the webmakers</h2>
+        		<p><strong>Let's teach the world the web.</strong> Meet some of the global community making it happen.</p>	
+        	</a>
+        </li>
+    </ol>
+    <ol class="carousel-controls">
+        <li><a href="#" class="current">● <span>read about "foo"</span></a></li>
+        <li><a href="#">● <span>read about "foo"</span></a></li>
+        <li><a href="#">● <span>read about "foo"</span></a></li>
+        <li><a href="#">● <span>read about "foo"</span></a></li>
+    </ol>
+</div>
+<div class="veg">
+    <section class="wrap tools">
+        <ul>
+            <li>
+                <a href="#">
+                    <h2 class="list-title">Thimble App</h3>
+                    <img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
+                </a>
+                <p>Remix, hack, make and share everything</p>
+            </li>
+            <li>
+                <a href="#">
+                    <h2 class="list-title">X-Ray Googles</h3>
+                    <img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
+                </a>
+                <p>Look under the hood and hack the web.</p>
+            </li>
+            <li>
+                <a href="#">
+                    <h2 class="list-title">Popcorn</h3>
+                    <img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
+                </a>
+                <p>Make videos work like the web.</p>
+            </li>
+        </ul>
+    </section>
+    <section class="wrap social">
+    <form>
+        <h2 class="side-title">Get Webmaker updates</h2>
+        <div class="form-fields">
+            <input type="text" name="cheese" id="cheese" placeholder="Your email here" />
+            <p><input type="checkbox" name="check-1" id="check-1" />
+            <label class="help" for="check-1">I'm okay with you handling this info as you explain in your <a href="http://www.mozilla.org/en-US/privacy-policy.html">Privacy Policy</a></label></p>
+        </div>
+        <input type="submit" class="button find" value="Sign me up" />
+    </form> 
+    <section class="share">
+                <h2 class="side-title">Follow</h2>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <ul>
+                    <li>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+                    </li>
+                    <li>
+                        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwebmaker.org&amp;send=false&amp;layout=button_count&amp;width=160&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:160px; height:21px;" allowTransparency="true"></iframe>
+                    </li>
+                </ul>
+            </section>
+    </section>
+</div>
 <div class="meat">
-	<section class="wrap tools">
-		<header>
-			<h2><a href="#">Tools</a></h2>
-			<p>Tools for creativity</p>
-		</header>
-		<ul>
-			<li>
-				<a href="#">
-					<h3 class="list-title">Thimble App</h3>
-					<img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
-				</a>
-				<p>Remix, hack, make and share everything</p>
-			</li>
-			<li>
-				<a href="#">
-					<h3 class="list-title">X-Ray Googles</h3>
-					<img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
-				</a>
-				<p>Look under the hood and hack the web.</p>
-			</li>
-			<li>
-				<a href="#">
-					<h3 class="list-title">Popcorn</h3>
-					<img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
-				</a>
-				<p>Make videos work like the web.</p>
-			</li>
-		</ul>
-	</section>
 	<div class="wrap columns">
 		<div class="col main">
 			<section class="projects">
 				<header>
-					<h2><a href="#">Projects</a></h2>
-					<p>Get excited and make things</p>
+					<h2><a href="#">Webmaker Projects</a></h2>
+					<p>Make something amazing with the web now</p>
 				</header>
+                <div class="featured">
 				<ul>
 					<li>
 						<a href="#">
@@ -55,47 +94,33 @@
 						</a>
 						<footer><p>Contributed by Tumblr</p></footer>
 					</li>
+                    <li>
+                        <a href="#">
+                            <img src="{{ MEDIA_URL }}img/projects/test.png" alt="" />
+                            <h3 class="list-title">Make a realistic car simulator with MITs Scratch</h3>
+                        </a>
+                        <footer><p>Contributed by Tumblr</p></footer>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="{{ MEDIA_URL }}img/projects/test.png" alt="" />
+                            <h3 class="list-title">Make an interactive documentary</h3>
+                        </a>
+                        <footer><p>Contributed by Tumblr</p></footer>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="{{ MEDIA_URL }}img/projects/test.png" alt="" />
+                            <h3 class="list-title">Make an interactive documentary</h3>
+                        </a>
+                        <footer><p>Contributed by Tumblr</p></footer>
+                    </li>
 				</ul>
-				<a class="lozenge" href="#">Go to Projects</a>
-			</section>
-			<section class="events">
-				<header>
-					<h2><a href="#">Events</a></h2>
-					<p>Connect and learn with others</p>
-				</header>
-				<ol>
-					<li class="vevent">
-						<time>June <span>23</span></time>
-						<h3 class="list-title"><a href="#">Kids and Tech: Exploring a World of Possibilities</a></h3>
-						<p class="location">New York</p>
-					</li>
-					<li class="vevent">
-						<time>June <span>23</span></time>
-						<h3 class="list-title"><a href="#">Learn Python the Fun Way</a></h3>
-						<p class="location">Toronto</p>
-					</li>
-					<li class="vevent">
-						<time>June <span>23</span></time>
-						<h3 class="list-title"><a href="#">Design thinking and making website</a></h3>
-						<p class="location">Brisbane</p>
-					</li>
-				</ol>
-				<a class="lozenge" href="#">Go to Events</a>
+				<a href="#" class="more">See all Webmaker projects</a>
+                </div>
 			</section>
 		</div>
 		<div class="col aside">
-			<section class="share">
-				<h2 class="side-title">Share the love</h2>
-				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-				<ul>
-					<li>
-						<a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
-					</li>
-					<li>
-						<iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwebmaker.org&amp;send=false&amp;layout=button_count&amp;width=160&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:160px; height:21px;" allowTransparency="true"></iframe>
-					</li>
-				</ul>
-			</section>
 			<section class="news">
 				<h2 class="side-title">What's new?</h2>
 				<ol>
@@ -106,6 +131,7 @@
 							<h3 class="list-title">Introducing "Mozilla Webmaker": helping the world make the web<h3>
 						</a>
 					</li>
+                    <p>Source: <a href="#">Plannet Webmaker</a> | <a href="#">RSS</a></p>
 				</ol>
 			</section>
 			<section class="tweets">
@@ -114,27 +140,42 @@
 				<a href="#">about 21 hours ago</a>
 				<a href="https://twitter.com/mozilla" class="twitter-follow-button" data-show-count="false">Follow @mozilla</a>
 			</section>
+            <section class="events">
+                <header>
+                    <h2><a href="{{ url('events') }}">Events</a></h2>
+                </header>
+                <ol>
+                    <li class="vevent">
+                        <time>June <span>23</span></time>
+                        <h3 class="list-title"><a href="#">Kids and Tech: Exploring a World of Possibilities</a></h3>
+                        <p class="location">New York</p>
+                    </li>
+                    <li class="vevent">
+                        <time>June <span>23</span></time>
+                        <h3 class="list-title"><a href="#">Learn Python the Fun Way</a></h3>
+                        <p class="location">Toronto</p>
+                    </li>
+                    <li class="vevent">
+                        <time>June <span>23</span></time>
+                        <h3 class="list-title"><a href="#">Design thinking and making website</a></h3>
+                        <p class="location">Brisbane</p>
+                    </li>
+                </ol>
+                <a class="button find" href="#">Create your own event</a>
+            </section>
 		</div>
 	</div>
 </div>
 <div class="fish">
 	<section class="wrap partners">
-		<h2>Webmaking goodness brought to you in partnership with these fine folk</h2>
+		<h2>Mozilla Webmaker is generously supported by the following:</h2>
 		<ul class="maker_partners">
 			<li><a href="#"><img src="{{ MEDIA_URL }}img/partner-popcorn.gif" alt="popcorn" /></a></li>
 			<li><a href="#"><img src="{{ MEDIA_URL }}img/partner-ignite.gif" alt="mozilla ignite" /></a></li>
 			<li><a href="#"><img src="{{ MEDIA_URL }}img/partner-opennews.gif" alt="mozilla opennews" /></a></li>
 			<li><a href="#"><img src="{{ MEDIA_URL }}img/partner-hive.gif" alt="hive NYC" /></a></li>
 		</ul>
-			<form>
-    			<label for="cheese">Get Webmaker updates</label>
-    			<div class="form-fields">
-                    <input type="text" name="cheese" id="cheese" placeholder="Your email here" />
-    				<p><input type="checkbox" name="check-1" id="check-1" />
-    				<label class="help" for="check-1">I'm okay with you handling this info as you explain in your <a href="http://www.mozilla.org/en-US/privacy-policy.html">Privacy Policy</a></label></p>
-    			</div>
-    			<a class="button find" href="/en-US/events/search/">Sign me up</a>
-    		</form> 
+        <p class="shout">and Mozillians like you</p>
 	</section>
 </div>
 {% endblock %}
