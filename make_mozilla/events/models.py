@@ -48,12 +48,6 @@ class Venue(models.Model):
     def longitude(self, value):
         self.location.x = value
 
-def _upcoming(qs, sort, include_private):
-    resultset = qs.filter(start__gte = datetime.now(), verified = True, pending_deletion = False).order_by(sort)
-    if not include_private:
-        resultset = resultset.filter(public=True)
-    return resultset
-
 class Event(models.Model):
     name = models.CharField(max_length = 255)
     url_hash = models.CharField(max_length = 20, blank = True)
@@ -102,12 +96,15 @@ class Event(models.Model):
 
     @classmethod
     def upcoming(cls, sort='start', include_private=False):
-        return _upcoming(cls.objects, sort, include_private)
+        resultset = cls.objects.filter(start__gte = datetime.now(), verified = True, pending_deletion = False).order_by(sort)
+        if not include_private:
+            resultset = resultset.filter(public=True)
+        return resultset
 
     @classmethod
     def near(cls, latitude, longitude, sort='start', include_private=False):
         point = geos.Point(float(longitude), float(latitude))
-        return _upcoming(cls.objects, sort, include_private).filter(venue__location__distance_lte=(point, measure.D(mi=20)))
+        return cls.upcoming(sort, include_private).filter(venue__location__distance_lte=(point, measure.D(mi=20)))
 
     @classmethod
     def all_user_non_bsd(cls, user):
@@ -116,6 +113,10 @@ class Event(models.Model):
     @classmethod
     def all_user_bsd(cls, user):
         return cls.objects.filter(organiser_email = user.email, source = 'bsd').order_by('start')
+
+    @classmethod
+    def upcoming_bsd(cls):
+        return cls.upcoming(include_private=True).filter(source = 'bsd')
 
 class EventAndVenueUpdater(object):
     @classmethod

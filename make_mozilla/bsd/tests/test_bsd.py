@@ -346,3 +346,11 @@ class BSDEventImporterTest(unittest.TestCase):
             mock_venue_extractor.assert_called_with(event_json)
             eq_(expected, actual)
 
+class BSDReaperTest(unittest.TestCase):
+    def test_that_a_subset_of_upcoming_bsd_events_can_be_deterministically_identified(self):
+        class FakeEvent(object):
+            def __init__(self, pk):
+                self.pk = pk
+        input_list = [FakeEvent(1), FakeEvent(2), FakeEvent(3), FakeEvent(4), FakeEvent(5), FakeEvent(6)]
+        actual = [x for x in bsd.BSDReaper(4, 1).subset(input_list)]
+        eq_(actual, [input_list[0], input_list[4]])

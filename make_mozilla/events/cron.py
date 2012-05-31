@@ -1,6 +1,7 @@
 import cronjobs
 from django.conf import settings
 from make_mozilla.bsd import fetch_and_process_event_feed
+from make_mozilla.bsd import BSDReaper
 from make_mozilla.events import models
 import commonware.log
 import funfactory.log_settings # Magic voodoo required to make logging work.
@@ -17,3 +18,8 @@ def import_bsd_events_for_kind_and_url(kind_slug, url):
     event_kind = models.EventKind.objects.get(slug = kind_slug)
     fetch_and_process_event_feed(event_kind, url)
 
+@cronjobs.register
+def reap_bsd_events(chunk):
+    log.info('Reaping deleted BSD events (chunk %s of 4)' % chunk)
+    reaper = BSDReaper(4, int(chunk))
+    reaper.process()

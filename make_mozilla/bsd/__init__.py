@@ -1,4 +1,7 @@
-import json, urllib2, re
+import json
+import urllib2
+import re
+import requests
 
 from bsdapi.BsdApi import Factory as BSDApiFactory
 from django.conf import settings
@@ -161,6 +164,26 @@ class BSDEventImporter(object):
         else:
             log.info('Adding new event for %s' % event_url)
         EventAndVenueUpdater.update(event, new_event, venue, new_venue)
+
+class BSDReaper(object):
+    def __init__(self, chunks, chunk_to_process):
+        self.chunks = chunks
+        self.chunk_to_process = chunk_to_process
+
+    def subset(self, input_set):
+        for event in input_set:
+            if event.pk % self.chunks == self.chunk_to_process:
+                yield event
+
+    def process(self):
+        input_query = Event.upcoming_bsd()
+        if input_query.count() > 50:
+            input_query = self.subset(input_query)
+        for event in input_query:
+            response = requests.head(event.event_url)
+            if response.status_code == 404:
+                log.info('Deleting event %s' % event_url)
+                event.delete()
 
 class BSDApiError(BaseException):
     pass
