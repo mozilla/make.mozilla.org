@@ -121,7 +121,7 @@ class Event(models.Model):
 
     @classmethod
     def all_upcoming_bsd(cls):
-        return cls.all_upcoming.filter(source = 'bsd')
+        return cls.all_upcoming().filter(source = 'bsd')
 
 class EventAndVenueUpdater(object):
     @classmethod
