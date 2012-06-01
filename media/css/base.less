@@ -1923,6 +1923,245 @@ ul.tri-set img {
 }
 
 /* ---[ Code party homepage ]------------------------------------------------- */
+/* ---[ Project Detail ]-----------------------------------------------------*/
+
+#project-detail #content .constrained {
+	max-width: 595px;
+	padding-right: 320px;
+	padding-bottom: 10px;
+	overflow: hidden;
+}
+
+#project-detail #main {
+	.box-shadow(@panelShadow);
+	.box-sizing(border-box);
+
+	padding: 20px 40px;
+	float: left;
+	width: 100%;
+	background: #FFF;
+	overflow: auto;
+}
+
+#project-detail #main .poster {
+	width: 100%;
+}
+
+#project-detail .meta {
+	float: right;
+	clear: right;
+	margin: 0 -305px 15px 0;
+	width: 290px;
+}
+
+#project-detail h2 {
+	margin-top: 0;
+}
+
+#project-detail #about {
+	.box-shadow(@panelShadow);
+	.box-sizing(border-box);
+
+	padding: 15px;
+	background: #EF4B36;
+	color: #FFF;
+	text-shadow: none;
+}
+
+#project-detail #about a {
+	color: #FFF;
+	border-bottom: solid 1px rgba(255,255,255,0.25);
+}
+
+#project-detail #about h3 {
+	color: #FFF;
+	text-transform: lowercase;
+	font-weight: normal;
+	position: relative;
+}
+
+#project-detail #about h3::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 100%;
+	margin: -15px 15px 0 0;
+	border: solid;
+	border-width: 15px 10px;
+	border-color: transparent #EF4B36 transparent transparent;
+}
+
+#project-detail #about dl {
+	overflow: hidden;
+	margin: -8px 0 0;
+	padding: 0;
+}
+
+#project-detail #about dt {
+	float: left;
+	clear: both;
+	width: 28px;
+	height: 28px;
+	margin-top: 8px;
+	background: url(../img/project-meta.png) no-repeat;
+	text-indent: -999em;
+}
+
+#project-detail #about dt.tool {
+	background-position: 0 -35px;
+}
+
+#project-detail #about dt.difficulty {
+	background-position: 0 -66px;
+}
+
+#project-detail #about dt.skills {
+	background-position: 0 -100px;
+}
+
+#project-detail #about dd {
+	margin: 8px 0 0 55px;
+	font-size: 0.857em;
+	line-height: 1.333em;
+	min-height: 1.333em;
+	padding: 6px 0;
+	overflow: hidden;
+}
+
+#project-detail #about ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#project-detail #about li {
+	float: left;
+}
+
+#project-detail #about li::before {
+	content: ",\00A0";
+}
+
+#project-detail #about li:first-child::before {
+	content: "";
+}
+
+#project-detail #partner {
+	.box-shadow(@panelShadow);
+	background: #FFF;
+}
+
+#project-detail #partner img {
+	margin: 0 auto -15px;
+	border: solid #FFF;
+	border-width: 15px 0;
+	display: block;
+}
+
+#project-detail #partner p {
+	margin: 0;
+	padding: 15px;
+}
+
+#project-detail #related h3 {
+	margin-bottom: 10px;
+	text-transform: lowercase;
+}
+
+#project-detail #related ul {
+	overflow: hidden;
+	list-style: none;
+	margin: -5px -5px 0;
+	padding: 5px;
+	position: relative;
+}
+
+#project-detail #related ul::before,
+#project-detail #related ul::after {
+	.box-shadow(~"inset 0 0 50px rgba(0,0,0,0.1)");
+	content: "";
+	display: block;
+	background: rgba(255,255,255,0.5);
+	width: 140px;
+	height: 91px;
+	position: absolute;
+	top: 5px;
+}
+
+#project-detail #related ul::before {
+	left: 5px;
+}
+
+#project-detail #related ul::after {
+	right: 5px;
+}
+
+#project-detail #related li {
+	float: left;
+	position: relative;
+	z-index: 1;
+}
+
+#project-detail #related li.next {
+	float: right;
+}
+
+#project-detail #related a {
+	.box-shadow(@panelShadow);
+	display: block;
+	position: relative;
+	border: solid 7px #FFF;
+}
+
+#project-detail #related a:hover::after,
+#project-detail #related a:focus::after {
+	.box-shadow(~"inset 0 0 20px rgba(0,0,0,0.25)");
+	content: "";
+	display: block;
+	position: absolute;
+	background: url(../img/prev_arrow_small.png) 50% 50% no-repeat;
+	background-color: rgba(0,0,0,0.25);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#project-detail #related .next a:hover::after,
+#project-detail #related .next a:focus::after {
+	background-image: url(../img/next_arrow_small.png);
+}
+
+#project-detail #related img {
+	display: block;
+}
+
+@media screen and (max-width: 800px) {
+	#project-detail #content .constrained {
+		max-width: 900px;
+		padding: 0 15px;
+	}
+
+	#project-detail #main {
+		float: none;
+		width: auto;
+	}
+
+	#project-detail .meta {
+		float: none;
+		width: auto;
+		clear: both;
+		margin: 15px 0 0;
+	}
+
+	#project-detail #about h3::before {
+		top: auto;
+		bottom: 100%;
+		margin: 0 -30px 15px 0;
+		border-width: 10px 15px;
+		border-color: transparent transparent #EF4B36 transparent;
+	}
+}
 
 .bad-ie #code-party-index #content::before {
 	background-image: url(../img/photos/codeparty_index.jpg);
