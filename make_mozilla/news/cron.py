@@ -13,7 +13,7 @@ def update_site_feeds():
     ids = []
     feeds = getattr(settings, 'SITE_FEED_URLS', None)
     for page, feed_url in feeds.iteritems():
-        log.info('Importing articles for %s from $s') % (page, feed_url)
+        log.info('Importing articles for %s from %s' % (page, feed_url))
         parsed = parse_feed(feed_url, page)
         ids.extend(parsed)
     Article.objects.exclude(id__in=ids).delete()
