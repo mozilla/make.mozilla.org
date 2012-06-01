@@ -4,7 +4,10 @@ from django.db import models
 from django.db.models.fields import files
 from PIL import Image
 import cStringIO
-  
+
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], ['^make_mozilla\.core\.fields\.SizedImageField'])
+
 
 class SizedImageFieldFile(files.ImageFieldFile):
 
