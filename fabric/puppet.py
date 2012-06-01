@@ -20,6 +20,7 @@ def apply():
         local('rm %s' % tarball_path)
         sudo('rm -rf /etc/puppet/manifests')
         sudo('rm -rf /etc/puppet/files')
+        sudo('rm -rf /etc/puppet/templates')
         with cd('/etc/puppet'):
             sudo('tar -xzf %s' % tarball_path)
         run('rm %s' % tarball_path)
