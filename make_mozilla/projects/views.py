@@ -74,7 +74,7 @@ class Index(object):
         invitation = models.Project(
             name='Submit your own project',
             url_hash='submit',
-            image='../submit-your-own.png',)
+            image='/media/img/submit-your-own.png',)
 
         projects = list(pagination.object_list)
         projects.append(invitation)
