@@ -4,8 +4,15 @@ class apache {
     before => File['/etc/apache2/sites-available/playdoh'];
   }
 
+  $server_aliases = $fqdn ? {
+    'make-dev1.vm.labs.scl3.mozilla.com' => ['make-dev.mozillalabs.com'],
+    'make-stage1.vm.labs.scl3.mozilla.com' => ['make-stage.mozillalabs.com'],
+    'make-prod1.vm.labs.scl3.mozilla.com' => ['webmaker.org'],
+    default => [],
+  }
+
   file { "/etc/apache2/sites-available/playdoh":
-    source => "/etc/puppet/files/apache/site.conf",
+    content => template("apache.conf.erb"),
     owner => "root", group => "root", mode => 0644,
     notify  => Service['apache2'],
     require => [
