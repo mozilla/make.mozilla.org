@@ -20,4 +20,11 @@ class app {
     minute => [5,15,25,35,45,55],
     require => [File[$app_root], User[$app_user]];
   }
+
+  cron { "update_site_feeds":
+    command => "cd ${app_root}/current && ${app_root}/virtualenv/bin/python manage.py cron update_site_feeds",
+    user => $app_user,
+    minute => [5,35],
+    require => [File[$app_root], User[$app_user]];
+  }
 }

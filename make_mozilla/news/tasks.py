@@ -62,12 +62,3 @@ def parse_feed(feed_url, page):
             entry_id = exists[0].id
         ids.append(entry_id)
     return ids
-
-
-def update_site_feeds():
-    ids = []
-    feeds = getattr(settings, 'SITE_FEED_URLS', None)
-    for page, feed_url in feeds.iteritems():
-        parsed = parse_feed(feed_url, page)
-        ids.extend(parsed)
-    Article.objects.exclude(id__in=ids).delete()
