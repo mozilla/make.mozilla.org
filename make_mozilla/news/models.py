@@ -1,3 +1,5 @@
+import lxml.html
+
 from django.db import models
 
 
@@ -10,6 +12,12 @@ class Article(models.Model):
     updated = models.DateTimeField()
     autor = models.CharField(max_length=255)
     featured = models.BooleanField(default=False)
+
+    def get_feature_image(self):
+        html = lxml.html.fromstring(self.summary)
+        imgs = html.cssselect('img')
+        if len(imgs) != 0:
+            return lxml.html.tostring(imgs[0])
 
     def get_summary(self):
         return self.summary
