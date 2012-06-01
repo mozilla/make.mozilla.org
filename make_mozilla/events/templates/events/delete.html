@@ -1,0 +1,15 @@
+{% extends "events/detail.html" %}
+
+{% block page_title %}{{ event.name }} | {{ super() }}{% endblock %}
+{% block page_id %}event-details{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div id="delete-prompt">
+  <h1>Are you sure you want to delete this event?</h1>
+  <form action="{{ url('event.delete', event_hash=event.hash) }}" method="POST">
+    <p><a class="button create" href="{{ url('events.mine') }}">Cancel</a> <input class="button delete" type="submit" value="Delete"></p>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+  </form>
+</div>
+{% endblock %}

@@ -63,7 +63,7 @@
                     </ul>
                     <h3>Your stuff</h3>
                     <ul>
-                    {% if not (request.user and request.user.is_authenticated()) %}
+                    {% if not user.is_authenticated() %}
                         <li><a href="{{ login_url() }}">Log in</a></li>
                     {% endif %}
                     {% block admin_menu_items %}

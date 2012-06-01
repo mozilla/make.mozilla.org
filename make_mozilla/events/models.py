@@ -48,12 +48,6 @@ class Venue(models.Model):
     def longitude(self, value):
         self.location.x = value
 
-def _upcoming(qs, sort, include_private):
-    resultset = qs.filter(start__gte = datetime.now(), verified = True).order_by(sort)
-    if not include_private:
-        resultset = resultset.filter(public=True)
-    return resultset
-
 class Event(models.Model):
     name = models.CharField(max_length = 255)
     url_hash = models.CharField(max_length = 20, blank = True)
@@ -62,6 +56,7 @@ class Event(models.Model):
     venue = models.ForeignKey(Venue)
     start = models.DateTimeField(null = True, blank = True)
     end = models.DateTimeField(null = True, blank = True)
+    source = models.CharField(max_length = 255, blank = True)
     source_id = models.CharField(max_length = 255, blank = True)
     organiser_email = models.EmailField(max_length = 255)
     campaign = models.ForeignKey('Campaign', null = True, blank=True)
@@ -69,6 +64,7 @@ class Event(models.Model):
     verified = models.BooleanField(default = False)
     official = models.BooleanField(default = False)
     public = models.BooleanField(default = False)
+    pending_deletion = models.BooleanField(default = False)
 
     objects = models.GeoManager()
 
@@ -93,27 +89,39 @@ class Event(models.Model):
         return bleached(self.description)
 
     def bsd_hosted(self):
-        return self.source_id.find('bsd:') == 0
+        return self.source == 'bsd'
 
     def verify_ownership(self, user):
         return user.email == self.organiser_email
 
     @classmethod
+    def all_upcoming(cls, sort='start'):
+        resultset = cls.objects.filter(start__gte = datetime.now()).order_by(sort)
+        return resultset
+
+    @classmethod
     def upcoming(cls, sort='start', include_private=False):
-        return _upcoming(cls.objects, sort, include_private)
+        resultset = cls.all_upcoming(sort).filter(verified = True, pending_deletion = False)
+        if not include_private:
+            resultset = resultset.filter(public=True)
+        return resultset
 
     @classmethod
     def near(cls, latitude, longitude, sort='start', include_private=False):
         point = geos.Point(float(longitude), float(latitude))
-        return _upcoming(cls.objects, sort, include_private).filter(venue__location__distance_lte=(point, measure.D(mi=20)))
+        return cls.upcoming(sort, include_private).filter(venue__location__distance_lte=(point, measure.D(mi=20)))
 
     @classmethod
     def all_user_non_bsd(cls, user):
-        return cls.objects.filter(organiser_email = user.email).exclude(source_id__startswith = 'bsd').order_by('start')
+        return cls.objects.filter(organiser_email = user.email).exclude(source = 'bsd').order_by('start')
 
     @classmethod
     def all_user_bsd(cls, user):
-        return cls.objects.filter(organiser_email = user.email, source_id__startswith = 'bsd').order_by('start')
+        return cls.objects.filter(organiser_email = user.email, source = 'bsd').order_by('start')
+
+    @classmethod
+    def all_upcoming_bsd(cls):
+        return cls.all_upcoming().filter(source = 'bsd')
 
 class EventAndVenueUpdater(object):
     @classmethod

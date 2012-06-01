@@ -14,7 +14,7 @@
     {% endfor %}
     </ol>
     {% else %}
-    <p class="no-events">You haven’t created any events. Why not <a href="{{ url('event.new') }}">create one</a>?</p>
+    <p class="no-events">You haven’t created any events. Why not <a href="https://donate.mozilla.org/page/event/create/">create one</a>?</p>
     {% endif %}
     <h3 class="my-events">My Events (RSVP hosted elsewhere)</h3>
     {% if events %}
@@ -24,7 +24,7 @@
     {% endfor %}
     </ol>
     {% else %}
-    <p class="no-events">You haven’t created any events elsewhere.</p>
+    <p class="no-events">You haven’t added any events. Why not <a href="{{ url('event.new') }}">add one you've created which already has a web page</a>?</p>
     {% endif %}
 </div>
 {% endblock %}

@@ -1,4 +1,7 @@
-import json, urllib2, re
+import json
+import urllib2
+import re
+import requests
 
 from bsdapi.BsdApi import Factory as BSDApiFactory
 from django.conf import settings
@@ -112,12 +115,9 @@ class BSDEventImporter(object):
         return [json_extractors.venue_name, json_extractors.venue_country, 
                 json_extractors.venue_street_address, json_extractors.venue_location]
 
-    def event_source_id(self, event_json):
-        return 'bsd:%s' % event_json['event_id']
-
     def fetch_existing_event(self, source_id):
         try:
-            return Event.objects.get(source_id = source_id)
+            return Event.objects.get(source = 'bsd', source_id = source_id)
         except Event.DoesNotExist:
             return None
 
@@ -145,7 +145,7 @@ class BSDEventImporter(object):
         return (event, venue)
 
     def process_event_from_json(self, event_kind, event_url, event_json):
-        source_id = self.event_source_id(event_json)
+        source_id = event_json['event_id']
         event = self.fetch_existing_event(source_id)
         if event is None:
             event = Event()
@@ -154,6 +154,7 @@ class BSDEventImporter(object):
         (new_event, new_venue) = self.new_models_from_json(event_json)
         new_event.event_url = event_url
         new_event.source_id = source_id
+        new_event.source = 'bsd'
         new_event.organiser_email = organiser_email
         new_event.kind = event_kind
         new_event.public = True
@@ -163,6 +164,26 @@ class BSDEventImporter(object):
         else:
             log.info('Adding new event for %s' % event_url)
         EventAndVenueUpdater.update(event, new_event, venue, new_venue)
+
+class BSDReaper(object):
+    def __init__(self, chunks, chunk_to_process):
+        self.chunks = chunks
+        self.chunk_to_process = chunk_to_process
+
+    def subset(self, input_set):
+        for event in input_set:
+            if event.pk % self.chunks == self.chunk_to_process:
+                yield event
+
+    def process(self):
+        input_query = Event.all_upcoming_bsd()
+        if input_query.count() > 50:
+            input_query = self.subset(input_query)
+        for event in input_query:
+            response = requests.head(event.event_url)
+            if response.status_code == 404:
+                log.info('Deleting event %s' % event.event_url)
+                event.delete()
 
 class BSDApiError(BaseException):
     pass

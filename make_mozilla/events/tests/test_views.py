@@ -228,26 +228,25 @@ class TestEventViewsDetail(unittest.TestCase):
         mock_render.assert_called_with(request, 'events/detail.html', {'event': mock_event})
         mock_event_get.assert_called_with(models.Event, url_hash = 'e25388fde')
 
-class TestEventViewsEdit(unittest.TestCase):
-    def test_that_it_routes_correctly(self):
-        assert_routing('/events/123456789/edit/', views.edit_or_update, name = 'event.edit', kwargs = {'event_hash': '123456789'})
-
+class TestEventViewsVerifiedOwnershipDecorator(unittest.TestCase):
     @patch.object(views, 'get_object_or_404')
     @patch.object(views, '_render_event_creation_form')
     def test_that_it_correctly_fetches_the_event(self, mock_render, mock_event_get):
         mock_user = Mock()
         mock_event = models.Event()
-        mock_event.venue = models.Venue()
         mock_event_get.return_value = mock_event
+        mock_wrapped_view = Mock()
         with patch.object(mock_event, 'verify_ownership') as mock_verify_ownership:
             mock_verify_ownership.return_value = True
             # mock_event.verify_ownership.return_value = True
             request = rf.get('/events/1/edit/')
             request.user = mock_user
-            views.edit_or_update(request, event_hash = '1')
 
+            wrapped_view = views.verified_ownership(mock_wrapped_view)
+            wrapped_view(request, event_hash = '1')
             mock_event_get.assert_called_with(models.Event, url_hash = '1')
             mock_verify_ownership.assert_called_with(mock_user)
+            mock_wrapped_view.assert_called_with(request, mock_event)
 
     @patch.object(views, 'get_object_or_404')
     @patch.object(views, '_render_event_creation_form')
@@ -258,11 +257,18 @@ class TestEventViewsEdit(unittest.TestCase):
         mock_event.verify_ownership.return_value = False
         request = rf.get('/events/1/edit/')
         request.user = mock_user
-        response = views.edit_or_update(request, event_hash = '1')
+        mock_wrapped_view = Mock()
+        wrapped_view = views.verified_ownership(mock_wrapped_view)
+        response = wrapped_view(request, event_hash = '1')
 
         assert not mock_render.called
         mock_event.verify_ownership.assert_called_with(mock_user)
         assert response.status_code == 403
+
+
+class TestEventViewsEdit(unittest.TestCase):
+    def test_that_it_routes_correctly(self):
+        assert_routing('/events/123456789/edit/', views.edit_or_update, name = 'event.edit', kwargs = {'event_hash': '123456789'})
 
 class TestEventViewsNear(unittest.TestCase):
     def test_that_it_routes_correctly_for_the_map(self):

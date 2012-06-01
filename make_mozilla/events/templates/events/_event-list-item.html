@@ -29,4 +29,16 @@
         <span class="date">{{ event.start.strftime('%-d') }}</span>
         {# <span class="year">{{ event.start.strftime('%Y') }}</span> #}
     </div>
+    {% if editable %}
+    <div class="edit-links">
+        <ul>
+        {% if event.source == 'bsd' %}
+            <li><a class="button create" href="https://donate.mozilla.org/page/event/edit_details?event_id={{ event.source_id }}">Edit</a></li>
+        {% else %}
+            <li><a class="button create" href="{{ url('event.edit', event_hash = event.hash) }}">Edit</a></li>
+        {% endif %}
+            <li><a class="button delete" href="{{ url('event.delete', event_hash = event.hash) }}">Delete</a></li>
+        </ul>
+    </div>
+    {% endif %}
 </li>
