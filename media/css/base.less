@@ -1922,7 +1922,392 @@ ul.tri-set img {
 	}
 }
 
-/* ---[ Code party homepage ]------------------------------------------------- */
+/* ---[ Projects Index ]---------------------------------------------------- */
+
+#projects-index #content::before {
+	.gradient(~"top, rgba(255,255,255,0), rgba(255,255,255,0.1), rgba(255,255,255,0)");
+	.box-shadow(~"inset 0 0 100px rgba(0,0,0,0.1)");
+
+	background-color: #39C;
+}
+
+#projects-index #content .constrained {
+	margin-top: -91px;
+	position: relative;
+}
+
+#projects-index #featured {
+	position: absolute;
+	height: 275px;
+	bottom: 100%;
+	left: 100px;
+	right: 100px;
+	padding: 75px 0;
+	text-shadow: none;
+	color: #FFF;
+
+	background-image: -webkit-radial-gradient(30% 50%, contain, rgba(255,255,255,0.33) 25%, rgba(255,255,255,0) 100%);
+	background-image: -moz-radial-gradient(30% 50%, contain, rgba(255,255,255,0.33) 25%, rgba(255,255,255,0) 100%);
+	background-image: -ms-radial-gradient(30% 50%, contain, rgba(255,255,255,0.33) 25%, rgba(255,255,255,0) 100%);
+	background-image: -o-radial-gradient(30% 50%, contain, rgba(255,255,255,0.33) 25%, rgba(255,255,255,0) 100%);
+	background-image: radial-gradient(30% 50%, contain, rgba(255,255,255,0.33) 25%, rgba(255,255,255,0) 100%);
+}
+
+#projects-index #featured .navigation {
+	display: none;
+}
+
+#projects-index #featured .navigation {
+	position: absolute;
+	bottom: 75px;
+	left: 250px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#projects-index #featured .navigation li {
+	float: left;
+	display: block;
+	font-size: 20px;
+	font-weight: 100;
+	width: 1em;
+	height: 1em;
+	line-height: 1em;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	color: #FFF;
+	text-shadow: 0 0 5px rgba(0,0,0,0.5);
+	outline: none;
+	font-family: arial, sans-serif;
+}
+
+#projects-index #featured .navigation li::after {
+	content: "\025CB";
+}
+
+#projects-index #featured .navigation li.active::after {
+	content: "\025CF";
+}
+
+#projects-index #featured .navigation li span {
+	text-align: left;
+	overflow: hidden;
+	width: 0;
+	display: block;
+	float: left;
+	text-indent: -999em;
+}
+
+#projects-index #featured h3 {
+	font-family: "Open Sans light";
+	font-weight: normal;
+	color: #FFF;
+}
+
+#projects-index #featured ul {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	list-style: none;
+}
+
+#projects-index #featured ul li {
+	position: absolute;
+	top: 0;
+	left: 250px;
+	right: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#projects-index #featured li.hidden {
+	display: none;
+}
+
+#projects-index #featured .image {
+	.box-shadow(~"0 0 5px rgba(0,0,0,0.25)");
+	display: block;
+	position: absolute;
+	left: -250px;
+	top: 0;
+}
+
+#projects-index #featured .image::after {
+	content: "";
+	position: absolute;
+	height: 5px;
+	bottom: 0;
+	left: 15px;
+	right: 15px;
+	border-radius: 50%;
+	.box-shadow(~"0 0 25px #000");
+}
+
+#projects-index #featured h4 {
+	font-family: "Open Sans light";
+	font-weight: normal;
+	font-size: 2.5em;
+	line-height: 1.25em;
+	height: 2.5em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#projects-index #featured h4 a {
+	color: #FFF;
+}
+
+#projects-index #featured img {
+	display: block;
+	border: solid 5px #FFF;
+	position: relative;
+	z-index: 1;
+}
+
+@media screen and (max-width: 900px) {
+	#projects-index #featured {
+		height: 250px;
+		padding: 0;
+	}
+
+	#projects-index #featured .navigation {
+		left: 0;
+		bottom: 25px;
+	}
+}
+
+@media screen and (min-width: 701px) {
+	#projects-index #featured .navigation {
+		display: block;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	#projects-index #content,
+	#projects-index #content .constrained {
+		padding-top: 0;
+		margin-top: 0;
+	}
+
+	#projects-index #content .constrained {
+		padding-bottom: 40px;
+	}
+
+	#projects-index #featured {
+		.gradient(~"top, rgba(255,255,255,0), rgba(255,255,255,0.1), rgba(255,255,255,0)");
+		.box-shadow(~"inset 0 0 100px rgba(0,0,0,0.1)");
+
+		position: static;
+		height: auto;
+		margin: -40px -15px 0;
+		padding: 100px 15px 50px;
+		background: #39C;
+		border-bottom: solid 14px #6D6E71;
+	}
+
+	#projects-index #featured ul li {
+		position: relative;
+		left: 0;
+		padding-left: 250px;
+		margin: 0 0 50px;
+
+		background-image: -webkit-radial-gradient(30% 50%, contain, rgba(255,255,255,0.33) 25%, rgba(255,255,255,0) 100%);
+		background-image: -moz-radial-gradient(30% 50%, contain, rgba(255,255,255,0.33) 25%, rgba(255,255,255,0) 100%);
+		background-image: -ms-radial-gradient(30% 50%, contain, rgba(255,255,255,0.33) 25%, rgba(255,255,255,0) 100%);
+		background-image: -o-radial-gradient(30% 50%, contain, rgba(255,255,255,0.33) 25%, rgba(255,255,255,0) 100%);
+		background-image: radial-gradient(30% 50%, contain, rgba(255,255,255,0.33) 25%, rgba(255,255,255,0) 100%);
+	}
+
+	#projects-index #featured li.hidden {
+		display: block;
+	}
+
+	#projects-index #featured li h4,
+	#projects-index #featured li p {
+		opacity: 1 !important;
+	}
+
+	#projects-index #featured li h4 {
+		height: auto;
+		min-height: 2.5em;
+	}
+
+	#projects-index #featured .image {
+		left: 0;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	#projects-index #featured ul li {
+		padding: 0;
+	}
+
+	#projects-index #featured h4 {
+		height: auto;
+	}
+
+	#projects-index #featured li p.empty {
+		height: 0;
+		overflow: hidden;
+	}
+
+	#projects-index #featured .image {
+		position: relative;
+		margin-bottom: 15px;
+	}
+
+	#projects-index #featured img {
+		width: 100%;
+		.box-sizing(border-box);
+	}
+}
+
+#projects-index #filter {
+	display: table;
+	border-collapse: collapse;
+	width: 100%;
+	padding: 0;
+	margin: 0 0 30px;
+	border: solid transparent;
+	border-width: 25px 35px;
+}
+
+#projects-index #filter .wrapper {
+	display: table-row;
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+
+#projects-index #filter .item {
+	display: table-cell;
+	white-space: nowrap;
+	padding: 0;
+	margin: 0;
+	border: none;
+	vertical-align: middle;
+	max-width: 150px;
+}
+
+#projects-index #filter .buttons {
+	padding-left: 10px;
+	font-size: 1em;
+}
+
+#projects-index #filter label {
+	.box-sizing(border-box);
+
+	float: none;
+	display: block;
+	margin: 0;
+	padding-left: 40px;
+	background: 10px 50% no-repeat;
+	width: 100%;
+	text-align: left;
+}
+
+#projects-index #filter label.audience {
+	background-image: url(../img/icons/audience.png);
+}
+
+#projects-index #filter label.tool {
+	background-image: url(../img/icons/tool.png);
+}
+
+#projects-index #filter label.difficulty {
+	background-image: url(../img/icons/difficulty.png);
+}
+
+#projects-index #filter label.skill {
+	background-image: url(../img/icons/skill.png);
+}
+
+#projects-index #filter select {
+	margin: 4px 0;
+}
+
+@media screen and (max-width: 900px) {
+	#projects-index #filter,
+	#projects-index #filter .wrapper,
+	#projects-index #filter .item {
+		.box-sizing(border-box);
+		display: block;
+		max-width: 100%;
+		overflow: hidden;
+	}
+
+	#projects-index #filter h3.item {
+		margin-bottom: 20px;
+	}
+
+	#projects-index #filter span.item {
+		width: 50%;
+		float: left;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	#projects-index #filter {
+		margin-top: -50px;
+	}
+
+	#projects-index #filter span.item {
+		width: auto;
+		float: none;
+	}
+
+	#projects-index #filter select {
+		max-width: 100%;
+	}
+}
+
+#projects-index .footer {
+	background: #FFF;
+	overflow: hidden;
+	padding: 25px;
+	margin: 50px 0 0;
+}
+
+#projects-index .footer p {
+	float: right;
+	padding: 5px;
+	margin: 0;
+}
+
+#projects-index .pagination {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	text-shadow: none;
+}
+
+#projects-index .pagination li {
+	float: left;
+	padding-right: 10px;
+}
+
+#projects-index .pagination span {
+	position: absolute;
+	left: -999em;
+}
+
+#projects-index .pagination a,
+#projects-index .pagination strong {
+	display: block;
+	width: 1.5em;
+	text-align: center;
+	padding: 5px;
+}
+
+#projects-index .pagination strong {
+	background: #27AAE1;
+	color: #FFF;
+}
+
 /* ---[ Project Detail ]-----------------------------------------------------*/
 
 #project-detail #content .constrained {
@@ -2162,6 +2547,8 @@ ul.tri-set img {
 		border-color: transparent transparent #EF4B36 transparent;
 	}
 }
+
+/* ---[ Code party homepage ]----------------------------------------------- */
 
 .bad-ie #code-party-index #content::before {
 	background-image: url(../img/photos/codeparty_index.jpg);
