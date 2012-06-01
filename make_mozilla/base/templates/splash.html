@@ -138,6 +138,7 @@
 				<h2 class="side-title">@mozilla</h2>
 				<p>And you throught 3rd base coaches were cryptic... The secret hand signals of NYC's famed Stork Club <a href="#">http://t.co./chgrkdn</a></p>
 				<a href="#">about 21 hours ago</a>
+                <div class="tweet"></div>
 			</section>
             <section class="events">
                 <header>
@@ -198,8 +199,9 @@
 </div>
 {% endblock %}
 
-{% block admin_menu_items %}
-{% if request.user and request.user.is_authenticated() %}
-<li><a href="{{ url('events.mine') }}">My events</a></li>
-{% endif %}
+{% block footer %}
+    {{ super() }}
+    {% block scripts %}
+        {{ js('homgepage_js') }}
+    {% endblock %}
 {% endblock %}
