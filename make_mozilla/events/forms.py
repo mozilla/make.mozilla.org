@@ -52,12 +52,13 @@ class VenueForm(PrefixedModelForm):
             self.initial['latitude'] = instance.latitude
             self.initial['longitude'] = instance.longitude 
 
-    def save(self, commit=True):
-        model = super(VenueForm, self).save(commit=False)
-
+    def add_geo_data_to(self, model):
         model.latitude = self.cleaned_data['latitude']
         model.longitude = self.cleaned_data['longitude']
 
+    def save(self, commit=True):
+        model = super(VenueForm, self).save(commit=False)
+        self.add_geo_data_to(model)
         if commit:
             model.save()
 

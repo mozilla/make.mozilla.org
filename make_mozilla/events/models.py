@@ -48,12 +48,6 @@ class Venue(models.Model):
     def longitude(self, value):
         self.location.x = value
 
-def _upcoming(qs, sort, include_private):
-    resultset = qs.filter(start__gte = datetime.now(), verified = True).order_by(sort)
-    if not include_private:
-        resultset = resultset.filter(public=True)
-    return resultset
-
 class Event(models.Model):
     name = models.CharField(max_length = 255)
     url_hash = models.CharField(max_length = 20, blank = True)
@@ -62,6 +56,7 @@ class Event(models.Model):
     venue = models.ForeignKey(Venue)
     start = models.DateTimeField(null = True, blank = True)
     end = models.DateTimeField(null = True, blank = True)
+    source = models.CharField(max_length = 255, blank = True)
     source_id = models.CharField(max_length = 255, blank = True)
     organiser_email = models.EmailField(max_length = 255)
     campaign = models.ForeignKey('Campaign', null = True, blank=True)
@@ -69,6 +64,7 @@ class Event(models.Model):
     verified = models.BooleanField(default = False)
     official = models.BooleanField(default = False)
     public = models.BooleanField(default = False)
+    pending_deletion = models.BooleanField(default = False)
 
     objects = models.GeoManager()
 
@@ -93,16 +89,62 @@ class Event(models.Model):
         return bleached(self.description)
 
     def bsd_hosted(self):
-        return self.source_id.find('bsd:') == 0
+        return self.source == 'bsd'
+
+    def verify_ownership(self, user):
+        return user.email == self.organiser_email
 
     @classmethod
-    def upcoming(self, sort='start', include_private=False):
-        return _upcoming(self.objects, sort, include_private)
+    def all_upcoming(cls, sort='start'):
+        resultset = cls.objects.filter(start__gte = datetime.now()).order_by(sort)
+        return resultset
 
     @classmethod
-    def near(self, latitude, longitude, sort='start', include_private=False):
+    def upcoming(cls, sort='start', include_private=False):
+        resultset = cls.all_upcoming(sort).filter(verified = True, pending_deletion = False)
+        if not include_private:
+            resultset = resultset.filter(public=True)
+        return resultset
+
+    @classmethod
+    def near(cls, latitude, longitude, sort='start', include_private=False):
         point = geos.Point(float(longitude), float(latitude))
-        return _upcoming(self.objects, sort, include_private).filter(venue__location__distance_lte=(point, measure.D(mi=20)))
+        return cls.upcoming(sort, include_private).filter(venue__location__distance_lte=(point, measure.D(mi=20)))
+
+    @classmethod
+    def all_user_non_bsd(cls, user):
+        return cls.objects.filter(organiser_email = user.email).exclude(source = 'bsd').order_by('start')
+
+    @classmethod
+    def all_user_bsd(cls, user):
+        return cls.objects.filter(organiser_email = user.email, source = 'bsd').order_by('start')
+
+    @classmethod
+    def all_upcoming_bsd(cls):
+        return cls.all_upcoming().filter(source = 'bsd')
+
+class EventAndVenueUpdater(object):
+    @classmethod
+    def update(cls, event, new_event, venue, new_venue):
+        if not cls.are_model_instances_identical(venue, new_venue):
+            venue = new_venue
+        venue.save()
+        if not cls.are_model_instances_identical(event, new_event):
+            if event.id:
+                new_event.id = event.id
+            event = new_event
+        event.venue = venue
+        event.save()
+
+    @classmethod
+    def are_model_instances_identical(cls, instance1, instance2):
+        if not (type(instance1) == type(instance2)):
+            return False
+        local_fields = [f for f in instance1._meta.local_fields if not f.primary_key]
+        def comparator(initial, field):
+            return initial and (field.value_from_object(instance1) == field.value_from_object(instance2))
+        return reduce(comparator, local_fields, True)
+
 
 class Campaign(models.Model):
     name = models.CharField(max_length = 255)

@@ -227,16 +227,15 @@ class BSDEventImporterTest(unittest.TestCase):
     @patch.object(bsd, 'Event')
     def test_that_the_importer_can_import_a_new_event(self, MockEvent):
         with nested(
-                patch.object(self.importer, 'event_source_id'),
                 patch.object(self.importer, 'fetch_existing_event'),
                 patch.object(self.importer, 'fetch_organiser_email_from_bsd'),
                 patch.object(self.importer, 'venue_for_event'),
                 patch.object(self.importer, 'new_models_from_json'),
-                patch.object(self.importer, 'are_model_instances_identical')
-            ) as (mock_source_id_func, mock_fetch_event_func,
+                patch.object(models.EventAndVenueUpdater, 'are_model_instances_identical')
+            ) as (mock_fetch_event_func,
                     mock_fetch_organiser_func, mock_venue_func,
                     mock_new_models_func, mock_identical_func):
-            event_json = {'event': 'json'}
+            event_json = {'event': 'json', 'event_id': 'source_id'}
             mock_null_event = Mock()
             mock_event = Mock()
             mock_null_venue = Mock()
@@ -245,7 +244,6 @@ class BSDEventImporterTest(unittest.TestCase):
 
             mock_fetch_event_func.return_value = None
             MockEvent.return_value = mock_null_event
-            mock_source_id_func.return_value = 'source_id'
             mock_fetch_organiser_func.return_value = 'example@mozilla.org'
             mock_venue_func.return_value = mock_null_venue
             mock_new_models_func.return_value = (mock_event, mock_venue)
@@ -254,7 +252,6 @@ class BSDEventImporterTest(unittest.TestCase):
             self.importer.process_event_from_json(mock_event_kind, 'http://some.url/', event_json)
 
             MockEvent.assert_called_with()
-            mock_source_id_func.assert_called_with(event_json)
             mock_fetch_event_func.assert_called_with('source_id')
             mock_fetch_organiser_func.assert_called_with(event_json)
             mock_venue_func.assert_called_with(mock_null_event)
@@ -268,9 +265,6 @@ class BSDEventImporterTest(unittest.TestCase):
             mock_event.save.assert_called
             mock_venue.save.assert_called
 
-    def test_that_the_event_source_id_can_be_extracted(self):
-        eq_(self.importer.event_source_id({'event_id': '1'}), 'bsd:1')
-
     @patch.object(bsd.Event, 'objects')
     def test_that_an_event_can_be_fetched_from_db_if_this_is_a_reimport(self, mock_event_objects):
         mock_event = Mock()
@@ -278,7 +272,7 @@ class BSDEventImporterTest(unittest.TestCase):
 
         eq_(self.importer.fetch_existing_event('source_id'), mock_event)
 
-        mock_event_objects.get.assert_called_with(source_id = 'source_id')
+        mock_event_objects.get.assert_called_with(source = 'bsd', source_id = 'source_id')
 
     @patch.object(bsd.Event, 'objects')
     def test_that_no_event_is_fetched_if_this_is_a_new_import(self, mock_event_objects):
@@ -286,7 +280,7 @@ class BSDEventImporterTest(unittest.TestCase):
 
         ok_(self.importer.fetch_existing_event('source_id') is None)
 
-        mock_event_objects.get.assert_called_with(source_id = 'source_id')
+        mock_event_objects.get.assert_called_with(source = 'bsd', source_id = 'source_id')
     
     @patch.object(bsd.BSDClient, 'constituent_email_for_constituent_id')
     def test_that_organiser_email_can_be_pulled_from_BSD_API(self, mock_api_func):
@@ -313,29 +307,6 @@ class BSDEventImporterTest(unittest.TestCase):
         eq_(self.importer.venue_for_event(models.Event()), mock_venue)
         MockVenue.assert_called_with()
 
-    def test_that_identical_model_instances_can_be_compared_properly(self):
-        e1 = models.Event(id = 1, name = "Hallo")
-        e2 = models.Event(id = 1, name = "Hallo")
-
-        ok_(self.importer.are_model_instances_identical(e1, e2))
-
-    def test_that_non_identical_model_instances_compare_false(self):
-        e1 = models.Event(id = 1, name = "Hallo")
-        e2 = models.Event(id = 1, name = "Boo hoo")
-
-        ok_(not self.importer.are_model_instances_identical(e1, e2))
-
-    def test_that_model_instances_of_different_classes_compare_false(self):
-        e1 = models.Event(id = 1, name = "Hallo")
-        e2 = models.Venue(id = 1, name = "Hallo")
-
-        ok_(not self.importer.are_model_instances_identical(e1, e2))
-
-    def test_that_unset_ids_are_ignored_when_comparing_instances(self):
-        e1 = models.Event(id = 1, name = "Hallo")
-        e2 = models.Event(id = None, name = "Hallo")
-
-        ok_(self.importer.are_model_instances_identical(e1, e2))
 
     @patch.object(bsd, 'Venue')
     @patch.object(bsd, 'Event')
@@ -375,3 +346,11 @@ class BSDEventImporterTest(unittest.TestCase):
             mock_venue_extractor.assert_called_with(event_json)
             eq_(expected, actual)
 
+class BSDReaperTest(unittest.TestCase):
+    def test_that_a_subset_of_upcoming_bsd_events_can_be_deterministically_identified(self):
+        class FakeEvent(object):
+            def __init__(self, pk):
+                self.pk = pk
+        input_list = [FakeEvent(1), FakeEvent(2), FakeEvent(3), FakeEvent(4), FakeEvent(5), FakeEvent(6)]
+        actual = [x for x in bsd.BSDReaper(4, 1).subset(input_list)]
+        eq_(actual, [input_list[0], input_list[4]])

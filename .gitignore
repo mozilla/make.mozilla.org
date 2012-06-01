@@ -9,6 +9,7 @@ settings/local.py
 */settings/fauxdev.py
 */settings/server.py
 media/img/uploads/*
+media/partner_media/*
 venv/*
 *.py[co]
 *.sw[po]

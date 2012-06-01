@@ -13,3 +13,8 @@
     <li><a href="http://www.mozilla.org/en-US/about/legal.html">Legal Notices</a></li>
 </ul>
 {% endblock %}
+{% block admin_menu_items %}
+{% if user.is_authenticated() %}
+<li><a href="{{ url('events.mine') }}">My events</a></li>
+{% endif %}
+{% endblock %}

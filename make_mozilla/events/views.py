@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from django import http
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -72,17 +74,66 @@ def create(request):
     return _render_event_creation_form(request, ef, vf, lf)
 
 
-def _render_event_creation_form(request, event_form, venue_form, privacy_and_legal_form):
-    fieldsets = (
+def verified_ownership(f):
+    def wrapped(request, event_hash):
+        event = get_object_or_404(models.Event, url_hash=event_hash)
+        if not event.verify_ownership(request.user):
+            return http.HttpResponseForbidden(u'sorry, you’re not allowed in')
+        return f(request, event)
+    return wrapped
+
+
+@login_required
+@verified_ownership
+def edit_or_update(request, event):
+    if request.method == "POST":
+        ef, vf, lf = _process_create_post_data(request.POST)
+        if ef.is_valid() and vf.is_valid():
+            new_event = ef.instance
+            new_event.organiser_email = event.organiser_email
+            new_event.verified = event.verified
+            new_event.official = event.official
+            new_event.campaign = event.campaign
+            new_event.source = event.source
+            new_event.source_id = event.source_id
+            new_venue = vf.instance
+            vf.add_geo_data_to(new_venue)
+            models.EventAndVenueUpdater.update(event, new_event, event.venue, new_venue)
+            return http.HttpResponseRedirect(reverse('event', kwargs={'event_hash': event.hash}))
+    else:
+        ef = forms.EventForm(instance = event)
+        vf = forms.VenueForm(instance = event.venue)
+        lf = forms.PrivacyAndLegalForm()
+    return _render_event_creation_form(request, ef, vf, lf, template = 'events/edit.html', event = event)
+
+@login_required
+@verified_ownership
+def delete(request, event):
+    if request.method == "POST":
+        if event.bsd_hosted():
+            event.pending_deletion = True
+            event.save()
+            return http.HttpResponseRedirect()
+        else:
+            event.delete()
+            return http.HttpResponseRedirect(reverse('events.mine'))
+    return jingo.render(request, 'events/delete.html', {'event': event})
+
+
+def _render_event_creation_form(request, event_form, venue_form, privacy_and_legal_form, template = 'events/new.html', event = None):
+    fieldsets = [
         forms.Fieldset(event_form, ('kind',)),
         forms.Fieldset(event_form, ('name', 'event_url', 'description', 'public')),
         forms.Fieldset(event_form, ('start', 'end',)),
         forms.Fieldset(venue_form, venue_form.fields),
-        privacy_and_legal_form,
-    )
+    ]
 
-    return jingo.render(request, 'events/new.html', {
-        'fieldsets': fieldsets
+    if event is None:
+        fieldsets.append(privacy_and_legal_form)
+
+    return jingo.render(request, template, {
+        'fieldsets': tuple(fieldsets),
+        'event': event
     })
 
 
@@ -116,6 +167,14 @@ def from_id(request, event_id):
 def details(request, event_hash):
     event = get_object_or_404(models.Event, url_hash=event_hash)
     return jingo.render(request, 'events/detail.html', {'event': event})
+
+@login_required
+def mine(request):
+    return jingo.render(request, 'events/mine.html', {
+        'events': models.Event.all_user_non_bsd(request.user),
+        'bsd_events': models.Event.all_user_bsd(request.user),
+        'editable': True
+    })
 
 
 def search(request):
@@ -154,7 +213,7 @@ class Near(object):
             return ('date', 'start')
 
     def paginated_results(self, latitude, longitude, order, results_per_page, page):
-        results = models.Event.near(latitude, longitude, sort = order)
+        results = models.Event.near(latitude, longitude, sort=order)
         return paginators.results_page(results, results_per_page, page=page)
 
     def render(self, request, template, results_per_page):
@@ -247,3 +306,7 @@ def content_guidelines(request):
 
 def event_guidelines(request):
     return jingo.render(request, 'events/legal/guidelines.html', {})
+
+
+def scribble_live(request):
+    return jingo.render(request, 'events/live-updates.html', {})

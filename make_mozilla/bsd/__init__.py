@@ -1,8 +1,11 @@
-import json, urllib2, re
+import json
+import urllib2
+import re
+import requests
 
 from bsdapi.BsdApi import Factory as BSDApiFactory
 from django.conf import settings
-from make_mozilla.events.models import Event, Venue
+from make_mozilla.events.models import Event, Venue, EventAndVenueUpdater
 from make_mozilla.bsd.extractors import json as json_extractors
 from make_mozilla.bsd.extractors import xml as xml_extractors
 import email.parser
@@ -112,12 +115,9 @@ class BSDEventImporter(object):
         return [json_extractors.venue_name, json_extractors.venue_country, 
                 json_extractors.venue_street_address, json_extractors.venue_location]
 
-    def event_source_id(self, event_json):
-        return 'bsd:%s' % event_json['event_id']
-
     def fetch_existing_event(self, source_id):
         try:
-            return Event.objects.get(source_id = source_id)
+            return Event.objects.get(source = 'bsd', source_id = source_id)
         except Event.DoesNotExist:
             return None
 
@@ -130,14 +130,6 @@ class BSDEventImporter(object):
         if event.id is not None:
             return event.venue
         return Venue()
-
-    def are_model_instances_identical(self, instance1, instance2):
-        if not (type(instance1) == type(instance2)):
-            return False
-        local_fields = [f for f in instance1._meta.local_fields if not f.primary_key]
-        def comparator(initial, field):
-            return initial and (field.value_from_object(instance1) == field.value_from_object(instance2))
-        return reduce(comparator, local_fields, True)
 
     def extract_from_event_json(self, event_json):
         event_attrs = {}
@@ -153,7 +145,7 @@ class BSDEventImporter(object):
         return (event, venue)
 
     def process_event_from_json(self, event_kind, event_url, event_json):
-        source_id = self.event_source_id(event_json)
+        source_id = event_json['event_id']
         event = self.fetch_existing_event(source_id)
         if event is None:
             event = Event()
@@ -162,23 +154,36 @@ class BSDEventImporter(object):
         (new_event, new_venue) = self.new_models_from_json(event_json)
         new_event.event_url = event_url
         new_event.source_id = source_id
+        new_event.source = 'bsd'
         new_event.organiser_email = organiser_email
-        if not self.are_model_instances_identical(venue, new_venue):
-            venue = new_venue
-        venue.save()
-        if not self.are_model_instances_identical(event, new_event):
-            if event.id:
-                new_event.id = event.id
-            event = new_event
+        new_event.kind = event_kind
+        new_event.public = True
+        new_event.verified = True
         if event.id:
             log.info('Updating event %s from %s' % (event.id, event_url))
         else:
             log.info('Adding new event for %s' % event_url)
-        event.kind = event_kind
-        event.venue = venue
-        event.public = True
-        event.verified = True
-        event.save()
+        EventAndVenueUpdater.update(event, new_event, venue, new_venue)
+
+class BSDReaper(object):
+    def __init__(self, chunks, chunk_to_process):
+        self.chunks = chunks
+        self.chunk_to_process = chunk_to_process
+
+    def subset(self, input_set):
+        for event in input_set:
+            if event.pk % self.chunks == self.chunk_to_process:
+                yield event
+
+    def process(self):
+        input_query = Event.all_upcoming_bsd()
+        if input_query.count() > 50:
+            input_query = self.subset(input_query)
+        for event in input_query:
+            response = requests.head(event.event_url)
+            if response.status_code == 404:
+                log.info('Deleting event %s' % event.event_url)
+                event.delete()
 
 class BSDApiError(BaseException):
     pass

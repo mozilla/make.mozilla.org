@@ -1,0 +1,16 @@
+{% extends "events/base.html" %}
+
+{% block page_id %}about{% endblock %}
+{% block page_class %}{{ super() }} scribble-live{% endblock %}
+
+{% block content %}
+<div class="words">
+<h2>Scribble Live test page</h2>
+<div id="scribblelive"></div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{{ js('core_js') }}
+{% endblock %}
