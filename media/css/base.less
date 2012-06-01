@@ -1693,6 +1693,78 @@ ul.tri-set img {
 	margin-left: 20px;
 }
 
+/* ---[ Project Flyers ]---------------------------------------------------- */
+
+.project-flyer {
+	.box-shadow(@panelShadow);
+
+	background: #FFF;
+	padding: 8px;
+}
+
+.project-flyer img {
+	width: 100%;
+	display: block;
+}
+
+.project-flyer h4 {
+	font-size: 1.143em;
+	font-family: 'Open Sans Light', sans-serif;
+	margin-top: 8px;
+}
+
+.project-flyer .contributor {
+	margin: 8px -8px -8px;
+	padding: 8px 16px;
+	background: #F1F2F2;
+	border-top: solid 1px #D7D8D9;
+}
+
+.project-flyer-list {
+	margin: -3px 0 0 -20px;
+	padding: 3px 0 0;
+	list-style: none;
+	overflow: hidden;
+}
+
+.project-flyer-list li {
+	.box-sizing(border-box);
+
+	margin: 0 0 20px;
+	padding-left: 20px;
+	float: left;
+	width: 33.333%;
+}
+
+.project-flyer-list li:nth-child(3n+4) {
+	clear: left;
+}
+
+@media screen and (max-width: 700px) {
+	.project-flyer-list {
+		padding-right: 5px;
+		margin-right: -5px;
+	}
+
+	.project-flyer-list li {
+		width: 50%;
+	}
+
+	.project-flyer-list li:nth-child(3n+4) {
+		clear: none;
+	}
+
+	.project-flyer-list li:nth-child(odd) {
+		clear: left;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.project-flyer-list li {
+		width: 100%;
+	}
+}
+
 /* ===[ Page Specific Settings ]============================================ */
 
 /* ---[ Tools Index ]------------------------------------------------------- */
