@@ -4,9 +4,9 @@
         <a id="tabzilla" href="http://www.mozilla.org/">from Mozilla</a>
         <ul>
             {% if waffle.switch('phase_2') %}
-            <li class="projects"><a href="">Projects</a></li>
-            {% endif %}
+            <li class="projects"><a href="{{ url('projects') }}">Projects</a></li>
             <li class="tools"><a href="{{ url('tools') }}">Tools</a></li>
+            {% endif %}
             <li class="events"><a href="{{ url('events') }}">Events</a></li>
         </ul>
     </div>

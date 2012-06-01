@@ -1,0 +1,72 @@
+{% extends "projects/base.html" %}
+
+{% block page_id %}project-detail{% endblock %}
+
+{% block content %}
+<div id="main">
+    <h2>{{ project }}</h2>
+    <img src="{{ project.image.poster_url }}" class="poster">
+
+    {{ project.content }}
+</div>
+<div class="meta" id="about">
+    <h3>About this project</h3>
+    <dl>
+        {% if project.audience.count() %}
+        <dt class="audience">Audience</dt>
+        <dd>
+            <ul>
+                {% for audience in project.audience.all() %}
+                    <li><a href="{{ audience.get_absolute_url() }}">{{ audience }}</a></li>
+                {% endfor %}
+            </ul>
+        </dd>
+        {% endif %}
+        {% if project.tool %}
+        <dt class="tool">Tool</dt>
+        <dd><a href="{{ project.tool.get_absolute_url() }}">{{ project.tool }}</a></dd>
+        {% endif %}
+        {% if project.difficulty %}
+        <dt class="difficulty">Difficulty</dt>
+        <dd><a href="{{ project.difficulty.get_absolute_url() }}">{{ project.difficulty }}</a></dd>
+        {% endif %}
+        {% if project.skills.count() %}
+        <dt class="skills">Skills</dt>
+        <dd>
+            <ul>
+                {% for skill in project.skills.all() %}
+                    <li><a href="{{ skill.get_absolute_url() }}">{{ skill }}</a></li>
+                {% endfor %}
+            </ul>
+        </dd>
+        {% endif %}
+    </dl>
+</div>
+{% if project.contributor %}
+<div class="meta" id="partner">
+    {% if project.contributor.logo -%}
+        {% if project.contributor.website %}<a href="{{ project.contributor.website }}">{% endif -%}
+        <img src="{{ project.contributor.logo.url }}" alt="{{ project.contributor}}" title="">
+        {%- if project.contributor.website %}</a>{% endif %}
+    {%- endif %}
+    <p>Contributed by {{ project.contributor }}</p>
+</div>
+{% endif %}
+{% if project.previous or project.next %}
+<div class="meta" id="related">
+    <h3>Related Projects</h3>
+    <ul>
+        {% if project.previous -%}
+            <li class="previous"><a href="{{ project.previous.get_absolute_url() }}">
+                <img src="{{ project.previous.image.thumb_url }}" alt="{{ project.previous }}" title="">
+            </a></li>
+        {%- endif %}
+        {% if project.next -%}
+            <li class="next"><a href="{{ project.next.get_absolute_url() }}">
+                <img src="{{ project.next.image.thumb_url }}" alt="{{ project.next }}" title="">
+            </a></li>
+        {%- endif %}
+    </ul>
+</div>
+{% endif %}
+{% endblock %}

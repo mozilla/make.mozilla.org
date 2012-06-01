@@ -47,6 +47,8 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'make_mozilla.events',
     # Tools
     'make_mozilla.tools',
+    # Projects
+    'make_mozilla.projects',
     # UserProfiles
     'make_mozilla.users',
     # extra lib stuff
