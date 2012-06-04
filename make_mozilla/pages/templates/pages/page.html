@@ -1,0 +1,75 @@
+{% extends "pages/base.html" %}
+
+{% block page_id %}page-{{ page.path }}{% endblock %}
+
+{% block site_css %}
+{{ super() }}
+<style>
+{% for section in page.sections.all() %}
+    {%- if section.poster %}
+    #section-{{ loop.index}} .poster {
+        background-image: url({{ section.poster.standard_url }});
+        height: {{ section.poster.standard_height }}px;
+    }
+    {%- endif %}
+{% endfor %}
+@media screen and (max-width: 700px) {
+    {% for section in page.sections.all() %}
+        {%- if section.poster %}
+        #section-{{ loop.index}} .poster {
+            background-image: url({{ section.poster.tablet_url }});
+            height: {{ section.poster.tablet_height }}px;
+        }
+        {%- endif %}
+    {% endfor %}
+}
+@media screen and (max-width: 500px) {
+    {% for section in page.sections.all() %}
+        {%- if section.poster %}
+        #section-{{ loop.index}} .poster {
+            background-image: url({{ section.poster.handheld_url }});
+            height: {{ section.poster.handheld_height }}px;
+        }
+        {%- endif %}
+    {% endfor %}
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% for section in page.sections.all() %}
+<section id="section-{{ loop.index }}"{% if section.has_sidebar %} class="sidebar"{% endif %}>
+    <header><h2>{{ section|safe }}</h2></header>
+    {% if section.poster %}<div class="poster"></div>{% endif %}
+    <div class="content">
+        {{ section.content|safe }}
+    </div>
+    {% if section.has_sidebar %}
+    <aside>
+        {% for quote in section.quotes.all() %}
+            <figure{% if loop.last and not section.sidebar %} class="last"{% endif %}>
+                <blockquote>
+                    &ldquo;{{ quote.quote|safe }}&rdquo;
+                </blockquote>
+                {% if quote.source %}<figcaption>
+                    <strong>
+                        {%- if quote.show_source_image and quote.source.avatar -%}
+                            <img src="{{ quote.source.avatar.adjusted_url }}" alt="" title="">
+                        {%- endif -%}
+                        &ndash;&nbsp;
+                        {%- if quote.url %}<a href="{{ quote.url }}">{% elif quote.source.url %}<a href="{{ quote.source.url }}">{% endif -%}
+                        {{ quote.source.name }}
+                        {%- if quote.url or quote.source.url %}</a>{% endif -%}
+                    </strong>
+                    {%- if quote.source.strapline %}<br>{{ quote.source.strapline }}{% endif -%}
+                </figcaption>{% endif %}
+            </figure>
+        {% endfor %}
+        {{ section.sidebar|safe }}
+    </aside>
+    {% endif %}
+</section>
+{% endfor %}
+
+{{ page.additional_content|safe }}
+{% endblock %}
