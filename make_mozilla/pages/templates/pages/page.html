@@ -1,5 +1,6 @@
 {% extends "pages/base.html" %}
 
+{% block page_title %}{{ page.title }} | {{ super() }}{% endblock %}
 {% block page_id %}page-{{ page.path }}{% endblock %}
 
 {% block site_css %}
