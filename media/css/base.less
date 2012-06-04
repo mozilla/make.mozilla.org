@@ -294,6 +294,270 @@ p {
 	}
 }
 
+/* ---[ 'Page' Content ]---------------------------------------------------- */
+
+.content-page section {
+	.box-shadow(@panelShadow);
+	background: #FFF;
+	overflow: hidden;
+	padding: 40px;
+	margin-bottom: 20px;
+	font-family: "Open Sans Light", "Open Sans", sans-serif;
+}
+
+.content-page section.sidebar {
+	padding-right: 365px;
+}
+
+.content-page section header {
+	.box-shadow(@panelShadow);
+	background: #FFF;
+	margin: -40px -40px 24px;
+	padding: 20px 40px;
+	position: relative;
+	z-index: 1;
+}
+
+.content-page section.sidebar header {
+	margin-right: -365px;
+}
+
+.content-page section header * {
+	margin: 0;
+	font-weight: bold;
+	font-size: 1.857em;
+}
+
+.content-page section .poster {
+	margin: -24px -40px 24px;
+	background-size: cover;
+}
+
+.content-page section.sidebar .poster {
+	margin-right: -365px;
+	background: 50% 50% no-repeat;
+}
+
+.content-page section .content {
+	font-size: 1.143em;
+	float: left;
+	width: 100%;
+}
+
+.content-page section aside {
+	float: right;
+	width: 285px;
+	margin-right: -325px;
+	padding-top: 8px;
+}
+
+.content-page section p {
+	margin-bottom: 0;
+	font-size: 1em;
+}
+
+.content-page section ol {
+	padding: 0;
+}
+
+.content-page section ul {
+	font-size: 0.9em;
+	padding: 0 0 0 20px;
+	margin-bottom: 0;
+	border-left: solid 20px #EEE;
+}
+
+.content-page section li {
+	margin-top: 1em;
+	list-style-position: inside;
+}
+
+.content-page section dl {
+	overflow: hidden;
+	font-size: 0.8em;
+	margin-bottom: 0;
+}
+
+.content-page section dt {
+	float: left;
+	width: 90px;
+	padding-top: 20px;
+	clear: left;
+	font-weight: bold;
+	font-family: "Open Sans", sans-serif;
+}
+
+.content-page section dd {
+	margin: 0;
+	padding: 20px 0 20px 120px;
+	border-top: solid 1px #E3E3E3;
+}
+
+.content-page section dt:first-child,
+.content-page section dt:first-child + dd {
+	border-top: none;
+}
+
+.content-page section aside {
+	line-height: 1.75em;
+}
+
+.content-page section aside figure {
+	border-bottom: solid 1px #E3E3E3;
+	margin-bottom: 2em;
+	padding-bottom: 2em;
+	font-size: 0.9em;
+	position: relative;
+}
+
+.content-page section aside figure.last {
+	border-bottom: none;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.content-page section aside figcaption {
+	margin-top: 1em;
+	padding-left: 0.8em;
+	text-indent: -0.8em;
+	overflow: hidden;
+}
+
+.content-page section aside figcaption img {
+	display: block;
+	float: left;
+	margin-left: -0.8em;
+	margin-right: 2em;
+	border-radius: 50%;
+}
+
+.content-page section aside blockquote {
+	margin: 1em 0 0;
+	padding: 0;
+}
+
+.content-page strong {
+	font-family: "Open Sans", sans-serif;
+}
+
+.content-page .links {
+	.box-shadow(@panelShadow);
+	background: #FFF;
+	overflow: hidden;
+	margin: 0 0 20px;
+	padding: 0;
+	list-style: none;
+	position: relative;
+}
+
+.content-page .links li {
+	width: 33.33%;
+	float: left;
+	margin: 0;
+	padding: 0 0 0.5em;
+}
+
+.content-page .links li::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	height: 100%;
+	border-left: solid 1px #E3E3E3;
+}
+
+.content-page .links li:first-child::before {
+	display: none;
+}
+
+.content-page .links h2 {
+	font-size: 1em;
+	margin: 1em 1.5em;
+	font-family: "Open Sans", sans-serif;
+	font-weight: bold;
+}
+
+.content-page .links p {
+	margin: 1em 1.5em;
+}
+
+.content-page .links a {
+	background: #27A6DD;
+	padding: 0.5em 0.5em 0.5em 1em;
+	color: #FFF;
+	text-shadow: none;
+	border-radius: 1.5em;
+}
+
+.content-page .links a::after {
+	content: ">";
+	background: #1383CC;
+	display: inline-block;
+	vertical-align: 7.5%;
+	width: 2em;
+	line-height: 2em;
+	text-align: center;
+	border-radius: 1em;
+	margin-left: 0.5em;
+	font-size: 0.8em;
+}
+
+@media screen and (max-width: 800px) {
+	.content-page section.sidebar {
+		padding-right: 40px;
+	}
+
+	.content-page section.sidebar header,
+	.content-page section.sidebar .poster {
+		margin-right: -40px;
+	}
+
+	.content-page section.sidebar .content {
+		padding-bottom: 40px;
+	}
+
+	.content-page section aside {
+		float: none;
+		width: auto;
+		clear: both;
+		border-top: solid 1px #DDD;
+		padding: 10px 40px 20px;
+		margin: 0 -40px -40px;
+		background: #EEE;
+	}
+
+	.content-page section aside figure::after {
+		content: "";
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 100%;
+		margin-top: 1px;
+		border-top: solid 1px rgba(255,255,255,0.75);
+	}
+
+	.content-page section aside figure.last::after {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.content-page .links li {
+		width: auto;
+		float: none;
+		margin: 0;
+		padding: 0 0 0.5em;
+		border-top: solid 1px #E3E3E3;
+	}
+
+	.content-page .links li::before {
+		display: none;
+	}
+
+	.content-page .links li:first-child {
+		border-top: none;
+	}
+}
+
 /* ---[ Map Content ]------------------------------------------------------- */
 
 .map-page #content .constrained {
