@@ -8,6 +8,7 @@ import make_mozilla.events.urls
 import make_mozilla.tools.urls
 import make_mozilla.projects.urls
 import make_mozilla.users.urls
+import make_mozilla.pages.urls
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib.gis import admin
@@ -27,6 +28,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+
+    (r'', include(make_mozilla.pages.urls)),
 )
 
 ## In DEBUG mode, serve media files through Django.
