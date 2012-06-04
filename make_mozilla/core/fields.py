@@ -3,6 +3,7 @@ from django.core.files.base import ContentFile
 from django.db import models
 from django.db.models.fields import files
 from PIL import Image
+from os.path import abspath
 import cStringIO
 
 from south.modelsinspector import add_introspection_rules
@@ -16,20 +17,28 @@ class SizedImageFieldFile(files.ImageFieldFile):
 
         self.sizes = self.field.sizes
 
-        if self.sizes:
+        if self.sizes and self.name:
             path, extension = self.url.rsplit('.', 1)
 
             for name, size in self.sizes.items():
                 try:
                     width, height = self.get_width_height(size)
 
-                    setattr(self, '%s_url' % name,
-                        '%s.%s.%s' % (path, name, extension))
+                    try:
+                        original_width, original_height = (self.width, self.height)
+                    except SuspiciousOperation:
+                        original_width, original_height = (width, height)
+
+                    if width == original_width and height == original_height:
+                        setattr(self, '%s_url' % name,
+                            '%s.%s' % (path, extension))
+                    else:
+                        setattr(self, '%s_url' % name,
+                            '%s.%s.%s' % (path, name, extension))
+
                     setattr(self, '%s_width' % name, width)
                     setattr(self, '%s_height' % name, height)
                 except IOError:
-                    pass
-                except SuspiciousOperation:
                     pass
 
     def generate_thumb(self, img, width, height, format):
@@ -44,8 +53,6 @@ class SizedImageFieldFile(files.ImageFieldFile):
         maxfactor = max(width/float(image_width), height/float(image_height))
         w = round(image_width * maxfactor)
         h = round(image_height * maxfactor)
-
-        print image_width, image_height, width, height, w, h
 
         image = image.resize((w, h), Image.ANTIALIAS)
 
@@ -70,6 +77,9 @@ class SizedImageFieldFile(files.ImageFieldFile):
                 height = width / float(self.width) * self.height
             except IOError:
                 height = None
+            except SuspiciousOperation:
+                ow, oh = Image.open(abspath(self.name[1:])).size
+                height = width / float(ow) * oh
         except TypeError:
             width = size[0]
             height = size[1]
@@ -84,10 +94,11 @@ class SizedImageFieldFile(files.ImageFieldFile):
 
             for name, size in self.sizes.items():
                 width, height = self.get_width_height(size)
-                target = '%s.%s.%s' % (path, name, extension)
-                thumb = self.generate_thumb(content, width, height, extension)
 
-                self.storage.save(target, thumb)
+                if width != self.width or height != self.height:
+                    target = '%s.%s.%s' % (path, name, extension)
+                    thumb = self.generate_thumb(content, width, height, extension)
+                    self.storage.save(target, thumb)
 
     def delete(self, save=True):
         super(SizedImageFieldFile, self).delete(save)
