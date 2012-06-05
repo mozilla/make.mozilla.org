@@ -41,6 +41,9 @@
                         <li><a href="{{ login_url() }}">Log in</a></li>
                     {% endif %}
                     {% block admin_menu_items %}
+                        {% if user.is_authenticated() %}
+                            <li><a href="{{ url('events.mine') }}">My events</a></li>
+                        {% endif %}
                     {% endblock %}
                     {% if request.user and request.user.is_authenticated() %}
                         <li><a href="{{ url('logout') }}">Log out</a></li>
@@ -51,7 +54,7 @@
                     <h3>About</h3>
                     {% block legal_links %}
                     <ul>
-                        <li><a href="{{ url('about') }}">About Us</a></li>
+                        <li><a href="{{ url('page', 'about') }}">About Us</a></li>
                         <li><a href="mailto:joinmozilla@mozilla.org">Contact Us</a></li>
                         <li><a href="http://www.mozilla.org/en-US/privacy-policy.html">Privacy Policy</a></li>
                         <li><a href="http://www.mozilla.org/en-US/about/legal.html">Legal Notices</a></li>
