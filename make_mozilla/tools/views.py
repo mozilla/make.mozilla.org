@@ -3,7 +3,13 @@ import jingo
 from make_mozilla.tools import models
 
 
+def index_static(request):
+    return jingo.render(request, 'tools/index_static.html')
+
+
 def index(request):
+    return index_static(request)
+
     featured_tools = models.Tool.objects.filter(featured=True)
     live_tools = models.Tool.live(include_featured=False)
     in_progress_tools = models.Tool.in_progress(include_featured=False)
