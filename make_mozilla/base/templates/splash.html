@@ -75,48 +75,24 @@
 		<div class="col main">
 			<section class="projects">
 				<header>
-					<h2><a href="#">Webmaker Projects</a></h2>
+					<h2><a href="{{ url('projects') }}">Webmaker Projects</a></h2>
 					<p>Make something amazing with the web</p>
 				</header>
                 <div class="featured">
 				<ul>
+                    {% for p in projects %}
 					<li>
-						<a href="#">
-							<img src="{{ MEDIA_URL }}img/projects/test.png" alt="" />
-							<h3 class="list-title">Make a realistic car simulator with MITs Scratch</h3>
+						<a href="{{ p.get_absolute_url() }}">
+							<img src="{{ p.image.featured_url }}" alt="" />
+							<h3 class="list-title">{{ p }}</h3>
 						</a>
+                        {% if p.contributor %}
 						<footer><p>Contributed by Tumblr</p></footer>
+                        {% endif %}
 					</li>
-					<li>
-						<a href="#">
-							<img src="{{ MEDIA_URL }}img/projects/test.png" alt="" />
-							<h3 class="list-title">Make an interactive documentary</h3>
-						</a>
-						<footer><p>Contributed by Tumblr</p></footer>
-					</li>
-                    <li>
-                        <a href="#">
-                            <img src="{{ MEDIA_URL }}img/projects/test.png" alt="" />
-                            <h3 class="list-title">Make a realistic car simulator with MITs Scratch</h3>
-                        </a>
-                        <footer><p>Contributed by Tumblr</p></footer>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="{{ MEDIA_URL }}img/projects/test.png" alt="" />
-                            <h3 class="list-title">Make an interactive documentary</h3>
-                        </a>
-                        <footer><p>Contributed by Tumblr</p></footer>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="{{ MEDIA_URL }}img/projects/test.png" alt="" />
-                            <h3 class="list-title">Make an interactive documentary</h3>
-                        </a>
-                        <footer><p>Contributed by Tumblr</p></footer>
-                    </li>
-				</ul>
-				<a href="#" class="more">See all Webmaker projects</a>
+                    {% endfor %}
+                </ul>
+				<a href="{{ url('projects') }}" class="more">See all Webmaker projects</a>
                 </div>
 			</section>
 		</div>
