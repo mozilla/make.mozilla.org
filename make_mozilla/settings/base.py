@@ -27,6 +27,10 @@ MINIFY_BUNDLES = {
             'js/map.js',
             'js/map.infobox.js',
         ),
+        'homgepage_js': (
+            'js/jquery.tweet.js',
+            'js/homepage.js',
+        ),
         'example_js': (
             'js/examples/libs/jquery-1.4.4.min.js',
             'js/examples/libs/jquery.cookie.js',
