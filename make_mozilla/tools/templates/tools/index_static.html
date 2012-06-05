@@ -1,0 +1,168 @@
+{% extends "tools/base.html" %}
+
+{% block page_id %}tools-index{% endblock %}
+{% block page_class %}{{ super() }} brochure-page content-page{% endblock %}
+
+{% block site_css %}
+{{ super() }}
+<style>
+#thimble .poster {
+    background-image: url({{ MEDIA_URL }}img/tools/thimble-poster.jpg);
+    height: 350px;
+}
+#goggles .poster {
+    background-image: url({{ MEDIA_URL }}img/tools/goggles-poster.jpg);
+    height: 350px;
+}
+#popcorn .poster {
+    background-image: url({{ MEDIA_URL }}img/tools/popcorn-poster.jpg);
+    height: 350px;
+}
+@media screen and (max-width: 700px) {
+    #thimble .poster {
+        background-image: url({{ MEDIA_URL }}img/tools/thimble-poster.tablet.jpg);
+        height: 272px;
+    }
+    #goggles .poster {
+        background-image: url({{ MEDIA_URL }}img/tools/goggles-poster.tablet.jpg);
+        height: 272px;
+    }
+    #popcorn .poster {
+        background-image: url({{ MEDIA_URL }}img/tools/popcorn-poster.tablet.jpg);
+        height: 272px;
+    }
+}
+@media screen and (max-width: 500px) {
+    #thimble .poster {
+        background-image: url({{ MEDIA_URL }}img/tools/thimble-poster.handheld.jpg);
+        height: 194px;
+    }
+    #goggles .poster {
+        background-image: url({{ MEDIA_URL }}img/tools/goggles-poster.handheld.jpg);
+        height: 194px;
+    }
+    #popcorn .poster {
+        background-image: url({{ MEDIA_URL }}img/tools/popcorn-poster.handheld.jpg);
+        height: 194px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <hgroup>
+        <div class="masthead">
+            <h2 class="plaque">Beta Tools</h2>
+        </div>
+        <h3 class="shout">Tools to help you make things on the Web</h3>
+    </hgroup>
+    <div class="featured-set">
+        <h3>Featured</h3>
+        <ul class="tool-flyer-list">
+            <li><div class="tool-flyer featured">
+                <h4 class="title"><a href="#thimble">Thimble</a></h4>
+                <a href="#thimble" class="logo"><img src="{{ MEDIA_URL }}img/tools/thimble-icon.png" alt="Thimble" title=""></a>
+                <p>Make and share your own webpage</p>
+            </div></li>
+            <li><div class="tool-flyer featured">
+                <h4 class="title"><a href="#goggles">X-Ray Goggles</a></h4>
+                <a href="#goggles" class="logo"><img src="{{ MEDIA_URL }}img/tools/goggles-icon.png" alt="X-Ray Goggles" title=""></a>
+                <p>Explore and remix any webpage</p>
+            </div></li>
+            <li><div class="tool-flyer featured">
+                <h4 class="title"><a href="#popcorn">Popcorn</a></h4>
+                <a href="#popcorn" class="logo"><img src="{{ MEDIA_URL }}img/tools/popcorn-icon.png" alt="Popcorn Maker" title=""></a>
+                <p>Make video pop</p>
+            </div></li>
+        </ul>
+    </div>
+</div>
+
+<section id="thimble" class="sidebar larger">
+    <header><h2><img src="{{ MEDIA_URL}}img/tools/thimble-icon.png"> <strong>Thimble</strong></h2></header>
+    <div class="poster"></div>
+    <div class="content">
+        <h3>Webmaking made easy</h3>
+        <span class="feature app"><img src="{{ MEDIA_URL }}img/tools/thimble-app.png" alt="A screenshot of the Thimble application"></span>
+        <p>Mozilla's Thimble App makes it ridiculously simple to create and share your own web pages. Write and edit HTML and CSS right in your browser. Instantly preview your work. Then host and share your finished projects with a single click.</p>
+        <span class="feature sample"><img src="{{ MEDIA_URL }}img/tools/thimble-sample.png" alt="A sample of the Thimble application"></span>
+        <p class="buttons"><a href="" class="button more">Get started</a></p>
+    </div>
+    <aside>
+        <figure>
+            <blockquote>
+                &ldquo;Thimble is one of the friendliest, easiest-to-use code editors we've seen&hellip;&rdquo;
+            </blockquote>
+            <figcaption>
+                <strong>&ndash;&nbsp;<a href="http://www.webmonkey.com/2012/05/learn-to-code-with-mozillas-thimble-editor/">Wired Webmonkey</a></strong>
+            </figcaption>
+        </figure>
+        <p>Make something with Thimble</p>
+        <ul>
+            <li><a href="">Hack a map</a></li>
+            <li><a href="">Make your own animal</a></li>
+            <li><a href="">Make your own rant page</a></li>
+            <li><em><a href="">more Thimble projects</a></em></li>
+        </ul>
+    </aside>
+</section>
+
+<section id="goggles" class="sidebar larger">
+    <header><h2><img src="{{ MEDIA_URL}}img/tools/goggles-icon.png"> <strong>X-Ray Goggles</strong></h2></header>
+    <div class="poster"></div>
+    <div class="content">
+        <h3>See how the web works</h3>
+        <span class="feature app"><img src="{{ MEDIA_URL }}img/tools/goggles-app.png" alt="A screenshot of the X-Ray Goggles application"></span>
+        <p>The X-Ray Goggles make it easy to see and mess around with the building blocks that make up the web. Activate the Goggles to inspect the code behind any web page, from <em>the New York Times</em> to your own blog. Then remix elements with a single click, swapping in your own text, images and more.</p>
+        <span class="feature sample"><img src="{{ MEDIA_URL }}img/tools/goggles-sample.png" alt="A sample of the X-Ray Goggles application"></span>
+        <p class="buttons"><a href="" class="button more">Get started</a></p>
+    </div>
+    <aside>
+        <figure>
+            <blockquote>
+                &ldquo;Hackasaurus [X-Ray Goggles] make is easy to see the structure of any web page and remix it.&rdquo;
+            </blockquote>
+            <figcaption>
+                <strong>&ndash;&nbsp;MIT Center for Civic Media</strong>
+            </figcaption>
+        </figure>
+        <p>Make something with X-Ray Goggles</p>
+        <ul>
+            <li><a href="">Remix your blog</a></li>
+            <li><a href="">Fix a broken TV</a></li>
+            <li><a href="">Remix your uncle</a></li>
+            <li><em><a href="">more X-Ray Goggles projects</a></em></li>
+        </ul>
+    </aside>
+</section>
+
+<section id="popcorn" class="sidebar larger">
+    <header><h2><img src="{{ MEDIA_URL}}img/tools/popcorn-icon.png"> <strong>Popcorn</strong></h2></header>
+    <div class="poster"></div>
+    <div class="content">
+        <h3>Supercharge your web video</h3>
+        <span class="feature app"><img src="{{ MEDIA_URL }}img/tools/popcorn-app.png" alt="A screenshot of the Popcorn application"></span>
+        <p>Mozilla Popcorn turns boring old online video into dynamic "hyper-video", rich with interactivity and context. It lets you link the rest of the web directly to your video's playback, pulling in social media, news feeds, data visualizations and other content in real time. Create your own pop-up videos, multimedia reports, guided web tours and more.</p>
+        <span class="feature sample"><img src="{{ MEDIA_URL }}img/tools/popcorn-sample.png" alt="A sample of the Popcorn application"></span>
+        <p class="buttons"><a href="" class="button more">Get started</a></p>
+    </div>
+    <aside>
+        <figure>
+            <blockquote>
+                &ldquo;This is the future of online video.&rdquo;
+            </blockquote>
+            <figcaption>
+                <strong>&ndash;&nbsp;Fast Company</strong>
+            </figcaption>
+        </figure>
+        <p>Make something with Popcorn</p>
+        <ul>
+            <li><a href="">Remix a TV commercial</a></li>
+            <li><a href="">Make a music video</a></li>
+            <li><a href="">Jump in a lake</a></li>
+            <li><em><a href="">more Popcorn projects</a></em></li>
+        </ul>
+    </aside>
+</section>
+{% endblock %}
