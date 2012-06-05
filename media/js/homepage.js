@@ -10,5 +10,8 @@ $(function() {
           auto_join_text_url: "we were checking out",
           loading_text: "loading tweets...",
           template: "<p>{text}</p>{time}"
-        });
+     });
+     $('.carousel').carousel({
+          interval: false
+     });
 });

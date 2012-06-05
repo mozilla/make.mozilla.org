@@ -3722,14 +3722,14 @@ border-right: none;
 .amuse {
 	margin-bottom: -140px;
 }
-.amuse .carousel,
-.amuse .carousel-controls {
+.amuse .pager,
+.amuse .pager-controls {
 	padding-left: 0;
 	list-style-type: none;
 	margin: 0;
 	overflow: hidden;
 }
-.amuse .carousel-text {
+.amuse .pager-text {
 	background: rgba(249, 8, 3, 0.8);
 	padding: 20px 20px 20px 80px;
 	color: #fff;
@@ -3739,35 +3739,35 @@ border-right: none;
 	position: relative;
 	bottom: 200px;
 }
-.amuse .carousel-title {
+.amuse .pager-title {
 	font-size: 14px;
 	color: #fff;
 	font-family: "Open Sans";
 	font-weight: bold;
 	margin: 0;
 }
-.amuse .carousel img {
+.amuse .pager img {
 	width: 100%;
 	height: auto;
 }
-.amuse .carousel-controls {
+.amuse .pager-controls {
 	position: relative;
 	bottom: 230px;
 	padding-left: 80px;
 }
-.amuse .carousel-controls li {
+.amuse .pager-controls li {
 	float: left;
 	margin-right: 10px;
 }
-.amuse .carousel-controls a {
+.amuse .pager-controls a {
 	color: #fff;
 	opacity: 0.6;
 }
-.amuse .carousel-controls a.current,
-.amuse .carousel-controls a:hover {
+.amuse .pager-controls a.current,
+.amuse .pager-controls a:hover {
 	opacity: 1;
 }
-.amuse .carousel-controls span {
+.amuse .pager-controls span {
 	position: absolute;
 	left: -9999em;
 	height: 1px;
@@ -4035,4 +4035,119 @@ border-right: none;
 .maker_partners li {
 	float: left;
 	margin-right: 20px;
+}
+
+
+
+
+
+.carousel {
+  position: relative;
+  margin-bottom: 18px;
+  padding: 0 40px;
+  line-height: 1;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel .item {
+  position: relative;
+  display: none;
+  margin-right: 0;
+  -webkit-transition: 0.6s ease-in-out left;
+     -moz-transition: 0.6s ease-in-out left;
+      -ms-transition: 0.6s ease-in-out left;
+       -o-transition: 0.6s ease-in-out left;
+          transition: 0.6s ease-in-out left;
+}
+.carousel .item ul {
+	padding-left: 0;
+	overflow: hidden;
+}
+.carousel .item li {
+	list-style-type: none;
+	margin-right: 6px;
+}
+.carousel .item > img {
+  display: block;
+  line-height: 1;
+}
+
+.carousel .active,
+.carousel .next,
+.carousel .prev {
+  display: block;
+}
+
+.carousel .active {
+  left: 0;
+}
+
+.carousel .next,
+.carousel .prev {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.carousel .next {
+  left: 100%;
+}
+
+.carousel .prev {
+  left: -100%;
+}
+
+.carousel .next.left,
+.carousel .prev.right {
+  left: 0;
+}
+
+.carousel .active.left {
+  left: -100%;
+}
+
+.carousel .active.right {
+  left: 100%;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  margin-top: -20px;
+  font-size: 60px;
+  font-weight: 100;
+  line-height: 15px;
+  color: #ffffff;
+  text-align: center;
+  background: #222222;
+  border: 3px solid #ffffff;
+  -webkit-border-radius: 18px;
+     -moz-border-radius: 18px;
+          border-radius: 18px;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+.carousel-control:link,
+.carousel-control:visited {
+	color: #fff;
+}
+
+.carousel-control.right {
+  right: 0;
+  left: auto;
+}
+
+.carousel-control:hover {
+  color: #ffffff;
+  text-decoration: none;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
 }

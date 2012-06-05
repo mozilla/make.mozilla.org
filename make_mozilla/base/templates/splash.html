@@ -4,16 +4,16 @@
 
 {% block content %}
 <div class="amuse">
-    <ol class="carousel">
+    <ol class="pager">
     	<li>
         	<img src="{{ MEDIA_URL }}img/carousel/faux.jpg" alt="" />
-        	<a href="http:mozilla.org/webmaker/videos/" class="carousel-text">
-        		<h2 class="carousel-title">Make the webmakers</h2>
+        	<a href="http:mozilla.org/webmaker/videos/" class="pager-text">
+        		<h2 class="pager-title">Make the webmakers</h2>
         		<p><strong>Let's teach the world the web.</strong> Meet some of the global community making it happen.</p>	
         	</a>
         </li>
     </ol>
-    <ol class="carousel-controls">
+    <ol class="pager-controls">
         <li><a href="#" class="current">● <span>read about "foo"</span></a></li>
         <li><a href="#">● <span>read about "foo"</span></a></li>
         <li><a href="#">● <span>read about "foo"</span></a></li>
@@ -146,24 +146,60 @@
         <a class="lozenge" href="{{ url('page', 'about') }}">Learn more</a>
         <div class="other-makers">
             <h3>Other Mozilla Webmaker websites:</h3>
+            <div id="mozilla-carousel" class="carousel slide">
+            <div class="carousel_inner">
             <ul class="maker_partners">
-                <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-popcorn.gif" alt="popcorn" /></a></li>
-                <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-ignite.gif" alt="mozilla ignite" /></a></li>
-                <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-opennews.gif" alt="mozilla opennews" /></a></li>
-                <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-hive.gif" alt="hive NYC" /></a></li>
-        </ul>
+                <li class="active item">
+                <ul>
+                    <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-popcorn.gif" alt="popcorn" /></a></li>
+                    <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-ignite.gif" alt="mozilla ignite" /></a></li>
+                    <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-opennews.gif" alt="mozilla opennews" /></a></li>
+                    <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-hive.gif" alt="hive NYC" /></a></li>
+                </ul>
+                </li>
+                <li class="item">
+                <ul>
+                    <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-opennews.gif" alt="mozilla opennews" /></a></li>
+                    <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-hive.gif" alt="hive NYC" /></a></li>
+                    <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-popcorn.gif" alt="popcorn" /></a></li>
+                    <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-ignite.gif" alt="mozilla ignite" /></a></li>
+                </ul>
+                </li>
+            </ul>
+            <a class="carousel-control left" href="#mozilla-carousel" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#mozilla-carousel" data-slide="next">&rsaquo;</a>
+            </div>
+            </div>
         </div>
     </section>
 </div>
 <div class="fish">
 	<section class="wrap partners">
 		<h2>Mozilla Webmaker is generously supported by the following:</h2>
+        <div id="partner-carousel" class="carousel slide">
+        <div class="carousel_inner">
 		<ul class="maker_partners">
-			<li><a href="#"><img src="{{ MEDIA_URL }}img/partner-popcorn.gif" alt="popcorn" /></a></li>
-			<li><a href="#"><img src="{{ MEDIA_URL }}img/partner-ignite.gif" alt="mozilla ignite" /></a></li>
-			<li><a href="#"><img src="{{ MEDIA_URL }}img/partner-opennews.gif" alt="mozilla opennews" /></a></li>
-			<li><a href="#"><img src="{{ MEDIA_URL }}img/partner-hive.gif" alt="hive NYC" /></a></li>
+			<li class="active item">
+                <ul>
+                    <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-popcorn.gif" alt="popcorn" /></a></li>
+			         <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-ignite.gif" alt="mozilla ignite" /></a></li>
+			         <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-opennews.gif" alt="mozilla opennews" /></a></li>
+			         <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-hive.gif" alt="hive NYC" /></a></li>
+                </ul>
+            </li>
+            <li class="item">
+                <ul> 
+                     <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-opennews.gif" alt="mozilla opennews" /></a></li>
+                     <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-hive.gif" alt="hive NYC" /></a></li>
+                     <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-popcorn.gif" alt="popcorn" /></a></li>
+                     <li><a href="#"><img src="{{ MEDIA_URL }}img/partner-ignite.gif" alt="mozilla ignite" /></a></li>
+                </ul>
+            </li>
 		</ul>
+        <a class="carousel-control left" href="#partner-carousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#partner-carousel" data-slide="next">&rsaquo;</a>
+        </div>
+        </div>
         <p class="shout">and Mozillians like you</p>
 	</section>
 </div>
