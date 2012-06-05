@@ -49,6 +49,8 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'make_mozilla.tools',
     # Projects
     'make_mozilla.projects',
+    # News and feed importer
+    'make_mozilla.news',
     # UserProfiles
     'make_mozilla.users',
     # Pages
@@ -59,6 +61,7 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'cronjobs',
     'waffle',
 ]
+
 
 class Setting(object):
     def __init__(self, *args, **kwargs):
@@ -71,12 +74,12 @@ class Setting(object):
 
 # Go! Go! Gadget Bleach!
 BLEACH = Setting(
-    allowed_tags = (
+    allowed_tags=(
         'h1', 'h2', 'a', 'b', 'em', 'i', 'strong',
         'ol', 'ul', 'li', 'blockquote', 'p',
         'span', 'pre', 'code', 'img'
     ),
-    allowed_attrs = {
+    allowed_attrs={
         'a': ['href', 'title'],
         'img': ['src', 'alt', 'title'],
     }
@@ -138,7 +141,7 @@ ANON_ALWAYS = True
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': ['localhost:11211',],
+        'LOCATION': ['localhost:11211', ],
         'KEY_PREFIX': 'make_mozilla'
     }
 }
@@ -198,3 +201,8 @@ SOUTH_DATABASE_ADAPTERS = {
 # CELERY_ALWAYS_EAGER = False  # required to activate celeryd
 BROKER_URL = "redis://localhost:6379/0"
 SITE_URL = 'http://localhost:8000'
+
+# RSS feed for planet news
+SITE_FEED_URLS = {
+    'webmaker': 'http://planet.drumbeat.org/rss20.xml',
+}

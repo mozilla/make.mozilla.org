@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block page_title %}News | {{ super() }}{% endblock %}
+
+{% block section_type %}news{% endblock %}
+
+{% block admin_menu_items %}
+{% if request.user and request.user.is_authenticated() %}
+<li><a href="{{ url('events.mine') }}">My events</a></li>
+{% endif %}
+{% endblock %}

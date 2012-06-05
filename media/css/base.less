@@ -180,7 +180,8 @@ p {
 .section-projects #header .projects a,
 .section-tools #header .tools a,
 .section-events #header .events a,
-#page-about #header .about a {
+#page-about #header .about a, 
+.section-news #header .news a {
 	background: #ED1C24;
 	color: #FFF;
 	border: none;
@@ -191,7 +192,8 @@ p {
 .section-projects #header .projects a::after,
 .section-tools #header .tools a::after,
 .section-events #header .events a::after,
-#page-about #header .about a::after {
+#page-about #header .about a::after,
+.section-news #header .news a::after  {
 	content: "";
 	position: absolute;
 	top: 100%;
@@ -227,7 +229,8 @@ p {
 	.section-projects #header .projects a::after,
 	.section-tools #header .tools a::after,
 	.section-events #header .events a::after,
-	#page-about #header .about a::after {
+	#page-about #header .about a::after,
+	.section-news #header .news a::after {
 		border-width: 20px 40px 0 40px;
 	}
 }
@@ -1726,7 +1729,15 @@ ul.tri-set img {
 	padding: 18px 35px;
 	border-top: solid 1px #E1E2E3;
 }
-
+.news-index .search-results {
+	box-shadow: none;
+}
+.news-index .pagination ol {
+	float: left;
+}
+.news-index .pagination .btn {
+	float: left;
+}
 .search-results .pagination li {
 	.box-shadow(none);
 
@@ -3641,4 +3652,21 @@ border-right: none;
 .legal address {
 	font-style: normal;
 	font-size: 0.929em;
+}
+
+/* ---[ News ]-------------------------------------------------- */
+.news-list {
+	list-style-type: none;
+	padding-left: 0;
+}
+.news-list .article {
+	border-top: 1px solid #E1E2E3;
+	padding-top: 1em;
+}
+.news-list .article:first-child {
+	border-top: none;
+	padding-top: 0;
+}
+.news-list .article .meta {
+	margin-top: -2em;
 }

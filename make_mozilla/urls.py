@@ -9,6 +9,7 @@ import make_mozilla.tools.urls
 import make_mozilla.projects.urls
 import make_mozilla.users.urls
 import make_mozilla.pages.urls
+import make_mozilla.news.urls
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib.gis import admin
@@ -19,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^events/',    include(make_mozilla.events.urls)),
     url(r'^tools/',     include(make_mozilla.tools.urls)),
     url(r'^projects/',  include(make_mozilla.projects.urls)),
+    url(r'^news/',    include(make_mozilla.news.urls)),
     url(r'^users/',     include(make_mozilla.users.urls)),
     # browserid endpoints
     url(r'^browserid/', include('django_browserid.urls')),
