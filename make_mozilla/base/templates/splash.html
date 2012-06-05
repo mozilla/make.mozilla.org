@@ -123,23 +123,15 @@
                     <h2><a href="{{ url('events') }}">Events</a></h2>
                 </header>
                 <ol>
+                    {% for e in events %}
                     <li class="vevent">
-                        <time>June <span>23</span></time>
-                        <h3 class="list-title"><a href="#">Kids and Tech: Exploring a World of Possibilities</a></h3>
-                        <p class="location">New York</p>
+                        <time>{{ e.start.strftime('%B') }} <span>{{ e.start.strftime('%e') }}</span></time>
+                        <h3 class="list-title"><a href="{{ e.event_url }}">{{ e.name }}</a></h3>
+                        <p class="location">{{ e.venue }}</p>
                     </li>
-                    <li class="vevent">
-                        <time>June <span>23</span></time>
-                        <h3 class="list-title"><a href="#">Learn Python the Fun Way</a></h3>
-                        <p class="location">Toronto</p>
-                    </li>
-                    <li class="vevent">
-                        <time>June <span>23</span></time>
-                        <h3 class="list-title"><a href="#">Design thinking and making website</a></h3>
-                        <p class="location">Brisbane</p>
-                    </li>
+                    {% endfor %}
                 </ol>
-                <a class="button find" href="#">Create your own event</a>
+                <a class="button find" href="https://donate.mozilla.org/page/event/create/">Create your own event</a>
             </section>
 		</div>
 	</div>
