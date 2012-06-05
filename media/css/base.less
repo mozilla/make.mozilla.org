@@ -307,6 +307,7 @@ p {
 .content-page section {
 	.box-shadow(@panelShadow);
 	background: #FFF;
+	position: relative;
 	overflow: hidden;
 	padding: 40px;
 	margin-bottom: 20px;
@@ -336,6 +337,15 @@ p {
 	font-size: 1.857em;
 }
 
+.content-page section header strong {
+	font-size: 1.25em;
+}
+
+.content-page section header img {
+	vertical-align: middle;
+	margin: 0 10px 0 -20px;
+}
+
 .content-page section .poster {
 	margin: -24px -40px 24px;
 	background-size: cover;
@@ -350,6 +360,11 @@ p {
 	font-size: 1.143em;
 	float: left;
 	width: 100%;
+	position: relative;
+}
+
+.content-page section.larger .content {
+	font-size: 1.429em;
 }
 
 .content-page section aside {
@@ -364,18 +379,18 @@ p {
 	font-size: 1em;
 }
 
-.content-page section ol {
+.content-page section .content ol {
 	padding: 0;
 }
 
-.content-page section ul {
+.content-page section .content ul {
 	font-size: 0.9em;
 	padding: 0 0 0 20px;
 	margin-bottom: 0;
 	border-left: solid 20px #EEE;
 }
 
-.content-page section li {
+.content-page section .content li {
 	margin-top: 1em;
 	list-style-position: inside;
 }
@@ -444,7 +459,7 @@ p {
 	padding: 0;
 }
 
-.content-page strong {
+.content-page section strong {
 	font-family: "Open Sans", sans-serif;
 }
 
@@ -2152,9 +2167,25 @@ ul.tri-set img {
 	padding-right: 6.666px;
 }
 
-#tools-index .featured-set .tool-flyer-list li,
 #tools-index .in-progress-set.adjusted .tool-flyer-list li {
 	width: 50%;
+}
+
+#tools-index .featured-set .tool-flyer-list {
+	text-align: center;
+}
+
+#tools-index .featured-set .tool-flyer-list li {
+	.box-sizing(border-box);
+	width: 49%;
+	padding-left: 20px;
+	display: inline-block;
+	float: none;
+	text-align: left;
+}
+
+#tools-index .featured-set .tool-flyer-list li .tool-flyer {
+	margin-left: 0;
 }
 
 #tools-index .coming-soon-set.adjusted {
@@ -2168,6 +2199,37 @@ ul.tri-set img {
 #tools-index .coming-soon-set.adjusted .tool-flyer-list li {
 	float: none;
 	width: 100%;
+}
+
+#tools-index .feature {
+	.box-shadow(~"0 0 5px #000");
+
+	display: block;
+	position: absolute;
+	background: #EEE;
+}
+
+#tools-index .feature.app {
+	.box-sizing(border-box);
+	top: -250px;
+	right: -345px;
+	width: 330px;
+	height: 245px;
+	border: solid 2px #FFF;
+	overflow: hidden;
+}
+
+#tools-index .feature.sample {
+	top: -210px;
+	right: -100px;
+	width: 200px;
+	height: 200px;
+	border: solid 10px #FFF;
+}
+
+#tools-index .feature.sample,
+#tools-index .feature.sample img {
+	.border-radius(50%);
 }
 
 @media screen and (max-width: 900px) {
@@ -2209,6 +2271,28 @@ ul.tri-set img {
 	#tools-index .coming-soon-set.adjusted .tool-flyer-list li {
 		width: 50%;
 		float: left;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	#tools-index .feature {
+		position: static;
+		margin: 30px auto;
+		max-width: 100%;
+		text-align: center;
+	}
+
+	#tools-index .feature.app {
+		height: auto;
+	}
+
+	#tools-index .feature img {
+		width: 100%;
+		display: block;
+	}
+
+	#tools-index section .buttons {
+		text-align: right;
 	}
 }
 
