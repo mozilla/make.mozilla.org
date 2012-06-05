@@ -3722,12 +3722,18 @@ border-right: none;
 .amuse {
 	margin-bottom: -140px;
 }
-.amuse .pager,
-.amuse .pager-controls {
+.amuse .pager-page,
+.amuse .pager-tabs {
 	padding-left: 0;
 	list-style-type: none;
 	margin: 0;
 	overflow: hidden;
+}
+.amuse .pager-page {
+    display: none;
+}
+.amuse .default-page {
+    display: block;
 }
 .amuse .pager-text {
 	background: rgba(249, 8, 3, 0.8);
@@ -3746,28 +3752,28 @@ border-right: none;
 	font-weight: bold;
 	margin: 0;
 }
-.amuse .pager img {
+.amuse .pager-page img {
 	width: 100%;
 	height: auto;
 }
-.amuse .pager-controls {
+.amuse .pager-tabs {
 	position: relative;
 	bottom: 230px;
 	padding-left: 80px;
 }
-.amuse .pager-controls li {
+.amuse .pager-tabs li {
 	float: left;
 	margin-right: 10px;
 }
-.amuse .pager-controls a {
+.amuse .pager-tabs a {
 	color: #fff;
 	opacity: 0.6;
 }
-.amuse .pager-controls a.current,
-.amuse .pager-controls a:hover {
+.amuse .pager-tabs a.selected,
+.amuse .pager-tabs a:hover {
 	opacity: 1;
 }
-.amuse .pager-controls span {
+.amuse .pager-tabs span {
 	position: absolute;
 	left: -9999em;
 	height: 1px;
@@ -4036,10 +4042,6 @@ border-right: none;
 	float: left;
 	margin-right: 20px;
 }
-
-
-
-
 
 .carousel {
   position: relative;

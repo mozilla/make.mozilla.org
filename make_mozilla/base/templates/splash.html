@@ -3,22 +3,52 @@
 {% block section_type %}homepage{% endblock %}
 
 {% block content %}
-<div class="amuse">
-    <ol class="pager">
-    	<li>
-        	<img src="http://placehold.it/1200x600/333/444" alt="" />
-        	<a href="http:mozilla.org/webmaker/videos/" class="pager-text">
-        		<h2 class="pager-title">Make the webmakers</h2>
-        		<p><strong>Let's teach the world the web.</strong> Meet some of the global community making it happen.</p>	
+<div class="amuse pager pager-with-tabs pager-auto-rotate pager-no-history" id="home-promo">
+    <div class="pager-content">
+        <div class="default-page pager-page" id="page-promo-join">
+            <a href="https://donate.mozilla.org/page/contribute/join-mozilla?source=join_link">
+                <img src="{{ MEDIA_URL }}img/carousel/join.jpg" alt="" />
+                <div class="pager-text">
+                    <h2 class="pager-title">Join Mozilla</h2>
+                    <p>Make a donation to support Mozilla's non-profit mission</p>  
+                </div>
+            </a>
+        </div>
+    	<div class="pager-page" id="page-promo-webmakers">
+            <a href="http://mozilla.org/webmaker/videos/">
+                <img src="{{ MEDIA_URL }}img/carousel/webmaker-video.jpg" alt="" />
+                <div class="pager-text">
+                    <h2 class="pager-title">Make the webmakers</h2>
+                    <p>Let's teach the world the web. Meet some of the global community making it happen.</p>	
+                </div>
         	</a>
-        </li>
+        </div>
+        <div class="pager-page" id="page-promo-code-party">
+            <a href="https://webmaker.org/events/">
+                <img src="{{ MEDIA_URL }}img/carousel/scp.png" alt="" />
+                <div class="pager-text">
+                    <h2 class="pager-title">Summer Code Party</h2>
+                    <p>Meet, make, and share your creations with friends to learn some code this summer.</p>  
+                </div>
+            </a>
+        </div>
+        <div class="pager-page" id="page-promo-popcorn">
+            <a href="http://www.mozillapopcorn.org">
+                <img src="{{ MEDIA_URL }}img/carousel/popcorn.jpg" alt="" />
+                <div class="pager-text">
+                    <h2 class="pager-title">Make video pop with Popcorn</h2>
+                    <p>Popcorn is revolutionizing video on the web. It's free, open, and easy to use. Try it today.</p>
+                </div>
+            </a>
+        </div>
     </ol>
-    <ol class="pager-controls">
-        <li><a href="#" class="current">● <span>read about "foo"</span></a></li>
-        <li><a href="#">● <span>read about "foo"</span></a></li>
-        <li><a href="#">● <span>read about "foo"</span></a></li>
-        <li><a href="#">● <span>read about "foo"</span></a></li>
-    </ol>
+    <ul class="pager-tabs">
+        <li id="tab-join"><a href="#" class="selected">● <span>read about "foo"</span></a></li>
+        <li id="tab-webmakers"><a href="#">● <span>read about "foo"</span></a></li>
+        <li id="tab-code-party"><a href="#">● <span>read about "foo"</span></a></li>
+        <li id="tab-popcorn"><a href="#">● <span>read about "foo"</span></a></li>
+    </ul>
+    </div>
 </div>
 <div class="veg">
     <section class="wrap tools">
@@ -112,7 +142,7 @@
                     </li>
                     {% endfor %}
                 </ol>
-                <p><a href="http://planet.drumbeat.org/">Plannet Webmaker</a> | <a href="http://planet.drumbeat.org/rss20.xml">RSS</a></p>
+                <p><a href="http://planet.drumbeat.org/">Planet Webmaker</a> | <a href="http://planet.drumbeat.org/rss20.xml">RSS</a></p>
 			</section>
 			<section class="tweets">
 				<h2 class="side-title">@mozilla</h2>

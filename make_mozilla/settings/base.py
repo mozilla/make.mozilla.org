@@ -30,6 +30,7 @@ MINIFY_BUNDLES = {
         'homgepage_js': (
             'js/jquery.tweet.js',
             'js/bootstrap-carousel.js',
+            'js/mozilla-pager.js',
             'js/homepage.js',
         ),
         'example_js': (
