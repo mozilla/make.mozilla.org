@@ -2287,7 +2287,8 @@ ul.tri-set img {
 
 @media screen and (max-width: 800px) {
 	#tools-index .feature {
-		position: static;
+		.box-shadow(~"0 0 5px rgba(0,0,0,0.5)");
+		position: relative;
 		margin: 30px auto;
 		max-width: 100%;
 		text-align: center;
@@ -2295,6 +2296,12 @@ ul.tri-set img {
 
 	#tools-index .feature.app {
 		height: auto;
+	}
+
+	#tools-index .feature.app,
+	#tools-index .feature.sample {
+		top: 0;
+		right: 0;
 	}
 
 	#tools-index .feature img {
