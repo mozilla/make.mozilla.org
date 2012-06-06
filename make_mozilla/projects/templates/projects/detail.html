@@ -8,6 +8,8 @@
     <img src="{{ project.image.poster_url }}" class="poster">
 
     {{ project.content }}
+
+    {% if project.link %}<p class="buttons"><a href="{{ project.link }}" class="button more">Get Started</a></p>{% endif %}
 </div>
 <div class="meta" id="about">
     <h3>About this project</h3>
