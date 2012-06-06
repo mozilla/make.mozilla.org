@@ -100,10 +100,10 @@
         </figure>
         <p>Make something with Thimble</p>
         <ul>
-            <li><a href="">Hack a map</a></li>
-            <li><a href="">Make your own animal</a></li>
-            <li><a href="">Make your own rant page</a></li>
-            <li><em><a href="">more Thimble projects</a></em></li>
+            {% for project in projects.thimble %}
+            <li><a href="{{ project.get_absolute_url() }}">{{ project }}</a></li>
+            {% endfor %}
+            <li><em><a href="{{ url('projects') }}?tool=thimble">more Thimble projects</a></em></li>
         </ul>
     </aside>
 </section>
@@ -129,10 +129,10 @@
         </figure>
         <p>Make something with X-Ray Goggles</p>
         <ul>
-            <li><a href="">Remix your blog</a></li>
-            <li><a href="">Fix a broken TV</a></li>
-            <li><a href="">Remix your uncle</a></li>
-            <li><em><a href="">more X-Ray Goggles projects</a></em></li>
+            {% for project in projects.goggles %}
+            <li><a href="{{ project.get_absolute_url() }}">{{ project }}</a></li>
+            {% endfor %}
+            <li><em><a href="{{ url('projects') }}?tool=x-ray-goggles">more X-Ray Goggles projects</a></em></li>
         </ul>
     </aside>
 </section>
@@ -158,10 +158,10 @@
         </figure>
         <p>Make something with Popcorn</p>
         <ul>
-            <li><a href="">Remix a TV commercial</a></li>
-            <li><a href="">Make a music video</a></li>
-            <li><a href="">Jump in a lake</a></li>
-            <li><em><a href="">more Popcorn projects</a></em></li>
+            {% for project in projects.popcorn %}
+            <li><a href="{{ project.get_absolute_url() }}">{{ project }}</a></li>
+            {% endfor %}
+            <li><em><a href="{{ url('projects') }}?tool=popcorn">more Popcorn projects</a></em></li>
         </ul>
     </aside>
 </section>

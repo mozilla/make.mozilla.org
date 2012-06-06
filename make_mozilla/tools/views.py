@@ -1,10 +1,21 @@
 from django.shortcuts import get_object_or_404
 import jingo
+from make_mozilla import projects
 from make_mozilla.tools import models
 
 
 def index_static(request):
-    return jingo.render(request, 'tools/index_static.html')
+    thimble_projects = projects.models.Project.objects.filter(tool__slug='thimble').order_by('?')[:3]
+    goggles_projects = projects.models.Project.objects.filter(tool__slug='x-ray-goggles').order_by('?')[:3]
+    popcorn_projects = projects.models.Project.objects.filter(tool__slug='popcorn').order_by('?')[:3]
+
+    return jingo.render(request, 'tools/index_static.html', {
+        'projects': {
+            'thimble': thimble_projects,
+            'goggles': goggles_projects,
+            'popcorn': popcorn_projects,
+        }
+    })
 
 
 def index(request):
