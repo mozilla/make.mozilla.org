@@ -2206,7 +2206,7 @@ ul.tri-set img {
 
 	display: block;
 	position: absolute;
-	background: #EEE;
+	background: #FFF;
 }
 
 #tools-index .feature.app {
@@ -2222,12 +2222,23 @@ ul.tri-set img {
 #tools-index .feature.sample {
 	top: -210px;
 	right: -100px;
-	width: 200px;
-	height: 200px;
+	width: 198px;
+	height: 198px;
 	border: solid 10px #FFF;
 }
 
+#tools-index .feature.sample::after {
+	.box-shadow(~"inset 0 0 10px rgba(0,0,0,0.5)");
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
 #tools-index .feature.sample,
+#tools-index .feature.sample::after,
 #tools-index .feature.sample img {
 	.border-radius(50%);
 }
