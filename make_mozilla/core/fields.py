@@ -3,12 +3,14 @@ from django.core.files.base import ContentFile
 from django.db import models
 from django.db.models.fields import files
 from PIL import Image
-from os.path import abspath
+from os import path
 import cStringIO
+import make_mozilla
 
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ['^make_mozilla\.core\.fields\.SizedImageField'])
 
+ROOT = path.dirname(path.dirname(make_mozilla.__file__))
 
 class SizedImageFieldFile(files.ImageFieldFile):
 
@@ -26,9 +28,9 @@ class SizedImageFieldFile(files.ImageFieldFile):
 
                     try:
                         original_width, original_height = (self.width, self.height)
-                    except SuspiciousOperation as e:
+                    except SuspiciousOperation:
                         try:
-                            original_width, original_height = Image.open(abspath(self.name[1:])).size
+                            original_width, original_height = Image.open('%s%s' % (ROOT, self.name)).size
                         except IOError:
                             original_width = original_height = False
 
@@ -81,7 +83,7 @@ class SizedImageFieldFile(files.ImageFieldFile):
             except IOError:
                 height = None
             except SuspiciousOperation:
-                ow, oh = Image.open(abspath(self.name[1:])).size
+                ow, oh = Image.open('%s%s' % (ROOT, self.name)).size
                 height = width / float(ow) * oh
         except TypeError:
             width = size[0]
