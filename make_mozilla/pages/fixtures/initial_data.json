@@ -5,7 +5,7 @@
         "fields": {
             "path": "about", 
             "title": "About",
-            "additional_content": "<ul class=\"links\">\r\n    <li>\r\n        <h2>FAQ</h2>\r\n        <p>Mozilla Webmaker FAQ. Frequently asked questions. Growing constantly &ndash; please submit your own.</p>\r\n        <p><a href=\"\">Go to FAQ</a></p>\r\n    </li>\r\n    <li>\r\n        <h2>Stay in Touch</h2>\r\n        <p>Mozilla Webmaker Communications. A one-stop list of all our communications channels and ways to stay in touch.</p>\r\n        <p><a href=\"\">Go to List</a></p>\r\n    </li>\r\n    <li>\r\n        <h2>FAQ</h2>\r\n        <p>Mozilla Webmaker resources and talking points. Slides, videos, talking points and more.</p>\r\n        <p><a href=\"\">Go to Resources</a></p>\r\n    </li>\r\n</ul>"
+            "additional_content": "<ul class=\"links\">\r\n    <li>\r\n        <h2>FAQ</h2>\r\n        <p>Mozilla Webmaker FAQ. Frequently asked questions. Growing constantly &ndash; please submit your own.</p>\r\n        <p><a href=\"\">Go to FAQ</a></p>\r\n    </li>\r\n    <li>\r\n        <h2>Stay in Touch</h2>\r\n        <p>Mozilla Webmaker Communications. A one-stop list of all our communications channels and ways to stay in touch.</p>\r\n        <p><a href=\"\">Go to List</a></p>\r\n    </li>\r\n    <li>\r\n        <h2>Resources</h2>\r\n        <p>Mozilla Webmaker resources and talking points. Slides, videos, talking points and more.</p>\r\n        <p><a href=\"\">Go to Resources</a></p>\r\n    </li>\r\n</ul>"
         }
     }, 
     {
@@ -13,7 +13,7 @@
         "model": "pages.pagesection", 
         "fields": {
             "title": "Make something amazing with the web", 
-            "poster": "/media/img/poster-placeholder.jpg", 
+            "poster": "/media/img/about/1.jpg", 
             "content": "<p><strong>Mozilla Webmaker wants to help you make something amazing with the web</strong>. We\u2019ve got new <a href=\"http://webmaker.org/tools\"><strong>TOOLS</strong></a> for you to use, <a href=\"http://webmaker.org/projects\"><strong>PROJECTS</strong></a> to help you get started, and a global <a href=\"http://webmaker.org/events\"><strong>COMMUNITY</strong></a> of creators \u2014 educators, filmmakers, journalists, developers, youth \u2014 all making and learning together.</p>\r\n\r\n<p><strong>The goal:</strong> <strong>help millions of people move from <em>using</em> the web to <em>making</em> the web</strong>. As part of Mozilla\u2019s non-profit <a href=\"http://www.mozilla.org\">mission</a>, we want to help the world increase their understanding of the web, take greater control of their online lives, and create a more web literate planet.</p>", 
             "quotes": [
                 2
@@ -27,7 +27,7 @@
         "model": "pages.pagesection", 
         "fields": {
             "title": "Creating a generation of webmakers", 
-            "poster": "/media/img/poster-placeholder.jpg", 
+            "poster": "/media/img/about/2.jpg", 
             "content": "<p>Concretely, Mozilla Webmaker offers:</p>\r\n\r\n<ol>\r\n    <li><strong><a href=\"http://webmaker.org/tools\">Tools</a></strong>. Authoring tools and software, designed and built with our community. From supercharging web video with <a href=\"http://mozillapopcorn.org\">Popcorn</a>, to exploring and remixing with the <a href=\"http://hackasaurus.org\">X-Ray Goggles</a>, to making your own web pages with <a href=\"http://thimble.webmaker.org\">Thimble</a>. Like a Swiss Army knife or \u201csuperhero utility belt\u201d for webmaking.</li>\r\n    <li><strong><a href=\"http://webmaker.org/projects\">Projects</a></strong>. Practical starter projects, how-tos and recipes, designed to help people at all levels make something amazing. From tweaking your blog template to building apps that change the world.</li>\r\n    <li><strong><a href=\"http://webmaker.org/events\">Community</a></strong>. Bringing people with diverse skills and backgrounds together. Teachers, filmmakers, journalists, youth. From web ninjas to newbies. Connecting at events, meet-ups and hack jams everywhere.</li>\r\n</ul>", 
             "quotes": [
                 3, 
@@ -43,7 +43,7 @@
         "model": "pages.pagesection", 
         "fields": {
             "title": "Why is Mozilla doing this?", 
-            "poster": "/media/img/poster-placeholder.jpg", 
+            "poster": "/media/img/about/3.jpg", 
             "content": "<p><strong>The web is becoming the world\u2019s second language, and a vital 21st century skill</strong>. Digital literacy today is as important as reading, writing and arithmetic. Mozilla believes its crucial that we give people the skills they need to understand, shape and actively participate in that world, instead of just passively consuming it.</p>", 
             "quotes": [
                 6
@@ -57,7 +57,7 @@
         "model": "pages.pagesection", 
         "fields": {
             "title": "What\u2019s a &ldquo;webmaker&rdquo;?", 
-            "poster": "/media/img/poster-placeholder.jpg", 
+            "poster": "/media/img/about/4.jpg", 
             "content": "<p><strong>Anyone who makes something using the open building blocks of the web.</strong> If you\u2019re uploading photos or videos, posting to a blog, or using social media, you\u2019re already on the path. We want to help you level up your skills and go further.</p>\r\n\r\n<p><strong>You don\u2019t have to be a professional coder or wizard to be a webmaker.</strong> In the same way that you don\u2019t have to be a professional baker to make bread, or a professional auto mechanic to change a tire or poke under the hood, <strong>you shouldn\u2019t have be be a professional web developer to understand how the web works \u2014 or make your own stuff</strong>. We want to help you go \u201cbeyond upload\u201d to unlock new opportunities for creativity and innovation in your life and work.</p>", 
             "quotes": [
                 7
@@ -71,7 +71,7 @@
         "model": "pages.pagesection", 
         "fields": {
             "title": "Shaping the web\u2019s future. Together.", 
-            "poster": "/media/img/poster-placeholder.jpg", 
+            "poster": "/media/img/about/5.jpg", 
             "content": "<p><strong>Together, we make technology that is changing the web. </strong>Mozilla Webmaker projects like <a href=\"http://mozillapopcorn.org/\">Popcorn</a> are changing the face of web video. <a href=\"http://thimble.webmaker.org\">Thimble</a> demystifies the web\u2019s language for beginners. <a href=\"http://hackasaurus.org/\">Hackasaurus</a> energizes digital literacy and learning.&nbsp; <a href=\"http://openbadges.org\">OpenBadges</a> unlocks&nbsp; skills and achievements. <a href=\"http://mozillaopennews.org/\">OpenNews</a> catalyzes web innovation in newsrooms. <a href=\"http://explorecreateshare.org/\">Hive NYC</a> empowers youth to co-design technology\u2019s future.</p>\r\n\r\n<p>That\u2019s what Webmaker is all about: <strong>bringing diverse people together to create dynamic new web projects, technology and approaches to learning</strong>. We\u2019re passionate about the public potential of the web, and want to empower people to design and build its future.</p>", 
             "quotes": [
                 8
@@ -85,7 +85,7 @@
         "model": "pages.pagesection", 
         "fields": {
             "title": "Is this for me?", 
-            "poster": "/media/img/poster-placeholder.jpg", 
+            "poster": "/media/img/about/6.jpg", 
             "content": "<p><strong>Yes!</strong> Mozilla Webmaker has tools and projects specifically for:</p>\r\n\r\n<dl>\r\n    <dt>Educators</dt>\r\n\t\t<dd>Resources for digital literacy, teaching webmaking basics like HTML and CSS, and <a href=\"https://webmaker.org/en-US/events/guides/\">guides</a> for hosting your own learning jam.</dd>\r\n    <dt>Filmmakers</dt>\r\n\t\t<dd><a href=\"http://mozillapopcorn.org/\">Mozilla Popcorn</a> helps filmmakers, documentarians and multimedia artists make their online videos pop.</dd>\r\n    <dt>Journalists</dt>\r\n\t\t<dd><a href=\"http://mozillaopennews.org/\">Knight-Mozilla OpenNews</a> provides fellowships, software and learning for news hackers.</dd>\r\n    <dt>Youth</dt>\r\n\t\t<dd><a href=\"http://explorecreateshare.org/\">Hive NYC</a> is a digital learning lab for youth. <a href=\"http://hackasaurus.org/\">Hackasaurus</a> helps youth explore and remix the web.</dd>\r\n    <dt>Developers and designers</dt>\r\n\t\t<dd>From contributing to <a href=\"https://github.com/mozilla\">Mozilla tools and projects</a>, to designing and building your own <a href=\"https://mozillaignite.org/\">next-generation apps</a> to change the world.</dd>\r\n    <dt>Beginners</dt>\r\n\t\t<dd>Our <a href=\"http://webmaker.org/projects\">projects</a> are sorted by difficulty, to help anyone get started making something quickly.</dd>\r\n    <dt>Experts</dt>\r\n\t\t<dd>Creating experimental apps, demos and web experiences no one\u2019s seen before.</dd>\r\n</dl>", 
             "quotes": [
                 9, 
