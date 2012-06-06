@@ -26,8 +26,11 @@ class SizedImageFieldFile(files.ImageFieldFile):
 
                     try:
                         original_width, original_height = (self.width, self.height)
-                    except SuspiciousOperation:
-                        original_width, original_height = (width, height)
+                    except SuspiciousOperation as e:
+                        try:
+                            original_width, original_height = Image.open(abspath(self.name[1:])).size
+                        except IOError:
+                            original_width = original_height = False
 
                     if width == original_width and height == original_height:
                         setattr(self, '%s_url' % name,
@@ -36,8 +39,8 @@ class SizedImageFieldFile(files.ImageFieldFile):
                         setattr(self, '%s_url' % name,
                             '%s.%s.%s' % (path, name, extension))
 
-                    setattr(self, '%s_width' % name, width)
-                    setattr(self, '%s_height' % name, height)
+                    setattr(self, '%s_width' % name, int(width))
+                    setattr(self, '%s_height' % name, int(height))
                 except IOError:
                     pass
 
