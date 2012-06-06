@@ -1,5 +1,6 @@
 import jingo
 import urllib
+from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404
 from make_mozilla.projects import models, forms
@@ -74,7 +75,7 @@ class Index(object):
         invitation = models.Project(
             name='Submit your own project',
             url_hash='submit',
-            image='/media/img/submit-your-own.png',)
+            image='%simg/submit-your-own.png' % settings.MEDIA_URL,)
 
         projects = list(pagination.object_list)
         projects.append(invitation)
