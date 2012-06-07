@@ -29,9 +29,9 @@ class Project(models.Model):
         })
 
     contributor = models.ForeignKey('Contributor', blank=True, null=True)
-    tool = models.ForeignKey(tools.models.Tool, blank=True, null=True)
-    audience = models.ManyToManyField('Audience', blank=True, null=True)
-    difficulty = models.ForeignKey('Difficulty', blank=True, null=True)
+    difficulties = models.ManyToManyField('Difficulty', blank=True, null=True)
+    topics = models.ManyToManyField('Topic', blank=True, null=True)
+    tools = models.ManyToManyField(tools.models.Tool, blank=True, null=True)
     skills = models.ManyToManyField('Skill', blank=True, null=True)
 
     class Meta:
@@ -107,13 +107,12 @@ class ProjectTag(models.Model):
         return '%s?%s' % (url, query)
 
 
-class Audience(ProjectTag):
+class Topic(ProjectTag):
     pass
 
 
 class Difficulty(ProjectTag):
-    class Meta(ProjectTag.Meta):
-        verbose_name_plural = 'Difficulties'
+    pass
 
 
 class Skill(ProjectTag):
