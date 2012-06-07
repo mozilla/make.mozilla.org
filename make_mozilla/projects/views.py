@@ -75,6 +75,7 @@ class Index(object):
         invitation = models.Project(
             name='Submit your own project',
             url_hash='submit',
+            link='https://wiki.mozilla.org/Webmaker/Submit_your_project',
             image='%simg/submit-your-own.png' % settings.MEDIA_URL,)
 
         projects = list(pagination.object_list)
@@ -104,6 +105,7 @@ class Index(object):
             'projects': projects,
             'pagination': pagination,
             'filter_form': filter_form,
+            'invitation': invitation,
             'query': qs
         })
 
