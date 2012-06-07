@@ -32,7 +32,7 @@
             {% for field in filter_form %}
                 <span class="item"><label for="id_{{ field.html_name }}" class="{{ field.html_name }}">{{ field }}</label></span>
             {% endfor %}
-            <noscript><p class="buttons item"><input type="submit" class="button" value="Update"></p></noscript>
+            <p class="buttons item"><input type="submit" class="button" value="Update"></p>
         </div>
     </form>
 
@@ -73,11 +73,11 @@
     {{ super() }}
     <script>
         $(function() {
-            var $dropdowns = $('#filter select').change(function() {
-                $dropdowns.each(function() {
+            $('#filter').submit(function() {
+                $('select', this).each(function() {
                     if (!this.selectedIndex) this.name = '';
                 });
-                this.form.submit();
+                this.submit();
             });
         });
         $(function() {
