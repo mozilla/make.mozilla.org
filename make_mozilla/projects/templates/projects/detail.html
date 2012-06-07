@@ -11,51 +11,25 @@
 
     {% if project.link %}<p class="buttons"><a href="{{ project.link }}" class="button more">Get Started</a></p>{% endif %}
 </div>
+
 <div class="meta" id="about">
     <h3>About this project</h3>
     <dl>
-        {% if project.difficulties.count() %}
-        <dt class="difficulty">Difficulty</dt>
-        <dd>
-            <ul>
-                {% for difficulty in project.difficulties.all() %}
-                    <li><a href="{{ difficulty.get_absolute_url() }}">{{ difficulty }}</a></li>
-                {% endfor %}
-            </ul>
-        </dd>
-        {% endif %}
-        {% if project.topics.count() %}
-        <dt class="topics">Topics</dt>
-        <dd>
-            <ul>
-                {% for topic in project.topics.all() %}
-                    <li><a href="{{ topic.get_absolute_url() }}">{{ topic }}</a></li>
-                {% endfor %}
-            </ul>
-        </dd>
-        {% endif %}
-        {% if project.tools.count() %}
-        <dt class="tool">Tool</dt>
-        <dd>
-            <ul>
-                {% for tool in project.tools.all() %}
-                    <li><a href="{{ tool.get_absolute_url() }}">{{ tool }}</a></li>
-                {% endfor %}
-            </ul>
-        </dd>
-        {% endif %}
-        {% if project.skills.count() %}
-        <dt class="skills">Skills</dt>
-        <dd>
-            <ul>
-                {% for skill in project.skills.all() %}
-                    <li><a href="{{ skill.get_absolute_url() }}">{{ skill }}</a></li>
-                {% endfor %}
-            </ul>
-        </dd>
-        {% endif %}
+        {% for label, tag in (('Difficulty','difficulties'),('Topic','topics'),('Tool','tools'),('Skill','skills')) %}
+            {% if project[tag].count() %}
+                <dt class="{{ label|lower }}">{{ label }}</dt>
+                <dd>
+                    <ul>
+                        {% for object in project[tag].all() %}
+                            <li><a href="{{ object.get_absolute_url() }}">{{ object }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </dd>
+            {% endif %}
+        {% endfor %}
     </dl>
 </div>
+
 {% if project.contributor %}
 <div class="meta" id="partner">
     {% if project.contributor.logo -%}
@@ -66,6 +40,7 @@
     <p>Contributed by {{ project.contributor }}</p>
 </div>
 {% endif %}
+
 {% if project.previous or project.next %}
 <div class="meta" id="related">
     <h3>Related Projects</h3>
