@@ -22,35 +22,35 @@ class Index(object):
     def extract_page(self, request):
         return request.GET.get('page', 1)
 
-    def extract_audience(self, request):
-        return self.find(models.Audience, request)
+    def extract_difficulty(self, request):
+        return self.find(models.Difficulty, request)
+
+    def extract_topic(self, request):
+        return self.find(models.Topic, request)
 
     def extract_tool(self, request):
         return self.find(tools.models.Tool, request, 'slug')
 
-    def extract_difficulty(self, request):
-        return self.find(models.Difficulty, request)
-
     def extract_skill(self, request):
         return self.find(models.Skill, request)
 
-    def results(self, audience=None, tool=None, difficulty=None, skill=None):
+    def results(self, difficulty=None, topic=None, tool=None, skill=None):
         query = {}
 
-        if audience is not None:
-            query['audience'] = audience
-        if tool is not None:
-            query['tool'] = tool
         if difficulty is not None:
-            query['difficulty'] = difficulty
+            query['difficulties'] = difficulty
+        if topic is not None:
+            query['topics'] = topic
+        if tool is not None:
+            query['tools'] = tool
         if skill is not None:
             query['skills'] = skill
 
         return models.Project.objects.filter(**query)
 
-    def paginated_results(self, page=1, audience=None, tool=None, difficulty=None, skill=None, results_per_page=8):
+    def paginated_results(self, page=1, difficulty=None, topic=None, tool=None, skill=None, results_per_page=8):
 
-        results = self.results(audience, tool, difficulty, skill)
+        results = self.results(difficulty, topic, tool, skill)
         paginator = Paginator(results, results_per_page)
 
         try:
@@ -64,13 +64,13 @@ class Index(object):
 
     def __call__(self, request):
         page = self.extract_page(request)
-        audience = self.extract_audience(request)
-        tool = self.extract_tool(request)
         difficulty = self.extract_difficulty(request)
+        topic = self.extract_topic(request)
+        tool = self.extract_tool(request)
         skill = self.extract_skill(request)
 
         featured = models.Project.objects.filter(featured=True)
-        pagination = self.paginated_results(page, audience, tool, difficulty, skill)
+        pagination = self.paginated_results(page, difficulty, topic, tool, skill)
 
         invitation = models.Project(
             name='Submit your own project',
@@ -81,19 +81,19 @@ class Index(object):
         projects.append(invitation)
 
         filter_form = forms.FilterForm({
-            'audience': audience,
-            'tool': tool,
             'difficulty': difficulty,
+            'topic': topic,
+            'tool': tool,
             'skill': skill,
         })
 
         query = {}
-        if audience:
-            query['audience'] = audience.value
-        if tool:
-            query['tool'] = tool.slug
         if difficulty:
             query['difficulty'] = difficulty.value
+        if topic:
+            query['topic'] = topic.value
+        if tool:
+            query['tool'] = tool.slug
         if skill:
             query['skill'] = skill.value
 
