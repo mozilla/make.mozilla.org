@@ -9,7 +9,7 @@ class ProjectStepInline(admin.TabularInline):
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'featured', )
     list_editable = ('featured', )
-    list_filter = ('contributor', 'audience', 'tool', 'difficulty', 'skills', )
+    list_filter = ('contributor', 'difficulties', 'topics', 'tools', 'skills', )
     exclude = ('url_hash',)
     # inlines = [ProjectStepInline,]
 
@@ -18,7 +18,7 @@ class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {'value':('label',),}
 
 
-class AudienceAdmin(TagAdmin):
+class TopicAdmin(TagAdmin):
     pass
 
 
@@ -35,7 +35,7 @@ class ContributorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Project, ProjectAdmin)
-admin.site.register(models.Audience, AudienceAdmin)
+admin.site.register(models.Topic, TopicAdmin)
 admin.site.register(models.Difficulty, DifficultyAdmin)
 admin.site.register(models.Skill, SkillAdmin)
 admin.site.register(models.Contributor, ContributorAdmin)
