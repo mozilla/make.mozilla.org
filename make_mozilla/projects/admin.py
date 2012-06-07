@@ -16,6 +16,15 @@ class ProjectAdmin(admin.ModelAdmin):
 
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {'value':('label',),}
+    fieldsets = (
+        (None, {
+            'fields': ('label', 'value', ),
+        }),
+        ('Advanced', {
+            'classes': ('collapse', ),
+            'fields': ('index', ),
+        })
+    )
 
 
 class TopicAdmin(TagAdmin):
