@@ -108,7 +108,7 @@ class ProjectTag(models.Model):
 
 
 class Difficulty(ProjectTag):
-    class Meta:
+    class Meta(ProjectTag.Meta):
         verbose_name_plural = 'difficulties'
 
 
