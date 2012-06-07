@@ -1,0 +1,214 @@
+[
+    {
+        "pk": 1,
+        "model": "projects.difficulty",
+        "fields": {
+            "index": 1,
+            "value": "beginner",
+            "label": "Beginner"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "projects.difficulty",
+        "fields": {
+            "index": 2,
+            "value": "intermediate",
+            "label": "Intermediate"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "projects.difficulty",
+        "fields": {
+            "index": 3,
+            "value": "advanced",
+            "label": "Advanced"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "projects.skill",
+        "fields": {
+            "index": 1,
+            "value": "html",
+            "label": "HTML"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "projects.skill",
+        "fields": {
+            "index": 1,
+            "value": "css",
+            "label": "CSS"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "projects.skill",
+        "fields": {
+            "index": 1,
+            "value": "javascript",
+            "label": "JavaScript"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "projects.skill",
+        "fields": {
+            "index": 1,
+            "value": "design",
+            "label": "Design"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "games",
+            "label": "Games"
+        }
+    },
+
+    {
+        "pk": 2,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "design",
+            "label": "Design"
+        }
+    },
+
+    {
+        "pk": 3,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "viral",
+            "label": "Viral"
+        }
+    },
+
+    {
+        "pk": 4,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "memes",
+            "label": "Memes"
+        }
+    },
+
+    {
+        "pk": 5,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "how-to",
+            "label": "How-to"
+        }
+    },
+
+    {
+        "pk": 6,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "video",
+            "label": "Video"
+        }
+    },
+
+    {
+        "pk": 7,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "storytelling",
+            "label": "Storytelling"
+        }
+    },
+
+    {
+        "pk": 8,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "writing",
+            "label": "Writing"
+        }
+    },
+
+    {
+        "pk": 9,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "blogging",
+            "label": "Blogging"
+        }
+    },
+
+    {
+        "pk": 10,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "web-design",
+            "label": "Web design"
+        }
+    },
+
+    {
+        "pk": 11,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "conservation",
+            "label": "Conservation"
+        }
+    },
+
+    {
+        "pk": 12,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "photography",
+            "label": "Photography"
+        }
+    },
+
+    {
+        "pk": 13,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "imaging",
+            "label": "Imaging"
+        }
+    },
+
+    {
+        "pk": 14,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "civic-engagement",
+            "label": "Civic engagement"
+        }
+    },
+
+    {
+        "pk": 15,
+        "model": "projects.topic",
+        "fields": {
+            "index": 1,
+            "value": "internet-culture",
+            "label": "Internet culture"
+        }
+    }
+]
