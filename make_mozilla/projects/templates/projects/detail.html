@@ -14,23 +14,35 @@
 <div class="meta" id="about">
     <h3>About this project</h3>
     <dl>
-        {% if project.audience.count() %}
-        <dt class="audience">Audience</dt>
+        {% if project.difficulties.count() %}
+        <dt class="difficulty">Difficulty</dt>
         <dd>
             <ul>
-                {% for audience in project.audience.all() %}
-                    <li><a href="{{ audience.get_absolute_url() }}">{{ audience }}</a></li>
+                {% for difficulty in project.difficulties.all() %}
+                    <li><a href="{{ difficulty.get_absolute_url() }}">{{ difficulty }}</a></li>
                 {% endfor %}
             </ul>
         </dd>
         {% endif %}
-        {% if project.tool %}
-        <dt class="tool">Tool</dt>
-        <dd><a href="{{ project.tool.get_absolute_url() }}">{{ project.tool }}</a></dd>
+        {% if project.topics.count() %}
+        <dt class="topics">Topics</dt>
+        <dd>
+            <ul>
+                {% for topic in project.topics.all() %}
+                    <li><a href="{{ topic.get_absolute_url() }}">{{ topic }}</a></li>
+                {% endfor %}
+            </ul>
+        </dd>
         {% endif %}
-        {% if project.difficulty %}
-        <dt class="difficulty">Difficulty</dt>
-        <dd><a href="{{ project.difficulty.get_absolute_url() }}">{{ project.difficulty }}</a></dd>
+        {% if project.tools.count() %}
+        <dt class="tool">Tool</dt>
+        <dd>
+            <ul>
+                {% for tool in project.tools.all() %}
+                    <li><a href="{{ tool.get_absolute_url() }}">{{ tool }}</a></li>
+                {% endfor %}
+            </ul>
+        </dd>
         {% endif %}
         {% if project.skills.count() %}
         <dt class="skills">Skills</dt>
