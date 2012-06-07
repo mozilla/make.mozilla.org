@@ -28,12 +28,11 @@ class Tool(models.Model):
     class Meta:
         ordering = ['name']
 
-    # @models.permalink
-    # def get_absolute_url(self):
-    #     return ('tool', (), {'slug': self.slug})
-
-
+    @models.permalink
     def get_absolute_url(self):
+        return ('tool', (), {'slug': self.slug})
+
+    def get_project_filter_url(self):
         url = reverse('projects')
         query = urllib.urlencode(dict([[self._meta.verbose_name, self.slug]]))
         return '%s?%s' % (url, query)

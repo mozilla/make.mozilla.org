@@ -21,7 +21,7 @@
                 <dd>
                     <ul>
                         {% for object in project[tag].all() %}
-                            <li><a href="{{ object.get_absolute_url() }}">{{ object }}</a></li>
+                            <li><a href="{{ object.get_project_filter_url() }}">{{ object }}</a></li>
                         {% endfor %}
                     </ul>
                 </dd>

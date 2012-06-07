@@ -105,6 +105,9 @@ class ProjectTag(models.Model):
         query = urllib.urlencode(dict([[self._meta.verbose_name, self.value]]))
         return '%s?%s' % (url, query)
 
+    def get_project_filter_url(self):
+        return self.get_absolute_url()
+
 
 class Difficulty(ProjectTag):
     class Meta(ProjectTag.Meta):
