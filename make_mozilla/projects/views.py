@@ -76,7 +76,8 @@ class Index(object):
             name='Submit your own project',
             url_hash='submit',
             link='https://wiki.mozilla.org/Webmaker/Submit_your_project',
-            image='%simg/submit-your-own.png' % settings.MEDIA_URL,)
+            image='%simg/submit-your-own.png' % settings.MEDIA_URL,
+            contributor=models.Contributor(local_name='you!'))
 
         projects = list(pagination.object_list)
         projects.append(invitation)
