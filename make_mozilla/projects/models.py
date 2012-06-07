@@ -107,11 +107,12 @@ class ProjectTag(models.Model):
         return '%s?%s' % (url, query)
 
 
-class Topic(ProjectTag):
-    pass
-
-
 class Difficulty(ProjectTag):
+    class Meta:
+        verbose_name_plural = 'difficulties'
+
+
+class Topic(ProjectTag):
     pass
 
 
