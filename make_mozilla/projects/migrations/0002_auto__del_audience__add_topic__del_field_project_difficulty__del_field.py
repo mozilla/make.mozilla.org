@@ -37,13 +37,13 @@ class Migration(SchemaMigration):
         ))
         db.create_unique('projects_project_tools', ['project_id', 'tool_id'])
 
-        # Adding M2M table for field tpoics on 'Project'
-        db.create_table('projects_project_tpoics', (
+        # Adding M2M table for field topics on 'Project'
+        db.create_table('projects_project_topics', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('project', models.ForeignKey(orm['projects.project'], null=False)),
             ('topic', models.ForeignKey(orm['projects.topic'], null=False))
         ))
-        db.create_unique('projects_project_tpoics', ['project_id', 'topic_id'])
+        db.create_unique('projects_project_topics', ['project_id', 'topic_id'])
 
         # Adding M2M table for field difficulties on 'Project'
         db.create_table('projects_project_difficulties', (
@@ -87,8 +87,8 @@ class Migration(SchemaMigration):
         # Removing M2M table for field tools on 'Project'
         db.delete_table('projects_project_tools')
 
-        # Removing M2M table for field tpoics on 'Project'
-        db.delete_table('projects_project_tpoics')
+        # Removing M2M table for field topics on 'Project'
+        db.delete_table('projects_project_topics')
 
         # Removing M2M table for field difficulties on 'Project'
         db.delete_table('projects_project_difficulties')
@@ -140,7 +140,7 @@ class Migration(SchemaMigration):
             'skills': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['projects.Skill']", 'null': 'True', 'blank': 'True'}),
             'teaser': ('django.db.models.fields.TextField', [], {}),
             'tools': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['tools.Tool']", 'null': 'True', 'blank': 'True'}),
-            'tpoics': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['projects.Topic']", 'null': 'True', 'blank': 'True'}),
+            'topics': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['projects.Topic']", 'null': 'True', 'blank': 'True'}),
             'url_hash': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'})
         },
         'projects.projectstep': {
