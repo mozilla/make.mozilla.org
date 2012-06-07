@@ -47,11 +47,10 @@ class Project(models.Model):
             self.url_hash = hashlib.sha224('%d' % self.id).hexdigest()[:9]
             self.save()
 
-    @models.permalink
     def get_absolute_url(self):
         if self.hash == 'submit':
-            return ('project.submit', (), {})
-        return ('project', (), {'project_hash': self.hash})
+            return self.link
+        return reverse('project', kwargs={'project_hash': self.hash})
 
     @property
     def content(self):
