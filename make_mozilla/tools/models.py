@@ -25,6 +25,9 @@ class Tool(models.Model):
             blank=True, null=True, upload_to='tools',
             storage=FileSystemStorage(**settings.UPLOADED_IMAGES))
 
+    class Meta:
+        ordering = ['name']
+
     # @models.permalink
     # def get_absolute_url(self):
     #     return ('tool', (), {'slug': self.slug})

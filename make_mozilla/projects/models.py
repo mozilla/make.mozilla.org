@@ -96,7 +96,7 @@ class ProjectTag(models.Model):
 
     class Meta:
         abstract = True
-        ordering = ['index', 'id']
+        ordering = ['index', 'label', 'id']
 
     def __unicode__(self):
         return self.label
