@@ -40,9 +40,14 @@ def index(request):
         }
     })
 
+
 def details(request, slug):
     tool = get_object_or_404(models.Tool, slug=slug)
 
     return jingo.render(request, 'tools/detail.html', {
         'tool': tool
     });
+
+
+def details_goggles(request):
+    return jingo.render(request, 'tools/detail_goggles.html')
