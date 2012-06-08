@@ -1,5 +1,6 @@
 {% extends "projects/base.html" %}
 
+{% block page_title %}{{ project }} | {{ super() }}{% endblock %}
 {% block page_id %}project-detail{% endblock %}
 
 {% block content %}
