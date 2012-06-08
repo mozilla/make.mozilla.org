@@ -51,3 +51,7 @@ def details(request, slug):
 
 def details_goggles(request):
     return jingo.render(request, 'tools/detail_goggles.html')
+
+
+def details_goggles_install(request):
+    return jingo.render(request, 'tools/detail_goggles_install.html')
