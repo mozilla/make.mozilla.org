@@ -8,6 +8,7 @@
 <div class="words">
 <section class="partners">
 <h2>Who's coming to the party?</h2>
+<p>If you want to be on this list send us a request to <a href="https://donate.mozilla.org/page/s/Summer-Code-Partner?source=about">become a partner organisation</a>.</p>
 <ul class="all our_partners">
     {% for p in campaign.partner_set.all() %}
     <li><a href="{{ p.website }}"><img src="{{ p.logo.url }}" alt="{{ p.name }}" /></a></li>
