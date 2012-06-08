@@ -1,15 +1,56 @@
-{% extends "events/detail.html" %}
+{% extends "events/base.html" %}
 
-{% block page_title %}{{ event.name }} | {{ super() }}{% endblock %}
+{% block page_title %}Delete | {{ event.name }} | {{ super() }}{% endblock %}
 {% block page_id %}event-details{% endblock %}
 
 {% block content %}
-{{ super() }}
-<div id="delete-prompt">
-  <h1>Are you sure you want to delete this event?</h1>
+<div class="h-event vevent">
+<div class="details panel">
+<div class="message warn">
+  <p class="shout"><strong>Are you sure you want to delete this event?</strong></p>
+  <p>Deleting the event will remove it permanently.</p>
   <form action="{{ url('event.delete', event_hash=event.hash) }}" method="POST">
-    <p><a class="button create" href="{{ url('events.mine') }}">Cancel</a> <input class="button delete" type="submit" value="Delete"></p>
+    <p><a class="button create" href="{{ url('events.mine') }}">Return to my events</a> <input class="button delete" type="submit" value="Delete"></p>
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
   </form>
+</div>
+    <h2 class="p-name summary">{{ event.name }}</h2>
+    <p>{{ event.start.strftime('%B %e, %Y %I:%M %p') }}</p>
+    {% if event.venue.name %}<p>{{ event.venue.name }}</p>{% endif %}
+    {% if event.event_url %}<p><a href="{{ event.event_url }}" class="button find u-url url">Register for event</a></p>{% endif %}
+    <div class="p-description description">
+        <h3>Event Description</h3>
+        <p>{{ event.bleached_description|replace('<p>','',1)|safe }}
+    </div>
+</div>
+
+<div class="meta panel">
+    <a href="http://maps.google.com/?q={{ event.venue.street_address.encode('utf-8')|urlencode }}&amp;ll={{ event.venue.latitude }},{{ event.venue.longitude }}" class="image">
+        <img alt="A map showing the location of this event" title="" src="http://maps.googleapis.com/maps/api/staticmap?sensor=false&amp;center={{ event.venue.latitude }},{{ event.venue.longitude }}&amp;zoom=15&amp;size=330x330&amp;format=png">
+        <span class="pulse"></span>
+        <span class="marker" title="{{ event.venue.name }}"></span>
+    </a>
+    <div class="p-location location">
+        {% if event.venue.name %}<div class="h-card vcard"><p class="p-name fn p-org org"><strong>{{ event.venue.name }}</strong></p>{% endif %}
+        <div class="h-adr adr">
+            <p><span class="p-street-address street-address">{{ event.venue.street_address|nl2br }}</span><br>
+                <span class="p-country-name country-name">{{ event.venue.country.name }}</span>></p>
+            <p><a href="/events/near/?lat={{ event.venue.latitude }}&amp;lng={{ event.venue.longitude }}">Events nearby</a></p>
+        </div>
+        {% if event.venue.name %}</div>{% endif %}
+    </div>
+    <div class="date">
+        {% if event.start.date() == event.end.date() %}
+        <p>{{ event.start.strftime('%A, %B %e, %Y') }}<br>
+            <time class="dt-start dtstart" datetime="{{ event.start.strftime('%F %T') }}">{{ event.start.strftime('%I:%M %p') }}</time> to 
+            <time class="dt-end dtend" datetime="{{ event.end.strftime('%F %T') }}">{{ event.end.strftime('%I:%M %p') }}</time></p>
+        {% else %}
+        <p>
+            <time class="dt-start dtstart" datetime="{{ event.start.strftime('%F %T') }}">{{ event.start.strftime('%B %e, %Y %I:%M %p') }}</time> to<br>
+            <time class="dt-end dtend" datetime="{{ event.end.strftime('%F %T') }}">{{ event.end.strftime('%B %e, %Y %I:%M %p') }}</time>
+        </p>
+        {% endif %}
+    </div>
+</div>
 </div>
 {% endblock %}
