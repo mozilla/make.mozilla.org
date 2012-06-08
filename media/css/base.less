@@ -557,7 +557,7 @@ p {
 	margin: 1em 1.5em;
 }
 
-.content-page .links a {
+.content-page .links a.primary {
 	background: #27A6DD;
 	padding: 0.5em 0.5em 0.5em 1em;
 	color: #FFF;
@@ -565,7 +565,7 @@ p {
 	border-radius: 1.5em;
 }
 
-.content-page .links a::after {
+.content-page .links a.primary::after {
 	content: ">";
 	background: #1383CC;
 	display: inline-block;
@@ -874,6 +874,10 @@ p {
 
 .button::after {
 	content: "\00A0\00BB";
+}
+
+.button.no-arrow::after {
+	content: "";
 }
 
 .button.near-me {
