@@ -43,10 +43,10 @@
         </div>
     </ol>
     <ul class="pager-tabs">
-        <li id="tab-join"><a href="#" class="selected">● <span>read about "foo"</span></a></li>
-        <li id="tab-webmakers"><a href="#">● <span>read about "foo"</span></a></li>
-        <li id="tab-code-party"><a href="#">● <span>read about "foo"</span></a></li>
-        <li id="tab-popcorn"><a href="#">● <span>read about "foo"</span></a></li>
+        <li id="tab-join"><a href="#" class="selected">● <span>read about Join Mozilla</span></a></li>
+        <li id="tab-webmakers"><a href="#">● <span>read about Make the webmakers</span></a></li>
+        <li id="tab-code-party"><a href="#">● <span>read about Summer Code Party</span></a></li>
+        <li id="tab-popcorn"><a href="#">● <span>read about Make video pop with Popcorn</span></a></li>
     </ul>
     </div>
 </div>
@@ -54,25 +54,25 @@
     <section class="wrap tools">
         <ul>
             <li>
-                <a href="#">
+                <a href="{{ url('tools') }}#thimble">
                     <h2 class="list-title">Thimble App</h3>
                     <img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
                 </a>
-                <p>Remix, hack, make and share everything</p>
+                <p>Make and share your own webpage</p>
             </li>
             <li>
-                <a href="#">
-                    <h2 class="list-title">X-Ray Googles</h3>
+                <a href="{{ url('tools') }}#x-ray-goggles">
+                    <h2 class="list-title">X-Ray Goggles</h3>
                     <img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
                 </a>
-                <p>Look under the hood and hack the web.</p>
+                <p>Explore and remix any webpage</p>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ url('tools') }}#popcorn">
                     <h2 class="list-title">Popcorn</h3>
                     <img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
                 </a>
-                <p>Make videos work like the web.</p>
+                <p>Make video pop</p>
             </li>
         </ul>
     </section>
@@ -220,7 +220,7 @@
 		</ul>
         </div>
         </div>
-        <p class="shout">and Mozillians like you</p>
+        <p class="shout">and <a href="https://donate.mozilla.org/page/contribute/join-mozilla?source=join_link">Mozillians like you</a></p>
 	</section>
 </div>
 {% endblock %}
