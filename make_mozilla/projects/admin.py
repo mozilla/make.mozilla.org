@@ -7,7 +7,7 @@ class ProjectStepInline(admin.TabularInline):
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'featured', )
+    list_display = ('name', 'featured', 'contributor', )
     list_editable = ('featured', )
     list_filter = ('contributor', 'difficulties', 'topics', 'tools', 'skills', )
     exclude = ('url_hash',)
