@@ -2423,11 +2423,11 @@ ul.tri-set img {
 
 #projects-index #featured {
 	position: absolute;
-	height: 275px;
+	height: 350px;
 	bottom: 100%;
-	left: 100px;
-	right: 100px;
-	padding: 75px 0;
+	left: 200px;
+	right: 200px;
+	padding: 0 0 75px;
 	text-shadow: none;
 	color: #FFF;
 
@@ -2440,12 +2440,9 @@ ul.tri-set img {
 
 #projects-index #featured .navigation {
 	display: none;
-}
-
-#projects-index #featured .navigation {
 	position: absolute;
-	bottom: 75px;
-	left: 250px;
+	bottom: 50px;
+	left: 0;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -2502,10 +2499,11 @@ ul.tri-set img {
 #projects-index #featured ul li {
 	position: absolute;
 	top: 0;
-	left: 250px;
+	left: 0;
 	right: 0;
 	margin: 0;
-	padding: 0;
+	padding: 165px 0 0;
+	height: 135px;
 }
 
 #projects-index #featured li.hidden {
@@ -2516,7 +2514,7 @@ ul.tri-set img {
 	.box-shadow(~"0 0 5px rgba(0,0,0,0.25)");
 	display: block;
 	position: absolute;
-	left: -250px;
+	left: 0;
 	top: 0;
 }
 
@@ -2536,9 +2534,6 @@ ul.tri-set img {
 	font-weight: normal;
 	font-size: 2.5em;
 	line-height: 1.25em;
-	height: 2.5em;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 #projects-index #featured h4 a {
@@ -2552,15 +2547,43 @@ ul.tri-set img {
 	z-index: 1;
 }
 
+#projects-index #featured a.button {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
 @media screen and (max-width: 900px) {
 	#projects-index #featured {
 		height: 250px;
 		padding: 0;
+		left: 100px;
+		right: 100px;
 	}
 
 	#projects-index #featured .navigation {
 		left: 0;
 		bottom: 25px;
+	}
+
+	#projects-index #featured ul li {
+		padding: 0;
+		left: 250px;
+	}
+
+	#projects-index #featured h4 {
+		height: 2.5em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	#projects-index #featured .image {
+		left: -250px;
+		top: 0;
+	}
+
+	#projects-index #featured a.button {
+		position: static;
 	}
 }
 
@@ -2598,6 +2621,7 @@ ul.tri-set img {
 		left: 0;
 		padding-left: 250px;
 		margin: 0 0 50px;
+		height: auto;
 
 		background-image: -webkit-radial-gradient(30% 50%, contain, rgba(255,255,255,0.33) 25%, rgba(255,255,255,0) 100%);
 		background-image: -moz-radial-gradient(30% 50%, contain, rgba(255,255,255,0.33) 25%, rgba(255,255,255,0) 100%);
