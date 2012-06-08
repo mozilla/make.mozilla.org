@@ -2,7 +2,7 @@ import jingo
 import urllib
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from make_mozilla.projects import models, forms
 from make_mozilla import tools
 
@@ -117,8 +117,12 @@ def submit(request):
     return jingo.render(request, 'projects/submit.html');
 
 
-def details(request, project_hash):
-    project = get_object_or_404(models.Project, url_hash=project_hash)
+def details(request, slug):
+    try:
+        project = models.Project.objects.get(slug=slug)
+    except models.Project.DoesNotExist:
+        project = get_object_or_404(models.Project, url_hash=slug)
+        return redirect(project, permanent=True)
 
     return jingo.render(request, 'projects/detail.html', {
         'project': project

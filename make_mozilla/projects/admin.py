@@ -11,6 +11,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_editable = ('featured', )
     list_filter = ('contributor', 'difficulties', 'topics', 'tools', 'skills', )
     exclude = ('url_hash',)
+    prepopulated_fields = {'slug': ('name',),}
     # inlines = [ProjectStepInline,]
 
 

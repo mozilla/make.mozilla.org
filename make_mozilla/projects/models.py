@@ -12,6 +12,7 @@ from make_mozilla.core import fields
 
 class Project(models.Model):
     name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, default='')
     teaser = models.TextField()
     body = models.TextField(blank=True, null=True)
     url_hash = models.CharField(max_length=20, blank=True, null=True)
@@ -37,6 +38,11 @@ class Project(models.Model):
     class Meta:
         ordering = ['-added',]
 
+    def __init__(self, *args, **kwargs):
+        super(Project, self).__init__(*args, **kwargs)
+        if not self.slug and self.url_hash:
+            self.slug = self.url_hash
+
     def __unicode__(self):
         return self.name
 
@@ -45,12 +51,14 @@ class Project(models.Model):
         if not self.url_hash:
             # We have to do this after a save, because we need an ID from the DB
             self.url_hash = hashlib.sha224('%d' % self.id).hexdigest()[:9]
+            if not self.slug:
+                self.slug = self.url_hash
             self.save()
 
     def get_absolute_url(self):
         if self.hash == 'submit':
             return self.link
-        return reverse('project', kwargs={'project_hash': self.hash})
+        return reverse('project', kwargs={'slug': self.slug})
 
     @property
     def content(self):
