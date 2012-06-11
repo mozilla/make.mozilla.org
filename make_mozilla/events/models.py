@@ -109,7 +109,7 @@ class Event(models.Model):
     @classmethod
     def near(cls, latitude, longitude, sort='start', include_private=False):
         point = geos.Point(float(longitude), float(latitude))
-        return cls.upcoming(sort, include_private).filter(venue__location__distance_lte=(point, measure.D(mi=20)))
+        return cls.upcoming(sort, include_private).filter(venue__location__distance_lte=(point, measure.D(mi=50)))
 
     @classmethod
     def all_user_non_bsd(cls, user):
