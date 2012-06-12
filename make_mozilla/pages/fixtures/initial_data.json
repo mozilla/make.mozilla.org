@@ -23,7 +23,7 @@
         "fields": {
             "path": "partners",
             "additional_content": "",
-            "title": "Partners"
+            "title": "Our Partners"
         }
     },
     {
@@ -32,7 +32,7 @@
         "fields": {
             "title": "Make something amazing with the web",
             "poster": "/media/img/about/1.jpg",
-            "content": "<p><strong>Mozilla Webmaker wants to help you make something amazing with the web</strong>. We\u2019ve got new <a href=\"http://webmaker.org/tools\"><em>tools</em></a> for you to use, <a href=\"http://webmaker.org/projects\"><em>projects</em></a> to help you get started, and a global <a href=\"http://webmaker.org/events\"><em>community</em></a> of creators \u2014 educators, filmmakers, journalists, developers, youth \u2014 all making and learning together.</p>\r\n\r\n<p><strong>The goal:</strong> <strong>help millions of people move from <em>using</em> the web to <em>making</em> the web</strong>. As part of Mozilla\u2019s non-profit <a href=\"http://www.mozilla.org\">mission</a>, we want to help the world increase their understanding of the web, take greater control of their online lives, and create a more web literate planet.</p>",
+            "content": "<p><strong>Mozilla Webmaker wants to help you make something amazing with the web</strong>. We\u2019ve got new <a href=\"http://webmaker.org/tools\"><em>tools</em></a> for you to use,<a href=\"http://webmaker.org/projects\"><em>projects</em></a> to help you get started,and a global <a href=\"http://webmaker.org/events\"><em>community</em></a> of creators \u2014 educators,filmmakers,journalists,developers,youth \u2014 all making and learning together.</p>\r\n\r\n<p><strong>The goal:</strong> <strong>help millions of people move from <em>using</em> the web to <em>making</em> the web</strong>. As part of Mozilla\u2019s non-profit <a href=\"http://www.mozilla.org\">mission</a>,we want to help the world increase their understanding of the web,take greater control of their online lives,and create a more web literate planet.</p>",
             "quotes": [
                 2
             ],
@@ -46,11 +46,11 @@
         "fields": {
             "title": "Creating a generation of webmakers",
             "poster": "/media/img/about/2.jpg",
-            "content": "<p>Mozilla Webmaker offers:</p>\r\n\r\n<ol>\r\n    <li><strong><a href=\"http://webmaker.org/tools\">Tools</a></strong>. Authoring tools and software, designed and built with our community. From supercharging web video with <a href=\"http://mozillapopcorn.org\">Popcorn</a>, to exploring and remixing with the <a href=\"http://hackasaurus.org\">X-Ray Goggles</a>, to making your own web pages with <a href=\"http://thimble.webmaker.org\">Thimble</a>. Like a Swiss Army knife or \u201csuperhero utility belt\u201d for webmaking.</li>\r\n    <li><strong><a href=\"http://webmaker.org/projects\">Projects</a></strong>. Practical starter projects, how-tos and recipes, designed to help people at all levels make something amazing. From tweaking your blog template to building apps that change the world.</li>\r\n    <li><strong><a href=\"http://webmaker.org/events\">Community</a></strong>. Bringing people with diverse skills and backgrounds together. Teachers, filmmakers, journalists, youth. From web ninjas to newbies. Connecting at events, meet-ups and hack jams everywhere.</li>\r\n</ul>",
+            "content": "<p>Mozilla Webmaker offers:</p>\r\n\r\n<ol>\r\n    <li><strong><a href=\"http://webmaker.org/tools\">Tools</a></strong>. Authoring tools and software,designed and built with our community. From supercharging web video with <a href=\"http://mozillapopcorn.org\">Popcorn</a>,to exploring and remixing with the <a href=\"http://hackasaurus.org\">X-Ray Goggles</a>,to making your own web pages with <a href=\"http://thimble.webmaker.org\">Thimble</a>. Like a Swiss Army knife or \u201csuperhero utility belt\u201d for webmaking.</li>\r\n    <li><strong><a href=\"http://webmaker.org/projects\">Projects</a></strong>. Practical starter projects,how-tos and recipes,designed to help people at all levels make something amazing. From tweaking your blog template to building apps that change the world.</li>\r\n    <li><strong><a href=\"http://webmaker.org/events\">Community</a></strong>. Bringing people with diverse skills and backgrounds together. Teachers,filmmakers,journalists,youth. From web ninjas to newbies. Connecting at events,meet-ups and hack jams everywhere.</li>\r\n</ul>",
             "quotes": [
-                5,
                 3,
-                4
+                4,
+                5
             ],
             "sidebar": "<p><strong>Watch the video: Meet the Webmakers</strong></p>\r\n<p><a href=\"http://www.mozilla.org/en-US/webmaker/videos/\"><img src=\"/media/img/about/video-thumbnail.jpg\" alt=\"Thumbnail of the 'Meet the Webmakers' video'\" title=\"\"></a></p>",
             "page": 1
@@ -62,7 +62,7 @@
         "fields": {
             "title": "Why is Mozilla doing this?",
             "poster": "/media/img/about/3.jpg",
-            "content": "<p><strong>The web is becoming the world\u2019s second language, and a vital 21st century skill</strong>. Digital literacy today is as important as reading, writing and arithmetic. Mozilla believes its crucial that we give people the skills they need to understand, shape and actively participate in that world, instead of just passively consuming it.</p>",
+            "content": "<p><strong>The web is becoming the world\u2019s second language,and a vital 21st century skill</strong>. Digital literacy today is as important as reading,writing and arithmetic. Mozilla believes its crucial that we give people the skills they need to understand,shape and actively participate in that world,instead of just passively consuming it.</p>",
             "quotes": [
                 6
             ],
@@ -76,7 +76,7 @@
         "fields": {
             "title": "What\u2019s a &ldquo;webmaker&rdquo;?",
             "poster": "/media/img/about/4.jpg",
-            "content": "<p><strong>Anyone who makes something using the open building blocks of the web.</strong> If you\u2019re uploading photos or videos, posting to a blog, or using social media, you\u2019re already on the path. We want to help you level up your skills and go further.</p>\r\n\r\n<p><strong>You don\u2019t have to be a professional coder or wizard to be a webmaker.</strong> In the same way that you don\u2019t have to be a professional baker to make bread, or a professional auto mechanic to change a tire or poke under the hood, <strong>you shouldn\u2019t have be be a professional web developer to understand how the web works \u2014 or make your own stuff</strong>. We want to help you go \u201cbeyond upload\u201d to unlock new opportunities for creativity and innovation in your life and work.</p>",
+            "content": "<p><strong>Anyone who makes something using the open building blocks of the web.</strong> If you\u2019re uploading photos or videos,posting to a blog,or using social media,you\u2019re already on the path. We want to help you level up your skills and go further.</p>\r\n\r\n<p><strong>You don\u2019t have to be a professional coder or wizard to be a webmaker.</strong> In the same way that you don\u2019t have to be a professional baker to make bread,or a professional auto mechanic to change a tire or poke under the hood,<strong>you shouldn\u2019t have be be a professional web developer to understand how the web works \u2014 or make your own stuff</strong>. We want to help you go \u201cbeyond upload\u201d to unlock new opportunities for creativity and innovation in your life and work.</p>",
             "quotes": [
                 7
             ],
@@ -90,7 +90,7 @@
         "fields": {
             "title": "Shaping the web\u2019s future. Together.",
             "poster": "/media/img/about/5.jpg",
-            "content": "<p><strong>Together, we make technology that is changing the web. </strong>Mozilla Webmaker projects like <a href=\"http://mozillapopcorn.org/\">Popcorn</a> are changing the face of web video. <a href=\"http://thimble.webmaker.org\">Thimble</a> demystifies the web\u2019s language for beginners. <a href=\"http://hackasaurus.org/\">Hackasaurus</a> energizes digital literacy and learning.&nbsp; <a href=\"http://openbadges.org\">OpenBadges</a> unlocks&nbsp; skills and achievements. <a href=\"http://mozillaopennews.org/\">OpenNews</a> catalyzes web innovation in newsrooms. <a href=\"http://explorecreateshare.org/\">Hive NYC</a> empowers youth to co-design technology\u2019s future.</p>\r\n\r\n<p>That\u2019s what Webmaker is all about: <strong>bringing diverse people together to create dynamic new web projects, technology and approaches to learning</strong>. We\u2019re passionate about the public potential of the web, and want to empower people to design and build its future.</p>",
+            "content": "<p><strong>Together,we make technology that is changing the web. </strong>Mozilla Webmaker projects like <a href=\"http://mozillapopcorn.org/\">Popcorn</a> are changing the face of web video. <a href=\"http://thimble.webmaker.org\">Thimble</a> demystifies the web\u2019s language for beginners. <a href=\"http://hackasaurus.org/\">Hackasaurus</a> energizes digital literacy and learning.&nbsp; <a href=\"http://openbadges.org\">OpenBadges</a> unlocks&nbsp; skills and achievements. <a href=\"http://mozillaopennews.org/\">OpenNews</a> catalyzes web innovation in newsrooms. <a href=\"http://explorecreateshare.org/\">Hive NYC</a> empowers youth to co-design technology\u2019s future.</p>\r\n\r\n<p>That\u2019s what Webmaker is all about: <strong>bringing diverse people together to create dynamic new web projects,technology and approaches to learning</strong>. We\u2019re passionate about the public potential of the web,and want to empower people to design and build its future.</p>",
             "quotes": [
                 8
             ],
@@ -104,7 +104,7 @@
         "fields": {
             "title": "Is this for me?",
             "poster": "/media/img/about/6.jpg",
-            "content": "<p><strong>Yes!</strong> Mozilla Webmaker has tools and projects specifically for:</p>\r\n\r\n<dl>\r\n    <dt>Educators</dt>\r\n\t\t<dd>Resources for digital literacy, teaching webmaking basics like HTML and CSS, and <a href=\"https://webmaker.org/en-US/events/guides/\">guides</a> for hosting your own learning jam.</dd>\r\n    <dt>Filmmakers</dt>\r\n\t\t<dd><a href=\"http://mozillapopcorn.org/\">Mozilla Popcorn</a> helps filmmakers, documentarians and multimedia artists make their online videos pop.</dd>\r\n    <dt>Journalists</dt>\r\n\t\t<dd><a href=\"http://mozillaopennews.org/\">Knight-Mozilla OpenNews</a> provides fellowships, software and learning for news hackers.</dd>\r\n    <dt>Youth</dt>\r\n\t\t<dd><a href=\"http://explorecreateshare.org/\">Hive NYC</a> is a digital learning lab for youth. <a href=\"http://hackasaurus.org/\">Hackasaurus</a> helps youth explore and remix the web.</dd>\r\n    <dt>Developers and designers</dt>\r\n\t\t<dd>From contributing to <a href=\"https://github.com/mozilla\">Mozilla tools and projects</a>, to designing and building your own <a href=\"https://mozillaignite.org/\">next-generation apps</a> to change the world.</dd>\r\n    <dt>Beginners</dt>\r\n\t\t<dd>Our <a href=\"http://webmaker.org/projects\">projects</a> are sorted by difficulty, to help anyone get started making something quickly.</dd>\r\n    <dt>Experts</dt>\r\n\t\t<dd>Creating experimental apps, demos and web experiences no one\u2019s seen before.</dd>\r\n</dl>",
+            "content": "<p><strong>Yes!</strong> Mozilla Webmaker has tools and projects specifically for:</p>\r\n\r\n<dl>\r\n    <dt>Educators</dt>\r\n\t\t<dd>Resources for digital literacy,teaching webmaking basics like HTML and CSS,and <a href=\"https://webmaker.org/en-US/events/guides/\">guides</a> for hosting your own learning jam.</dd>\r\n    <dt>Filmmakers</dt>\r\n\t\t<dd><a href=\"http://mozillapopcorn.org/\">Mozilla Popcorn</a> helps filmmakers,documentarians and multimedia artists make their online videos pop.</dd>\r\n    <dt>Journalists</dt>\r\n\t\t<dd><a href=\"http://mozillaopennews.org/\">Knight-Mozilla OpenNews</a> provides fellowships,software and learning for news hackers.</dd>\r\n    <dt>Youth</dt>\r\n\t\t<dd><a href=\"http://explorecreateshare.org/\">Hive NYC</a> is a digital learning lab for youth. <a href=\"http://hackasaurus.org/\">Hackasaurus</a> helps youth explore and remix the web.</dd>\r\n    <dt>Developers and designers</dt>\r\n\t\t<dd>From contributing to <a href=\"https://github.com/mozilla\">Mozilla tools and projects</a>,to designing and building your own <a href=\"https://mozillaignite.org/\">next-generation apps</a> to change the world.</dd>\r\n    <dt>Beginners</dt>\r\n\t\t<dd>Our <a href=\"http://webmaker.org/projects\">projects</a> are sorted by difficulty,to help anyone get started making something quickly.</dd>\r\n    <dt>Experts</dt>\r\n\t\t<dd>Creating experimental apps,demos and web experiences no one\u2019s seen before.</dd>\r\n</dl>",
             "quotes": [
                 9,
                 10
@@ -119,7 +119,7 @@
         "fields": {
             "title": "Get involved",
             "poster": "/media/img/about/7.jpg",
-            "content": "<p><strong>Mozilla Webmaker </strong>tools and projects are designed, built and tested in the open, through hands-on participation from creative people like you. Here\u2019s how you can get involved:</p>\r\n\r\n<ul>\r\n    <li><strong><a href=\"https://wiki.mozilla.org/Webmakers/Community_Calls\">Join our weekly Webmaker community calls</a>.</strong> All are welcome, each and every Tuesday. Drop in to hear from special guest speakers, get a sneak peek at new work, and share your ideas.</li>\r\n    <li><strong><a href=\"http://webmaker.org/events\">Join the Summer Code Party</a>.</strong> We're inviting the world to make and learn using Webmaker tools, projects and events this summer. <a href=\"https://webmaker.org/en-US/events/search/\">Find an event</a> near you \u2014 or <a href=\"https://donate.mozilla.org/page/event/create/\">create your own</a>.</li>\r\n    <li><strong><a href=\"https://donate.mozilla.org/page/s/sign-up-for-mozilla\">Sign up for updates</a>.</strong> Join our mailing list to stay on top of Webmaker news and milestones.</li>\r\n    <li><strong><a href=\"https://wiki.mozilla.org/Webmakers/Communications\">Get in touch</a>.</strong> A one-stop list of all Webmaker communications channels and ways to get in touch. From the Webmaker newsgroup, to public chat rooms, to on-ramps for specific programs.</li>\r\n    <li><strong><a href=\"https://wiki.mozilla.org/Webmaker/FAQ\">Check out our FAQ</a>.</strong> And add your own questions.</li>\r\n    <li><strong>Share your work.</strong> Made something amazing with Webmaker? Let us know by tweeting about it using the <a href=\"https://twitter.com/#!/search/%23webmaker\">#webmaker</a> hash tag. Or <a href=\"https://twitter.com/#!/search/%23mozparty\">#mozparty</a> for the Summer Code Party.</li>\r\n    <li><strong><a href=\"https://wiki.mozilla.org/Webmaker/Submit_your_project\">Submit your own Webmaker project or how-to</a>.</strong> Make or learn something amazing? Show others how to do it as well. Create your own step-by-step how-to, then <a href=\"https://wiki.mozilla.org/Webmaker/Submit_your_project\">submit it</a> to the Webmaker project gallery.</li>\r\n    <li><strong><a href=\"http://webmaker.org/events\">Join or create an event</a>.</strong> Our handy <a href=\"https://webmaker.org/en-US/events/guides/\">event guides</a> makes it easy \u2014 from large scale hack jams to gathering around your own kitchen table.</li>\r\n    <li><strong><a href=\"http://mozilla.org/join\">Join Mozilla</a>.</strong> Make a donation to support Mozilla's non-profit mission. (And receive a coveted Firefox t-shirt \u2014 the only way to get it!)</li>\r\n</ul>",
+            "content": "<p><strong>Mozilla Webmaker </strong>tools and projects are designed,built and tested in the open,through hands-on participation from creative people like you. Here\u2019s how you can get involved:</p>\r\n\r\n<ul>\r\n    <li><strong><a href=\"https://wiki.mozilla.org/Webmakers/Community_Calls\">Join our weekly Webmaker community calls</a>.</strong> All are welcome,each and every Tuesday. Drop in to hear from special guest speakers,get a sneak peek at new work,and share your ideas.</li>\r\n    <li><strong><a href=\"http://webmaker.org/events\">Join the Summer Code Party</a>.</strong> We're inviting the world to make and learn using Webmaker tools,projects and events this summer. <a href=\"https://webmaker.org/en-US/events/search/\">Find an event</a> near you \u2014 or <a href=\"https://donate.mozilla.org/page/event/create/\">create your own</a>.</li>\r\n    <li><strong><a href=\"https://donate.mozilla.org/page/s/sign-up-for-mozilla\">Sign up for updates</a>.</strong> Join our mailing list to stay on top of Webmaker news and milestones.</li>\r\n    <li><strong><a href=\"https://wiki.mozilla.org/Webmakers/Communications\">Get in touch</a>.</strong> A one-stop list of all Webmaker communications channels and ways to get in touch. From the Webmaker newsgroup,to public chat rooms,to on-ramps for specific programs.</li>\r\n    <li><strong><a href=\"https://wiki.mozilla.org/Webmaker/FAQ\">Check out our FAQ</a>.</strong> And add your own questions.</li>\r\n    <li><strong>Share your work.</strong> Made something amazing with Webmaker? Let us know by tweeting about it using the <a href=\"https://twitter.com/#!/search/%23webmaker\">#webmaker</a> hash tag. Or <a href=\"https://twitter.com/#!/search/%23mozparty\">#mozparty</a> for the Summer Code Party.</li>\r\n    <li><strong><a href=\"https://wiki.mozilla.org/Webmaker/Submit_your_project\">Submit your own Webmaker project or how-to</a>.</strong> Make or learn something amazing? Show others how to do it as well. Create your own step-by-step how-to,then <a href=\"https://wiki.mozilla.org/Webmaker/Submit_your_project\">submit it</a> to the Webmaker project gallery.</li>\r\n    <li><strong><a href=\"http://webmaker.org/events\">Join or create an event</a>.</strong> Our handy <a href=\"https://webmaker.org/en-US/events/guides/\">event guides</a> makes it easy \u2014 from large scale hack jams to gathering around your own kitchen table.</li>\r\n    <li><strong><a href=\"http://mozilla.org/join\">Join Mozilla</a>.</strong> Make a donation to support Mozilla's non-profit mission. (And receive a coveted Firefox t-shirt \u2014 the only way to get it!)</li>\r\n</ul>",
             "quotes": [
                 11,
                 12
@@ -136,7 +136,7 @@
             "poster": "",
             "content": "<iframe src=\"http://embed.scribblelive.com/Embed/v5.aspx?Id=49367\" width=\"495\" height=\"1600\" frameborder=\"0\" style=\"width: 100%;\"></iframe>",
             "quotes": [],
-            "sidebar": "<h3>#MozParty</strong> links and ways to get help</h3>\r\n<h4>FAQ</h4>\r\n<ul>\r\n\t<li><a href=\"https://wiki.mozilla.org/Summer_Campaign_2012/FAQ\"><strong>Check here first!</strong></a> New questions and answers added daily.</li>\r\n\t<li><a href=\"https://webmaker.org/en-US/events/guides/\"><strong>Event Guides</strong></a>. Step-by-step help with hosting your event.<strong></strong></li>\r\n</ul>\r\n\r\n<h4>News</h4>\r\n<ul>\r\n\t<li><strong><a href=\"https://webmaker.org/news\">Latest Summer Code Party news.</a> </strong>Blog posts, press coverage and more.</li>\r\n</ul>\r\n\r\n<h4>Twitter</h4>\r\n<ul>\r\n\t<li><strong>Need help? </strong>Just tag a tweet with<strong> <a href=\"https://twitter.com/#!/search/realtime/%23mozhelp\">#MozHelp</a></strong> and a volunteer will get in touch!</li>\r\n\t<li><strong>Follow <a href=\"https://twitter.com/#!/mozilla\">@Mozilla</a> </strong>for updates.</li>\r\n\t<li><a href=\"https://twitter.com/#!/search/realtime/%23mozparty\"><strong>#MozParty</strong></a> is the main Summer Code Party hashtag.</li>\r\n</ul>\r\n\r\n<h4>Facebook</h4>\r\n<ul>\r\n\t<li><strong><a href=\"http://www.facebook.com/mozilla\">Like Mozilla on Facebook</a> </strong>for updates. Add your comments and questions.</li>\r\n\t<li>Join the <strong><a href=\"http://www.facebook.com/groups/427727673913762/\">Summer Code Party</a> </strong>Facebook group.</li>\r\n\t<li>Feel free to start a local group of summer code partyers to coordinate near you!</li>\r\n</ul>\r\n\r\n<h4>Email</h4>\r\n<ul>\r\n\t<li><a href=\"https://donate.mozilla.org/page/s/webmaker-signup\"><strong>Sign up here for updates.</strong></a></li>\r\n\t<li>Email us at <strong>mozparty [AT] mozilla [DOT] org</strong> with questions or links to great stuff you\u2019ve made.</li>\r\n</ul>\r\n\r\n<h4>Blogging and photos</h4>\r\n<ul>\r\n\t<li>Tag your posts and photos with <strong>\u201cmozparty\u201d</strong></li>\r\n</ul>\r\n\r\n<h4>Volunteer</h4>\r\n<ul>\r\n\t<li><a href=\"https://wiki.mozilla.org/Summer_Campaign_2012/Volunteer-opportunities\">Help with support and storytelling help here</a></li>\r\n</ul>\r\n\r\n<h4>Chat</h4>\r\n<ul>\r\n\t<li><strong>On IRC?</strong> Come on over to <strong>irc.mozilla.org</strong> and join the <strong>#MozParty </strong>channel.</li>\r\n\t<li>Or get live chat help now using the widget below. Just pick a nickname and hit \u201cconnect.\u201d</li>\r\n</ul>\r\n\r\n<h3>Chat with others in #MozParty now:</h3>\r\n<iframe src=\"http://widget.mibbit.com/?settings=ac59117fb2e7c03e7e7c3c3ac0692589&amp;server=irc.mozilla.org&amp;channel=%23MozParty\" width=\"285\" height=\"300\" frameborder=\"0\" style=\"width: 100%\"></iframe>",
+            "sidebar": "<h3>#MozParty</strong> links and ways to get help</h3>\r\n<h4>FAQ</h4>\r\n<ul>\r\n\t<li><a href=\"https://wiki.mozilla.org/Summer_Campaign_2012/FAQ\"><strong>Check here first!</strong></a> New questions and answers added daily.</li>\r\n\t<li><a href=\"https://webmaker.org/en-US/events/guides/\"><strong>Event Guides</strong></a>. Step-by-step help with hosting your event.<strong></strong></li>\r\n</ul>\r\n\r\n<h4>News</h4>\r\n<ul>\r\n\t<li><strong><a href=\"https://webmaker.org/news\">Latest Summer Code Party news.</a> </strong>Blog posts,press coverage and more.</li>\r\n</ul>\r\n\r\n<h4>Twitter</h4>\r\n<ul>\r\n\t<li><strong>Need help? </strong>Just tag a tweet with<strong> <a href=\"https://twitter.com/#!/search/realtime/%23mozhelp\">#MozHelp</a></strong> and a volunteer will get in touch!</li>\r\n\t<li><strong>Follow <a href=\"https://twitter.com/#!/mozilla\">@Mozilla</a> </strong>for updates.</li>\r\n\t<li><a href=\"https://twitter.com/#!/search/realtime/%23mozparty\"><strong>#MozParty</strong></a> is the main Summer Code Party hashtag.</li>\r\n</ul>\r\n\r\n<h4>Facebook</h4>\r\n<ul>\r\n\t<li><strong><a href=\"http://www.facebook.com/mozilla\">Like Mozilla on Facebook</a> </strong>for updates. Add your comments and questions.</li>\r\n\t<li>Join the <strong><a href=\"http://www.facebook.com/groups/427727673913762/\">Summer Code Party</a> </strong>Facebook group.</li>\r\n\t<li>Feel free to start a local group of summer code partyers to coordinate near you!</li>\r\n</ul>\r\n\r\n<h4>Email</h4>\r\n<ul>\r\n\t<li><a href=\"https://donate.mozilla.org/page/s/webmaker-signup\"><strong>Sign up here for updates.</strong></a></li>\r\n\t<li>Email us at <strong>mozparty [AT] mozilla [DOT] org</strong> with questions or links to great stuff you\u2019ve made.</li>\r\n</ul>\r\n\r\n<h4>Blogging and photos</h4>\r\n<ul>\r\n\t<li>Tag your posts and photos with <strong>\u201cmozparty\u201d</strong></li>\r\n</ul>\r\n\r\n<h4>Volunteer</h4>\r\n<ul>\r\n\t<li><a href=\"https://wiki.mozilla.org/Summer_Campaign_2012/Volunteer-opportunities\">Help with support and storytelling help here</a></li>\r\n</ul>\r\n\r\n<h4>Chat</h4>\r\n<ul>\r\n\t<li><strong>On IRC?</strong> Come on over to <strong>irc.mozilla.org</strong> and join the <strong>#MozParty </strong>channel.</li>\r\n\t<li>Or get live chat help now using the widget below. Just pick a nickname and hit \u201cconnect.\u201d</li>\r\n</ul>\r\n\r\n<h3>Chat with others in #MozParty now:</h3>\r\n<iframe src=\"http://widget.mibbit.com/?settings=ac59117fb2e7c03e7e7c3c3ac0692589&amp;server=irc.mozilla.org&amp;channel=%23MozParty\" width=\"285\" height=\"300\" frameborder=\"0\" style=\"width: 100%\"></iframe>",
             "page": 2
         }
     },
@@ -144,12 +144,42 @@
         "pk": 9,
         "model": "pages.pagesection",
         "fields": {
-            "title": "Partners",
+            "title": "Our Partners",
             "poster": "",
-            "content": "<p>Partner Content</p>",
+            "content": "<h3>We are grateful for the generous support of our partners:</h3>\r\n\r\n<ul class=\"partners\">\r\n\t<li><a href=\"http://www.citf.org/\" target=\"_blank\">Chicago Instructional Technology Foundation</a>\r\n\t\t<br><strong>Project:</strong> A Story Told in Code</li>\r\n\r\n\t<li><a href=\"http://cpb.org/\" target=\"_blank\"><img src=\"/media/img/partners/cpb.png\" width=\"120\" height=\"41\"></a>\r\n\t\t<br><strong>Project:</strong> NewsHour Open Election 2012</li>\r\n\r\n\t<li><a href=\"http://www.fordfoundation.org/\" target=\"_blank\"><img src=\"/media/img/partners/fordfoundation.png\" width=\"200\" height=\"24\"></a>\r\n\t\t<br><strong>Project:</strong> <a href=\"http://www.mozilla.org/en-US/collusion/\" target=\"_blank\">Collusion</a></li>\r\n\r\n\t<li><a href=\"http://www.knightfoundation.org/\" target=\"_blank\"><img src=\"/media/img/partners/knightfoundation.png\" width=\"200\" height=\"26\"></a>\r\n\t\t<br><strong>Project:</strong> <a href=\"http://mozillaopennews.org/\" target=\"_blank\">Knight-Mozilla OpenNews</a></li>\r\n\r\n\t<li><a href=\"http://www.macfound.org/\" target=\"_blank\"><img src=\"/media/img/partners/macarthur.png\" width=\"200\" height=\"17\"></a>\r\n\t\t<br><strong>Projects:</strong> <a href=\"http://openbadges.org/en-US/\" target=\"_blank\">OpenBadges</a>,<a href=\"http://explorecreateshare.org/\" target=\"_blank\">Hive NYC</a>,and the <a href=\"http://www.learningfreedomandtheweb.org/\" target=\"_blank\">Learning,Freedom &amp; the Web Festival</a></li>\r\n\r\n\t<li><a href=\"http://www.moore.org/\" target=\"_blank\"><img src=\"/media/img/partners/moore.png\" width=\"108\" height=\"44\"></a>\r\n\t\t<br><strong>Project:</strong> Science of Fiction</li>\r\n\r\n\t<li><a href=\"http://www.nesta.org.uk/\" target=\"_blank\"><img src=\"/media/img/partners/nesta.png\" alt=\"\" width=\"144\" height=\"31\"></a>\r\n\t\t<br><strong>Project:</strong> London Learning Jam</li>\r\n\r\n\t<li><a href=\"http://www.nea.gov/\" target=\"_blank\"><img src=\"/media/img/partners/nea.png\" width=\"112\" height=\"66\"></a>\r\n\t\t<br><strong>Project:</strong> Open(Art)</li>\r\n\r\n\t<li><a href=\"http://www.nsf.gov/\" target=\"_blank\"><img src=\"/media/img/partners/nsf.png\" width=\"96\" height=\"96\"></a>\r\n\t\t<br><strong>Project:</strong> <a href=\"https://mozillaignite.org/\" target=\"_blank\">Mozilla Ignite</a></li>\r\n\r\n\t<li><a href=\"http://www.rescorp.org/\" target=\"_blank\"><img src=\"/media/img/partners/rsca.png\" width=\"160\" height=\"50\"></a>\r\n\t\t<br><strong>Project:</strong> Science of Fiction</li>\r\n\r\n\t<li><a href=\"http://www.sloan.org/\" target=\"_blank\"><img src=\"/media/img/partners/sloan.png\" width=\"180\" height=\"56\"></a>\r\n\t\t<br><strong>Project:</strong> <a href=\"http://software-carpentry.org/\" target=\"_blank\">Helping Scientists Think Like the Web</a></li>\r\n\r\n\t<li><a href=\"http://www.zerodivide.org/\" target=\"_blank\"><img src=\"/media/img/partners/zerodivide.png\" width=\"126\" height=\"56\"></a>\r\n\t\t<br><strong>Project:</strong> <a href=\"http://mozillapopcorn.org/bavc/\" target=\"_blank\">Web-native Storytelling</a></li>\r\n</ul>\r\n\r\n<p>And the <a href=\"https://mozillafestival.org/supporters/\" target=\"_blank\">many and wondrous supporters</a> of our annual Mozilla Festival.</p>",
             "quotes": [],
             "sidebar": "",
             "page": 3
+        }
+    },
+    {
+        "pk": 2,
+        "model": "pages.quote",
+        "fields": {
+            "url": "",
+            "quote": "<strong>Mozillians are people who make things.</strong> Moving people from consumption to creation is Mozilla\u2019s goal.",
+            "show_source_image": true,
+            "source": 1
+        }
+    },
+    {
+        "pk": 3,
+        "model": "pages.quote",
+        "fields": {
+            "url": "",
+            "quote": "<strong>Thimble</strong> is one of the friendliest,easiest-to-use code editors we\u2019ve seen.",
+            "show_source_image": false,
+            "source": 2
+        }
+    },
+    {
+        "pk": 4,
+        "model": "pages.quote",
+        "fields": {
+            "url": "",
+            "quote": "<strong>Hackasaurus [X-Ray Goggles]</strong> make it easy to see the structure of any web page and remix it.",
+            "show_source_image": false,
+            "source": 3
         }
     },
     {
@@ -177,7 +207,7 @@
         "model": "pages.quote",
         "fields": {
             "url": "",
-            "quote": "<strong>When we gained literacy, we learned not just how to read but to write.</strong> And as we now moved into an increasingly digital reality, we must learn not just how to use programs but how to make them.",
+            "quote": "<strong>When we gained literacy,we learned not just how to read but to write.</strong> And as we now moved into an increasingly digital reality,we must learn not just how to use programs but how to make them.",
             "show_source_image": true,
             "source": 6
         }
@@ -187,7 +217,7 @@
         "model": "pages.quote",
         "fields": {
             "url": "",
-            "quote": "<strong>The Internet isn\u2019t really a technology.</strong> It\u2019s a belief system, a philosophy about the effectiveness of decentralized, bottom-up innovation.",
+            "quote": "<strong>The Internet isn\u2019t really a technology.</strong> It\u2019s a belief system,a philosophy about the effectiveness of decentralized,bottom-up innovation.",
             "show_source_image": true,
             "source": 7
         }
@@ -207,7 +237,7 @@
         "model": "pages.quote",
         "fields": {
             "url": "",
-            "quote": "The common thread between education, journalism and the web for Mozilla is personal empowerment.",
+            "quote": "The common thread between education,journalism and the web for Mozilla is personal empowerment.",
             "show_source_image": false,
             "source": 9
         }
@@ -217,7 +247,7 @@
         "model": "pages.quote",
         "fields": {
             "url": "",
-            "quote": "Mozilla has grown exponentially, but unlike other technology projects, it knows that its real strength lies in its community.",
+            "quote": "Mozilla has grown exponentially,but unlike other technology projects,it knows that its real strength lies in its community.",
             "show_source_image": false,
             "source": 10
         }
@@ -227,7 +257,7 @@
         "model": "pages.quote",
         "fields": {
             "url": "http://www.ecrans.fr/Mozilla-l-info-en-ligne-de-mire,13495.html",
-            "quote": "[Mozilla believes] we must raise the hood, examine the engine, get our hands dirty. In short, we must 'hack' everything we can get a hold of.",
+            "quote": "[Mozilla believes] we must raise the hood,examine the engine,get our hands dirty. In short,we must 'hack' everything we can get a hold of.",
             "show_source_image": false,
             "source": 11
         }
@@ -237,39 +267,19 @@
         "model": "pages.quote",
         "fields": {
             "url": "",
-            "quote": "The <a href=\"https://mozillafestival.org/\">Mozilla Festival</a> was a crowd of filmmakers, educators, coders, tech-savvy media professionals, media-sceptical hackers, hacking-ignorant journalists, gamers, government advisors&hellip;. It was diverse. <strong>All of them, however, were thinkers and makers ready to explore the frontiers of the open web</strong>.",
+            "quote": "The <a href=\"https://mozillafestival.org/\">Mozilla Festival</a> was a crowd of filmmakers,educators,coders,tech-savvy media professionals,media-sceptical hackers,hacking-ignorant journalists,gamers,government advisors&hellip;. It was diverse. <strong>All of them,however,were thinkers and makers ready to explore the frontiers of the open web</strong>.",
             "show_source_image": false,
             "source": 12
         }
     },
     {
-        "pk": 2,
-        "model": "pages.quote",
+        "pk": 1,
+        "model": "pages.quotesource",
         "fields": {
-            "url": "",
-            "quote": "<strong>Mozillians are people who make things.</strong> Moving people from consumption to creation is Mozilla\u2019s goal.",
-            "show_source_image": true,
-            "source": 1
-        }
-    },
-    {
-        "pk": 3,
-        "model": "pages.quote",
-        "fields": {
-            "url": "",
-            "quote": "<strong>Thimble</strong> is one of the friendliest, easiest-to-use code editors we\u2019ve seen.",
-            "show_source_image": false,
-            "source": 2
-        }
-    },
-    {
-        "pk": 4,
-        "model": "pages.quote",
-        "fields": {
-            "url": "",
-            "quote": "<strong>Hackasaurus [X-Ray Goggles]</strong> make it easy to see the structure of any web page and remix it.",
-            "show_source_image": false,
-            "source": 3
+            "url": "http://blog.lizardwrangler.com/",
+            "name": "Mitchell Baker",
+            "avatar": "/media/img/about/avatar-mitchell.png",
+            "strapline": "Mozilla Chair / Chief Lizard Wrangler"
         }
     },
     {
@@ -293,6 +303,26 @@
         }
     },
     {
+        "pk": 4,
+        "model": "pages.quotesource",
+        "fields": {
+            "url": "http://www.wired.com/",
+            "name": "Wired.com",
+            "avatar": "",
+            "strapline": ""
+        }
+    },
+    {
+        "pk": 5,
+        "model": "pages.quotesource",
+        "fields": {
+            "url": "http://inforgood.wordpress.com/",
+            "name": "Meredith Stewart",
+            "avatar": "/media/img/about/avatar-meredith.png",
+            "strapline": "teacher"
+        }
+    },
+    {
         "pk": 6,
         "model": "pages.quotesource",
         "fields": {
@@ -309,7 +339,7 @@
             "url": "http://joi.ito.com/",
             "name": "Joi Ito",
             "avatar": "/media/img/about/avatar-joi.png",
-            "strapline": "Mozilla Foundation Board Member, Director of MIT Media Lab"
+            "strapline": "Mozilla Foundation Board Member,Director of MIT Media Lab"
         }
     },
     {
@@ -360,36 +390,6 @@
             "name": "TechCrunch",
             "avatar": "",
             "strapline": ""
-        }
-    },
-    {
-        "pk": 1,
-        "model": "pages.quotesource",
-        "fields": {
-            "url": "http://blog.lizardwrangler.com/",
-            "name": "Mitchell Baker",
-            "avatar": "/media/img/about/avatar-mitchell.png",
-            "strapline": "Mozilla Chair / Chief Lizard Wrangler"
-        }
-    },
-    {
-        "pk": 4,
-        "model": "pages.quotesource",
-        "fields": {
-            "url": "http://www.wired.com/",
-            "name": "Wired.com",
-            "avatar": "",
-            "strapline": ""
-        }
-    },
-    {
-        "pk": 5,
-        "model": "pages.quotesource",
-        "fields": {
-            "url": "http://inforgood.wordpress.com/",
-            "name": "Meredith Stewart",
-            "avatar": "/media/img/about/avatar-meredith.png",
-            "strapline": "teacher"
         }
     }
 ]
