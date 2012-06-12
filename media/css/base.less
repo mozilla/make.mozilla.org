@@ -3903,11 +3903,19 @@ border-right: none;
 	font-family: "Open Sans";
 	margin: 0;
 }
+.section-homepage .projects header h2 {
+	float: left;
+	margin-right: 10px;
+}
 .section-homepage section header p,
 .fish h2,
 .fish .shout {
 	font-family: "Open Sans Light";
 	margin: 0;
+}
+.projects header p {
+	line-height: 14px;
+	display: inline-block;
 }
 .amuse {
 	margin-bottom: -140px;
@@ -4035,6 +4043,12 @@ border-right: none;
 #content .veg .form-fields input[type=text] {
 	height: 2.5em;
 }
+.veg form .extra {
+	display: none;
+}
+.no-js .veg form .extra {
+	display: block;
+}
 #content .veg .help {
 	width: 60%;
 }
@@ -4108,6 +4122,7 @@ border-right: none;
 	line-height: 1;
 	background: #27a9e0 url(../img/icons/long-button.gif) no-repeat 90% center;
 	display: inline-block;
+	text-shadow: none;
 }
 .lozenge:link, 
 .lozenge:visited {
@@ -4176,9 +4191,10 @@ border-right: none;
 	padding-left: 0;
 	list-style-type: none;
 }
-.meat .tweets .side-title {
+.meat .tweets .side-title a {
 	padding-left: 40px;
-	background: transparent url(../img/icons/tweeter.gif) no-repeat 0 0;
+	background: transparent url(../img/icons/tweeter.png) no-repeat 0 -10px;
+	display: inline-block;
 }
 .meat .tweets .twitter-follow-button {
 	margin-top: 1em;

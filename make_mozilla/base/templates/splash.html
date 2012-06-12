@@ -55,17 +55,17 @@
         <ul>
             <li>
                 <a href="{{ url('tools') }}#thimble">
-                    <h2 class="list-title">Thimble App</h3>
+                    <h2 class="list-title">Thimble</h3>
                     <img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
                 </a>
-                <p>Make and share your own webpage</p>
+                <p>Make and share your own web page</p>
             </li>
             <li>
                 <a href="{{ url('tools') }}#x-ray-goggles">
                     <h2 class="list-title">X-Ray Goggles</h3>
                     <img src="{{ MEDIA_URL }}img/tools/default.gif" alt="" />
                 </a>
-                <p>Explore and remix any webpage</p>
+                <p>Explore and remix any web page</p>
             </li>
             <li>
                 <a href="{{ url('tools') }}#popcorn">
@@ -78,11 +78,13 @@
     </section>
     <section class="wrap social">
     <form action="https://donate.mozilla.org/page/s/webmaker" method="post">
-        <h2 class="side-title">Get Webmaker updates</h2>
+        <h2 class="side-title">Get Mozilla Webmaker updates</h2>
         <div class="form-fields">
             <input type="text" name="email" id="email" placeholder="Your email here" />
+            <div class="extra">
             <p><input type="checkbox" name="custom-1216" id="custom-1216" />
             <label class="help" for="custom-1216">I'm okay with you handling this info as you explain in your <a href="http://www.mozilla.org/en-US/privacy-policy.html">Privacy Policy</a></label></p>
+            </div>
         </div>
         <input type="submit" name="submit-btn" class="button find" value="Sign me up" />
     </form> 
@@ -128,7 +130,7 @@
 		</div>
 		<div class="col aside">
 			<section class="news">
-				<h2 class="side-title">Webmaker news</h2>
+				<h2 class="side-title">Webmaker News</h2>
                 <ol>
                     {% for n in news %}
                     <li>
@@ -142,10 +144,10 @@
                     </li>
                     {% endfor %}
                 </ol>
-                <p><a href="http://planet.drumbeat.org/">Planet Webmaker</a> | <a href="http://planet.drumbeat.org/rss20.xml">RSS</a></p>
+                <p><a href="http://planet.drumbeat.org/">Planet Webmaker Blog</a> | <a href="http://planet.drumbeat.org/rss20.xml">RSS</a></p>
 			</section>
 			<section class="tweets">
-				<h2 class="side-title">@mozilla</h2>
+				<h2 class="side-title"><a href="https://twitter.com/mozilla/">@mozilla</a></h2>
                 <div class="tweet"></div>
 			</section>
             <section class="events">
@@ -161,7 +163,7 @@
                     </li>
                     {% endfor %}
                 </ol>
-                <a class="button find" href="https://donate.mozilla.org/page/event/create/">Create your own event</a>
+                <a class="button find" href="{{ url('events.search') }}">Find an event near you</a>
             </section>
 		</div>
 	</div>
@@ -170,7 +172,7 @@
     <section class="wrap all-mozilla">
         <h2>Building a generation of webmakers</h2>
         <blockquote>
-            <p>"Mozillans are people who make things. Moving from consumption to creation is Mozilla's goal."</p>
+            <p>"Mozillans are people who make things. Moving people from consumption to creation is Mozilla's goal."</p>
             <cite><img src="{{ MEDIA_URL }}img/mitchell-photo.jpg" alt="" /><em>Mitchell Baker</em>, Mozilla Chair and Chief Lizard Wrangler</cite>
         </blockquote>
         <a class="lozenge" href="{{ url('page', 'about') }}">Learn more</a>

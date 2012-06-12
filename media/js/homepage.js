@@ -14,4 +14,7 @@ $(function() {
      $('.carousel').carousel({
           interval: false
      });
+     $('input#email').focus(function() {
+          $(this).next('div').slideDown();
+     });
 });
