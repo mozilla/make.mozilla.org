@@ -266,8 +266,9 @@ def partners(request, slug):
 
 def guides_all(request):
     event_kinds = models.EventKind.objects.all()
+    events_dict = dict([(o.slug, o) for o in event_kinds])
     return jingo.render(request, 'events/guides/index.html', {
-        'event_kinds': event_kinds,
+        'event_kinds': events_dict,
     })
 
 
