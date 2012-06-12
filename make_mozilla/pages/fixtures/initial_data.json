@@ -134,7 +134,7 @@
         "fields": {
             "title": "Support",
             "poster": "",
-            "content": "<p>Support content</p>",
+            "content": "<iframe src=\"http://embed.scribblelive.com/Embed/v5.aspx?Id=49367\" width=\"820\" height=\"600\" frameborder=\"0\" style=\"width: 100%;\"></iframe>",
             "quotes": [],
             "sidebar": "",
             "page": 2
