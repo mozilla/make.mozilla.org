@@ -1,32 +1,24 @@
 # -*- coding: utf-8 -*-
 import datetime
+import re
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
-
+from make_mozilla.bsd import BSDClient, BSDEventImporter
 
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Event.source'
-        db.add_column('events_event', 'source',
-                      self.gf('django.db.models.fields.CharField')(default='', max_length=255, blank=True),
-                      keep_default=False)
         if not db.dry_run:
-            for event in orm.Event.objects.all():
-                if event.source_id != '':
-                    event.source = 'bsd'
-                    event.source_id = event.source_id.split(':')[-1]
-                    event.save()
+            event_importer = BSDEventImporter()
+            for event in orm.Event.objects.filter(source='bsd', source_id='bsd'):
+                obfuscated_event_id = BSDEventImporter.extract_event_obfuscated_id(event.event_url)
+                bsd_event_id = BSDClient.fetch_event(obfuscated_event_id)['event_id']
+                if event_importer.fetch_existing_event(bsd_event_id):
+                    event.delete()
 
     def backwards(self, orm):
-        if not db.dry_run:
-            for event in orm.Event.objects.all():
-                if event.source != '':
-                    event.source_id = '%s:%s' % (event.source, event.source_id)
-                    event.save()
-        # Deleting field 'Event.source'
-        db.delete_column('events_event', 'source')
+        pass
 
     models = {
         'events.campaign': {
@@ -50,6 +42,7 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'official': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'organiser_email': ('django.db.models.fields.EmailField', [], {'max_length': '255'}),
+            'pending_deletion': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'public': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'source': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'source_id': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
