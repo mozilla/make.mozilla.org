@@ -14,8 +14,11 @@ class Migration(SchemaMigration):
             for event in orm.Event.objects.filter(source='bsd', source_id='bsd'):
                 obfuscated_event_id = BSDEventImporter.extract_event_obfuscated_id(event.event_url)
                 bsd_event_id = BSDClient.fetch_event(obfuscated_event_id)['event_id']
-                if event_importer.fetch_existing_event(bsd_event_id):
-                    event.delete()
+                dupe_event = event_importer.fetch_existing_event(bsd_event_id)
+                if dupe_event:
+                    event.source_id = bsd_event_id
+                    event.save()
+                    dupe_event.delete()
 
     def backwards(self, orm):
         pass
