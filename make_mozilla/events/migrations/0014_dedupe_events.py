@@ -13,7 +13,12 @@ class Migration(SchemaMigration):
             event_importer = BSDEventImporter()
             for event in orm.Event.objects.filter(source='bsd', source_id='bsd'):
                 obfuscated_event_id = BSDEventImporter.extract_event_obfuscated_id(event.event_url)
-                bsd_event_id = BSDClient.fetch_event(obfuscated_event_id)['event_id']
+                try:
+                    bsd_event = BSDClient.fetch_event(obfuscated_event_id)
+                except:
+                    print "event_url: '%s'" % event.event_url
+                    print "obfuscated_event_id: '%s'" % obfuscated_event_id
+                bsd_event_id = bsd_event['event_id']
                 dupe_event = event_importer.fetch_existing_event(bsd_event_id)
                 if dupe_event:
                     event.source_id = bsd_event_id
