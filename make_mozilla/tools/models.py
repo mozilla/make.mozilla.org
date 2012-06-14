@@ -1,5 +1,7 @@
+import urllib
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.core.urlresolvers import reverse
 from django.db import models
 
 
@@ -23,9 +25,17 @@ class Tool(models.Model):
             blank=True, null=True, upload_to='tools',
             storage=FileSystemStorage(**settings.UPLOADED_IMAGES))
 
+    class Meta:
+        ordering = ['name']
+
     @models.permalink
     def get_absolute_url(self):
         return ('tool', (), {'slug': self.slug})
+
+    def get_project_filter_url(self):
+        url = reverse('projects')
+        query = urllib.urlencode(dict([[self._meta.verbose_name, self.slug]]))
+        return '%s?%s' % (url, query)
 
     @classmethod
     def live(self, include_featured=True):

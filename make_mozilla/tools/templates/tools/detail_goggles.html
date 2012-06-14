@@ -1,0 +1,34 @@
+{% extends "tools/base.html" %}
+
+{% block page_title %}X-Ray Goggles | {{ super() }}{% endblock %}
+
+{% block page_id %}tool-detail{% endblock %}
+{% block page_class %}{{ super() }} content-page{% endblock %}
+
+{% block content %}
+<section class="sidebar">
+    <header><h2>X-Ray Goggles</h2></header>
+    <div class="content">
+        <h3>Make your first hack in three easy steps!</h3>
+        <ol class="steps">
+            <li><p>Copy this URL to your clipboard: <input type="text" style="display: block; width: 100%" autocomplete="off" value="http://seriouscat.com/serious_cat_is_serious.jpg"></p></li>
+            <li><p>Activate the <a class="button no-arrow" href="javascript:(function(){var script=document.createElement('script');script.src='http://webxray.hackasaurus.org/webxray.js';script.className='webxray';document.head.appendChild(script);})();">X-Ray Goggles</a></p></li>
+            <li><p>Move your mouse over the image on the right to see what it's made of, and tap <kbd><span>R</span></kbd> to make it point to the URL from your clipboard!</p></li>
+        </ol>
+    </div>
+    <aside>
+        <img src="{{ MEDIA_URL }}img/tools/supergirl.png" width="285" alt="Supergirl" title="">
+    </aside>
+</section>
+
+<ul class="links">
+    <li>
+        <h2>&hellip;and then, the world!</h2>
+        <p><a href="{{ url('tool.goggles.install') }}">Install the goggles</a> into your bookmarks bar and use them to remix any web page!</p>
+    </li>
+    <li>
+        <h2>Become a ninja!</h2>
+        <p>Tap <kbd><span>H</span></kbd> to learn about more awesome powers like undo/redo and computed style editing.</p>
+    </li>
+</ul>
+{% endblock %}

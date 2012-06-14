@@ -1,0 +1,145 @@
+{% extends "projects/base.html" %}
+
+{% block page_id %}projects-index{% endblock %}
+{% block page_class %}{{ super() }} brochure-page{% endblock %}
+
+{% block content %}
+    {% if featured %}
+    <div id="featured">
+        <h3>Featured Projects</h3>
+        <ul>
+        {% for project in featured %}
+            <li{% if not loop.first %} class="hidden"{% endif %}>
+                <h4><a href="{{ project.get_absolute_url() }}">
+                    <span class="image"><img src="{{ project.image.flyer_url }}" alt="" title=""></span>
+                    {{ project }}
+                </a></h4>
+                {% if project.contributor -%}
+                    <p>Contributed by {{ project.contributor }}</p>
+                {%- else -%}
+                    <p class="empty">&nbsp;</p>
+                {%- endif %}
+                <a href="{{ project.get_absolute_url() }}" class="button more">Learn More</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <form action="#filter" id="filter">
+        <div class="wrapper">
+            <h3 class="item">Filter projects by</h3>
+            {% for field in filter_form %}
+                <span class="item"><label for="id_{{ field.html_name }}" class="{{ field.html_name }}">{{ field }}</label></span>
+            {% endfor %}
+            <p class="buttons item"><input type="submit" class="button" value="Update"></p>
+        </div>
+    </form>
+
+    {% if projects %}
+    <h3>Webmaker Projects:</h3>
+    <ul class="project-flyer-list">
+    {% for project in projects %}
+        <li><div class="project-flyer">
+            <a href="{{ project.get_absolute_url() }}">
+                <img src="{{ project.image.flyer_url }}">
+                <h4 class="title">{{ project }}</h4>
+            </a>
+            {% if project.contributor %}<p class="contributor">Contributed by {{ project.contributor }}</p>{% endif %}
+        </div></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="footer">
+        <ul class="pagination">
+        {% for page in pagination.paginator.page_range %}
+            <li>
+                {%- if page == pagination.number -%}
+                    <strong><span>Page</span> {{ page }}</strong>
+                {%- elif page == 1 -%}
+                    <a href="./{% if query %}?{{ query }}{% endif %}#filter"><span>Page</span> {{ page }}</a>
+                {%- else -%}
+                    <a href="./{% if query %}?{{ query }}&amp;{% else %}?{% endif %}page={{ page }}#filter"><span>Page</span> {{ page }}</a>
+                {%- endif -%}
+            </li>
+        {% endfor %}
+        </ul>
+        <p><a href="{{ invitation.link }}">Submit your own project</a></p>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+    <script>
+        $(function() {
+            $('#filter').submit(function() {
+                $('select', this).each(function() {
+                    if (!this.selectedIndex) this.name = '';
+                });
+                this.submit();
+            });
+        });
+        $(function() {
+            var currentIndex, timeout,
+                $featured = $('#featured').addClass('enabled'),
+                $items = $featured.find('li'),
+                fadeTime = 500,
+                waitTime = 10000;
+
+            if ($items.length <= 1) return;
+            if ($items.filter(':visible').length > 1) return;
+
+            var $navigation = $('<ol class="navigation"></ol>').appendTo($featured);
+
+            $items.each(function(index) {
+                if (index) {
+                    $(this).addClass('hidden').find('h4, p').css('opacity', 0);
+                } else {
+                    currentIndex = index;
+                }
+                var label = $.trim($('h4', this).text());
+                var $nav = $('<li></li>')
+                        .append($('<span></span>').text(label))
+                        .attr('title', label)
+                        .attr('tabindex', 0)
+                        .toggleClass('active', !index)
+                        .click(function() { select(index); })
+                        .appendTo($navigation);
+            });
+
+            var select = function(index) {
+                clearTimeout(timeout);
+                if (index == currentIndex) {
+                    timeout = setTimeout(function() {
+                        select(index + 1);
+                    }, waitTime);
+                } else {
+                    if (index >= $items.length) index = 0;
+
+                    $navigation.find('li').removeClass('active').eq(index).addClass('active');
+
+                    var $old = $items.eq(currentIndex),
+                        $new = $items.eq(index);
+
+                    $old.find('h4, p').animate({opacity: 0}, fadeTime, function() {
+                        $old.addClass('hidden');
+                    });
+
+                    $new.removeClass('hidden').find('h4, p').animate({opacity: 1}, fadeTime, function() {
+                        if (currentIndex != index) {
+                            currentIndex = index;
+                            timeout = setTimeout(function() {
+                                select(index + 1);
+                            }, waitTime);
+                        }
+                    });
+                }
+            }
+
+            timeout = setTimeout(function() {
+                select(currentIndex + 1);
+            }, waitTime);
+        });
+    </script>
+{% endblock %}

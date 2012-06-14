@@ -6,7 +6,10 @@ patch()
 
 import make_mozilla.events.urls
 import make_mozilla.tools.urls
+import make_mozilla.projects.urls
 import make_mozilla.users.urls
+import make_mozilla.pages.urls
+import make_mozilla.news.urls
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib.gis import admin
@@ -16,6 +19,8 @@ urlpatterns = patterns('',
     url(r'^$',          'make_mozilla.base.views.root.index', name="splash"),
     url(r'^events/',    include(make_mozilla.events.urls)),
     url(r'^tools/',     include(make_mozilla.tools.urls)),
+    url(r'^projects/',  include(make_mozilla.projects.urls)),
+    url(r'^news/',    include(make_mozilla.news.urls)),
     url(r'^users/',     include(make_mozilla.users.urls)),
     # browserid endpoints
     url(r'^browserid/', include('django_browserid.urls')),
@@ -25,6 +30,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+
+    (r'', include(make_mozilla.pages.urls)),
 )
 
 ## In DEBUG mode, serve media files through Django.

@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block section_type %}homepage{% endblock %}
+
+{% block content %}
+<div class="amuse pager pager-with-tabs pager-auto-rotate pager-no-history" id="home-promo">
+    <div class="pager-content">
+        <div class="default-page pager-page" id="page-promo-join">
+            <a href="https://donate.mozilla.org/page/contribute/join-mozilla?source=webmaker_home">
+                <img src="{{ MEDIA_URL }}img/carousel/join.jpg" alt="" />
+                <div class="pager-text">
+                    <h2 class="pager-title">Join Mozilla</h2>
+                    <p>Make a donation today to support Mozilla's work building a generation of webmakers.</p>  
+                </div>
+            </a>
+        </div>
+    	<div class="pager-page" id="page-promo-webmakers">
+            <a href="http://mozilla.org/webmaker/videos/">
+                <img src="{{ MEDIA_URL }}img/carousel/webmaker-video.jpg" alt="" />
+                <div class="pager-text">
+                    <h2 class="pager-title">Meet the webmakers</h2>
+                    <p>Let's teach the world the web. Meet some of the global community making it happen.</p>	
+                </div>
+        	</a>
+        </div>
+        <div class="pager-page" id="page-promo-code-party">
+            <a href="https://webmaker.org/events/">
+                <img src="{{ MEDIA_URL }}img/carousel/SCP.gif" alt="" />
+                <div class="pager-text">
+                    <h2 class="pager-title">Summer Code Party</h2>
+                    <p>Meet, make, and share your creations with friends to learn some code this summer.</p>  
+                </div>
+            </a>
+        </div>
+        <div class="pager-page" id="page-promo-popcorn">
+            <a href="http://www.mozillapopcorn.org">
+                <img src="{{ MEDIA_URL }}img/carousel/popcorn.jpg" alt="" />
+                <div class="pager-text">
+                    <h2 class="pager-title">Make video pop with Popcorn</h2>
+                    <p>Popcorn is revolutionizing video on the web. It's free, open and easy to use. Try it today.</p>
+                </div>
+            </a>
+        </div>
+    </ol>
+    <ul class="pager-tabs">
+        <li id="tab-join"><a href="#" class="selected">● <span>read about Join Mozilla</span></a></li>
+        <li id="tab-webmakers"><a href="#">● <span>read about Make the webmakers</span></a></li>
+        <li id="tab-code-party"><a href="#">● <span>read about Summer Code Party</span></a></li>
+        <li id="tab-popcorn"><a href="#">● <span>read about Make video pop with Popcorn</span></a></li>
+    </ul>
+    </div>
+</div>
+<div class="veg">
+    <section class="wrap tools">
+        <ul>
+            <li>
+                <a href="{{ url('tools') }}#thimble">
+                    <h2 class="list-title">Thimble</h3>
+                    <img src="{{ MEDIA_URL }}img/tools/thimble-icon.png" alt="" />
+                </a>
+                <p>Make and share your own web page</p>
+            </li>
+            <li>
+                <a href="{{ url('tools') }}#x-ray-goggles">
+                    <h2 class="list-title">X-Ray Goggles</h3>
+                    <img src="{{ MEDIA_URL }}img/tools/goggles-icon.png" alt="" />
+                </a>
+                <p>Explore and remix any web page</p>
+            </li>
+            <li>
+                <a href="{{ url('tools') }}#popcorn">
+                    <h2 class="list-title">Popcorn</h3>
+                    <img src="{{ MEDIA_URL }}img/tools/popcorn-icon.png" alt="" />
+                </a>
+                <p>Make video pop</p>
+            </li>
+        </ul>
+    </section>
+    <section class="wrap social">
+    <form action="https://donate.mozilla.org/page/s/webmaker" method="post">
+        <h2 class="side-title">Get Mozilla Webmaker updates</h2>
+        <div class="form-fields">
+            <input type="text" name="email" id="email" placeholder="Your email here" />
+            <div class="extra">
+            <p><input type="checkbox" name="custom-1216" id="custom-1216" />
+            <label class="help" for="custom-1216">I'm okay with you handling this info as you explain in your <a href="http://www.mozilla.org/en-US/privacy-policy.html">Privacy Policy</a></label></p>
+            </div>
+        </div>
+        <input type="submit" name="submit-btn" class="button find" value="Sign me up" />
+    </form> 
+    <section class="share">
+                <h2 class="side-title">Follow</h2>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <ul>
+                    <li>
+                        <a href="https://twitter.com/mozilla" class="twitter-follow-button" data-show-count="false">Follow @mozilla</a>
+                    </li>
+                    <li>
+                        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com/mozilla/&amp;send=false&amp;layout=button_count&amp;width=160&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:160px; height:21px;" allowTransparency="true"></iframe>
+                    </li>
+                </ul>
+            </section>
+    </section>
+</div>
+<div class="meat">
+	<div class="wrap columns">
+		<div class="col main">
+			<section class="projects">
+				<header>
+					<h2><a href="{{ url('projects') }}">Webmaker Projects</a></h2>
+					<p>Make something amazing with the web</p>
+				</header>
+                <div class="featured">
+				<ul>
+                    {% for p in projects %}
+					<li>
+						<a href="{{ p.get_absolute_url() }}">
+							<img src="{{ p.image.featured_url }}" alt="" />
+							<h3 class="list-title">{{ p }}</h3>
+						</a>
+                        {% if p.contributor %}
+						<footer><p>Contributed by Tumblr</p></footer>
+                        {% endif %}
+					</li>
+                    {% endfor %}
+                </ul>
+				<a href="{{ url('projects') }}" class="more">See all Webmaker projects</a>
+                </div>
+			</section>
+		</div>
+		<div class="col aside">
+			<section class="news">
+				<h2 class="side-title">Webmaker News</h2>
+                <ol>
+                    {% for n in news %}
+                    <li>
+                        <a href="{{ n.link }}">
+                            {% if loop.first and n.get_feature_image() %}
+                                {{ n.get_feature_image()|safe }}
+                            {% endif %}
+                            <p>{{ n.updated.strftime('%B %e, %Y') }}</p>
+                            <h3 class="list-title">{{ n.title }}</h3>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ol>
+                <p><a href="http://planet.webmaker.org/">Planet Webmaker Blog</a> | <a href="http://planet.webmaker.org/rss20.xml">RSS</a></p>
+			</section>
+			<section class="tweets">
+				<h2 class="side-title"><a href="https://twitter.com/mozilla/">@mozilla</a></h2>
+                <div class="tweet"></div>
+			</section>
+            <section class="events">
+                <header>
+                    <h2><a href="{{ url('events') }}">Events</a></h2>
+                </header>
+                <ol>
+                    {% for e in events %}
+                    <li class="vevent">
+                        <time>{{ e.start.strftime('%B') }} <span>{{ e.start.strftime('%e') }}</span></time>
+                        <h3 class="list-title"><a href="{{ e.event_url }}">{{ e.name }}</a></h3>
+                        <p class="location">{{ e.venue }}</p>
+                    </li>
+                    {% endfor %}
+                </ol>
+                <a class="button find" href="{{ url('events.search') }}">Find an event near you</a>
+            </section>
+		</div>
+	</div>
+</div>
+<div class="cheese">
+    <section class="wrap all-mozilla">
+        <h2>Building a generation of webmakers</h2>
+        <blockquote>
+            <p>"Mozillans are people who make things. Moving people from consumption to creation is Mozilla's goal."</p>
+            <cite><img src="{{ MEDIA_URL }}img/mitchell-photo.jpg" alt="" /><em>Mitchell Baker</em>, Mozilla Chair and Chief Lizard Wrangler</cite>
+        </blockquote>
+        <a class="lozenge" href="{{ url('page', 'about') }}">Learn more</a>
+        <div class="other-makers">
+            <h3>Other Mozilla Webmaker websites:</h3>
+            <div id="mozilla-carousel" class="carousel slide">
+            <div class="carousel_inner">
+            <ul class="maker_partners">
+                <li class="active item">
+                <ul>
+                    <li><a href="http://mozillapopcorn.org/"><img src="{{ MEDIA_URL }}img/logos/webmaker/Popcorn.png" alt="Popcorn" /></a></li>
+                    <li><a href="http://www.hackasaurus.org/"><img src="{{ MEDIA_URL }}img/logos/webmaker/Hackasaurus.png" alt="Hackasaurus" /></a></li>
+                    <li><a href="http://www.mozillaopennews.org/"><img src="{{ MEDIA_URL }}img/logos/webmaker/Opennews.png" alt="Mozilla Opennews" /></a></li>
+                    <li><a href="http://www.openbadges.org/"><img src="{{ MEDIA_URL }}img/logos/webmaker/OpenBadges.png" alt="Mozilla Openbadges" /></a></li>
+                </ul>
+                </li>
+                <li class="item">
+                <ul>
+                    <li><a href="https://mozillaignite.org/"><img src="{{ MEDIA_URL }}img/logos/webmaker/Ignite.png" alt="Ignite" /></a></li>
+                    <li><a href="http://explorecreateshare.org/"><img src="{{ MEDIA_URL }}img/logos/webmaker/Hive.png" alt="Hive NYC" /></a></li>
+                    <li><a href="https://mozillafestival.org/"><img src="{{ MEDIA_URL }}img/logos/webmaker/Festival.png" alt="Mozilla Festival" /></a></li>
+                    <li><a href="http://www.mozilla.org/en-US/collusion/"><img src="{{ MEDIA_URL }}img/logos/webmaker/Collusion.png" alt="Collusion" /></a></li>
+                </ul>
+                </li>
+            </ul>
+            <a class="carousel-control left" href="#mozilla-carousel" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#mozilla-carousel" data-slide="next">&rsaquo;</a>
+            </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="fish">
+	<section class="wrap partners">
+		<h2>Mozilla Webmaker is generously supported by the following:</h2>
+        <div id="partner-carousel" class="carousel slide">
+        <div class="carousel_inner">
+		<ul class="maker_partners">
+			<li class="active item">
+                <ul>
+                    <li><a href="http://www.knightfoundation.org/"><img src="{{ MEDIA_URL }}img/logos/funding/Knight.png" alt="Knight Foundation" /></a></li>
+			         <li><a href="http://www.macfound.org/"><img src="{{ MEDIA_URL }}img/logos/funding/Macarthur.png" alt="MacArthur Foundation" /></a></li>
+			         <li><a href="http://www.fordfoundation.org/"><img src="{{ MEDIA_URL }}img/logos/funding/ford-foundation.png" alt="Ford Foundation" /></a></li>
+			         <li><a href="http://www.sloan.org/"><img src="{{ MEDIA_URL }}img/logos/funding/Sloan.png" alt="Alfred P Sloan Foundation" /></a></li>
+                </ul>
+            </li>
+		</ul>
+        </div>
+        </div>
+        <p class="shout">and <a href="https://donate.mozilla.org/page/contribute/join-mozilla?source=webmaker_home">Mozillians like you</a></p>
+	</section>
+</div>
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+    {% block scripts %}
+        {{ js('homgepage_js') }}
+    {% endblock %}
+{% endblock %}

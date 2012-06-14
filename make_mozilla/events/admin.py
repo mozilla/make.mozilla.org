@@ -8,6 +8,7 @@ class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'kind', 'venue', 'source_id')
     list_filter = ('kind', 'campaign', 'verified', 'official', 'public')
     exclude = ('url_hash',)
+    date_hierarchy = 'start'
 
 
 class PartnerAdmin(admin.ModelAdmin):

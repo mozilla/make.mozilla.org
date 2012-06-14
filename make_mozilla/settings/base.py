@@ -27,6 +27,12 @@ MINIFY_BUNDLES = {
             'js/map.js',
             'js/map.infobox.js',
         ),
+        'homgepage_js': (
+            'js/jquery.tweet.js',
+            'js/bootstrap-carousel.js',
+            'js/mozilla-pager.js',
+            'js/homepage.js',
+        ),
         'example_js': (
             'js/examples/libs/jquery-1.4.4.min.js',
             'js/examples/libs/jquery.cookie.js',
@@ -47,14 +53,21 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'make_mozilla.events',
     # Tools
     'make_mozilla.tools',
+    # Projects
+    'make_mozilla.projects',
+    # News and feed importer
+    'make_mozilla.news',
     # UserProfiles
     'make_mozilla.users',
+    # Pages
+    'make_mozilla.pages',
     # extra lib stuff
     'south',
     'django_browserid',  # Load after auth to monkey-patch it.
     'cronjobs',
     'waffle',
 ]
+
 
 class Setting(object):
     def __init__(self, *args, **kwargs):
@@ -67,12 +80,12 @@ class Setting(object):
 
 # Go! Go! Gadget Bleach!
 BLEACH = Setting(
-    allowed_tags = (
+    allowed_tags=(
         'h1', 'h2', 'a', 'b', 'em', 'i', 'strong',
         'ol', 'ul', 'li', 'blockquote', 'p',
         'span', 'pre', 'code', 'img'
     ),
-    allowed_attrs = {
+    allowed_attrs={
         'a': ['href', 'title'],
         'img': ['src', 'alt', 'title'],
     }
@@ -134,7 +147,7 @@ ANON_ALWAYS = True
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': ['localhost:11211',],
+        'LOCATION': ['localhost:11211', ],
         'KEY_PREFIX': 'make_mozilla'
     }
 }
@@ -194,3 +207,8 @@ SOUTH_DATABASE_ADAPTERS = {
 # CELERY_ALWAYS_EAGER = False  # required to activate celeryd
 BROKER_URL = "redis://localhost:6379/0"
 SITE_URL = 'http://localhost:8000'
+
+# RSS feed for planet news
+SITE_FEED_URLS = {
+    'webmaker': 'http://planet.drumbeat.org/rss20.xml',
+}

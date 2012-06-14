@@ -1,0 +1,43 @@
+{% extends "tools/detail_goggles.html" %}
+
+{% block page_title %}Install | {{ super() }}{% endblock %}
+
+{% block content %}
+<section>
+    <header><h2>Installing X-Ray Goggles</h2></header>
+    <div class="content">
+        <noscript>
+            <div class="alert">
+                <p>In order to use the goggles, you need to have JavaScript enabled.</p>
+                <p>Please enable it or use a browser that supports it.</p>
+            </div>
+        </noscript>
+
+        <div class="alert msie-only" style="display: none;">
+            <p>Sorry, but the goggles don't yet work on Microsoft Internet Explorer.</p>
+            <p>Until they do, please use the latest version of <a href="http://mozilla.org/firefox">Firefox</a>, Opera, Chrome, or Safari.</p>
+        </div>
+
+        <p>The X-Ray Goggles are a <em>bookmarklet</em>—a special kind of tool that can augment any web page.</p>
+        <p>Here's how to install the goggles bookmarklet so you can inspect and remix anything you see on the web.</p>
+        <ol class="steps">
+            <li>
+                <p>Enable your browser's bookmarks toolbar by watching this video:</p>
+                <p><div id="bookmarks-toolbar-movie"></div></p>
+            </li>
+            <li>
+                <p>Drag the <a class="button no-arrow" href="javascript:(function(){var script=document.createElement('script');script.src='http://webxray.hackasaurus.org/webxray.js';script.className='webxray';document.head.appendChild(script);})();">X-Ray Goggles</a> up to your bookmarks toolbar.</p>
+            </li>
+            <li>
+                <p>Whenever you want to remix any web page you're visiting, just click on the X-Ray Goggles button in your bookmarks toolbar.</p>
+            </li>
+        </ol>
+        <p>That's all there is to it. Happy webmaking!</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+    <script src="{{ MEDIA_URL }}js/goggles-bookmark-movie.js"></script>
+{% endblock %}

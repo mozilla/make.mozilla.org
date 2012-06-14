@@ -14,25 +14,54 @@
 <h3 class="shout">Choose the type of event you would like to host:</h3>
 
 <ul class="tri-set">
-    {% for kind in event_kinds %}
     <li>
-        <a href="{{ url('guides_%s' % kind.slug) }}">
-            <img class="thumb" src="{{ MEDIA_URL }}/img/{{ kind.name|lower|replace(' ', '-')}}_thumb.jpg" alt="" />
-            <h3>{{ kind.name }}</h3>
+        <a href="{{ url('guides_%s' % event_kinds['kitchen_table'].slug) }}">
+            <img class="thumb" src="{{ MEDIA_URL }}img/{{ event_kinds['kitchen_table'].name|lower|replace(' ', '-')}}_thumb.jpg" alt="" />
+            <h3>{{ event_kinds['kitchen_table'].name }}</h3>
         </a>
-        <p>{{ kind.description }}</p>
+        <p>{{ event_kinds['kitchen_table'].description }}</p>
         {#
         Copy comes from VPN restricted admin section
         #}
-        {% if kind.figures %}
-            {{ kind.figures|safe }}
+        {% if event_kinds['kitchen_table'].figures %}
+            {{ event_kinds['kitchen_table'].figures|safe }}
         {% endif %}
-        {% if kind.additional %}
-            {{ kind.additional|safe }}
+        {% if event_kinds['kitchen_table'].additional %}
+            {{ event_kinds['kitchen_table'].additional|safe }}
         {% endif %}
-        
     </li>
-    {% endfor %}
+    <li>
+        <a href="{{ url('guides_%s' % event_kinds['hack_jam'].slug) }}">
+            <img class="thumb" src="{{ MEDIA_URL }}img/{{ event_kinds['hack_jam'].name|lower|replace(' ', '-')}}_thumb.jpg" alt="" />
+            <h3>{{ event_kinds['hack_jam'].name }}</h3>
+        </a>
+        <p>{{ event_kinds['hack_jam'].description }}</p>
+        {#
+        Copy comes from VPN restricted admin section
+        #}
+        {% if event_kinds['hack_jam'].figures %}
+            {{ event_kinds['hack_jam'].figures|safe }}
+        {% endif %}
+        {% if event_kinds['hack_jam'].additional %}
+            {{ event_kinds['hack_jam'].additional|safe }}
+        {% endif %}
+    </li>
+    <li>
+        <a href="{{ url('guides_%s' % event_kinds['pop_up'].slug) }}">
+            <img class="thumb" src="{{ MEDIA_URL }}img/{{ event_kinds['pop_up'].name|lower|replace(' ', '-')}}_thumb.jpg" alt="" />
+            <h3>{{ event_kinds['pop_up'].name }}</h3>
+        </a>
+        <p>{{ event_kinds['pop_up'].description }}</p>
+        {#
+        Copy comes from VPN restricted admin section
+        #}
+        {% if event_kinds['pop_up'].figures %}
+            {{ event_kinds['pop_up'].figures|safe }}
+        {% endif %}
+        {% if event_kinds['pop_up'].additional %}
+            {{ event_kinds['pop_up'].additional|safe }}
+        {% endif %}
+    </li>
 </ul>
 {% endblock %}
 

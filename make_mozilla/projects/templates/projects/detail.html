@@ -1,0 +1,62 @@
+{% extends "projects/base.html" %}
+
+{% block page_title %}{{ project }} | {{ super() }}{% endblock %}
+{% block page_id %}project-detail{% endblock %}
+
+{% block content %}
+<div id="main">
+    <h2>{{ project }}</h2>
+    <img src="{{ project.image.poster_url }}" class="poster">
+
+    {{ project.content }}
+
+    {% if project.link %}<p class="buttons"><a {% if not waffle.switch('no_track') %}onClick="dcsMultiTrack('DCS.dcsuri', '{{ project.link }}', 'WT.ti', 'project_{{ project|lower|replace(' ', '-') }}');"{% endif %}href="{{ project.link }}" class="button more">Get Started</a></p>{% endif %}
+</div>
+
+<div class="meta" id="about">
+    <h3>About this project</h3>
+    <dl>
+        {% for label, tag in (('Difficulty','difficulties'),('Topic','topics'),('Tool','tools'),('Skill','skills')) %}
+            {% if project[tag].count() %}
+                <dt class="{{ label|lower }}">{{ label }}</dt>
+                <dd>
+                    <ul>
+                        {% for object in project[tag].all() %}
+                            <li><a href="{{ object.get_project_filter_url() }}">{{ object }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </dd>
+            {% endif %}
+        {% endfor %}
+    </dl>
+</div>
+
+{% if project.contributor %}
+<div class="meta" id="partner">
+    {% if project.contributor.logo -%}
+        {% if project.contributor.website %}<a href="{{ project.contributor.website }}">{% endif -%}
+        <img src="{{ project.contributor.logo.url }}" alt="{{ project.contributor}}" title="">
+        {%- if project.contributor.website %}</a>{% endif %}
+    {%- endif %}
+    <p>Contributed by {{ project.contributor }}</p>
+</div>
+{% endif %}
+
+{% if project.previous or project.next %}
+<div class="meta" id="related">
+    <h3>Related Projects</h3>
+    <ul>
+        {% if project.previous -%}
+            <li class="previous"><a href="{{ project.previous.get_absolute_url() }}">
+                <img src="{{ project.previous.image.thumb_url }}" alt="{{ project.previous }}" title="">
+            </a></li>
+        {%- endif %}
+        {% if project.next -%}
+            <li class="next"><a href="{{ project.next.get_absolute_url() }}">
+                <img src="{{ project.next.image.thumb_url }}" alt="{{ project.next }}" title="">
+            </a></li>
+        {%- endif %}
+    </ul>
+</div>
+{% endif %}
+{% endblock %}

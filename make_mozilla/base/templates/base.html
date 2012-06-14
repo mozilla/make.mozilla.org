@@ -34,41 +34,54 @@
         <div id="footer">
             <div class="constrained">
                 <div class="col">
-                <h2><img src="{{ MEDIA_URL }}img/footer_logo.png" alt="Mozilla Webmaker" width="129" height="39" /></h2>
-                <h3>Admin</h3>
-                <ul>
-                {% if not user.is_authenticated() %}
-                    <li><a href="{{ login_url() }}">Log in</a></li>
-                {% endif %}
-                {% block admin_menu_items %}
-                {% endblock %}
-                {% if request.user and request.user.is_authenticated() %}
-                    <li><a href="{{ url('logout') }}">Log out</a></li>
-                {% endif %}
-                </ul>
+                    <h2><img src="{{ MEDIA_URL }}img/footer_logo.png" alt="Mozilla Webmaker" width="129" height="39" /></h2>
+                    <h3>Admin</h3>
+                    <ul>
+                    {% if not (request.user and request.user.is_authenticated()) %}
+                        <li><a href="{{ login_url() }}">Log in</a></li>
+                    {% endif %}
+                    {% block admin_menu_items %}
+                        {% if user.is_authenticated() %}
+                            <li><a href="{{ url('events.mine') }}">My events</a></li>
+                        {% endif %}
+                    {% endblock %}
+                    {% if request.user and request.user.is_authenticated() %}
+                        <li><a href="{{ url('logout') }}">Log out</a></li>
+                    {% endif %}
+                    </ul>
                 </div>
                 <div class="col">
                     <h3>About</h3>
                     {% block legal_links %}
                     <ul>
-                        <li><a href="{{ url('about') }}">About Us</a></li>
-                        <li><a href="mailto:joinmozilla@mozilla.org">Contact Us</a></li>
+                        <li><a href="{{ url('page', 'about') }}">About Us</a></li>
+                        <li><a href="mailto:mozparty@mozilla.org">Contact Us</a></li>
                         <li><a href="http://www.mozilla.org/en-US/privacy-policy.html">Privacy Policy</a></li>
                         <li><a href="http://www.mozilla.org/en-US/about/legal.html">Legal Notices</a></li>
                     </ul>
                     {% endblock %}
                 </div>
                 <div class="col">
-                    <h3>Connect with Us</h3>
+                    <h3>Connect with us</h3>
                     <ul>
                         <li><a href="http://twitter.com/mozilla/">Twitter</a></li>
                         <li><a href="https://www.facebook.com/mozilla/">Facebook</a></li>
                     </ul>
                 </div>
                 <div class="col">
-                    <h3>Make Something!</h3>
+                    <h3>Make something</h3>
                     <ul>
+                        <li><a href="{{ url('projects') }}">Projects</a></li>
+                        <li><a href="{{ url('tools') }}">Tools</a></li>
                         <li><a href="{{ url('events') }}">Events</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Support our work</h3>
+                    <ul>
+                        <li><a href="https://donate.mozilla.org/page/contribute/join-mozilla?source=join_link">Donate</a></li>
+                        <li><a href="https://mozillalabs.com/en-US/">Contribute</a></li>
+                        <li><a href="https://donate.mozilla.org/page/contribute/firefoxtshirt">Buy a t-shirt</a></li>
                     </ul>
                 </div>
             </div>

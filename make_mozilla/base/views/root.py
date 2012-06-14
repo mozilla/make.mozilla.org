@@ -1,11 +1,19 @@
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-
 import jingo
+
+from make_mozilla.news.models import Article
+from make_mozilla.projects.models import Project
+from make_mozilla.events.models import Event
 
 
 def index(request):
-    return HttpResponseRedirect(reverse('events'))
+    news = Article.objects.filter(featured=True).order_by('-updated')[0:3]
+    projects = Project.objects.filter(featured=True).order_by('?')[0:5]
+    events = Event.objects.filter(official=True).order_by('start')[0:3]
+    return jingo.render(request, 'splash.html', {
+        'news': news,
+        'projects': projects,
+        'events': events,
+    })
 
 
 def fail(request):
@@ -14,4 +22,3 @@ def fail(request):
 
 def app_fail(request):
     return jingo.render(request, 'base/500.html', {}, status=500)
-

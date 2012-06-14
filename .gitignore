@@ -6,6 +6,7 @@ settings/local.py
 */settings/staging.py
 */settings/local_old.py
 */settings/production.py
+*/settings/staging.py
 */settings/fauxdev.py
 */settings/server.py
 media/img/uploads/*
