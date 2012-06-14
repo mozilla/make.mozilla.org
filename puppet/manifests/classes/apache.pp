@@ -12,7 +12,7 @@ class apache {
   }
 
   file { "/etc/apache2/sites-available/playdoh":
-    content => template("apache.conf.erb"),
+    content => template("/etc/puppet/templates/apache.conf.erb"),
     owner => "root", group => "root", mode => 0644,
     notify  => Service['apache2'],
     require => [
