@@ -11,7 +11,7 @@
         {% for project in featured %}
             <li{% if not loop.first %} class="hidden"{% endif %}>
                 <h4><a href="{{ project.get_absolute_url() }}">
-                    <span class="image"><img src="{{ project.image.featured_url }}" alt="" title=""></span>
+                    <span class="image"><img src="{{ project.image.flyer_url }}" alt="" title=""></span>
                     {{ project }}
                 </a></h4>
                 {% if project.contributor -%}
