@@ -99,12 +99,16 @@
             </figcaption>
         </figure>
         <p>Make something with Thimble</p>
+        {% if projects.thimble.count() != 0 %}
         <ul>
             {% for project in projects.thimble %}
             <li><a href="{{ project.get_absolute_url() }}">{{ project }}</a></li>
             {% endfor %}
             <li><em><a href="{{ url('projects') }}?tool=thimble">More Thimble projects</a></em></li>
         </ul>
+        {% else %}
+            <p><b>Projects coming soon</b></p>
+        {% endif %}
     </aside>
 </section>
 
@@ -128,12 +132,16 @@
             </figcaption>
         </figure>
         <p>Make something with X-Ray Goggles</p>
+        {% if projects.goggles.count() != 0 %}
         <ul>
             {% for project in projects.goggles %}
             <li><a href="{{ project.get_absolute_url() }}">{{ project }}</a></li>
             {% endfor %}
             <li><em><a href="{{ url('projects') }}?tool=x-ray-goggles">More X-Ray Goggles projects</a></em></li>
         </ul>
+        {% else %}
+            <p><b>Projects coming soon</b></p>
+        {% endif %}
     </aside>
 </section>
 
@@ -157,12 +165,16 @@
             </figcaption>
         </figure>
         <p>Make something with Popcorn</p>
+        {% if projects.popcorn.count() != 0 %}
         <ul>
             {% for project in projects.popcorn %}
             <li><a href="{{ project.get_absolute_url() }}">{{ project }}</a></li>
             {% endfor %}
             <li><em><a href="{{ url('projects') }}?tool=popcorn">More Popcorn projects</a></em></li>
         </ul>
+        {% else %}
+            <p><b>Projects coming soon</b></p>
+        {% endif %}
     </aside>
 </section>
 {% endblock %}
