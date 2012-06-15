@@ -184,7 +184,7 @@ todo: animate top, left and other styles (color, font size, etc.)
     if (!styleSheet) {
       styleSheet = document.createElement('style');
       styleSheet.setAttribute('type', 'text/css');
-      styleSheet.appendChild(document.createTextNode("@font-face { font-family: 'Varela Round'; font-style: normal; font-weight: normal; src: local('Varela Round'), local('VarelaRound-Regular'), url('http://themes.googleusercontent.com/static/fonts/varelaround/v1/APH4jr0uSos5wiut5cpjrqRDOzjiPcYnFooOUGCOsRk.woff') format('woff');}\n" +
+      styleSheet.appendChild(document.createTextNode("@font-face { font-family: 'Varela Round'; font-style: normal; font-weight: normal; src: local('Varela Round'), local('VarelaRound-Regular'), url('//themes.googleusercontent.com/static/fonts/varelaround/v1/APH4jr0uSos5wiut5cpjrqRDOzjiPcYnFooOUGCOsRk.woff') format('woff');}\n" +
       '.popcorn-pop { background-color: black; border-radius: 12px; color: black; padding: 4px 9px; font-family: \'Varela Round\', sans-serif; font-size: 16px; }\n' +
       '.popcorn-pop > div { background-color: white; border-radius: 8px; padding: 4px; position: relative; }\n' +
       '.popcorn-pop .image { clip-path: url("#popcorn-pop-clip-path"); }\n' +
