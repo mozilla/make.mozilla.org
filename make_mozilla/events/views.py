@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
+import datetime
 import urllib2
 import json
 import bleach
@@ -194,6 +195,24 @@ def search(request):
         })))
 
     return jingo.render(request, 'events/search.html', {'results': results, 'location': location})
+
+
+def all(request):
+    today = datetime.date.today()
+    page = request.GET.get('page', 1)
+
+    if request.GET.get('sort') == 'name':
+        sort, order = ('name', 'name')
+    else:
+        sort, order = ('date', 'start')
+
+    results = models.Event.objects.filter(start__gte=today).order_by(order)
+    results_per_page = 24
+
+    return jingo.render(request, 'events/all.html', {
+        'sort': sort,
+        'results': paginators.results_page(results, results_per_page, page=page),
+    })
 
 
 class Near(object):
