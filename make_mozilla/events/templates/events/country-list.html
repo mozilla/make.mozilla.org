@@ -1,0 +1,39 @@
+{% extends "events/base.maps.html" %}
+
+{% block page_title %}{{ country.name }} | {{ super() }}{% endblock %}
+{% block page_id %}events-list-all{% endblock %}
+
+{% block content %}
+<div class="search-results">
+    {% include "events/_search-form.html" %}
+    <span class="switch"><a href="{{ url('events.country.map', code=country.code|lower) }}">switch to map view</a> | <a href="{{ url('events.all') }}">see all events</a></span>
+    {% if results.object_list %}
+        <p class="sorting">Sort by: <a href=""{% if sort == 'date' %} class="active"{% endif %}>Upcoming first</a> <span>or</span> <a href="?sort=name"{% if sort == 'name' %} class="active"{% endif %}>A-Z</a></p>
+        <ol>
+        {# Can't iterate directly over results until Django 1.4 #}
+        {% for event in results.object_list %}
+            {% include "events/_event-list-item.html" %}
+        {% endfor %}
+        </ol>
+        {% if results.paginator.num_pages > 1 %}
+            <ol class="pagination">
+                {% for page in range(1, results.paginator.num_pages+1) %}
+                    <li{% if page == results.number %} class="current"{% endif %}><a href="{% if page != 1 %}?page={{ page }}{% endif %}{% if sort != 'date' %}{% if page == 1 %}?{% else %}&amp;{% endif %}sort={{ sort }}{% endif %}"><span>Page</span> {{ page }}</a></li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+    {% else %}
+        <p class="no-results">No events found in {{ country.name }}. Why don't you <a href="https://donate.mozilla.org/page/event/create/" class="button create">Create an Event</a></p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        window.map_config = {
+            filter: "{{ country.code }}",
+            fit: "{{ country.name }}"
+        };
+    </script>
+    {{ super() }}
+{% endblock %}
