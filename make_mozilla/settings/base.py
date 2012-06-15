@@ -26,6 +26,7 @@ MINIFY_BUNDLES = {
         'maps_js': (
             'js/map.js',
             'js/map.infobox.js',
+            'js/map.clusterer.js',
         ),
         'homgepage_js': (
             'js/jquery.tweet.js',
