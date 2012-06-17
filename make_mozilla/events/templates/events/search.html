@@ -6,6 +6,7 @@
 {% block content %}
 <div class="search-results">
     {% include "events/_search-form.html" %}
+    <a href="{{ url('events.all') }}" class="switch">see all events</a>
     {% if location %}
         {% if results %}
             <h3>Did you mean:</h3>
