@@ -6,7 +6,7 @@
 {% block content %}
 <div class="search-results">
     {% include "events/_search-form.html" %}
-    <a href="{{ url('events.near') }}?lat={{ latitude }}&amp;lng={{ longitude }}" class="switch">switch to list view</a>
+    <span class="switch"><a href="{{ url('events.near') }}?lat={{ latitude }}&amp;lng={{ longitude }}">switch to list view</a> | <a href="{{ url('events.all') }}">see all events</a></span>
     {% if results.object_list %}
         {% if results.paginator.num_pages > 1 %}
             <ol class="pagination">
@@ -29,6 +29,8 @@
                 longitude: "{{ longitude }}",
                 draggable: true,
                 controls: true,
+                cluster: true,
+                target: "{{ url('events.near.map') }}?lat=${lat}&lng=${lng}",
                 full: true,
                 zoom: 12,
                 mapFooter: '<img src="/media/img/official-event.png" alt="White check mark on blue circle" title=""> Indicates official webmaker event'
@@ -63,7 +65,8 @@
         window.map_config = {
             latitude: "{{ latitude }}",
             longitude: "{{ longitude }}",
-            zoom: 12
+            zoom: 12,
+            target: "{{ url('events.near.map') }}?lat=${lat}&lng=${lng}"
         };
     </script>
     {{ super() }}
