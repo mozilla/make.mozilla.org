@@ -5,12 +5,12 @@
 {% block content %}
 <div class="amuse pager pager-with-tabs pager-auto-rotate pager-no-history" id="home-promo">
     <div class="pager-content">
-        <div class="default-page pager-page" id="page-promo-join">
-            <a href="https://donate.mozilla.org/page/contribute/join-mozilla?source=webmaker_home">
-                <img src="{{ MEDIA_URL }}img/carousel/join.jpg" alt="" />
+        <div class="default-page pager-page" id="page-promo-code-party">
+            <a href="https://webmaker.org/events/">
+                <img src="{{ MEDIA_URL }}img/carousel/SCP.gif" alt="" />
                 <div class="pager-text">
-                    <h2 class="pager-title">Join Mozilla</h2>
-                    <p>Make a donation today to support Mozilla's work building a generation of webmakers.</p>  
+                    <h2 class="pager-title">Summer Code Party</h2>
+                    <p>Meet, make, and share your creations with friends to learn some code this summer.</p>  
                 </div>
             </a>
         </div>
@@ -23,15 +23,6 @@
                 </div>
         	</a>
         </div>
-        <div class="pager-page" id="page-promo-code-party">
-            <a href="https://webmaker.org/events/">
-                <img src="{{ MEDIA_URL }}img/carousel/SCP.gif" alt="" />
-                <div class="pager-text">
-                    <h2 class="pager-title">Summer Code Party</h2>
-                    <p>Meet, make, and share your creations with friends to learn some code this summer.</p>  
-                </div>
-            </a>
-        </div>
         <div class="pager-page" id="page-promo-popcorn">
             <a href="http://www.mozillapopcorn.org">
                 <img src="{{ MEDIA_URL }}img/carousel/popcorn.jpg" alt="" />
@@ -41,12 +32,20 @@
                 </div>
             </a>
         </div>
-    </ol>
+        <div class="pager-page" id="page-promo-join">
+            <a href="https://donate.mozilla.org/page/contribute/join-mozilla?source=webmaker_home">
+                <img src="{{ MEDIA_URL }}img/carousel/join.jpg" alt="" />
+                <div class="pager-text">
+                    <h2 class="pager-title">Join Mozilla</h2>
+                    <p>Make a donation today to support Mozilla's work building a generation of webmakers.</p>  
+                </div>
+            </a>
+        </div>
     <ul class="pager-tabs">
-        <li id="tab-join"><a href="#" class="selected">● <span>read about Join Mozilla</span></a></li>
+        <li id="tab-code-party"><a href="#" class="selected">● <span>read about Summer Code Party</span></a></li>
         <li id="tab-webmakers"><a href="#">● <span>read about Make the webmakers</span></a></li>
-        <li id="tab-code-party"><a href="#">● <span>read about Summer Code Party</span></a></li>
         <li id="tab-popcorn"><a href="#">● <span>read about Make video pop with Popcorn</span></a></li>
+        <li id="tab-join"><a href="#">● <span>read about Join Mozilla</span></a></li>
     </ul>
     </div>
 </div>
@@ -55,21 +54,21 @@
         <ul>
             <li>
                 <a href="{{ url('tools') }}#thimble">
-                    <h2 class="list-title">Thimble</h3>
+                    <h2 class="list-title">Thimble</h2>
                     <img src="{{ MEDIA_URL }}img/tools/thimble-icon.png" alt="" />
                 </a>
                 <p>Make and share your own web page</p>
             </li>
             <li>
                 <a href="{{ url('tools') }}#x-ray-goggles">
-                    <h2 class="list-title">X-Ray Goggles</h3>
+                    <h2 class="list-title">X-Ray Goggles</h2>
                     <img src="{{ MEDIA_URL }}img/tools/goggles-icon.png" alt="" />
                 </a>
                 <p>Explore and remix any web page</p>
             </li>
             <li>
                 <a href="{{ url('tools') }}#popcorn">
-                    <h2 class="list-title">Popcorn</h3>
+                    <h2 class="list-title">Popcorn</h2>
                     <img src="{{ MEDIA_URL }}img/tools/popcorn-icon.png" alt="" />
                 </a>
                 <p>Make video pop</p>
