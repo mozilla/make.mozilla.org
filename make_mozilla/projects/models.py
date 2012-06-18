@@ -79,14 +79,14 @@ class Project(models.Model):
     @property
     def previous(self):
         try:
-            return self.get_previous_by_added(difficulty=self.difficulty)
+            return self.get_previous_by_added(difficulties__in=self.difficulties.all())
         except self.DoesNotExist:
             return None
 
     @property
     def next(self):
         try:
-            return self.get_next_by_added(difficulty=self.difficulty)
+            return self.get_next_by_added(difficulties__in=self.difficulties.all())
         except self.DoesNotExist:
             return None
 

@@ -148,6 +148,9 @@ p {
 	font-size: 0.929em;
 	line-height: 1.769em;
 }
+object {
+	width: 100%;
+}
 
 /* ===[ Header ]============================================================ */
 
@@ -3945,6 +3948,12 @@ border-right: none;
 .section-homepage .aside {
 	width: 33%;
 }
+@media screen and (max-width:500px) {
+	.section-homepage .col {
+		width: 100%;
+		float: none;
+	}
+}
 .section-homepage section .list-title {
 	font-size: 14px;
 	font-weight: normal;
@@ -4013,6 +4022,7 @@ border-right: none;
 .amuse .pager-page img {
 	width: 100%;
 	height: auto;
+	display: block;
 }
 .amuse .pager-tabs {
 	position: relative;
@@ -4036,6 +4046,21 @@ border-right: none;
 	left: -9999em;
 	height: 1px;
 }
+@media screen and (max-width:500px) {
+	.amuse {
+		margin-bottom: 0;
+	}
+	.amuse .pager-text {
+		bottom: 0;
+		padding-left: 20px;
+		width: auto;
+		display: block;
+	}
+	.amuse .pager-tabs {
+		bottom: 30px;
+		padding-left: 20px;
+	}
+}
 .veg .tools {
 	padding-bottom: 1em;
 	border-bottom: 1px solid #e4e4e5;
@@ -4058,6 +4083,12 @@ border-right: none;
 }
 .veg .tools li:first-child {
 	border-left: none;
+}
+@media screen and (max-width: 500px) {
+	.veg .tools li {
+		width: 100%;
+		float: none;
+	}
 }
 .veg .tools li p {
 	margin-top: 0;
@@ -4128,6 +4159,18 @@ border-right: none;
 .veg .share li {
 	float: left;
 	margin-right: 10px;
+}
+@media screen and (max-width:500px) {
+	#content .veg form {
+		float: none;
+		width: auto;
+		border-right: none;
+	}
+	.veg .share {
+		float: none;
+		width: auto;
+		padding-left: 0;
+	}
 }
 .meat {
 	overflow: hidden;
@@ -4222,6 +4265,16 @@ border-right: none;
 	font-size: 24px;
 	font-family: "Open Sans light";
 }
+@media screen and (max-width:500px) {
+	.meat .events ol li {
+		padding-left: 0;
+	}
+	.meat .events time {
+		float: none;
+		position: static;
+		width: auto;
+	}
+}
 .meat .news ol {
 	padding-left: 0;
 	list-style-type: none;
@@ -4289,6 +4342,16 @@ border-right: none;
 	color: #fff;
 	font-size: 14px;
 	text-shadow: none;
+}
+@media screen and (max-width: 500px) {
+	.cheese blockquote {
+		width: auto;
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.cheese cite img {
+		float: left;
+	}
 }
 .fish {
 	background: url("../img/bg-stone.png") repeat-x scroll 50% 0 #F9F9F9;
