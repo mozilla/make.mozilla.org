@@ -33,6 +33,10 @@ MINIFY_BUNDLES = {
             'js/mozilla-pager.js',
             'js/homepage.js',
         ),
+        'events_js': (
+            'js/flickr.js',
+            'js/folder.js',
+        ),
         'example_js': (
             'js/examples/libs/jquery-1.4.4.min.js',
             'js/examples/libs/jquery.cookie.js',
