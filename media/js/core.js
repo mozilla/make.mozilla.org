@@ -32,9 +32,10 @@ if (document && document.querySelectorAll) {
             }
 
             for (var i = 0, l = $$titles.length; i < l; ++i) {
-                if (label) {
-                    $$titles[i].setAttribute('data-label', label);
-                    $$metas[i].setAttribute('data-label', label);
+                var itemLabel = $$titles[i].getAttribute('data-label') || label;
+                if (itemLabel) {
+                    $$titles[i].setAttribute('data-label', itemLabel);
+                    $$metas[i].setAttribute('data-label', itemLabel);
                 }
 
                 var title = $$titles[i].innerText,
