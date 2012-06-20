@@ -3924,8 +3924,16 @@ border-right: none;
 	border-bottom: 1px solid #939598;
 }
 .guides-inner .major img {
-	width: 100%;
-	height: auto;
+	float: right;
+	margin: 0 0 10px 10px;
+}
+@media screen and (max-width: 500px) {
+	.guides-inner .major img {
+		width: 100%;
+		height: auto;
+		margin: 0;
+		float: none;
+	}
 }
 .guides-inner .thumb {
 	border-box: 0 0 2px 1px rgba(0, 0, 0, 0.25);
