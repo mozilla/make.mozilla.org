@@ -33,12 +33,12 @@
 <div class="meta-ticker" data-label="Event Type">
     <h3>Event Types</h3>
     <dl>
+        <dt data-label="Get Support"><a href="{{ url('page', 'support')}}">Need Help? <span class="thumb"><img src="{{ MEDIA_URL }}/img/help_stub.png" alt="" width="95" height="95"></span></a></dt>
+            <dd>Need help with your event? Visit our handy <a href="{{ url('page', 'support')}}">support page</a>.</dd>
         {% for kind in event_kinds %}
             <dt><a href="{{ url('guides_%s' % kind.slug) }}">{{ kind.name }} <span class="thumb"><img src="{{ MEDIA_URL }}/img/{{ kind.name|lower|replace(' ', '-') }}_stub.jpg" alt="" width="95" height="95"></span></a></dt>
                 <dd>{{ kind.description }}</dd>
         {% endfor %}
-        <dt data-label="Get Support"><a href="{{ url('page', 'support')}}">Need Help? <span class="thumb"><img src="{{ MEDIA_URL }}/img/help_stub.png" alt="" width="95" height="95"></span></a></dt>
-            <dd>Need help with your event? Here's how to get it. Visit our helpful <a href="{{ url('page', 'support')}}">support page</a>.</dd>
     </dl>
 </div>
 {% endif %}
@@ -66,7 +66,7 @@
             <div id="flickr-container" class="flickr-set">
                 <p>See our <a href="http://www.flickr.com/photos/mozilladrumbeat/favorites/" class="flickr-link" for="flickr-container">recent photos</a>.</p>
             </div>
-            <p><a href="http://www.flickr.com">via Flickr</a></p>
+            <p><a href="http://www.flickr.com/photos/mozilladrumbeat/favorites/">via Flickr</a></p>
             <h3>Upcoming events</h3>
             <ol class="upcoming-event-list">
             {% for event in upcoming %}
