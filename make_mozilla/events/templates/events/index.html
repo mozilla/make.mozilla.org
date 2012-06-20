@@ -50,9 +50,9 @@
             <ul class="featured-event-list">
             {% for event in featured %}
                 <li class="vevent">
-                    <h4><a href="{{ event.get_absolute_url() }}">{{ event }}</a></h4>
-                    <a href="{{ event.get_absolute_url() }}" class="map"><img src="//maps.googleapis.com/maps/api/staticmap?sensor=false&amp;markers={{ event.venue.latitude }},{{ event.venue.longitude }}&amp;zoom=3&amp;size=250x165&amp;maptype=terrain&amp;format=png" class="foldable"></a>
-                    <p class="date"><time><span class="month">{{ event.start.strftime('%b') }}</span> <span class="day">{{ event.start.strftime('%d')}}</span> <span class="year">{{ event.start.strftime('%Y')}}</span></time></p>
+                    <h4><a href="{{ event.get_absolute_url() }}" class="url summary">{{ event }}</a></h4>
+                    <a href="{{ event.get_absolute_url() }}" class="map"><img src="//maps.googleapis.com/maps/api/staticmap?sensor=false&amp;markers={{ event.venue.latitude }},{{ event.venue.longitude }}&amp;zoom=3&amp;size=225x165&amp;maptype=terrain&amp;format=png" class="foldable"></a>
+                    <p class="date dtstart"><time><span class="month">{{ event.start.strftime('%b') }}</span> <span class="day">{{ event.start.strftime('%d')}}</span> <span class="year">{{ event.start.strftime('%Y')}}</span></time></p>
                     <p class="location">{{ event.venue.street_address|replace("\r\n",", ") }}
                         <br>{{ event.venue.country.name}}</p>
                 </li>
