@@ -99,7 +99,9 @@
                         count = Math.min(8, photos.length)
                         loaded = 0;
 
-                    photos.sort(function() { return Math.random() - 0.5; });
+                    if ($(link).hasClass('random')) {
+                        photos.sort(function() { return Math.random() - 0.5; });
+                    }
 
                     for (var i = 0; i < count; ++i) {
                         photos[i].context = context;
