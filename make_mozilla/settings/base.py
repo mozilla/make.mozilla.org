@@ -214,5 +214,5 @@ SITE_URL = 'http://localhost:8000'
 
 # RSS feed for planet news
 SITE_FEED_URLS = {
-    'webmaker': 'http://planet.drumbeat.org/rss20.xml',
+    'webmaker': 'http://planet.webmaker.org/rss20.xml',
 }
