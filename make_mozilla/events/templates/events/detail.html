@@ -32,7 +32,7 @@
 
 <div class="meta panel">
     <a href="http://maps.google.com/?q={{ event.venue.street_address.encode('utf-8')|urlencode }}&amp;ll={{ event.venue.latitude }},{{ event.venue.longitude }}" class="image">
-        <img alt="A map showing the location of this event" title="" src="http://maps.googleapis.com/maps/api/staticmap?sensor=false&amp;center={{ event.venue.latitude }},{{ event.venue.longitude }}&amp;zoom=15&amp;size=330x330&amp;format=png">
+        <img alt="A map showing the location of this event" title="" src="//maps.googleapis.com/maps/api/staticmap?sensor=false&amp;center={{ event.venue.latitude }},{{ event.venue.longitude }}&amp;zoom=15&amp;size=330x330&amp;format=png">
         <span class="pulse"></span>
         <span class="marker" title="{{ event.venue.name }}"></span>
     </a>
