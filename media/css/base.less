@@ -290,6 +290,37 @@ object {
 	}
 }
 
+@media screen and (max-width: 500px) {
+	#header ul {
+		clear: both;
+		font-size: 0.8em;
+		background: rgba(255,255,255,0.5);
+		height: auto;
+		word-spacing: -3px;
+	}
+
+	#header li {
+		display: inline-block;
+		width: 50%;
+		word-spacing: 0;
+	}
+
+	#header li a {
+		min-width: 0;
+		max-width: none;
+		display: block;
+		padding: 0;
+	}
+
+	.section-projects #header .projects a::after,
+	.section-tools #header .tools a::after,
+	.section-events #header .events a::after,
+	#page-about #header .about a::after,
+	.section-news #header .news a::after {
+		border-width: 0;
+	}
+}
+
 /* ===[ Content ]=========================================================== */
 
 #content {
@@ -307,6 +338,12 @@ object {
 	#content {
 		margin-top: -100px;
 		padding-top: 140px;
+	}
+}
+@media screen and (max-width: 500px) {
+	#content {
+		margin-top: -70px;
+		padding-top: 110px;
 	}
 }
 
@@ -389,6 +426,13 @@ object {
 	.brochure-page #content::before {
 		margin-top: -314px;
 		height: 300px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.brochure-page #content::before {
+		margin-top: -274px;
+		height: 260px;
 	}
 }
 
