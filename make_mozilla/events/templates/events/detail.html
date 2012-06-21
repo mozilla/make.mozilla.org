@@ -32,7 +32,7 @@
 
 <div class="meta panel">
     <a href="http://maps.google.com/?q={{ event.venue.street_address.encode('utf-8')|urlencode }}&amp;ll={{ event.venue.latitude }},{{ event.venue.longitude }}" class="image">
-        <img alt="A map showing the location of this event" title="" src="http://maps.googleapis.com/maps/api/staticmap?sensor=false&amp;center={{ event.venue.latitude }},{{ event.venue.longitude }}&amp;zoom=15&amp;size=330x330&amp;format=png">
+        <img alt="A map showing the location of this event" title="" src="//maps.googleapis.com/maps/api/staticmap?sensor=false&amp;center={{ event.venue.latitude }},{{ event.venue.longitude }}&amp;zoom=15&amp;size=330x330&amp;format=png">
         <span class="pulse"></span>
         <span class="marker" title="{{ event.venue.name }}"></span>
     </a>
@@ -40,7 +40,7 @@
         {% if event.venue.name %}<div class="h-card vcard"><p class="p-name fn p-org org"><strong>{{ event.venue.name }}</strong></p>{% endif %}
         <div class="h-adr adr">
             <p><span class="p-street-address street-address">{{ event.venue.street_address|nl2br }}</span><br>
-                <span class="p-country-name country-name">{{ event.venue.country.name }}</span>></p>
+                <span class="p-country-name country-name">{{ event.venue.country.name }}</span></p>
             <p><a href="/events/near/?lat={{ event.venue.latitude }}&amp;lng={{ event.venue.longitude }}">Events nearby</a></p>
         </div>
         {% if event.venue.name %}</div>{% endif %}
