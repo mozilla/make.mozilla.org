@@ -67,16 +67,6 @@
                 <p>See our <a href="http://www.flickr.com/photos/mozilladrumbeat/favorites/" class="flickr-link" for="flickr-container">recent photos</a>.</p>
             </div>
             <p><a href="http://www.flickr.com/photos/mozilladrumbeat/favorites/">via Flickr</a></p>
-            <h3>Upcoming events</h3>
-            <ol class="upcoming-event-list">
-            {% for event in upcoming %}
-                <li class="vevent">
-                    <time>{{ event.start.strftime('%B') }} <span>{{ event.start.strftime('%e') }}</span></time>
-                    <h3 class="list-title"><a href="{{ event.get_absolute_url() }}">{{ event.name }}</a></h3>
-                    <p class="location">{{ event.venue }}</p>
-                </li>
-            {% endfor %}
-            </ol>
         </div>
     </div>
 </div>
