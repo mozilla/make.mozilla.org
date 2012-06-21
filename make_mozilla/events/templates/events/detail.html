@@ -40,7 +40,7 @@
         {% if event.venue.name %}<div class="h-card vcard"><p class="p-name fn p-org org"><strong>{{ event.venue.name }}</strong></p>{% endif %}
         <div class="h-adr adr">
             <p><span class="p-street-address street-address">{{ event.venue.street_address|nl2br }}</span><br>
-                <span class="p-country-name country-name">{{ event.venue.country.name }}</span>></p>
+                <span class="p-country-name country-name">{{ event.venue.country.name }}</span></p>
             <p><a href="/events/near/?lat={{ event.venue.latitude }}&amp;lng={{ event.venue.longitude }}">Events nearby</a></p>
         </div>
         {% if event.venue.name %}</div>{% endif %}
