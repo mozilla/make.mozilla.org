@@ -57,13 +57,11 @@ def index(request):
 
     featured = list(models.Event.objects.filter(official=True, end__gte=datetime.now(), pending_deletion=False).order_by('?')[:3])
     featured.sort(key=lambda event: event.start)
-    upcoming = models.Event.upcoming()[:3];
 
     return jingo.render(request, 'events/index.html', {
         'event_kinds': event_kinds,
         'current_campaign': current_campaign,
         'featured': featured,
-        'upcoming': upcoming,
     })
 
 
