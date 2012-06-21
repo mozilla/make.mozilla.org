@@ -20,7 +20,6 @@ urlpatterns = patterns('',
     url(r'^events/',    include(make_mozilla.events.urls)),
     url(r'^tools/',     include(make_mozilla.tools.urls)),
     url(r'^projects/',  include(make_mozilla.projects.urls)),
-    url(r'^news/',    include(make_mozilla.news.urls)),
     url(r'^users/',     include(make_mozilla.users.urls)),
     # browserid endpoints
     url(r'^browserid/', include('django_browserid.urls')),

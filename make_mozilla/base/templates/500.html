@@ -1,4 +1,6 @@
-{% extends "events/base.html" %}
+{% extends "base.html" %}
+
+{% block page_title %}Server Error (500) | {{ super() }}{% endblock %}
 
 {% block page_id %}error{% endblock %}
 {% block page_class %}{{ super() }} guides-inner brochure-page{% endblock %}

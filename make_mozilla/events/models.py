@@ -5,6 +5,7 @@ from django_countries import CountryField
 from django.utils.safestring import mark_safe
 from django.core.files.storage import FileSystemStorage
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
 
 from datetime import datetime
 from tower import ugettext_lazy as _
@@ -77,6 +78,12 @@ class Event(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        if self.bsd_hosted():
+            return self.event_url
+        else:
+            return reverse('event', kwargs={'event_hash': self.hash})
 
     @property
     def hash(self):
