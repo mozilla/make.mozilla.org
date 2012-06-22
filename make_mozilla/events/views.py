@@ -18,6 +18,7 @@ import json
 import bleach
 import commonware
 import jingo
+from datetime import datetime
 from funfactory.log import log_cef
 from mobility.decorators import mobile_template
 from session_csrf import anonymous_csrf
@@ -48,14 +49,21 @@ class IndexGeoRSSFeed(Feed):
 
 def index(request):
     event_kinds = models.EventKind.objects.all()
+
     try:
         current_campaign = models.Campaign.objects.get(pk=1)
     except ObjectDoesNotExist:
         current_campaign = None
 
-    return jingo.render(request, 'events/code-party_splash.html', {
+    now = datetime.utcnow()
+
+    featured = list(models.Event.objects.filter(official=True, end__gte=datetime.now(), pending_deletion=False).order_by('?')[:3])
+    featured.sort(key=lambda event: event.start)
+
+    return jingo.render(request, 'events/index.html', {
         'event_kinds': event_kinds,
         'current_campaign': current_campaign,
+        'featured': featured,
     })
 
 

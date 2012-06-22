@@ -99,12 +99,16 @@
             </figcaption>
         </figure>
         <p>Make something with Thimble</p>
+        {% if projects.thimble.count() != 0 %}
         <ul>
             {% for project in projects.thimble %}
             <li><a href="{{ project.get_absolute_url() }}">{{ project }}</a></li>
             {% endfor %}
             <li><em><a href="{{ url('projects') }}?tool=thimble">More Thimble projects</a></em></li>
         </ul>
+        {% else %}
+            <p><b>Projects coming soon</b></p>
+        {% endif %}
     </aside>
 </section>
 
@@ -128,12 +132,16 @@
             </figcaption>
         </figure>
         <p>Make something with X-Ray Goggles</p>
+        {% if projects.goggles.count() != 0 %}
         <ul>
             {% for project in projects.goggles %}
             <li><a href="{{ project.get_absolute_url() }}">{{ project }}</a></li>
             {% endfor %}
             <li><em><a href="{{ url('projects') }}?tool=x-ray-goggles">More X-Ray Goggles projects</a></em></li>
         </ul>
+        {% else %}
+            <p><b>Projects coming soon</b></p>
+        {% endif %}
     </aside>
 </section>
 
@@ -141,11 +149,11 @@
     <header><h2><img src="{{ MEDIA_URL}}img/tools/popcorn-icon.png"> <strong>Popcorn</strong></h2></header>
     <div class="poster"></div>
     <div class="content">
-        <h3>Supercharge your web video</h3>
+        <h3>Video beyond the box</h3>
         <span class="feature app"><img src="{{ MEDIA_URL }}img/tools/popcorn-app.png" alt="A screenshot of the Popcorn application"></span>
-        <p>Mozilla Popcorn turns boring old online video into dynamic "hyper-video", rich with interactivity and context. It lets you link the rest of the web directly to your video's playback, pulling in social media, news feeds, data visualizations and other content in real time. Create your own pop-up videos, multimedia reports, guided web tours and more.</p>
+        <p><b>Mozilla Popcorn pulls the rest of the web into your video.</b> Popcorn is an interactive video tool that lets you link your video directly to popular web services like Twitter, Wikipedia, Google maps and more. The result is a new kind of multimedia experience that works more like the web itself: interactive, rich with context and constantly changing. Create your own newscasts, pop-up videos, multimedia reports, guided web tours and more. <b>Popcorn is still in development</b> -- but please take an advance look and play around with the preview version now. Let's make some Popcorn!</p>
         <span class="feature sample"><img src="{{ MEDIA_URL }}img/tools/popcorn-sample.png" alt="A sample of the Popcorn application"></span>
-        <p class="buttons"><a href="http://mozillapopcorn.org/" class="button more">Get started</a></p>
+        <p class="buttons"><a href="http://maker.mozillapopcorn.org/" class="button more">Get started</a></p>
     </div>
     <aside>
         <figure>
@@ -157,12 +165,16 @@
             </figcaption>
         </figure>
         <p>Make something with Popcorn</p>
+        {% if projects.popcorn.count() != 0 %}
         <ul>
             {% for project in projects.popcorn %}
             <li><a href="{{ project.get_absolute_url() }}">{{ project }}</a></li>
             {% endfor %}
             <li><em><a href="{{ url('projects') }}?tool=popcorn">More Popcorn projects</a></em></li>
         </ul>
+        {% else %}
+            <p><b>Projects coming soon</b></p>
+        {% endif %}
     </aside>
 </section>
 {% endblock %}

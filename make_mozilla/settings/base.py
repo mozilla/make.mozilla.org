@@ -34,6 +34,10 @@ MINIFY_BUNDLES = {
             'js/mozilla-pager.js',
             'js/homepage.js',
         ),
+        'events_js': (
+            'js/flickr.js',
+            'js/folder.js',
+        ),
         'example_js': (
             'js/examples/libs/jquery-1.4.4.min.js',
             'js/examples/libs/jquery.cookie.js',
@@ -211,5 +215,5 @@ SITE_URL = 'http://localhost:8000'
 
 # RSS feed for planet news
 SITE_FEED_URLS = {
-    'webmaker': 'http://planet.drumbeat.org/rss20.xml',
+    'webmaker': 'http://planet.webmaker.org/rss20.xml',
 }

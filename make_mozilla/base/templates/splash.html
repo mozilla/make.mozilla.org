@@ -4,16 +4,7 @@
 
 {% block content %}
 <div class="amuse pager pager-with-tabs pager-auto-rotate pager-no-history" id="home-promo">
-    <div class="pager-content">
-        <div class="default-page pager-page" id="page-promo-join">
-            <a href="https://donate.mozilla.org/page/contribute/join-mozilla?source=webmaker_home">
-                <img src="{{ MEDIA_URL }}img/carousel/join.jpg" alt="" />
-                <div class="pager-text">
-                    <h2 class="pager-title">Join Mozilla</h2>
-                    <p>Make a donation today to support Mozilla's work building a generation of webmakers.</p>  
-                </div>
-            </a>
-        </div>
+    <div class="default-page pager-content">
     	<div class="pager-page" id="page-promo-webmakers">
             <a href="http://mozilla.org/webmaker/videos/">
                 <img src="{{ MEDIA_URL }}img/carousel/webmaker-video.jpg" alt="" />
@@ -33,20 +24,28 @@
             </a>
         </div>
         <div class="pager-page" id="page-promo-popcorn">
-            <a href="http://www.mozillapopcorn.org">
+            <a href="http://maker.mozillapopcorn.org">
                 <img src="{{ MEDIA_URL }}img/carousel/popcorn.jpg" alt="" />
                 <div class="pager-text">
-                    <h2 class="pager-title">Make video pop with Popcorn</h2>
+                    <h2 class="pager-title">Supercharge web video with Popcorn</h2>
                     <p>Popcorn is revolutionizing video on the web. It's free, open and easy to use. Try it today.</p>
                 </div>
             </a>
         </div>
-    </ol>
+        <div class="pager-page" id="page-promo-join">
+            <a href="https://donate.mozilla.org/page/contribute/join-mozilla?source=webmaker_home">
+                <img src="{{ MEDIA_URL }}img/carousel/join.jpg" alt="" />
+                <div class="pager-text">
+                    <h2 class="pager-title">Join Mozilla</h2>
+                    <p>Make a donation today to support Mozilla's work building a generation of webmakers.</p>  
+                </div>
+            </a>
+        </div>
     <ul class="pager-tabs">
-        <li id="tab-join"><a href="#" class="selected">● <span>read about Join Mozilla</span></a></li>
-        <li id="tab-webmakers"><a href="#">● <span>read about Make the webmakers</span></a></li>
+        <li id="tab-webmakers"><a href="#" class="selected">● <span>read about Make the webmakers</span></a></li>
         <li id="tab-code-party"><a href="#">● <span>read about Summer Code Party</span></a></li>
         <li id="tab-popcorn"><a href="#">● <span>read about Make video pop with Popcorn</span></a></li>
+        <li id="tab-join"><a href="#">● <span>read about Join Mozilla</span></a></li>
     </ul>
     </div>
 </div>
@@ -55,24 +54,24 @@
         <ul>
             <li>
                 <a href="{{ url('tools') }}#thimble">
-                    <h2 class="list-title">Thimble</h3>
+                    <h2 class="list-title">Thimble</h2>
                     <img src="{{ MEDIA_URL }}img/tools/thimble-icon.png" alt="" />
                 </a>
                 <p>Make and share your own web page</p>
             </li>
             <li>
                 <a href="{{ url('tools') }}#x-ray-goggles">
-                    <h2 class="list-title">X-Ray Goggles</h3>
+                    <h2 class="list-title">X-Ray Goggles</h2>
                     <img src="{{ MEDIA_URL }}img/tools/goggles-icon.png" alt="" />
                 </a>
                 <p>Explore and remix any web page</p>
             </li>
             <li>
                 <a href="{{ url('tools') }}#popcorn">
-                    <h2 class="list-title">Popcorn</h3>
+                    <h2 class="list-title">Popcorn</h2>
                     <img src="{{ MEDIA_URL }}img/tools/popcorn-icon.png" alt="" />
                 </a>
-                <p>Make video pop</p>
+                <p>Supercharge web video</p>
             </li>
         </ul>
     </section>
@@ -119,7 +118,7 @@
 							<h3 class="list-title">{{ p }}</h3>
 						</a>
                         {% if p.contributor %}
-						<footer><p>Contributed by Tumblr</p></footer>
+						<footer><p>Contributed by {{ p.contributor.local_name }}</p></footer>
                         {% endif %}
 					</li>
                     {% endfor %}
@@ -130,14 +129,11 @@
 		</div>
 		<div class="col aside">
 			<section class="news">
-				<h2 class="side-title">Webmaker News</h2>
+				<h2 class="side-title"><a href="{{ url('page', 'news') }}">Webmaker News</a></h2>
                 <ol>
                     {% for n in news %}
                     <li>
                         <a href="{{ n.link }}">
-                            {% if loop.first and n.get_feature_image() %}
-                                {{ n.get_feature_image()|safe }}
-                            {% endif %}
                             <p>{{ n.updated.strftime('%B %e, %Y') }}</p>
                             <h3 class="list-title">{{ n.title }}</h3>
                         </a>
@@ -172,7 +168,7 @@
     <section class="wrap all-mozilla">
         <h2>Building a generation of webmakers</h2>
         <blockquote>
-            <p>"Mozillans are people who make things. Moving people from consumption to creation is Mozilla's goal."</p>
+            <p>"Mozillians are people who make things. Moving people from consumption to creation is Mozilla's goal."</p>
             <cite><img src="{{ MEDIA_URL }}img/mitchell-photo.jpg" alt="" /><em>Mitchell Baker</em>, Mozilla Chair and Chief Lizard Wrangler</cite>
         </blockquote>
         <a class="lozenge" href="{{ url('page', 'about') }}">Learn more</a>
@@ -206,21 +202,39 @@
     </section>
 </div>
 <div class="fish">
-	<section class="wrap partners">
-		<h2>Mozilla Webmaker is generously supported by the following:</h2>
+    <section class="wrap partners">
+        <h2>Mozilla Webmaker is <a href="{{ url('page', 'partners') }}">generously supported</a> by the following:</h2>
         <div id="partner-carousel" class="carousel slide">
-        <div class="carousel_inner">
-		<ul class="maker_partners">
-			<li class="active item">
-                <ul>
-                    <li><a href="http://www.knightfoundation.org/"><img src="{{ MEDIA_URL }}img/logos/funding/Knight.png" alt="Knight Foundation" /></a></li>
-			         <li><a href="http://www.macfound.org/"><img src="{{ MEDIA_URL }}img/logos/funding/Macarthur.png" alt="MacArthur Foundation" /></a></li>
-			         <li><a href="http://www.fordfoundation.org/"><img src="{{ MEDIA_URL }}img/logos/funding/ford-foundation.png" alt="Ford Foundation" /></a></li>
-			         <li><a href="http://www.sloan.org/"><img src="{{ MEDIA_URL }}img/logos/funding/Sloan.png" alt="Alfred P Sloan Foundation" /></a></li>
+            <div class="carousel_inner">
+                <ul class="maker_partners">
+                    <li class="item active">
+                        <ul>
+                            <li><a href="http://www.citf.org/"><img src="/media/img/logos/funding/citf.png" alt="Chicago Instructional Technology Foundation"></a></li>
+                            <li><a href="http://cpb.org/"><img src="/media/img/logos/funding/cpb.png" alt="Corporation for Public Broadcasting"></a></li>
+                            <li><a href="http://www.fordfoundation.org/"><img src="/media/img/logos/funding/ford-foundation.png" alt="Ford Foundation"></a></li>
+                            <li><a href="http://www.knightfoundation.org/"><img src="/media/img/logos/funding/Knight.png" alt="Knight Foundation"></a></li>
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <ul>
+                            <li><a href="http://www.macfound.org/"><img src="/media/img/logos/funding/Macarthur.png" alt="MacArthur Foundation"></a></li>
+                            <li><a href="http://www.moore.org/"><img src="/media/img/logos/funding/moore.png" alt="Moore Foundation"></a></li>
+                            <li><a href="http://www.nesta.org.uk/"><img src="/media/img/logos/funding/nesta.png" alt="NESTA"></a></li>
+                            <li><a href="http://www.nea.gov/"><img src="/media/img/logos/funding/nea.png" alt="National Endowment for the Arts"></a></li>
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <ul>
+                            <li><a href="http://www.nsf.gov/"><img src="/media/img/logos/funding/NSF.png" alt="National Science Foundation"></a></li>
+                            <li><a href="http://www.rescorp.org/"><img src="/media/img/logos/funding/rsca.png" alt="Research Corporation for Science Advancement"></a></li>
+                            <li><a href="http://www.sloan.org/"><img src="/media/img/logos/funding/Sloan.png" alt="Sloan Foundation"></a></li>
+                            <li><a href="http://www.zerodivide.org/"><img src="/media/img/logos/funding/zerodivide.png" alt="ZeroDivide"></a></li>
+                        </ul>
+                    </li>
                 </ul>
-            </li>
-		</ul>
-        </div>
+                <a class="carousel-control left" href="#partner-carousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#partner-carousel" data-slide="next">&rsaquo;</a>
+            </div>
         </div>
         <p class="shout">and <a href="https://donate.mozilla.org/page/contribute/join-mozilla?source=webmaker_home">Mozillians like you</a></p>
 	</section>

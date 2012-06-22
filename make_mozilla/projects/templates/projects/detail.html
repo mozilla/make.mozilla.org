@@ -10,7 +10,7 @@
 
     {{ project.content }}
 
-    {% if project.link %}<p class="buttons"><a href="{{ project.link }}" class="button more">Get Started</a></p>{% endif %}
+    {% if project.link %}<p class="buttons"><a{% if not waffle.switch('no_track') %}onClick="dcsMultiTrack('DCS.dcsuri', '{{ project.link }}', 'WT.ti', 'project_{{ project|lower|replace(' ', '-') }}');"{% endif %} href="{{ project.link }}" class="button more">Get Started</a></p>{% endif %}
 </div>
 
 <div class="meta" id="about">
