@@ -1,5 +1,7 @@
 {% extends "events/base.maps.html" %}
 
+{% import "events/map-setup.html" as map %}
+
 {% block page_title %}Near | {{ super() }}{% endblock %}
 {% block page_id %}events-list{% endblock %}
 
@@ -29,12 +31,6 @@
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        window.map_config = {
-            latitude: "{{ latitude }}",
-            longitude: "{{ longitude }}",
-            zoom: 12
-        };
-    </script>
+    {{ map.config({'latitude':latitude,'longitude':longitude}) }}
     {{ super() }}
 {% endblock %}

@@ -1,5 +1,7 @@
 {% extends "events/base.maps.html" %}
 
+{% import "events/map-setup.html" as map %}
+
 {% block page_title %}{{ country.name }} | {{ super() }}{% endblock %}
 {% block page_id %}events-list-all{% endblock %}
 
@@ -29,11 +31,6 @@
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        window.map_config = {
-            filter: "{{ country.code }}",
-            fit: "{{ country.name }}"
-        };
-    </script>
+    {{ map.config(country) }}
     {{ super() }}
 {% endblock %}
