@@ -1,5 +1,7 @@
 {% extends "events/base.maps.html" %}
 
+{% import "events/map-setup.html" as map %}
+
 {% block page_title %}Near | {{ super() }}{% endblock %}
 {% block page_id %}events-map{% endblock %}
 
@@ -23,52 +25,11 @@
 
 {% block scripts %}
     {% if results.object_list %}
-        <script>
-            window.map_config = {
-                latitude: "{{ latitude }}",
-                longitude: "{{ longitude }}",
-                draggable: true,
-                controls: true,
-                cluster: true,
-                target: "{{ url('events.near.map') }}?lat=${lat}&lng=${lng}",
-                full: true,
-                zoom: 12,
-                mapFooter: '<img src="/media/img/official-event.png" alt="White check mark on blue circle" title=""> Indicates official webmaker event'
-            };
-        </script>
+        {{ map.config({'latitude':latitude,'longitude':longitude}, target=url('events.near.map') + "?lat=${lat}&lng=${lng}", full=True) }}
         {{ super() }}
-        <script>
-            map.add_event.apply(map, [
-                {% for event in results.object_list -%}
-                {
-                    name: '{{ event.name|escape }}',
-                    latitude: {{ event.venue.latitude }},
-                    longitude: {{ event.venue.longitude }},
-                    url: '{% if event.bsd_hosted() %}{{ event.event_url|escape }}{% else %}{{ url('event', event.hash)|escape }}{% endif %}',
-                    venue: '{{ event.venue.name|escape }}',
-                    address: '{{ event.venue.street_address|replace('\r', '')|replace('\n', ', ')|escape }}',
-                    from: new Date('{{ event.start.strftime('%a, %d %b %Y %H:%M:%S UTC%z') }}'),
-                    to: new Date('{{ event.end.strftime('%a, %d %b %Y %H:%M:%S UTC%z') }}'),
-                    official: {% if event.official %}true{% else %}false{% endif %},
-                    type: {
-                        name: '{{ event.kind.name|escape }}',
-                        url: '{{ url('guides_%s' % event.kind.slug)|escape }}'
-                    }
-                }{% if not loop.last %},
-                {% endif -%}
-                {%- endfor %}
-
-            ]);
-        </script>
+        {{ map.events(results.object_list) }}
     {% else %}
-    <script>
-        window.map_config = {
-            latitude: "{{ latitude }}",
-            longitude: "{{ longitude }}",
-            zoom: 12,
-            target: "{{ url('events.near.map') }}?lat=${lat}&lng=${lng}"
-        };
-    </script>
-    {{ super() }}
+        {{ map.config({'latitude':latitude,'longitude':longitude}, target=url('events.near.map') + "?lat=${lat}&lng=${lng}") }}
+        {{ super() }}
     {% endif %}
 {% endblock %}
