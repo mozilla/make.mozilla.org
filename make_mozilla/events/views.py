@@ -12,7 +12,6 @@ from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
-import datetime
 import urllib2
 import json
 import bleach
@@ -207,7 +206,7 @@ def search(request):
 
 
 def all(request):
-    today = datetime.date.today()
+    today = datetime.today()
     page = request.GET.get('page', 1)
 
     if request.GET.get('sort') == 'name':
@@ -248,7 +247,7 @@ class Country(object):
 
         (sort, order) = self.extract_sort(request)
         page = self.extract_page(request)
-        today = datetime.date.today()
+        today = datetime.today()
 
         results = models.Event.objects.filter(start__gte=today, venue__country=country_code).order_by(order)
 
