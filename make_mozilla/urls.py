@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.conf.urls.defaults import *
+from django.http import HttpResponseRedirect
 
 from funfactory.monkeypatches import patch
 patch()
@@ -16,6 +17,7 @@ from django.contrib.gis import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^ja/', lambda x: HttpResponseRedirect('http://www.mozillafactory.org/ja/webmaker/')),
     url(r'^$',          'make_mozilla.base.views.root.index', name="splash"),
     url(r'^events/',    include(make_mozilla.events.urls)),
     url(r'^tools/',     include(make_mozilla.tools.urls)),
