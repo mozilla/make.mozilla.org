@@ -820,7 +820,7 @@ object {
 	.box-shadow(@panelShadow);
 
 	background: #FFF;
-	padding: 20px 30px;
+	padding: 20px;
 	width: 460px;
 	cursor: default;
 }
@@ -891,6 +891,18 @@ object {
 	float: right;
 	font-size: 0.857em;
 	text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+	#map-container .infoBox {
+		width: 360px;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	#map-container .infoBox {
+		width: 220px;
+	}
 }
 
 /* ===[ Footer ]============================================================ */

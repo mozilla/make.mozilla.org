@@ -260,7 +260,7 @@ var map = (function (config) {
                             content: content,
                             alignBottom: true,
                             pixelOffset: new google.maps.Size(-50, -100),
-                            infoBoxClearance: new google.maps.Size(40, 40),
+                            infoBoxClearance: new google.maps.Size(40, 0),
                             closeBoxURL: '/media/img/close.png'
                         });
 
@@ -274,7 +274,8 @@ var map = (function (config) {
                                 location = projection.fromLatLngToContainerPixel(marker.position),
                                 targetX = location.x + box.offsetWidth / 2 + (this.pixelOffset_.width||0),
                                 targetY = location.y - box.offsetHeight + (this.pixelOffset_.height||0) + (container.offsetHeight / 2)
-                                    - $(search.form.parentNode).offset().top - search.form.parentNode.offsetHeight - 40,
+                                    - $(search.form.parentNode).offset().top - search.form.parentNode.offsetHeight - 40
+                                    + container.parentNode.offsetTop,
                                 target = projection.fromContainerPixelToLatLng(new google.maps.Point(targetX, targetY));
                             
                             gmap.panTo(target);
