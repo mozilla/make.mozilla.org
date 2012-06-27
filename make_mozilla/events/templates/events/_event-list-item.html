@@ -3,7 +3,7 @@
         <h4><a class="p-name summary u-url url" href="{% if event.bsd_hosted() %}{{ event.event_url }}{% else %}{{ url('event', event.hash) }}{% endif %}">{{ event.name }}</a></h4>
         {% if event.start and event.end %}
             {% if event.start.date() == event.end.date() %}
-            <p>
+            <p class="date">
                 <time class="dt-start dtstart" datetime="{{ event.start.strftime('%F %T') }}">{{ event.start.strftime('%B %-d, %Y %-I:%M %p') }}</time> to 
                 <time class="dt-end dtend" datetime="{{ event.end.strftime('%F %T') }}">{{ event.end.strftime('%-I:%M %p') }}</time>
             </p>
