@@ -2010,31 +2010,34 @@ ul.tri-set img {
 	}
 }
 
-@media screen and (max-width: 700px) {
-	.search-results .buttons.item {
+@media screen and (max-width: 800px) {
+	#content .search-results .buttons.item {
 		display: block;
 		text-align: right;
 		padding: 10px 35px 0 0;
 	}
+	#content .search-results .item input {
+		max-width: 100%;
+	}
 }
 
 @media screen and (max-width: 500px) {
-	.search-results form .item {
+	#content .search-results form .item {
 		display: block;
 		margin: 10px 0 0;
 		padding: 0;
 		width: auto;
 	}
 
-	.search-results .item.location {
+	#content .search-results .item.location {
 		margin-left: 18px;
 	}
 
-	.search-results select {
+	#content .search-results select {
 		width: 100%;
 	}
 
-	.search-results .buttons.item {
+	#content .search-results .buttons.item {
 		padding-right: 0;
 	}
 }
