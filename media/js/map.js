@@ -255,10 +255,13 @@ var map = (function (config) {
                             data.push(item);
                         }
                     }
+                    $(search).data('results', data);
                     response(data);
                 });
             },
             open: function () {
+                var results = $(search).data('results');
+                searchLocation = (results &&results.length) ? results[0].location : null;
                 $(this).addClass('with-results');
             },
             close: function () {
