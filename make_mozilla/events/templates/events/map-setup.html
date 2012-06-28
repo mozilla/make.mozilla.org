@@ -37,8 +37,8 @@
                 url: '{{ event.get_absolute_url() }}',
                 venue: '{{ event.venue.name|escape }}',
                 address: '{{ event.venue.street_address|replace('\r', '')|replace('\n', ', ')|escape }}',
-                from: new Date('{{ event.start.strftime('%a, %d %b %Y %H:%M:%S UTC%z') }}'),
-                to: new Date('{{ event.end.strftime('%a, %d %b %Y %H:%M:%S UTC%z') }}'),
+                from: new Date('{{ event.start.strftime('%a, %d %b %Y %H:%M:%S') }}'),
+                to: new Date('{{ event.end.strftime('%a, %d %b %Y %H:%M:%S') }}'),
                 official: {% if event.official %}true{% else %}false{% endif %},
                 type: {
                     name: '{{ event.kind.name|escape }}',
