@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from django import http
+from django_countries import countries
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_GET
@@ -202,6 +203,72 @@ def search(request):
         })))
 
     return jingo.render(request, 'events/search.html', {'results': results, 'location': location})
+
+
+def all(request):
+    today = datetime.today()
+    page = request.GET.get('page', 1)
+
+    if request.GET.get('sort') == 'name':
+        sort, order = ('name', 'name')
+    else:
+        sort, order = ('date', 'start')
+
+    results = models.Event.objects.filter(start__gte=today).order_by(order)
+    results_per_page = 24
+
+    return jingo.render(request, 'events/all.html', {
+        'sort': sort,
+        'results': paginators.results_page(results, results_per_page, page=page),
+    })
+
+
+class Country(object):
+    def extract_page(self, request):
+        return request.GET.get('page', 1)
+
+    def extract_sort(self, request):
+        sort = request.GET.get('sort')
+        if sort == 'name':
+            return ('name', 'name')
+        else:
+            return ('date', 'start')
+
+    def paginated_results(self, latitude, longitude, order, results_per_page, page):
+        results = models.Event.near(latitude, longitude, sort=order)
+        return paginators.results_page(results, results_per_page, page=page)
+
+    def render(self, request, country_code, template, results_per_page):
+        try:
+            country_list = dict(countries.COUNTRIES)
+            country_name = country_list[country_code].__unicode__()
+        except KeyError:
+            raise http.Http404
+
+        (sort, order) = self.extract_sort(request)
+        page = self.extract_page(request)
+        today = datetime.today()
+
+        results = models.Event.objects.filter(start__gte=today, venue__country=country_code).order_by(order)
+
+        return jingo.render(request, template, {
+            'sort': 'start',
+            'country': {
+                'code': country_code,
+                'name': country_name,
+            },
+            'results': paginators.results_page(results, results_per_page, page=page),
+        })
+
+country_view = Country()
+
+
+def country(request, code):
+    return country_view.render(request, code.upper(), 'events/country-list.html', 24)
+
+
+def country_map(request, code):
+    return country_view.render(request, code.upper(), 'events/country-map.html', 24)
 
 
 class Near(object):
