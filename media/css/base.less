@@ -820,7 +820,7 @@ object {
 	.box-shadow(@panelShadow);
 
 	background: #FFF;
-	padding: 20px 30px;
+	padding: 20px;
 	width: 460px;
 	cursor: default;
 }
@@ -891,6 +891,18 @@ object {
 	float: right;
 	font-size: 0.857em;
 	text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+	#map-container .infoBox {
+		width: 360px;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	#map-container .infoBox {
+		width: 220px;
+	}
 }
 
 /* ===[ Footer ]============================================================ */
@@ -1914,8 +1926,8 @@ ul.tri-set img {
 	display: block;
 	float: right;
 	width: 130px;
-	margin-right: -200px;
-	padding: 20px;
+	margin: 0 -200px -280px 0;
+	padding: 20px 20px 300px;
 	border-left: solid 1px #E1E2E3;
 	text-transform: uppercase;
 	font-size: 0.857em;
@@ -2021,32 +2033,101 @@ ul.tri-set img {
 	}
 }
 
-@media screen and (max-width: 700px) {
-	.search-results .buttons.item {
+@media screen and (max-width: 800px) {
+	#content .search-results .buttons.item {
 		display: block;
 		text-align: right;
 		padding: 10px 35px 0 0;
 	}
+
+	#content .search-results .item input {
+		max-width: 100%;
+	}
+
+	.search-results ol li {
+		padding-left: 20px;
+	}
+
+	.search-results ol p.date {
+		font-weight: bold;
+		margin-bottom: 1em;
+	}
+
+	.search-results ol div.date {
+		display: none;
+	}
+
+	.search-results ol .about .type {
+		left: 20px;
+	}
 }
 
 @media screen and (max-width: 500px) {
-	.search-results form .item {
+	#content .search-results form .item {
 		display: block;
 		margin: 10px 0 0;
 		padding: 0;
 		width: auto;
 	}
 
-	.search-results .item.location {
+	#content .search-results .item.location {
 		margin-left: 18px;
 	}
 
-	.search-results select {
+	#content .search-results select {
 		width: 100%;
 	}
 
-	.search-results .buttons.item {
+	#content .search-results .buttons.item {
 		padding-right: 0;
+	}
+
+	.search-results ol {
+		padding-bottom: 20px;
+	}
+
+	.search-results ol li {
+		padding-right: 20px;
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+
+	.search-results ol .about {
+		padding-bottom: 20px;
+	}
+
+	.search-results ol .about .type {
+		position: static;
+		display: inline-block;
+		margin-top: 1em;
+	}
+
+	.search-results ol .campaign {
+		float: none;
+		min-height: 0;
+		padding-bottom: 20px;
+		margin: 0 -20px;
+		width: auto;
+		background: #EEE;
+		border-right: none;
+		border-top: solid 1px #DDD;
+		text-align: center;
+	}
+
+	.search-results ol .campaign img {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	#content .search-results .buttons.item .button {
+		display: block;
+		width: 100%;
+		margin: 0;
+	}
+
+	#content .search-results .buttons.item .button.near-me {
+		margin-top: 10px;
 	}
 }
 

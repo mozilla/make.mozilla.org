@@ -6,10 +6,14 @@ def event_name(event_json):
 
 def event_times(event_json):
     tz = pytz.timezone(event_json['local_timezone'])
-    start = tz.localize(
-        datetime.strptime(
-            event_json['start_datetime_system'], '%Y-%m-%d %H:%M:%S'))
-    end = start + timedelta(minutes = int(event_json['duration']))
+    db_datetime = datetime.strptime(
+        event_json['start_datetime_system'],
+        '%Y-%m-%d %H:%M:%S'
+    )
+    db_ammended_datetime = db_datetime.replace(tzinfo=pytz.utc)
+    cleaned_date = db_ammended_datetime.astimezone(tz)
+    start = cleaned_date.replace(tzinfo=pytz.utc)
+    end = start + timedelta(minutes=int(event_json['duration']))
     return {'start': start, 'end': end}
 
 def event_description(event_json):
