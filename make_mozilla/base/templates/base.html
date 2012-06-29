@@ -2,7 +2,7 @@
 <!--[if (lt IE 9)]><html class="no-js bad-ie" lang="{{ LANG }}" dir="{{ DIR }}"><![endif]-->
 <!--[if gt IE 8]><!--><html class="no-js" lang="{{ LANG }}" dir="{{ DIR }}"><!--<![endif]-->
     <head>
-        <title>{% block page_title %}Mozilla Webmaker{% endblock %}</title>
+        <title>{% if APP_STAGE %}[{{ APP_STAGE }}] | {% endif %}{% block page_title %}Mozilla Webmaker{% endblock %}</title>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta name="viewport" content="initial-scale=1.0, width=device-width">
         <link rel="shortcut icon" href="{{ MEDIA_URL }}img/favicon.ico" type="image/x-icon">
@@ -22,6 +22,11 @@
         <script>
             document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, '');
         </script>
+        {% if APP_MSG %}
+            <div id="app_stage_box">
+                <div class="constrained">{{ APP_MSG|safe }}</div>
+            </div>
+        {% endif %}
         {% block header %}{% include "header.html" %}{% endblock %}
         {% block content_wrapper -%}
         <div id="content">
