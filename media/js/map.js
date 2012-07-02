@@ -225,26 +225,26 @@ var map = (function (config) {
                     if (results && results.length) {
                         for (var i = 0, l = Math.min(results.length, 6); i < l; ++i) {
                             var components = results[i].address_components,
-                                geometry = results[i].geometry;
-                            // console.log(results[i]);
+                                geometry = results[i].geometry,
+                                types = results[i].types.join('|');
+
+                            if (types.indexOf('political') == -1) {
+                                // skip this item if it's a landmark, feature, etc
+                                continue;
+                            }
 
                             var item = {
                                 label: results[i].formatted_address,
                                 value: results[i].formatted_address,
                             };
 
-                            if (components.length == 2
-                                    && components[0].long_name == components[0].short_name
-                                    && components[0].types[0] == 'administrative_area_level_1') {
-                                components.shift();
-                            }
-
-                            if (components.length == 1 && components[0].types[0] == 'country') {
+                            if (types.indexOf('country') > -1) {
                                 item.location = {
                                     targetRef: 'countryTarget',
                                     code: components[0].short_name.toLowerCase()
                                 };
-                            } else {
+                            } else if (types.indexOf('locality') > -1) {
+                                // covers 'sublocality' too
                                 item.location = {
                                     targetRef: 'target',
                                     lat: geometry.location.lat(),
@@ -252,9 +252,20 @@ var map = (function (config) {
                                 };
                             }
 
-                            data.push(item);
+                            if (item.location) {
+                                data.push(item);
+                            }
                         }
                     }
+
+                    if (!data.length) {
+                        data.push({
+                            label: 'No results found',
+                            value: null,
+                            location: null
+                        });
+                    }
+
                     $(search).data('results', data);
                     response(data);
                 });
