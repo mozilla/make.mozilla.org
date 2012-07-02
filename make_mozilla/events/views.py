@@ -264,11 +264,11 @@ country_view = Country()
 
 
 def country(request, code):
-    return country_view.render(request, code.upper(), 'events/country-list.html', 24)
+    return country_view.render(request, code.upper(), 'events/country-list.html', 4)
 
 
 def country_map(request, code):
-    return country_view.render(request, code.upper(), 'events/country-map.html', 24)
+    return country_view.render(request, code.upper(), 'events/country-map.html', 999)
 
 
 class Near(object):
@@ -318,7 +318,7 @@ def near(request):
 
 @require_GET
 def near_map(request):
-    return near_view.render(request, 'events/near-map.html', 24)
+    return near_view.render(request, 'events/near-map.html', 999)
 
 
 @require_GET
