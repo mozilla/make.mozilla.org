@@ -90,9 +90,9 @@ var map = (function (config) {
             center: new google.maps.LatLng(c('latitude'), c('longitude')),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
 
-            scrollwheel: false,
+            scrollwheel: c('controls'),
             keyboardShortcuts: false,
-            disableDoubleClickZoom: true,
+            disableDoubleClickZoom: c('controls'),
             disableDefaultUI: true,
             draggable: c('draggable'),
 
