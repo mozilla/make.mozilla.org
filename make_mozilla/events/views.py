@@ -252,7 +252,7 @@ class Country(object):
         results = models.Event.objects.filter(start__gte=today, venue__country=country_code).order_by(order)
 
         return jingo.render(request, template, {
-            'sort': 'start',
+            'sort': sort,
             'country': {
                 'code': country_code,
                 'name': country_name,
