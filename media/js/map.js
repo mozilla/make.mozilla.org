@@ -90,7 +90,7 @@ var map = (function (config) {
             center: new google.maps.LatLng(c('latitude'), c('longitude')),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
 
-            scrollwheel: c('controls'),
+            scrollwheel: false,
             keyboardShortcuts: false,
             disableDoubleClickZoom: c('controls'),
             disableDefaultUI: true,
@@ -107,11 +107,11 @@ var map = (function (config) {
             clusterer = new MarkerClusterer(gmap, [], {
                 styles: [{
                     url: '/media/img/map-cluster.png',
-                    height: 50,
+                    height: 55,
                     width: 50,
-                    anchor: [19,0],
-                    textColor: '#000',
-                    textSize: 13
+                    anchor: [18,0],
+                    textColor: '#FFF',
+                    textSize: 14
                 }]
             });
         }
