@@ -215,7 +215,7 @@ def all(request):
         sort, order = ('date', 'start')
 
     results = models.Event.objects.filter(start__gte=today).order_by(order)
-    results_per_page = 24
+    results_per_page = 4
 
     return jingo.render(request, 'events/all.html', {
         'sort': sort,
