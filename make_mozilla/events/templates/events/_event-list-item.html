@@ -17,7 +17,7 @@
             </p>
             {% endif %}
         {% endif %}
-        <p class="p-location location">{{ event.venue.street_address|replace('\r\n', ', ') }}</p>
+        <p class="p-location location">{{ event.venue.street_address|replace('\r\n', ', ') }}<br><a href="{{ url('events.country', code=event.venue.country.code|lower) }}">{{ event.venue.country.name }}</a></p>
         <a class="type" href="{{ url('guides_%s' % event.kind.slug) }}">{{ event.kind.name }}</a>
     </div>
     {% if event.campaign %}

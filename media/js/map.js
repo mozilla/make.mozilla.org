@@ -21,11 +21,15 @@ var map = (function (config) {
         search: 'input-location',
         latitude: location[0],
         longitude: location[1],
+        cluster: false,
+        fit: null,
+        filter: null,
         full: false,
         zoom: 13,
         controls: false,
         draggable: false,
-        target: '/events/near/?lat=${lat}&lng=${lng}'
+        target: '/events/near/?lat=${lat}&lng=${lng}',
+        countryTarget: '/events/in/${code}/'
     };
 
     var c = function(property) {
@@ -39,6 +43,7 @@ var map = (function (config) {
         gmap_callback,
         gmap,
         geocoder,
+        clusterer,
         searchLocation,
         eventStack = [],
         standardMarkerImage,
@@ -87,7 +92,7 @@ var map = (function (config) {
 
             scrollwheel: false,
             keyboardShortcuts: false,
-            disableDoubleClickZoom: true,
+            disableDoubleClickZoom: c('controls'),
             disableDefaultUI: true,
             draggable: c('draggable'),
 
@@ -97,6 +102,48 @@ var map = (function (config) {
                 position: google.maps.ControlPosition.LEFT_BOTTOM
             }
         });
+
+        if (c('cluster')) {
+            clusterer = new MarkerClusterer(gmap, [], {
+                styles: [{
+                    url: '/media/img/map-cluster.png',
+                    height: 55,
+                    width: 50,
+                    anchor: [18,0],
+                    textColor: '#FFF',
+                    textSize: 14
+                }]
+            });
+        }
+
+        if (c('fit')) {
+            geocode(c('fit'), function(results) {
+                if (results && results.length) {
+                    var viewport = results[0].geometry.viewport,
+                        center = viewport.getCenter();
+
+                    gmap.fitBounds(viewport);
+
+                    gmap.setZoom(gmap.getZoom() + 1);
+
+                    var overlay = new google.maps.OverlayView();
+                    overlay.draw = function() {};
+                    overlay.setMap(gmap);
+
+                    var projection = overlay.getProjection();
+
+                    if (projection && projection.fromLatLngToContainerPixel) {
+                        var current = projection.fromLatLngToContainerPixel(center),
+                            target = new google.maps.Point(
+                                current.x,
+                                current.y - $(search.form.parentNode).offset().top
+                            );
+
+                        gmap.setCenter(projection.fromContainerPixelToLatLng(target));
+                    }
+                }
+            });
+        }
 
         standardMarkerImage = new google.maps.MarkerImage(
             '/media/img/map-marker.png',
@@ -151,7 +198,7 @@ var map = (function (config) {
     if (search) {
         search.form.onsubmit = function () {
             if (searchLocation) {
-                window.location = c('target').replace(/\${(\w+)}/g, function(match, key) {
+                window.location = c(searchLocation.targetRef).replace(/\${(\w+)}/g, function(match, key) {
                     return searchLocation.hasOwnProperty(key) ? searchLocation[key] : '';
                 });
             }
@@ -177,20 +224,55 @@ var map = (function (config) {
                     var data = [];
                     if (results && results.length) {
                         for (var i = 0, l = Math.min(results.length, 6); i < l; ++i) {
-                            data.push({
+                            var components = results[i].address_components,
+                                geometry = results[i].geometry,
+                                types = results[i].types.join('|');
+
+                            if (types.indexOf('political') == -1) {
+                                // skip this item if it's a landmark, feature, etc
+                                continue;
+                            }
+
+                            var item = {
                                 label: results[i].formatted_address,
                                 value: results[i].formatted_address,
-                                location: {
-                                    lat: results[i].geometry.location.lat(),
-                                    lng: results[i].geometry.location.lng()
-                                }
-                            });
+                            };
+
+                            if (types.indexOf('country') > -1) {
+                                item.location = {
+                                    targetRef: 'countryTarget',
+                                    code: components[0].short_name.toLowerCase()
+                                };
+                            } else if (types.indexOf('locality') > -1) {
+                                // covers 'sublocality' too
+                                item.location = {
+                                    targetRef: 'target',
+                                    lat: geometry.location.lat(),
+                                    lng: geometry.location.lng()
+                                };
+                            }
+
+                            if (item.location) {
+                                data.push(item);
+                            }
                         }
                     }
+
+                    if (!data.length) {
+                        data.push({
+                            label: 'No results found',
+                            value: null,
+                            location: null
+                        });
+                    }
+
+                    $(search).data('results', data);
                     response(data);
                 });
             },
             open: function () {
+                var results = $(search).data('results');
+                searchLocation = (results &&results.length) ? results[0].location : null;
                 $(this).addClass('with-results');
             },
             close: function () {
@@ -221,7 +303,11 @@ var map = (function (config) {
         if (address_cache.hasOwnProperty(address)) {
             callback(address_cache[address], address);
         } else if (geocoder) {
-            geocoder.geocode({address:address}, function(results, status) {
+            request = {
+                address: address,
+                region: c('filter')
+            };
+            geocoder.geocode(request, function(results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
                     address_cache[address] = results;
                 } else {
@@ -255,6 +341,10 @@ var map = (function (config) {
                             icon: standardMarkerImage,
                             shadow: shadowMarkerImage
                         });
+
+                        if (clusterer) {
+                            clusterer.addMarker(marker);
+                        }
 
                         var panel = new InfoBox({
                             content: content,
