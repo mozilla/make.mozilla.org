@@ -2,13 +2,13 @@
 
 {% import "events/map-setup.html" as map %}
 
-{% block page_title %}Near | {{ super() }}{% endblock %}
+{% block page_title %}{{ country.name }} | {{ super() }}{% endblock %}
 {% block page_id %}events-map{% endblock %}
 
 {% block content %}
 <div class="search-results">
     {% include "events/_search-form.html" %}
-    <span class="switch"><a href="{{ url('events.near') }}?lat={{ latitude }}&amp;lng={{ longitude }}">switch to list view</a> | <a href="{{ url('events.all') }}">see all events</a></span>
+    <span class="switch"><a href="{{ url('events.country', code=country.code|lower) }}">switch to list view</a> | <a href="{{ url('events.all') }}">see all events</a></span>
     {% if results.object_list %}
         {% if results.paginator.num_pages > 1 %}
             <ol class="pagination">
@@ -18,18 +18,18 @@
             </ol>
         {% endif %}
     {% else %}
-        <p class="no-results">Nothing found. Why don't you <a href="https://donate.mozilla.org/page/event/create/" class="button create">Create an Event</a></p>
+        <p class="no-results">No events found in {{ country.name }}. Why don't you <a href="https://donate.mozilla.org/page/event/create/" class="button create">Create an Event</a></p>
     {% endif %}
 </div>
 {% endblock %}
 
 {% block scripts %}
     {% if results.object_list %}
-        {{ map.config({'latitude':latitude,'longitude':longitude}, target=url('events.near.map') + "?lat=${lat}&lng=${lng}", full=True) }}
+        {{ map.config(country, target=url('events.country.map', code='xx')|replace('/xx/','/${code}/'), full=True)}}
         {{ super() }}
-        {{ map.events(results.object_list) }}
+        {{ map.events(results.object_list)}}
     {% else %}
-        {{ map.config({'latitude':latitude,'longitude':longitude}, target=url('events.near.map') + "?lat=${lat}&lng=${lng}") }}
+        {{ map.config(country, target=url('events.country.map', code='xx')|replace('/xx/','/${code}/')) }}
         {{ super() }}
     {% endif %}
 {% endblock %}

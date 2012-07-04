@@ -28,6 +28,7 @@ MINIFY_BUNDLES = {
         'maps_js': (
             'js/map.js',
             'js/map.infobox.js',
+            'js/map.clusterer.js',
         ),
         'homgepage_js': (
             'js/jquery.tweet.js',
@@ -121,7 +122,8 @@ AUTHENTICATION_BACKENDS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
     'django_browserid.context_processors.browserid_form',
-    'make_mozilla.base.context_processors.login_and_get_back'
+    'make_mozilla.base.context_processors.login_and_get_back',
+    'make_mozilla.core.context_processors.app_stage'
 ]
 
 MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [

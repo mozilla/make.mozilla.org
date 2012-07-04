@@ -56,7 +56,7 @@
                     <a href="{{ event.get_absolute_url() }}" class="map"><img src="//maps.googleapis.com/maps/api/staticmap?sensor=false&amp;markers={{ event.venue.latitude }},{{ event.venue.longitude }}&amp;zoom=3&amp;size=225x165&amp;maptype=terrain&amp;format=png" class="foldable"></a>
                     <p class="date dtstart"><time><span class="month">{{ event.start.strftime('%b') }}</span> <span class="day">{{ event.start.strftime('%d')}}</span> <span class="year">{{ event.start.strftime('%Y')}}</span></time></p>
                     <p class="location">{{ event.venue.street_address|replace("\r\n",", ") }}
-                        <br>{{ event.venue.country.name}}</p>
+                        <br><a href="{{ url('events.country', code=event.venue.country.code|lower) }}">{{ event.venue.country.name }}</a></p>
                 </li>
             {% endfor %}
             </ul>
