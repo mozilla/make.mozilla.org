@@ -1,0 +1,53 @@
+{% macro config(location, target='', full=False) %}
+    <script>
+        window.map_config = {
+            {% if full %}
+                draggable: true,
+                controls: true,
+                full: true,
+                cluster: true,
+                mapFooter: '<img src="/media/img/official-event.png" alt="White check mark on blue circle" title=""> Indicates official webmaker event',
+            {% endif %}
+            {% if location.code is defined %}
+                {% if target %}
+                    countryTarget: '{{ target|escape }}',
+                {% endif %}
+                filter: '{{ location.code|escape }}',
+                fit: '{{ location.name|escape }}'
+            {% else %}
+                {% if target %}
+                    target: '{{ target|escape }}',
+                {% endif %}
+                latitude: '{{ location.latitude|escape }}',
+                longitude: '{{ location.longitude|escape }}',
+                zoom: 12
+            {% endif %}
+        };
+    </script>
+{% endmacro %}
+
+{% macro events(events) %}
+    <script>
+        map.add_event.apply(map, [
+            {% for event in events -%}
+            {
+                name: '{{ event.name|escape }}',
+                latitude: {{ event.venue.latitude }},
+                longitude: {{ event.venue.longitude }},
+                url: '{{ event.get_absolute_url() }}',
+                venue: '{{ event.venue.name|escape }}',
+                address: '{{ event.venue.street_address|replace('\r', '')|replace('\n', ', ')|escape }}',
+                from: new Date('{{ event.start.strftime('%a, %d %b %Y %H:%M:%S') }}'),
+                to: new Date('{{ event.end.strftime('%a, %d %b %Y %H:%M:%S') }}'),
+                official: {% if event.official %}true{% else %}false{% endif %},
+                type: {
+                    name: '{{ event.kind.name|escape }}',
+                    url: '{{ url('guides_%s' % event.kind.slug)|escape }}'
+                }
+            }{% if not loop.last %},
+            {% endif -%}
+            {%- endfor %}
+
+        ]);
+    </script>
+{% endmacro %}

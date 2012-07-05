@@ -29,6 +29,13 @@ DATABASES = {
 # Uncomment this and set to all slave DBs in use on the site.
 # SLAVE_DATABASES = ['slave']
 
+
+# For warning users about the stage the site is in - no worries about people not
+# knowing it's a dev server with these!
+# Both are optional and default to False if not set
+#APP_STAGE = 'LOCAL DEV'
+#APP_MESSAGE = "<strong>This is the %s server</strong><br />Content here is not accurate and and we're not going to carry data over to live so please don't submit anything important.<br />Our live site is <a href='https://webmaker.org'>webmaker.org</a>" % APP_STAGE
+
 # Recipients of traceback emails and other notifications.
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),

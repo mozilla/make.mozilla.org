@@ -36,6 +36,18 @@
 
 /* ===[ Core ]============================================================== */
 
+#app_stage_box {
+	background: rgba(249, 8, 3, 0.8);
+	padding: 0.2em 0;
+	color: white;
+	text-shadow: none;
+}
+#app_stage_box a {
+	color: white;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
 body {
 	background: #FFF;
 	color: #939598;
@@ -1748,6 +1760,7 @@ ul.tri-set img {
 	margin: 0;
 	border: solid transparent;
 	border-width: 25px 35px;
+	background: rgba(255,255,255,0.9);
 }
 
 .search-results form .wrapper {
@@ -1792,13 +1805,13 @@ ul.tri-set img {
 }
 
 .search-results input[type="text"]::-webkit-input-placeholder {
-	text-transform: uppercase;
+	font-style: italic;
 	font-size: 0.8em;
 	line-height: 2.5em;
 }
 
 .search-results input[type="text"]:-moz-placeholder {
-	text-transform: uppercase;
+	font-style: italic;
 	font-size: 0.8em;
 	line-height: 2.5em;
 }
@@ -1863,11 +1876,6 @@ ul.tri-set img {
 	font-weight: bold;
 }
 
-.search-results .sorting span {
-	position: absolute;
-	left: -99em;
-}
-
 .search-results ul,
 .search-results ol {
 	margin: 0;
@@ -1879,6 +1887,7 @@ ul.tri-set img {
 	.box-shadow(@panelShadow);
 
 	background: #FFF;
+	background: rgba(255,255,255,0.9);
 	margin-top: 15px;
 }
 
@@ -2005,6 +2014,7 @@ ul.tri-set img {
 	margin: 35px;
 	padding: 20px 30px;
 	background: #FFF;
+	background: rgba(255,255,255,0.9);
 	font-size: 1.142em;
 	text-align: center;
 	position: relative;
@@ -2109,6 +2119,7 @@ ul.tri-set img {
 		margin: 0 -20px;
 		width: auto;
 		background: #EEE;
+		background: rgba(238,238,238,0.5);
 		border-right: none;
 		border-top: solid 1px #DDD;
 		text-align: center;
