@@ -7,7 +7,7 @@
 <div class="search-results">
     {% include "events/_search-form.html" %}
     {% if results.object_list %}
-        <p class="sorting">Sort by: <a href=""{% if sort == 'date' %} class="active"{% endif %}>Upcoming first</a> <span>or</span> <a href="?sort=name"{% if sort == 'name' %} class="active"{% endif %}>A-Z</a></p>
+        <p class="sorting">Sort by: <a href="./"{% if sort == 'date' %} class="active"{% endif %}>Upcoming first</a> <span>or</span> <a href="?sort=name"{% if sort == 'name' %} class="active"{% endif %}>A-Z</a></p>
         <ol>
         {# Can't iterate directly over results until Django 1.4 #}
         {% for event in results.object_list %}
