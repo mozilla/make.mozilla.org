@@ -25,7 +25,7 @@ class EventPage(Page):
     def pagination_end(self):
         return min(self.paginator.num_pages, self.number + self.paginator.adjacent_pagination_limit)
 
-    def pagination_item(self, base, number, sort, class_name='', content='', query={}):
+    def pagination_item(self, base, number, sort, class_name='', content='', **query):
         href = base
 
         if number > 1:
@@ -62,31 +62,31 @@ class EventPage(Page):
         if self.number == 1:
             items.append('<li class="previous">%s</li>' % previous);
         else:
-            items.append(self.pagination_item(base, self.number - 1, sort, 'previous', previous, query=query))
+            items.append(self.pagination_item(base, self.number - 1, sort, 'previous', previous, **query))
 
         # If the 'first' page isn't the first page, add an empty separator
         if start > 1:
             # Add the first page in if it's not already included
             if start > 2:
-                items.append(self.pagination_item(base, 1, sort))
+                items.append(self.pagination_item(base, 1, sort, **query))
             items.append('<li class="empty">...</li>')
 
         for number in range(start, end + 1):
             class_name = 'current' if number == self.number else ''
-            items.append(self.pagination_item(base, number, sort, class_name, query=query))
+            items.append(self.pagination_item(base, number, sort, class_name, **query))
 
         # If the 'last' page isn't the last page, add an empty separator
         if (end < self.paginator.num_pages):
             items.append('<li class="empty">...</li>')
             # Add the last page in if it's not already included
             if end < self.paginator.num_pages - 1:
-                items.append(self.pagination_item(base, self.paginator.num_pages, sort, query=query))
+                items.append(self.pagination_item(base, self.paginator.num_pages, sort, **query))
 
         # Next link - check if we're at the last page
         if self.number == self.paginator.num_pages:
             items.append('<li class="next">%s</li>' % next);
         else:
-            items.append(self.pagination_item(base, self.number + 1, sort, 'next', next, query=query))
+            items.append(self.pagination_item(base, self.number + 1, sort, 'next', next, **query))
 
         return mark_safe(''.join(items))
 
