@@ -437,7 +437,7 @@ var map = (function (config) {
                                 html.push('<span class="date"><time class="from" datetime="' + from_ts + '">' + from + '</time>');
                                 // events without an end time get imported with an end time 1 minute BEFORE the start date...
                                 if (from_epoc < to_epoc) {
-                                        html.push('<span> to </span><time class="to" datetime="' + to_ts + '">' + to + '</time>');
+                                    html.push('<span> to </span><time class="to" datetime="' + to_ts + '">' + to + '</time>');
                                 }
                                 html.push('</span>');
                                 html.push('<a href="' + event.type.url + '" class="type">' + event.type.name + '</a>');

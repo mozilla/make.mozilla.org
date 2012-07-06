@@ -19,9 +19,11 @@
         </ol>
         {% if results.paginator.num_pages > 1 %}
             <ol class="pagination">
-                {% for page in range(1, results.paginator.num_pages+1) %}
-                    <li{% if page == results.number %} class="current"{% endif %}><a href="?lat={{ latitude }}&amp;lng={{ longitude }}{% if sort != 'date' %}&amp;sort={{ sort }}{% endif %}{% if page != 1 %}&amp;page={{ page }}{% endif %}"><span>Page</span> {{ page }}</a></li>
-                {% endfor %}
+                {% if sort == 'date' %}
+                    {{ results.pagination('./', query={'lat':latitude, 'lng':longitude}) }}
+                {% else %}
+                    {{ results.pagination('./', sort, query={'lat':latitude, 'lng':longitude}) }}
+                {% endif %}
             </ol>
         {% endif %}
     {% else %}
