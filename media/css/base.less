@@ -1818,12 +1818,26 @@ ul.tri-set img {
 #content .search-results form ul.ui-autocomplete a {
 	padding: 10px 15px;
 	border-bottom: solid 1px #EEE;
+	background: 15px 50% no-repeat;
+
+	&.event {
+		padding-left: 40px;
+		background-image: url(../img/search-event.gif);
+		background-color: rgba(251,252,197,0.1);
+	}
+	&.geo {
+		padding-left: 40px;
+		background-image: url(../img/search-geo.gif);
+	}
 }
 
 #content .search-results form ul.ui-autocomplete a.ui-state-hover,
 #content .search-results form ul.ui-autocomplete a.ui-state-active {
 	color: #000;
-	background: #FFF;
+	background-color: #FCFCFC;
+	background-color: rgba(252,252,252,0.5);
+
+	&.event { background-color: rgba(251,252,197,0.5); }
 }
 
 #content .search-results .buttons {
