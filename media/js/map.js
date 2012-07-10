@@ -29,7 +29,9 @@ var map = (function (config) {
         controls: false,
         draggable: false,
         target: '/events/near/?lat=${lat}&lng=${lng}',
-        countryTarget: '/events/in/${code}/'
+        countryTarget: '/events/in/${code}/',
+        eventTarget: '${url}',
+        queryPath: '/events/search/query/'
     };
 
     var c = function(property) {
@@ -220,8 +222,61 @@ var map = (function (config) {
             autoFocus: false,
             minLength: 3,
             source: function (request, response) {
+                var data = [],
+                    eventsData = null,
+                    geoData = null;
+
+                function combine() {
+                    if (eventsData !== null && geoData !== null) {
+                        data.push.apply(data, geoData);
+                        data.push.apply(data, eventsData);
+
+                        console.log(data);
+
+                        if (!data.length) {
+                            data.push({
+                                label: 'No results found',
+                                value: null,
+                                location: null
+                            });
+                        }
+
+                        $(search).data('results', data);
+                        response(data);
+                    }
+                }
+
+                $.ajax({
+                    url: c('queryPath'),
+                    data: {query: request.term},
+                    dataType: 'json',
+                    jsonp: false,
+                    jsonpCallback: 'queryCallback',
+                    success: function (response) {
+                        var data = [];
+                        for (var i = 0, l = Math.min(response.results.length, 6); i < l; ++i) {
+                            data.push({
+                                label: response.results[i].name,
+                                value: response.results[i].name,
+                                type: 'event',
+                                location: {
+                                    url: response.results[i].url,
+                                    targetRef: 'eventTarget'
+                                }
+                            });
+                        }
+                        eventsData = data;
+                        combine();
+                    },
+                    error: function () {
+                        eventsData = [];
+                        combine();
+                    }
+                });
+
                 geocode(request.term, function(results) {
                     var data = [];
+
                     if (results && results.length) {
                         for (var i = 0, l = Math.min(results.length, 6); i < l; ++i) {
                             var components = results[i].address_components,
@@ -235,10 +290,8 @@ var map = (function (config) {
 
                             var item = {
                                 label: results[i].formatted_address,
-                                value: results[i].formatted_address,
+                                value: results[i].formatted_address
                             };
-
-                            console.log(types, components);
 
                             if (types.indexOf('country') > -1) {
                                 item.location = {
@@ -265,22 +318,16 @@ var map = (function (config) {
                                 }
                             }
 
+                            item.type = 'geo';
+
                             if (item.location) {
                                 data.push(item);
                             }
                         }
                     }
 
-                    if (!data.length) {
-                        data.push({
-                            label: 'No results found',
-                            value: null,
-                            location: null
-                        });
-                    }
-
-                    $(search).data('results', data);
-                    response(data);
+                    geoData = data;
+                    combine();
                 });
             },
             open: function () {
@@ -300,7 +347,12 @@ var map = (function (config) {
             change: function (event, ui) {
                 searchLocation = ui.item ? ui.item.location : null;
             }
-        });
+        }).data( "autocomplete" )._renderItem = function(list, item) {
+            return $(document.createElement('li'))
+                .data("item.autocomplete", item)
+                .append('<a class="' + (item.type||'') + '">' + item.label + '</a>')
+                .appendTo(list);
+        };
     }
 
     var address_cache = {},
