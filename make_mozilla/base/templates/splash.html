@@ -5,46 +5,56 @@
 {% block content %}
 <div class="amuse pager pager-with-tabs pager-auto-rotate pager-no-history" id="home-promo">
     <div class="default-page pager-content">
-    	<div class="pager-page" id="page-promo-webmakers">
-            <a href="http://mozilla.org/webmaker/videos/">
-                <img src="{{ MEDIA_URL }}img/carousel/webmaker-video.jpg" alt="" />
+    	<div class="pager-page" id="page-promo-code-party">
+            <a href="{{ url('events') }}">
+                <img src="{{ MEDIA_URL }}img/carousel/july_2012/scp.jpg" alt="" width="1068" height="372" />
                 <div class="pager-text">
-                    <h2 class="pager-title">Meet the webmakers</h2>
-                    <p>Let's teach the world the web. Meet some of the global community making it happen.</p>	
+                    <h2 class="pager-title">Join the Summer Code Party!</h2>
+                    <p>Now to Sep 23. Meet, make and learn with webmakers around the world.</p>	
                 </div>
         	</a>
         </div>
-        <div class="pager-page" id="page-promo-code-party">
-            <a href="https://webmaker.org/events/">
-                <img src="{{ MEDIA_URL }}img/carousel/SCP.gif" alt="" />
+        <div class="pager-page" id="page-promo-search-events">
+            <a href="{{ url('events.search') }}">
+                <img src="{{ MEDIA_URL }}img/carousel/july_2012/map.jpg" alt="" width="1068" height="372" />
                 <div class="pager-text">
-                    <h2 class="pager-title">Summer Code Party</h2>
-                    <p>Meet, make, and share your creations with friends to learn some code this summer.</p>  
+                    <h2 class="pager-title">Find an event near you</h2>
+                    <p>Or get together around your own kitchen table.</p>  
+                </div>
+            </a>
+        </div>
+        <div class="pager-page" id="page-promo-webmaker-kids">
+            <a href="http://mozilla.org/webmaker/videos/">
+                <img src="{{ MEDIA_URL }}img/carousel/july_2012/webmaker-kids.jpg" alt="" width="1068" height="372" />
+                <div class="pager-text">
+                    <h2 class="pager-title">Building the next generation of webmakers</h2>
+                    <p>Meet the digital creators of tomorrow in this new video.</p>
                 </div>
             </a>
         </div>
         <div class="pager-page" id="page-promo-popcorn">
-            <a href="http://maker.mozillapopcorn.org">
-                <img src="{{ MEDIA_URL }}img/carousel/popcorn.jpg" alt="" />
+            <a href="http://maker.mozillapopcorn.org/storycamp/">
+                <img src="{{ MEDIA_URL }}img/carousel/july_2012/popcorn-storycamp.jpg" alt="" width="1068" height="372" />
                 <div class="pager-text">
-                    <h2 class="pager-title">Supercharge web video with Popcorn</h2>
-                    <p>Popcorn is revolutionizing video on the web. It's free, open and easy to use. Try it today.</p>
+                    <h2 class="pager-title">Storytelling, creativity and the web</h2>
+                    <p>Dive into "web-native" video and storytelling with author Cory Doctorow, OK GO's Damian Kulash and others.</p>
                 </div>
             </a>
         </div>
         <div class="pager-page" id="page-promo-join">
             <a href="https://donate.mozilla.org/page/contribute/join-mozilla?source=webmaker_home">
-                <img src="{{ MEDIA_URL }}img/carousel/join.jpg" alt="" />
+                <img src="{{ MEDIA_URL }}img/carousel/july_2012/join.jpg" alt="" width="1068" height="372" />
                 <div class="pager-text">
                     <h2 class="pager-title">Join Mozilla</h2>
-                    <p>Make a donation today to support Mozilla's work building a generation of webmakers.</p>  
+                    <p>Make a donation to support Mozilla's non-profit mission. Help build a new generation of webmakers.</p>  
                 </div>
             </a>
         </div>
     <ul class="pager-tabs">
-        <li id="tab-webmakers"><a href="#" class="selected">● <span>read about Make the webmakers</span></a></li>
-        <li id="tab-code-party"><a href="#">● <span>read about Summer Code Party</span></a></li>
-        <li id="tab-popcorn"><a href="#">● <span>read about Make video pop with Popcorn</span></a></li>
+        <li id="tab-code-party"><a href="#" class="selected">● <span>read about Join the Summer Code Party!</span></a></li>
+        <li id="tab-search-events"><a href="#">● <span>read about Find an event near you</span></a></li>
+        <li id="tab-webmaker-kids"><a href="#">● <span>read about Building the next generation of webmakers</span></a></li>
+        <li id="tab-popcorn"><a href="#">● <span>read about Storytelling, creativity and the web</span></a></li>
         <li id="tab-join"><a href="#">● <span>read about Join Mozilla</span></a></li>
     </ul>
     </div>
