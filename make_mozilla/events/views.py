@@ -9,6 +9,7 @@ from django.contrib.syndication.views import Feed
 from django.contrib.gis.feeds import GeoRSSFeed
 from django.utils.http import urlquote_plus, urlencode
 from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.cache import cache_page
 from django.shortcuts import redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -203,6 +204,23 @@ def search(request):
         })))
 
     return jingo.render(request, 'events/search.html', {'results': results, 'location': location})
+
+
+@cache_page(60*15)
+def search_query(request):
+    callback = request.GET.get('callback');
+    query = request.GET.get('query', '');
+    results = []
+
+    if query:
+        results = models.Event.query(query)
+
+    return jingo.render(request, 'events/query.json', {
+        'callback': callback,
+        'query': query,
+        'generated': datetime.now(),
+        'results': results
+    }, content_type='text/javascript')
 
 
 def all(request):
