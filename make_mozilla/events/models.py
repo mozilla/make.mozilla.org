@@ -6,6 +6,7 @@ from django.utils.safestring import mark_safe
 from django.core.files.storage import FileSystemStorage
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 
 from datetime import datetime
 from tower import ugettext_lazy as _
@@ -100,6 +101,17 @@ class Event(models.Model):
 
     def verify_ownership(self, user):
         return user.email == self.organiser_email
+
+    @classmethod
+    def query(cls, query):
+        """Very naive name/description searching"""
+        lower_query = query.lower()
+        return sorted(
+            cls.objects
+                .filter(verified = True, pending_deletion = False)
+                .filter(Q(name__icontains=query) | Q(description__icontains=query))
+                .order_by('name'),
+            key=lambda r: r.name.lower().find(lower_query) % 999 - r.name.lower().count(lower_query))
 
     @classmethod
     def all_upcoming(cls, sort='start'):
