@@ -1,0 +1,10 @@
+{% if callback %}{{ callback|escape }}({% endif %}{
+    "query": "{{ query|escape }}",
+    "generated": "{{ generated.strftime('%a, %d %b %Y %H:%M:%S +0000') }}",
+    "results": [
+    {% for result in results %}
+        {"name": "{{ result.name|escape }}", "url": "{{ result.get_absolute_url()|escape }}"}{% if not loop.last %},
+    {% endif %}{% endfor %}
+
+    ]
+}{% if callback %});{% endif %}
