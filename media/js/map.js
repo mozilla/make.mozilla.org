@@ -238,7 +238,7 @@ var map = (function (config) {
                                 value: results[i].formatted_address,
                             };
 
-                            console.log(types, components);
+                            // console.log(types, components);
 
                             if (types.indexOf('country') > -1) {
                                 item.location = {
