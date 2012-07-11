@@ -27,11 +27,11 @@
 
 {% block scripts %}
     {% if results.object_list %}
-        {{ map.config({'latitude':latitude,'longitude':longitude}, target=url('events.near.map') + "?lat=${lat}&lng=${lng}", full=True) }}
+        {{ map.config({'latitude':latitude,'longitude':longitude}, isMapView=True, full=True) }}
         {{ super() }}
         {{ map.events(results.object_list) }}
     {% else %}
-        {{ map.config({'latitude':latitude,'longitude':longitude}, target=url('events.near.map') + "?lat=${lat}&lng=${lng}") }}
+        {{ map.config({'latitude':latitude,'longitude':longitude}, isMapView=True) }}
         {{ super() }}
     {% endif %}
 {% endblock %}
