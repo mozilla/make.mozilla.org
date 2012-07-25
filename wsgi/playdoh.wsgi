@@ -13,7 +13,7 @@ site.addsitedir(os.path.abspath(os.path.join(wsgidir, '../')))
 import manage
 
 import newrelic.agent
-newrelic.agent.initialize('/var/webapps/newrelic-1.3.0.289/newrelic.ini', 'development')
+newrelic.agent.initialize('/var/webapps/make.mozilla.org/shared/newrelic.ini', 'development')
 
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()
