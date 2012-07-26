@@ -12,7 +12,12 @@ site.addsitedir(os.path.abspath(os.path.join(wsgidir, '../')))
 # manage adds /apps, /lib, and /vendor to the Python path.
 import manage
 
+import newrelic.agent
+newrelic.agent.initialize('/var/webapps/make.mozilla.org/shared/newrelic.ini')
+
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()
+
+application = newrelic.agent.wsgi_application()(application)
 
 # vim: ft=python
