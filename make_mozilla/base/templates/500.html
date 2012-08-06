@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 
 {% block page_title %}Server Error (500) | {{ super() }}{% endblock %}
 
@@ -34,6 +34,47 @@
 {% endblock %}
 
 {% block footer %}
-{{ super() }}
-{{ js('core_js') }}
+<div id="footer">
+    <div class="constrained">
+        <div class="col">
+            <h2><img src="{{ MEDIA_URL }}img/footer_logo.png" alt="Mozilla Webmaker" width="129" height="39" /></h2>
+        </div>
+        <div class="col">
+            <h3>About</h3>
+            {% block legal_links %}
+            <ul>
+                <li><a href="{{ url('page', 'about') }}">About Us</a></li>
+                <li><a href="mailto:mozparty@mozilla.org">Contact Us</a></li>
+                <li><a href="http://www.mozilla.org/en-US/privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="http://www.mozilla.org/en-US/about/legal.html">Legal Notices</a></li>
+            </ul>
+            {% endblock %}
+        </div>
+        <div class="col">
+            <h3>Connect with us</h3>
+            <ul>
+                <li><a href="{{ url('page', 'news') }}">News</a></li>
+                <li><a href="{{ url('page', 'support') }}">Support</a></li>
+                <li><a href="http://twitter.com/mozilla/">Twitter</a></li>
+                <li><a href="https://www.facebook.com/mozilla/">Facebook</a></li>
+            </ul>
+        </div>
+        <div class="col">
+            <h3>Make something</h3>
+            <ul>
+                <li><a href="{{ url('projects') }}">Projects</a></li>
+                <li><a href="{{ url('tools') }}">Tools</a></li>
+                <li><a href="{{ url('events') }}">Events</a></li>
+            </ul>
+        </div>
+        <div class="col">
+            <h3>Support our work</h3>
+            <ul>
+                <li><a href="https://donate.mozilla.org/page/contribute/join-mozilla?source=join_link">Donate</a></li>
+                <li><a href="https://mozillalabs.com/en-US/">Contribute</a></li>
+                <li><a href="https://donate.mozilla.org/page/contribute/firefoxtshirt">Buy a t-shirt</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}
