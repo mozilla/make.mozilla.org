@@ -21,7 +21,6 @@
         <a class="type" href="{{ url('guides_%s' % event.kind.slug) }}">{{ event.kind.name }}</a>
     </div>
     {% if event.campaign %}
-    {{ event.campaign.logo }}
     <a class="campaign" href="{{ url('about') }}">
         {% if event.campaign.check_logo() %}
         <img src="{{ event.campaign.logo.url }}" width="{{ event.campaign.logo.width }}" height="{{ event.campaign.logo.height}}">
