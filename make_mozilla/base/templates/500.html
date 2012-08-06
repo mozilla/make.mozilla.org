@@ -5,6 +5,21 @@
 {% block page_id %}error{% endblock %}
 {% block page_class %}{{ super() }} guides-inner brochure-page{% endblock %}
 
+{% block header %}
+<div id="header">
+    <div class="constrained">
+        <h1><a href="{{ url('splash') }}"><img src="/media/img/header_logo.png" alt="Mozilla Webmaker" width="218" height="64" /></a></h1>
+        <a id="tabzilla" href="http://www.mozilla.org/">from Mozilla</a>
+        <ul>
+            <li class="projects"><a href="{{ url('projects') }}">Projects</a></li>
+            <li class="tools"><a href="{{ url('tools') }}">Tools</a></li>
+            <li class="events"><a href="{{ url('events') }}">Events</a></li>
+            <li class="about"><a href="{{ url('page', 'about') }}">About</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
 {% block content %}
 
 <header class="event-type">
@@ -37,7 +52,7 @@
 <div id="footer">
     <div class="constrained">
         <div class="col">
-            <h2><img src="{{ MEDIA_URL }}img/footer_logo.png" alt="Mozilla Webmaker" width="129" height="39" /></h2>
+            <h2><img src="/meda/img/footer_logo.png" alt="Mozilla Webmaker" width="129" height="39" /></h2>
         </div>
         <div class="col">
             <h3>About</h3>
