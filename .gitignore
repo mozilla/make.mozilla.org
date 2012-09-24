@@ -11,6 +11,7 @@ settings/local.py
 */settings/server.py
 media/img/uploads/*
 media/partner_media/*
+media/assets/hoc_2012/hacked/
 venv/*
 *.py[co]
 *.sw[po]
