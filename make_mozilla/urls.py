@@ -12,6 +12,8 @@ import make_mozilla.users.urls
 import make_mozilla.pages.urls
 import make_mozilla.news.urls
 
+from make_mozilla.events import views
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib.gis import admin
 admin.autodiscover()
@@ -25,6 +27,8 @@ urlpatterns = patterns('',
     url(r'^tools/',     include(make_mozilla.tools.urls)),
     url(r'^projects/',  include(make_mozilla.projects.urls)),
     url(r'^users/',     include(make_mozilla.users.urls)),
+    url(r'^hall-of-fame/$',
+        views.hoc_2012,     name='hoc_2012'),
     # browserid endpoints
     url(r'^browserid/', include('django_browserid.urls')),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',

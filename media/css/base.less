@@ -139,7 +139,8 @@ h2,
 	color: #6D6E71;
 }
 
-h3 {
+h3,
+.announce {
 	font-size: 1.143em;
 	font-weight: bold;
 	color: #6D6E71;
@@ -2354,12 +2355,15 @@ ul.tri-set img {
 	display: block;
 }
 
-.project-flyer h4 {
+.project-flyer h4,
+.project-flyer .title {
 	font-size: 1.143em;
 	font-family: 'Open Sans Light', sans-serif;
 	margin-top: 8px;
 }
-
+.project-flyer .title {
+	color: #27AAE1;
+}
 .project-flyer .contributor {
 	margin: 8px -8px -8px;
 	padding: 8px 16px;
@@ -4925,7 +4929,22 @@ border-right: none;
 	height: auto;
 	margin-top: 1em;
 }
-#hoc_2012 .sub {
-	margin-top: 1em;
-	margin-bottom: 0;
+#hoc_2012 .project-flyer-list {
+	border-left: none;
+}
+#hoc_2012 .hoc_outro ul {
+	border-left: none;
+}
+#hoc_2012 .hoc_outro img {
+	float: right;
+	width: 50%;
+	height: auto;
+	margin-left: 20px;
+}
+@media screen and (max-width: 601px) {
+	#hoc_2012 .hoc_outro img {
+		width: 100%;
+		float: none;
+		margin-left: 0;
+	}
 }
