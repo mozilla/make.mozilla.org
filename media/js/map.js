@@ -238,6 +238,8 @@ var map = (function (config) {
                                 value: results[i].formatted_address,
                             };
 
+                            // console.log(types, components);
+
                             if (types.indexOf('country') > -1) {
                                 item.location = {
                                     targetRef: 'countryTarget',
@@ -250,6 +252,17 @@ var map = (function (config) {
                                     lat: geometry.location.lat(),
                                     lng: geometry.location.lng()
                                 };
+                            } else if ((types.indexOf('administrative_area_level_1') > -1)
+                                    && (components[0].short_name == components[0].long_name)
+                                    && (components.length == 2)) {
+                                item = {
+                                    label: components[1].long_name,
+                                    value: components[1].long_name,
+                                    location: {
+                                        targetRef: 'countryTarget',
+                                        code: components[1].short_name.toLowerCase()
+                                    }
+                                }
                             }
 
                             if (item.location) {

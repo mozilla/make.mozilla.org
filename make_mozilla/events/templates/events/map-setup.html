@@ -1,23 +1,21 @@
-{% macro config(location, target='', full=False) %}
+{% macro config(location, isMapView=False, full=False) %}
     <script>
         window.map_config = {
-            {% if full %}
+            {% if full -%}
                 draggable: true,
                 controls: true,
                 full: true,
                 cluster: true,
                 mapFooter: '<img src="/media/img/official-event.png" alt="White check mark on blue circle" title=""> Indicates official webmaker event',
             {% endif %}
-            {% if location.code is defined %}
-                {% if target %}
-                    countryTarget: '{{ target|escape }}',
-                {% endif %}
+            {% if isMapView -%}
+                target: '{{ url('events.near.map') + "?lat=${lat}&lng=${lng}"|escape }}',
+                countryTarget: '{{ url('events.country.map', code='xx')|replace('/xx/','/${code}/')|escape }}',
+            {% endif %}
+            {% if location.code is defined -%}
                 filter: '{{ location.code|escape }}',
                 fit: '{{ location.name|escape }}'
-            {% else %}
-                {% if target %}
-                    target: '{{ target|escape }}',
-                {% endif %}
+            {% else -%}
                 latitude: '{{ location.latitude|escape }}',
                 longitude: '{{ location.longitude|escape }}',
                 zoom: 12

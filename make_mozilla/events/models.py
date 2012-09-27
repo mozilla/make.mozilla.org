@@ -161,6 +161,10 @@ class Campaign(models.Model):
     start = models.DateField()
     end = models.DateField()
 
+    #  campaign logo's were being a pain, hopefully less so now
+    def check_logo(self):
+        return self.logo.storage.exists(self.logo.name)
+
     @classmethod
     def current(self):
         today = datetime.today().date()

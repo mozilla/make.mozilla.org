@@ -27,11 +27,11 @@
 
 {% block scripts %}
     {% if results.object_list %}
-        {{ map.config(country, target=url('events.country.map', code='xx')|replace('/xx/','/${code}/'), full=True)}}
+        {{ map.config(country, isMapView=True, full=True)}}
         {{ super() }}
         {{ map.events(results.object_list)}}
     {% else %}
-        {{ map.config(country, target=url('events.country.map', code='xx')|replace('/xx/','/${code}/')) }}
+        {{ map.config(country, isMapView=True) }}
         {{ super() }}
     {% endif %}
 {% endblock %}

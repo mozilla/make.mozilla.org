@@ -139,7 +139,8 @@ h2,
 	color: #6D6E71;
 }
 
-h3 {
+h3,
+.announce {
 	font-size: 1.143em;
 	font-weight: bold;
 	color: #6D6E71;
@@ -2354,12 +2355,15 @@ ul.tri-set img {
 	display: block;
 }
 
-.project-flyer h4 {
+.project-flyer h4,
+.project-flyer .title {
 	font-size: 1.143em;
 	font-family: 'Open Sans Light', sans-serif;
 	margin-top: 8px;
 }
-
+.project-flyer .title {
+	color: #27AAE1;
+}
 .project-flyer .contributor {
 	margin: 8px -8px -8px;
 	padding: 8px 16px;
@@ -4252,9 +4256,10 @@ border-right: none;
 	color: #fff;
 	display: inline-block;
 	width: 280px;
+	min-height: 115px;
 	text-shadow: none;
 	position: relative;
-	bottom: 160px;
+	bottom: 180px;
 }
 .amuse .pager-title {
 	font-size: 14px;
@@ -4270,7 +4275,7 @@ border-right: none;
 }
 .amuse .pager-tabs {
 	position: relative;
-	bottom: 190px;
+	bottom: 210px;
 	padding-left: 80px;
 }
 .amuse .pager-tabs li {
@@ -4916,4 +4921,30 @@ border-right: none;
 /* Snapping the fixed width on the embeddable twitter widget */
 .twtr-doc[style] {
 	width: 100% !important;
+}
+
+/* Hall of fame (.hoc) stuff */
+#hoc_2012 .content .block_img {
+	width: 100%;
+	height: auto;
+	margin-top: 1em;
+}
+#hoc_2012 .project-flyer-list {
+	border-left: none;
+}
+#hoc_2012 .hoc_outro ul {
+	border-left: none;
+}
+#hoc_2012 .hoc_outro img {
+	float: right;
+	width: 50%;
+	height: auto;
+	margin-left: 20px;
+}
+@media screen and (max-width: 601px) {
+	#hoc_2012 .hoc_outro img {
+		width: 100%;
+		float: none;
+		margin-left: 0;
+	}
 }
