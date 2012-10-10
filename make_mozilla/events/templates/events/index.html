@@ -45,6 +45,7 @@
 {% endblock %}
 
 {% block footer %}
+{% if featured %}
 <div id="subcontent">
     <div class="constrained">
         <div class="primary">
@@ -70,6 +71,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 {{ super() }}
 {{ js('core_js') }}
 {{ js('events_js') }}
