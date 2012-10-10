@@ -19,10 +19,11 @@ from django.contrib.gis import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$',          'make_mozilla.base.views.root.index', name="splash"),
+    url(r'^$',          'make_mozilla.base.views.root.index',   name="splash"),
     url(r'^ja/',
         lambda x: HttpResponseRedirect('http://www.mozillafactory.org/ja/webmaker/')
     ),
+    url(r'^videos/',    'make_mozilla.base.views.root.videos',  name="video_page"),
     url(r'^events/',    include(make_mozilla.events.urls)),
     url(r'^tools/',     include(make_mozilla.tools.urls)),
     url(r'^projects/',  include(make_mozilla.projects.urls)),

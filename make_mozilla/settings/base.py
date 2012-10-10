@@ -36,6 +36,9 @@ MINIFY_BUNDLES = {
             'js/mozilla-pager.js',
             'js/homepage.js',
         ),
+        'video-tools': (
+            'js/mozilla-video-tools.js',
+        ),
         'events_js': (
             'js/flickr.js',
             'js/folder.js',
