@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block page_title %}Videos | {{ super() }}
+{% endblock %}
+
+{% block page_id %}videos{% endblock %}
+{% block page_class %}content-page{% endblock %}
+
+{% block content %}
+<section class="hoc_intro">
+    <header>
+        <h2>Meet the webmakers</h2>
+    </header>
+    <div class="poster" style="background-image: url({{ MEDIA_URL }}img/carousel/july_2012/webmaker-kids.jpg); height: 350px; background-position: top right;"></div>
+    <div class="content">
+        <p><strong>We're building a generation of webmakers.</strong> Meet some of the global community making it happen.</p>
+
+        <div class="mozilla-video-control mozilla-video-shadow">
+            <video
+                width="528"
+                height="297"
+                poster="{{ MEDIA_URL }}img/videos/poster-instructors.jpg"
+                controls="controls">
+                <source src="//videos-cdn.mozilla.net/serv/webmademovies/webmakers-instructors.webm" type="video/webm" />
+                <source src="//videos-cdn.mozilla.net/serv/webmademovies/webmakers-instructors.ogv" type="video/ogg; codecs=&quot;theora, vorbis&quot;" />
+                <source src="//videos-cdn.mozilla.net/serv/webmademovies/webmakers-instructors.mp4" type="video/mp4" />
+                <object type="application/x-shockwave-flash"
+                    style="width: 528px; height: 297px;"
+                    data="/media/flash/playerWithControls.swf?flv=uploads/webmademovies/webmakers-instructors.flv&amp;autoplay=false&amp;msg=Play%20Video">
+                    <param name="movie" value="/media/flash/playerWithControls.swf?flv=uploads/webmademovies/webmakers-instructors.flv&amp;autoplay=false&amp;msg=Play%20Video" />
+                    <param name="wmode" value="transparent" />
+                    <div class="video-player-no-flash">
+                        This video requires a browser with support for open video or the <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player</a>.
+                    </div>
+                </object>
+            </video>
+        </div>
+
+        <div class="mozilla-video-control mozilla-video-shadow">
+            <video
+                width="528"
+                height="297"
+                poster="{{ MEDIA_URL }}img/videos/poster-kids.jpg"
+                controls="controls">
+                <source src="//videos-cdn.mozilla.net/serv/webmademovies/webmakers-young.webm" type="video/webm" />
+                <source src="//videos-cdn.mozilla.net/serv/webmademovies/webmakers-young.ogv" type="video/ogg; codecs=&quot;theora, vorbis&quot;" />
+                <source src="//videos-cdn.mozilla.net/serv/webmademovies/webmakers-young.mp4" type="video/mp4" />
+                <object type="application/x-shockwave-flash"
+                    style="width: 528px; height: 297px;"
+                    data="/media/flash/playerWithControls.swf?flv=uploads/webmademovies/webmakers-young.flv&amp;autoplay=false&amp;msg=Play%20Video">
+                    <param name="movie" value="/media/flash/playerWithControls.swf?flv=uploads/webmademovies/webmakers-young.flv&amp;autoplay=false&amp;msg=Play%20Video" />
+                    <param name="wmode" value="transparent" />
+                    <div class="video-player-no-flash">
+                        This video requires a browser with support for open video or the <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player</a>.
+                    </div>
+                </object>
+            </video>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{{ js('core_js') }}
+{{ js('video-tools') }}
+{% endblock %}

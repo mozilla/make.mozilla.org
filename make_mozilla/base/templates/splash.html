@@ -5,7 +5,7 @@
 {% block content %}
 <div class="amuse pager pager-with-tabs pager-auto-rotate pager-no-history" id="home-promo">
     <div class="default-page pager-content">
-    	<div class="pager-page" id="page-promo-code-party">
+    	<div class="pager-page" id="page-promo-festival">
             <a href="http://mozillafestival.org">
                 <img src="{{ MEDIA_URL }}img/carousel/mozfest_opt.jpg" alt="" width="1400" height="488" />
                 <div class="pager-text">
@@ -24,7 +24,7 @@
             </a>
         </div>
         <div class="pager-page" id="page-promo-webmaker-kids">
-            <a href="http://mozilla.org/webmaker/videos/">
+            <a href="{{ url('video_page') }}">
                 <img src="{{ MEDIA_URL }}img/carousel/july_2012/webmaker-kids.jpg" alt="" width="1400" height="488" />
                 <div class="pager-text">
                     <h2 class="pager-title">Building the next generation of webmakers</h2>
@@ -32,12 +32,12 @@
                 </div>
             </a>
         </div>
-        <div class="pager-page" id="page-promo-popcorn">
-            <a href="http://maker.mozillapopcorn.org/storycamp/">
-                <img src="{{ MEDIA_URL }}img/carousel/july_2012/popcorn-storycamp.jpg" alt="" width="1400" height="488" />
+        <div class="pager-page" id="page-promo-adlib">
+            <a href="https://webmaker.org/en-US/projects/pbs-newshour-ad-libs-2012/">
+                <img src="{{ MEDIA_URL }}img/carousel/Adlib_opt.jpg" alt="" width="1400" height="488" />
                 <div class="pager-text">
-                    <h2 class="pager-title">Storytelling, creativity and the web</h2>
-                    <p>Dive into "web-native" video and storytelling with author Cory Doctorow, OK GO's Damian Kulash and others.</p>
+                    <h2 class="pager-title">Make your own campaign ad</h2>
+                    <p>Learn how political campaign ads work by making one of your own—powered by Popcorn.js!</p>
                 </div>
             </a>
         </div>
@@ -51,10 +51,10 @@
             </a>
         </div>
     <ul class="pager-tabs">
-        <li id="tab-code-party"><a href="#" class="selected">● <span>read about Join the Summer Code Party!</span></a></li>
+        <li id="tab-festival"><a href="#" class="selected">● <span>read about Join us for the 2012 Mozilla Festival!</span></a></li>
         <li id="tab-search-events"><a href="#">● <span>read about Find an event near you</span></a></li>
         <li id="tab-webmaker-kids"><a href="#">● <span>read about Building the next generation of webmakers</span></a></li>
-        <li id="tab-popcorn"><a href="#">● <span>read about Storytelling, creativity and the web</span></a></li>
+        <li id="tab-adlib"><a href="#">● <span>read about Make your own campaign ad</span></a></li>
         <li id="tab-join"><a href="#">● <span>read about Join Mozilla</span></a></li>
     </ul>
     </div>
