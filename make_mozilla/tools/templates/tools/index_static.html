@@ -71,7 +71,7 @@
                 <p>Explore and remix any web page</p>
             </div></li>
             <li><div class="tool-flyer featured">
-                <h4 class="title"><a href="#popcorn">Popcorn</a></h4>
+                <h4 class="title"><a href="#popcorn-maker">Popcorn Maker</a></h4>
                 <a href="#popcorn" class="logo"><img src="{{ MEDIA_URL }}img/tools/popcorn-icon.png" alt="Popcorn Maker" title=""></a>
                 <p>Supercharge web video</p>
             </div></li>
@@ -146,12 +146,14 @@
 </section>
 
 <section id="popcorn" class="sidebar larger">
-    <header><h2><img src="{{ MEDIA_URL}}img/tools/popcorn-icon.png"> <strong>Popcorn</strong></h2></header>
+    <header id="popcorn-maker"><h2><img src="{{ MEDIA_URL}}img/tools/popcorn-icon.png"> <strong>Popcorn Maker</strong></h2></header>
     <div class="poster"></div>
     <div class="content">
         <h3>Video beyond the box</h3>
         <span class="feature app"><img src="{{ MEDIA_URL }}img/tools/popcorn-app.png" alt="A screenshot of the Popcorn application"></span>
-        <p><b>Mozilla Popcorn pulls the rest of the web into your video.</b> Popcorn is an interactive video tool that lets you link your video directly to popular web services like Twitter, Wikipedia, Google maps and more. The result is a new kind of multimedia experience that works more like the web itself: interactive, rich with context and constantly changing. Create your own newscasts, pop-up videos, multimedia reports, guided web tours and more. <b>Popcorn is still in development</b> -- but please take an advance look and play around with the preview version now. Let's make some Popcorn!</p>
+        <p>Popcorn Maker makes it easy to enhance, remix and share web video. Use your web browser to combine video and audio with content from the rest of the web — from text, links and maps to pictures and live feeds.</p>
+        <p>Use Popcorn Maker to create your own interactive newscasts, pop-up videos, multimedia reports, fan videos, guided web tours and more. Remix your favorite videos on YouTube or sounds on SoundCloud, add your own comments and links, or drag and drop in content from across the web.</p>
+        <p>The result is a whole new way to tell stories on the web, with videos that are dynamic, full of links, and unique each time you watch them. It's video beyond the box.</p>
         <span class="feature sample"><img src="{{ MEDIA_URL }}img/tools/popcorn-sample.png" alt="A sample of the Popcorn application"></span>
         <p class="buttons"><a href="http://maker.mozillapopcorn.org/" class="button more">Get started</a></p>
     </div>
@@ -164,13 +166,13 @@
                 <strong>&ndash;&nbsp;Fast Company</strong>
             </figcaption>
         </figure>
-        <p>Make something with Popcorn</p>
+        <p>Make something with Popcorn Maker</p>
         {% if projects.popcorn.count() != 0 %}
         <ul>
             {% for project in projects.popcorn %}
             <li><a href="{{ project.get_absolute_url() }}">{{ project }}</a></li>
             {% endfor %}
-            <li><em><a href="{{ url('projects') }}?tool=popcorn">More Popcorn projects</a></em></li>
+            <li><em><a href="{{ url('projects') }}?tool=popcorn">More Popcorn Maker projects</a></em></li>
         </ul>
         {% else %}
             <p><b>Projects coming soon</b></p>
