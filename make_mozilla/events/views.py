@@ -368,6 +368,10 @@ def guides_pop_up(request):
     })
 
 
+def guides_game_jam(request):
+    return jingo.render(request, 'events/guides/game-jam.html', {})
+
+
 def privacy_policy(request):
     return jingo.render(request, 'events/legal/privacy.html', {})
 
@@ -386,6 +390,7 @@ def event_guidelines(request):
 
 def scribble_live(request):
     return jingo.render(request, 'events/live-updates.html', {})
+
 
 def hoc_2012(request):
     return jingo.render(request, 'events/hoc_2012.html', {})
