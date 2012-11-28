@@ -5,15 +5,6 @@
 {% block content %}
 <div class="amuse pager pager-with-tabs pager-auto-rotate pager-no-history" id="home-promo">
     <div class="default-page pager-content">
-    	<div class="pager-page" id="page-promo-code-party">
-            <a href="http://mozillafestival.org">
-                <img src="{{ MEDIA_URL }}img/carousel/mozfest_opt.jpg" alt="" width="1400" height="488" />
-                <div class="pager-text">
-                    <h2 class="pager-title">Join us for the 2012 Mozilla Festival!</h2>
-                    <p>November 9 – 11, 2012<br />London, UK | Ravensbourne</p>	
-                </div>
-        	</a>
-        </div>
         <div class="pager-page" id="page-promo-search-events">
             <a href="{{ url('events.search') }}">
                 <img src="{{ MEDIA_URL }}img/carousel/july_2012/map.jpg" alt="" width="1400" height="488" />
@@ -51,7 +42,6 @@
             </a>
         </div>
     <ul class="pager-tabs">
-        <li id="tab-code-party"><a href="#" class="selected">● <span>read about Join us for the 2012 Mozilla Festival!</span></a></li>
         <li id="tab-search-events"><a href="#">● <span>read about Find an event near you</span></a></li>
         <li id="tab-webmaker-kids"><a href="#">● <span>read about Building the next generation of webmakers</span></a></li>
         <li id="tab-popcorn"><a href="#">● <span>read about Make your own campaign ad</span></a></li>
