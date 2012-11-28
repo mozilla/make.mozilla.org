@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block page_title %}Videos | ITU | {{ super() }}
+{% endblock %}
+
+{% block page_id %}videos{% endblock %}
+{% block page_class %}content-page itu{% endblock %}
+
+{% block content %}
+<section class="hoc_intro">
+    <header>
+        <h2>ITU Video remixes</h2>
+    </header>
+    <div class="content">
+        <p><strong>This page contains remixes of the Popcorn Project that Mozilla launched to support grassroots mobilization around the ITU.</strong></p>
+        <p>Read <a href="https://www.webmaker.org/en-US/projects/roll-your-own-itu-activism-video/">more about the original video</a> and once you've remixed it we're collecting the best videos to feature here. Submit your remixes to <a href="mailto:tim@mozillafoundation.org">tim@mozillafoundation.org</a>!</p>
+        <article>
+            <h3>The original video</h3>
+            <iframe src="http://popcorn.webmadecontent.org/1gr_" width="820" height="503" frameborder="0" mozallowfullscreen webkitallowfullscreen allowfullscreen></iframe>
+        </article>
+    </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{{ js('core_js') }}
+{{ js('video-tools') }}
+{% endblock %}

@@ -156,6 +156,10 @@ h4 {
 	margin: 0;
 	padding: 0;
 }
+.whimper {
+	font-size: 1em;
+	font-weight: bold;
+}
 
 p {
 	font-size: 0.929em;
@@ -3720,6 +3724,13 @@ ul.tri-set img {
 .columns .meta {
 	width: 40%;
 }
+@media screen and (max-width: 700px) {
+	.columns .col {
+		float: none;
+		width: auto;
+		padding-left: 0;
+	}
+}
 #about .join_in {
 	padding-left: 0;
 }
@@ -5100,4 +5111,82 @@ a.mozilla-video-control-overlay {
 .mozilla-video-player-content .video-download-links a:link,
 .mozilla-video-player-content .video-download-links a:hover {
     color: #888;
+}
+/** a bunch of hacks for the ITU page **/
+.itu section .content ul {
+	border-left: none;
+	padding-left: 0;
+}
+.itu section .content ul ul {
+	padding-left: 40px;
+}
+.itu .whimper {
+	margin: 0.5em 0 0.2em 0;
+}
+.itu .content {
+	overflow: hidden;
+}
+.itu .sidebar p {
+	margin-top: 0;
+}
+.itu .stretch {
+	width: 100%;
+	height: auto;
+}
+.itu #and_finally {
+	padding: 0;
+}
+.itu #and_finally header {
+	margin: 0;
+}
+.itu .vcard {
+	border-bottom: 1px solid #E1E2E3;
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+}
+.itu .vcard:last-child {
+	margin-bottom: 0;
+	border-bottom: none;
+	padding-bottom: 0;
+}
+.itu .vcard-row {
+	margin-bottom: 0.2em;
+	overflow: hidden;
+}
+.itu .vcard h4 {
+	display: inline-block;
+	margin-right: 10px;
+}
+#itu_index .col {
+	padding-top: 1em;
+}
+#itu_index .col section {
+	box-shadow: none;
+	padding: 0;
+}
+#itu_index .your-say {
+	border-bottom: 1px solid #E1E2E3;
+}
+#itu_index .your-say li {
+	list-style-position: outside;
+	margin-left: 1.5em;
+}
+#itu_kit .indent {
+	margin-left: 40px;
+}
+#itu_advocates .project h4 {
+	float: left;
+	width: 10%;
+	min-width: 70px;
+}
+#itu_advocates .project p {
+	width: 83%;
+	float: left;
+	margin-top: 0;
+}
+#videos article {
+	margin-top: 1em;
+}
+#videos article iframe {
+	margin-bottom: 1em;
 }
