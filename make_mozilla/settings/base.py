@@ -71,6 +71,8 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'make_mozilla.users',
     # Pages
     'make_mozilla.pages',
+    # Static pages
+    'make_mozilla.static_pages',
     # extra lib stuff
     'south',
     'django_browserid',  # Load after auth to monkey-patch it.
