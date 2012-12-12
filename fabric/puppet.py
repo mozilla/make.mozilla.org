@@ -3,16 +3,18 @@ from fabric.operations import sudo
 import uuid, StringIO
 from release import local_settings_path
 
+
 @task
 def setup():
-    with settings(user = env.puppet_user):
+    with settings(user=env.puppet_user):
         sudo('apt-get update')
         sudo('apt-get install puppet')
     execute(facts)
 
+
 @task
 def apply():
-    with settings(user = env.puppet_user):
+    with settings(user=env.puppet_user):
         tarball_path = '/tmp/make-moz-%s.tar.gz' % uuid.uuid4().hex
         with lcd('puppet'):
             local('tar czf %s .' % tarball_path)
@@ -26,9 +28,10 @@ def apply():
         run('rm %s' % tarball_path)
         sudo('puppet -d /etc/puppet/manifests/dev.pp')
 
+
 @task
 def facts():
-    with settings(user = env.puppet_user):
+    with settings(user=env.puppet_user):
         import imp
         env_settings = imp.load_source('env_settings', local_settings_path())
         db_user = env_settings.DATABASES['default']['USER']

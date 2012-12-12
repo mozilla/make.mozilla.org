@@ -3,8 +3,6 @@ make.mozilla.org
 
 This app is built using Mozilla's Playdoh.
 
-Deployment instructions are towards the bottom of this file.
-
 Local development
 =================
 
