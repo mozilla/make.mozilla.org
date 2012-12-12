@@ -14,6 +14,16 @@ We're using PostGIS + GeoDjango for the DB, so you'll also need the following in
 * Proj4
 * GDAL
 
+Checkout the sourcecode and init the git submodules:
+
+    git clone --recursive git://github.com/mozilla/webmaker.org
+
+If at any point you realize you forgot to clone with the recursive flag, you
+can fix that by running:
+
+    git submodule update --init --recursive
+
+
 Mac OS X
 --------
 
@@ -44,6 +54,63 @@ GeoDjango is installed as part of Django. You need to take a look at the install
 instructions at [https://docs.djangoproject.com/en/1.3/ref/contrib/gis/install/#post-installation] 
 to get PostGIS configured properly with Django. Ubuntu's version ships with a postgis-template generation script, which you can see used in `./puppet/manifests/classes/postgis.pp`
 
+Making it run locally
+=====================
+
+Once you have all the dependencies installed, you need to create a settings
+file.
+
+    cp make_mozilla/settings/local.py{-dist,}
+
+And then edit the settings file to match your needs, here is the section about
+the databases:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',
+            'NAME': 'webmaker',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': 'localhost',
+            'PORT': '5432',
+            'TEST_CHARSET': 'utf8',
+            'TEST_COLLATION': 'utf8_general_ci',
+        },
+    }
+
+
+Setting up the database
+-----------------------
+
+Once you've installed postgis, you need to create a template for it, and then
+create your database with this template. For postgis 1.5:
+
+    cd /tmp && wget https://raw.github.com/django/django/master/docs/ref/contrib/gis/install/create_template_postgis-1.5.sh
+    sudo su postgres
+    /tmp/create_template_postgis-1.5.sh
+
+And finally create the database:
+
+    createdb -T template_postgis webmaker
+
+Populating it
+-------------
+
+    ./manage.py syncdb
+    ./manage.py migrate
+    
+
+Compiling the assets
+--------------------
+
+You also need to compile the assets, be sure to update your settings with the path to your LESS executable:
+
+    LESS_BIN = "/usr/local/bin/lessc"
+
+And then run:
+
+    ./manage.py compress_assets
+
 playdoh: about the framework
 ============================
 
@@ -65,4 +132,3 @@ This software is licensed under the [New BSD License][BSD]. For more
 information, read the file ``LICENSE``.
 
 [BSD]: http://creativecommons.org/licenses/BSD/
-
