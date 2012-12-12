@@ -17,7 +17,6 @@ env.forward_agent = True
 env.puppet_user = os.getenv('AS', env.user)
 env.user = 'make_mozilla'
 hosts = {
-    'dev': ['make.constituentparts.com'],
     'development': ['make-dev1.vm.labs.scl3.mozilla.com'],
     'staging': ['make-stage1.vm.labs.scl3.mozilla.com'],
     'production': ['make-prod1.vm.labs.scl3.mozilla.com']
