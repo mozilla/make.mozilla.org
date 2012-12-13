@@ -12,7 +12,7 @@ import fab_git as git
 import puppet
 
 env.releases_path = '/var/webapps/make.mozilla.org'
-env.repo_url = 'git://github.com/rossbruniges/make.mozilla.org.git'
+env.repo_url = 'git://github.com/mozilla/make.mozilla.org.git'
 env.forward_agent = True
 env.puppet_user = os.getenv('AS', env.user)
 env.user = 'make_mozilla'
