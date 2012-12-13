@@ -42,7 +42,7 @@
                     <h2><img src="{{ MEDIA_URL }}img/footer_logo.png" alt="Mozilla Webmaker" width="129" height="39" /></h2>
                     <h3>Admin</h3>
                     <ul>
-                    {% if not (request.user and request.user.is_authenticated()) %}
+                    {% if not (request and request.user and request.user.is_authenticated()) %}
                         <li><a href="{{ login_url() }}">Log in</a></li>
                     {% endif %}
                     {% block admin_menu_items %}
@@ -50,7 +50,7 @@
                             <li><a href="{{ url('events.mine') }}">My events</a></li>
                         {% endif %}
                     {% endblock %}
-                    {% if request.user and request.user.is_authenticated() %}
+                    {% if request and request.user and request.user.is_authenticated() %}
                         <li><a href="{{ url('logout') }}">Log out</a></li>
                     {% endif %}
                     </ul>
