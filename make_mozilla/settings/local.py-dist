@@ -7,24 +7,19 @@
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'playdoh_app',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-        'OPTIONS': {
-            'init_command': 'SET storage_engine=InnoDB',
-            'charset' : 'utf8',
-            'use_unicode' : True,
-        },
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'webmaker',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5432',
         'TEST_CHARSET': 'utf8',
         'TEST_COLLATION': 'utf8_general_ci',
     },
-    # 'slave': {
-    #     ...
-    # },
 }
+
+LESS_PREPROCESS = True
+LESS_BIN = "/usr/local/bin/lessc"
 
 # Uncomment this and set to all slave DBs in use on the site.
 # SLAVE_DATABASES = ['slave']
@@ -50,9 +45,10 @@ DEBUG = TEMPLATE_DEBUG = True
 # instances and False on stage/prod.
 DEV = True
 
-# # Playdoh ships with sha512 password hashing by default. Bcrypt+HMAC is safer,
-# # so it is recommended. Please read <https://github.com/fwenzel/django-sha2#readme>,
-# # then switch this to bcrypt and pick a secret HMAC key for your application.
+## Playdoh ships with sha512 password hashing by default. Bcrypt+HMAC is safer,
+## so it is recommended. Please read
+## <https://github.com/fwenzel/django-sha2#readme>, then switch this to bcrypt
+## and pick a secret HMAC key for your application.
 # PWD_ALGORITHM = 'bcrypt'
 # HMAC_KEYS = {  # for bcrypt only
 #     '2011-01-01': 'cheesecake',
