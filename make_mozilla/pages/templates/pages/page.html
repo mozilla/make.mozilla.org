@@ -40,7 +40,7 @@
 {% block content %}
 {% if page.show_subnav %}
 <nav class="subnav">
-    {% if page.subnav_title %}<h4>{{ page.subnav_title }}</h4>{% endif %}
+    {% if page.subnav_title %}<h2 class="title">{{ page.subnav_title }}</h2>{% endif %}
     <ul>
     {% for section in page.sections.all() %}
         <li><a href="#section-{{ loop.index }}">{{ section.nav_title|safe }}</a></li>

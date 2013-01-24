@@ -22,7 +22,7 @@ class Page(models.Model):
 class PageSection(models.Model):
     title = models.CharField(max_length=255)
     subnav_title = models.CharField(max_length=255, blank=True, null=True,
-        verbose_name='Sub-navigation title', help_text='Will use the primary title if blank')
+        verbose_name='Sub-navigation title', help_text='Will use the section title if blank')
     page = models.ForeignKey('Page', related_name='sections')
     poster = fields.SizedImageField(
         blank=True,
