@@ -9,6 +9,10 @@ from make_mozilla.core import fields
 class Page(models.Model):
     title = models.CharField(max_length=255)
     path = models.SlugField(unique=True)
+    show_subnav = models.BooleanField(default=False,
+        verbose_name='Show sub-navigation menu')
+    subnav_title = models.CharField(max_length=100, blank=True, null=True,
+        verbose_name='Menu title', help_text='This can be left blank if you do not need a title')
     additional_content = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
@@ -17,6 +21,8 @@ class Page(models.Model):
 
 class PageSection(models.Model):
     title = models.CharField(max_length=255)
+    subnav_title = models.CharField(max_length=255, blank=True, null=True,
+        verbose_name='Sub-navigation title', help_text='Will use the primary title if blank')
     page = models.ForeignKey('Page', related_name='sections')
     poster = fields.SizedImageField(
         blank=True,
@@ -38,6 +44,12 @@ class PageSection(models.Model):
 
     def __unicode__(self):
         return mark_safe(self.title)
+
+    @property
+    def nav_title(self):
+        if self.subnav_title:
+            return mark_safe(self.subnav_title)
+        return unicode(self)
 
     @property
     def has_sidebar(self):
