@@ -38,6 +38,16 @@
 {% endblock %}
 
 {% block content %}
+{% if page.show_subnav %}
+<nav class="subnav">
+    {% if page.subnav_title %}<h2 class="title">{{ page.subnav_title }}</h2>{% endif %}
+    <ul>
+    {% for section in page.sections.all() %}
+        <li><a href="#section-{{ loop.index }}">{{ section.nav_title|safe }}</a></li>
+    {% endfor %}
+    </ul>
+</nav>
+{% endif %}
 {% for section in page.sections.all() %}
 <section id="section-{{ loop.index }}"{% if section.has_sidebar %} class="sidebar"{% endif %}>
     <header><h2>{{ section|safe }}</h2></header>
