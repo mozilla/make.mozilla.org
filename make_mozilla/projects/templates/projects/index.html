@@ -45,6 +45,13 @@
                 <img src="{{ project.image.flyer_url }}">
                 <h4 class="title">{{ project }}</h4>
             </a>
+            {% if project.groups %}
+                <ul class="project-group">
+                    {% for g in project.groups %}
+                        <li><a href="{{ g.get_absolute_url() }}">A <em>{{ g.name }}</em> project</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             {% if project.contributor %}<p class="contributor">Contributed by {{ project.contributor }}</p>{% endif %}
         </div></li>
     {% endfor %}

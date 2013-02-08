@@ -2371,12 +2371,39 @@ ul.tri-set img {
 }
 
 /* ---[ Project Flyers ]---------------------------------------------------- */
-
+.group-intro {
+	padding: 0 350px 4em 0;
+	border-bottom: 1px dotted #D6D6D6;
+	margin-bottom: 4em;
+	overflow: hidden;
+	position: relative;
+}
+.group-intro h1 {
+	font-style: italic;
+	font-size: 48px;
+	overflow: hidden;
+	font-weight: normal;
+	letter-spacing: -3px;
+	line-height: 1.1;
+}
+.group-intro h1 em {
+	display: inline-block;
+	font-size: 70px;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-style: normal;
+	color: #676767;
+}
+.group-intro img {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
 .project-flyer {
 	.box-shadow(@panelShadow);
-
 	background: #FFF;
 	padding: 8px;
+	position: relative;
 }
 
 .project-flyer img {
@@ -2396,7 +2423,26 @@ ul.tri-set img {
 	background: #F1F2F2;
 	border-top: solid 1px #D7D8D9;
 }
-
+.project-flyer .project-group {
+	overflow: hidden;
+	background: yellow;
+	list-style-type: none;
+	padding: 0.5em 10px;
+	margin: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.project-flyer .project-group li {
+	padding: 0;
+	margin: 0;
+	width: auto;
+}
+.project-flyer .project-group em {
+	font-weight: bold;
+	text-decoration: underline;
+	font-style: normal;
+}
 .project-flyer-list {
 	margin: -3px 0 0 -20px;
 	padding: 3px 0 0;
@@ -2418,6 +2464,15 @@ ul.tri-set img {
 }
 
 @media screen and (max-width: 700px) {
+	.group-intro {
+		padding-right: 0;
+	}
+	.group-intro img {
+		position: static;
+		float: right;
+		width: 50%;
+		height: auto;
+	}
 	.project-flyer-list {
 		padding-right: 5px;
 		margin-right: -5px;

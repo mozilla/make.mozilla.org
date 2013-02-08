@@ -61,6 +61,14 @@ class Project(models.Model):
         return reverse('project', kwargs={'slug': self.slug})
 
     @property
+    def groups(self):
+        try:
+            return self.group_set.all()
+        # because we have the 'dummy project' that doesn't have a primary key
+        except ValueError:
+            return None
+
+    @property
     def content(self):
         if self.steps.count():
             content = '\n\n'.join(self.steps.values_list('content', flat=True))
@@ -89,6 +97,50 @@ class Project(models.Model):
             return self.get_next_by_added(difficulties__in=self.difficulties.all())
         except self.DoesNotExist:
             return None
+
+
+class Group(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, default='',
+        help_text="Remember if you change this after a group has been saved it can cause broken links")
+    members = models.ManyToManyField(Project, through='GroupMembership')
+    body = models.TextField(null=True, blank=True,
+        help_text='Please paste your HTML in here - please remember to include any images behind an HTTPS server')
+    body_text_template = models.CharField(max_length=255, blank=True, null=True,
+        help_text="If supplying an HTML template for the body include the filename here. We look for templates in 'make_mozilla/projects/templates/groups/'")
+    take_body_from = models.CharField(max_length=4, choices=(
+            ('body', 'body'),
+            ('temp', 'body_text_template')
+        ),
+        default='body',
+        help_text='Do you want the introduction text to be taken direct from the DB or from an HTML template file?')
+    image = fields.SizedImageField(
+        upload_to='projects',
+        help_text='Unless custom CSS is written this will appear in the top right of the page, next to the title',
+        storage=FileSystemStorage(**settings.UPLOADED_IMAGES),
+        sizes={
+            'poster': 515,
+            'flyer': (270, 165),
+            'featured': (200, 130),
+            'thumb': (126, 77),
+        })
+
+    def __unicode__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('group', kwargs={'slug': self.slug})
+
+    @property
+    def projects(self):
+        return self.members.all().order_by('groupmembership__order')
+
+
+class GroupMembership(models.Model):
+    project = models.ForeignKey(Project)
+    group = models.ForeignKey(Group)
+    order = models.IntegerField(max_length=2, default=1,
+        help_text="Order can also be set on the listing page once saved")
 
 
 class ProjectStep(models.Model):
@@ -147,7 +199,7 @@ class Contributor(models.Model):
     def website(self):
         if self.partner:
             return self.partner.website
-        return none
+        return None
 
     @property
     def logo(self):

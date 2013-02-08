@@ -1,0 +1,25 @@
+{% extends "projects/base.html" %}
+
+{% block page_title %}{{ group.name }} | {{ super() }}{% endblock %}
+
+{% block page_id %}{{ group.slug }}{% endblock %}
+{% block section_type %}project-group{% endblock %}
+
+{% block content %}
+    <div class="group-intro">
+        <h1>welcome to the <em>{{ group.name }}</em></h1>
+         <img class="faux-bg" src="/media/partner_media/{{ group.image }}" alt="" />
+        <p>I like cake</p>
+    </div>
+    <ol class="project-flyer-list">
+    {% for p in group.projects %}
+        <li><div class="project-flyer">
+            <a href="{{ p.get_absolute_url() }}">
+                <img src="{{ p.image.flyer_url }}">
+                <h4 class="title">{{ p }}</h4>
+            </a>
+            {% if p.contributor %}<p class="contributor">Contributed by {{ p.contributor }}</p>{% endif %}
+        </div></li>
+    {% endfor %}
+    </ol>
+{% endblock %}

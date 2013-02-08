@@ -114,7 +114,7 @@ index = Index()
 
 
 def submit(request):
-    return jingo.render(request, 'projects/submit.html');
+    return jingo.render(request, 'projects/submit.html')
 
 
 def details(request, slug):
@@ -126,4 +126,17 @@ def details(request, slug):
 
     return jingo.render(request, 'projects/detail.html', {
         'project': project
-    });
+    })
+
+
+def group(request, slug):
+    group = get_object_or_404(models.Group, slug=slug)
+
+    if group.take_body_from == 'temp':
+        template = 'projects/groups/%s' % group.body_text_template
+    else:
+        template = 'projects/group_index.html'
+
+    return jingo.render(request, template, {
+        'group': group
+    })
