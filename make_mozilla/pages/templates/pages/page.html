@@ -38,6 +38,7 @@
 {% endblock %}
 
 {% block content %}
+{{ page.additional_content|safe }}
 {% if page.show_subnav %}
 <nav class="subnav">
     {% if page.subnav_title %}<h2 class="title">{{ page.subnav_title }}</h2>{% endif %}
@@ -81,6 +82,4 @@
     {% endif %}
 </section>
 {% endfor %}
-
-{{ page.additional_content|safe }}
 {% endblock %}
