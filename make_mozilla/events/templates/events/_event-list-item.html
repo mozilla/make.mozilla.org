@@ -31,7 +31,7 @@
     {% if event.start %}
         <div class="date">
             <span class="day">{{ event.start.strftime('%A') }}</span>
-            <span class="month">{{ event.start.strftime('%B') }}</span>
+            <span class="month">{% if event.start.strftime('%B')|length > 6 %}{{ event.start.strftime('%b.') }}{% else %}{{ event.start.strftime('%B') }}{% endif %}</span>
             <span class="date">{{ event.start.strftime('%-d') }}</span>
             {# <span class="year">{{ event.start.strftime('%Y') }}</span> #}
         </div>
