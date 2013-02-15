@@ -107,14 +107,15 @@ class Index(object):
             'pagination': pagination,
             'filter_form': filter_form,
             'invitation': invitation,
-            'query': qs
+            'query': qs,
+            'filters': ", ".join(query.values())
         })
 
 index = Index()
 
 
 def submit(request):
-    return jingo.render(request, 'projects/submit.html');
+    return jingo.render(request, 'projects/submit.html')
 
 
 def details(request, slug):
@@ -126,4 +127,4 @@ def details(request, slug):
 
     return jingo.render(request, 'projects/detail.html', {
         'project': project
-    });
+    })
