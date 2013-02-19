@@ -62,7 +62,7 @@
         "fields": {
             "title": "Why is Mozilla doing this?",
             "poster": "/media/img/about/3.jpg",
-            "content": "<p><strong>The web is becoming the world\u2019s second language, and a vital 21st century skill</strong>. Digital literacy today is as important as reading, writing and arithmetic. Mozilla believes its crucial that we give people the skills they need to understand, shape and actively participate in that world, instead of just passively consuming it.</p>",
+            "content": "<p><strong>The web is becoming the world\u2019s second language, and a vital 21st century skill</strong>. Digital literacy today is as important as reading, writing and arithmetic. Mozilla believes it\u2019s crucial that we give people the skills they need to understand, shape and actively participate in that world, instead of just passively consuming it.</p>",
             "quotes": [
                 6
             ],
@@ -76,7 +76,7 @@
         "fields": {
             "title": "What\u2019s a &ldquo;webmaker&rdquo;?",
             "poster": "/media/img/about/4.jpg",
-            "content": "<p><strong>Anyone who makes something using the open building blocks of the web.</strong> If you\u2019re uploading photos or videos, posting to a blog, or using social media, you\u2019re already on the path. We want to help you level up your skills and go further.</p>\r\n\r\n<p><strong>You don\u2019t have to be a professional coder or wizard to be a webmaker.</strong> In the same way that you don\u2019t have to be a professional baker to make bread, or a professional auto mechanic to change a tire or poke under the hood, <strong>you shouldn\u2019t have be be a professional web developer to understand how the web works \u2014 or make your own stuff</strong>. We want to help you go \u201cbeyond upload\u201d to unlock new opportunities for creativity and innovation in your life and work.</p>",
+            "content": "<p><strong>Anyone who makes something using the open building blocks of the web.</strong> If you\u2019re uploading photos or videos, posting to a blog, or using social media, you\u2019re already on the path. We want to help you level up your skills and go further.</p>\r\n\r\n<p><strong>You don\u2019t have to be a professional coder or wizard to be a webmaker.</strong> In the same way that you don\u2019t have to be a professional baker to make bread, or a professional auto mechanic to change a tire or poke under the hood, <strong>you shouldn\u2019t have to be a professional web developer to understand how the web works \u2014 or make your own stuff</strong>. We want to help you go \u201cbeyond upload\u201d to unlock new opportunities for creativity and innovation in your life and work.</p>",
             "quotes": [
                 7
             ],
@@ -187,7 +187,7 @@
         "model": "pages.quote",
         "fields": {
             "url": "",
-            "quote": "Popcorn Maker could be the next big thing in internet video.",
+            "quote": "<strong>Popcorn</strong> could be the next big thing in internet video.",
             "show_source_image": false,
             "source": 4
         }

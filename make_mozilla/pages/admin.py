@@ -8,13 +8,14 @@ class PageSectionInline(admin.StackedInline):
     extra = 1
     fieldsets = (
         (None, {
-            'fields': ('title', 'poster', 'content',),
+            'fields': ('title', 'subnav_title', 'poster', 'content',),
         }),
         ('Sidebar', {
             'classes': ('collapse',),
             'fields': ('quotes', 'sidebar',),
         }),
     )
+    prepopulated_fields = {"subnav_title": ("title",)}
     filter_horizontal = ('quotes',)
 
 
@@ -25,6 +26,10 @@ class PageAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': ('title', 'path',),
+        }),
+        ('Sub-navigation', {
+            'classes': ('collapse',),
+            'fields': ('show_subnav', 'subnav_title',),
         }),
         ('Advanced', {
             'classes': ('collapse',),
