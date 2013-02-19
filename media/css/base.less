@@ -37,13 +37,12 @@
 /* ===[ Core ]============================================================== */
 
 #app_stage_box {
-	background: rgba(249, 8, 3, 0.8);
-	padding: 0.2em 0;
-	color: white;
+	background: #FFFF00;
+	padding: 0.5em 0;
+	color: #827600;
 	text-shadow: none;
 }
 #app_stage_box a {
-	color: white;
 	font-weight: bold;
 	text-decoration: underline;
 }
@@ -455,6 +454,7 @@ object {
 
 /* ---[ 'Page' Content ]---------------------------------------------------- */
 
+.content-page .subnav,
 .content-page section {
 	.box-shadow(@panelShadow);
 	background: #FFF;
@@ -463,6 +463,49 @@ object {
 	padding: 40px;
 	margin-bottom: 20px;
 	font-family: "Open Sans Light", "Open Sans", sans-serif;
+}
+
+.content-page .subnav {
+	font-size: 1.286em;
+	padding: 20px;
+	margin-top: 1em;
+	clear: both;
+}
+
+.content-page .subnav .title {
+	margin: 0 0.5em 0 0;
+	padding: 0;
+	line-height: 1.769em;
+	font-size: 1em;
+	font-weight: bold;
+	display: inline-block;
+	font-family: "Open Sans", sans-serif;
+
+	&::after {
+		content: ":\00A0";
+	}
+}
+
+.content-page .subnav ul,
+.content-page .subnav li {
+	font-size: 1em;
+	line-height: 1.769em;
+	list-style: none;
+	margin: 0.35em 0;
+	padding: 0;
+	display: inline;
+}
+
+.content-page .subnav li {
+	margin: 0.2em 0 0.2em 0.5em;
+	padding: 0 0 0 0.75em;
+	border-left: solid 1px #BBB;
+
+	&:first-child {
+		border: none;
+		padding-left: 0;
+		margin-left: 0;
+	}
 }
 
 .content-page section.sidebar {
@@ -788,6 +831,23 @@ object {
 	.content-page .links li:first-child {
 		border-top: none;
 	}
+}
+
+.content-page section .content .simple-list {
+	border: none;
+	padding-left: 0;
+}
+.content-page section .content .simple-list li {
+	list-style-type: none;
+	list-style-position: outside;
+	overflow: hidden;
+	margin-bottom: 1em;
+}
+.content-page section .content .simple-list img {
+	float: left;
+	margin-right: 20px;
+	width: 120px;
+	height: auto;
 }
 
 /* ---[ Map Content ]------------------------------------------------------- */
@@ -3144,7 +3204,7 @@ ul.tri-set img {
 	.box-shadow(@panelShadow);
 	.box-sizing(border-box);
 
-	padding: 20px 40px;
+	padding: 20px;
 	float: left;
 	width: 100%;
 	background: #FFF;
