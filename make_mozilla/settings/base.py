@@ -25,6 +25,9 @@ MINIFY_BUNDLES = {
         'core_js': (
             'js/core.js',
         ),
+        'video-tools': (
+            'js/mozilla-video-tools.js',
+        ),
         'maps_js': (
             'js/map.js',
             'js/map.infobox.js',
