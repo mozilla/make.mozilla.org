@@ -19,6 +19,17 @@ class PageSectionInline(admin.StackedInline):
     filter_horizontal = ('quotes',)
 
 
+class PageAdminForm(forms.ModelForm):
+    class Meta:
+        model = models.Page
+
+    def __init__(self, *args, **kwargs):
+        super(PageAdminForm, self).__init__(*args, **kwargs)
+        # In theory this could be extended to preclude parent/child loops,
+        # but that's an exercise left to the reader for now!
+        self.fields['parent'].queryset = models.Page.objects.exclude(id__exact=self.instance.id)
+
+
 class PageAdmin(admin.ModelAdmin):
     inlines = [PageSectionInline]
     prepopulated_fields = {'path': ('title',)}
