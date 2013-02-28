@@ -1,7 +1,8 @@
 {% extends "pages/base.html" %}
 
 {% block page_title %}{{ page.title }} | {{ super() }}{% endblock %}
-{% block page_id %}page-{{ page.path }}{% endblock %}
+{% block page_id %}page-{{ page.real_path|replace('/', '_') }}{% endblock %}
+{% block page_class %}{{ super() }} section-{{ page.get_section_root() }}{% endblock %}
 
 {% block site_css %}
 {{ super() }}
