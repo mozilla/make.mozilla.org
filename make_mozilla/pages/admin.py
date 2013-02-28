@@ -37,12 +37,13 @@ class PageAdmin(admin.ModelAdmin):
     indented_title.short_description = 'Title'
 
     form = PageAdminForm
+    ordering = ('real_path',)
     inlines = [PageSectionInline]
     prepopulated_fields = {'path': ('title',)}
-    list_display = ('title', 'path',)
+    list_display = (indented_title, 'path', )
     fieldsets = (
         (None, {
-            'fields': ('title', 'path',),
+            'fields': ('title', 'path', 'parent',),
         }),
         ('Sub-navigation', {
             'classes': ('collapse',),
