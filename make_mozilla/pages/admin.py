@@ -31,6 +31,11 @@ class PageAdminForm(forms.ModelForm):
 
 
 class PageAdmin(admin.ModelAdmin):
+    def indented_title(obj):
+        indent = '-' * (len(obj.real_path.split('/')) - 1)
+        return '%s %s' % (indent, obj.title)
+    indented_title.short_description = 'Title'
+
     inlines = [PageSectionInline]
     prepopulated_fields = {'path': ('title',)}
     list_display = ('title', 'path',)
