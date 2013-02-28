@@ -18,6 +18,23 @@ class Page(models.Model):
         verbose_name='Menu title', help_text='This can be left blank if you do not need a title')
     additional_content = models.TextField(blank=True, null=True)
 
+    def clean(self):
+        from django.core.exceptions import ValidationError
+
+        self.path = self.path.strip('/')
+
+        if self.parent:
+            self.real_path = '%s/%s' % (self.parent.real_path, self.path)
+        else:
+            self.real_path = self.path
+
+        try:
+            if Page.objects.exclude(id__exact=self.id).get(real_path=self.real_path):
+                raise ValidationError('This path/parent combination already exists.')
+        except Page.DoesNotExist:
+            # We can safely ignore this, as it means we're in the clear and our path is fine
+            pass
+
     def __unicode__(self):
         return self.title
 
