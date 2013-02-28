@@ -22,10 +22,10 @@ class PageSectionInline(admin.StackedInline):
 class PageAdmin(admin.ModelAdmin):
     inlines = [PageSectionInline]
     prepopulated_fields = {'path': ('title',)}
-    list_display = ('title', 'path',)
+    list_display = ('title', 'path', 'parent')
     fieldsets = (
         (None, {
-            'fields': ('title', 'path',),
+            'fields': ('title', 'path', 'parent'),
         }),
         ('Sub-navigation', {
             'classes': ('collapse',),

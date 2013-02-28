@@ -14,6 +14,12 @@ class Page(models.Model):
     subnav_title = models.CharField(max_length=100, blank=True, null=True,
         verbose_name='Menu title', help_text='This can be left blank if you do not need a title')
     additional_content = models.TextField(blank=True, null=True)
+    parent = models.ForeignKey('self', blank=True, null=True,
+        help_text='This will allow you to use URLs like about/foo - parent.path + path')
+
+    @property
+    def has_parent(self):
+        return self.parent or False
 
     def __unicode__(self):
         return self.title

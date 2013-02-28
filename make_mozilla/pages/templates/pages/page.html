@@ -2,6 +2,7 @@
 
 {% block page_title %}{{ page.title }} | {{ super() }}{% endblock %}
 {% block page_id %}page-{{ page.path }}{% endblock %}
+{% block page_class %}{{ super() }} section-{{ page.parent.path }}{% endblock %}
 
 {% block site_css %}
 {{ super() }}
