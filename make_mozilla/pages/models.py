@@ -1,22 +1,55 @@
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
+
 from make_mozilla.core import fields
+from make_mozilla.pages import utils
 
 
 class Page(models.Model):
     title = models.CharField(max_length=255)
-    path = models.SlugField(unique=True)
+    path = models.SlugField()
+    real_path = models.CharField(max_length=1024, unique=True, blank=True)
+    parent = models.ForeignKey('self', blank=True, null=True,
+        help_text='This will allow you to use URLs like /about/foo - parent.path + path',
+        related_name='children')
     show_subnav = models.BooleanField(default=False,
         verbose_name='Show sub-navigation menu')
     subnav_title = models.CharField(max_length=100, blank=True, null=True,
         verbose_name='Menu title', help_text='This can be left blank if you do not need a title')
     additional_content = models.TextField(blank=True, null=True)
 
+    def has_ancestor(self, page):
+        if not self.parent:
+            return False
+        if self.parent.id == page.id:
+            return True
+        return self.parent.has_ancestor(page)
+
+    def save(self, update_children=False, *args, **kwargs):
+        super(Page, self).save(*args, **kwargs)
+        # Recursively update the full path of any children
+        # when asked explicitly.
+        if update_children:
+            # Update path from parent if any.
+            target = self.parent if self.parent else self
+            utils.update_children(target)
+
     def __unicode__(self):
         return self.title
+
+    @property
+    def indented_title(self):
+        indent = len(self.real_path.split('/')) - 1
+        if not indent:
+            return self.title
+        return '%s %s' % ('-' * indent, self.title)
+
+    def get_absolute_url(self):
+        return reverse('page', args=[self.real_path])
 
 
 class PageSection(models.Model):
@@ -86,7 +119,7 @@ class QuoteSource(models.Model):
         upload_to='avatars',
         storage=FileSystemStorage(**settings.UPLOADED_IMAGES),
         sizes={
-            'adjusted': (90,90),
+            'adjusted': (90, 90),
         })
 
     class Meta:
