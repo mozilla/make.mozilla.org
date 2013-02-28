@@ -35,6 +35,17 @@ class Page(models.Model):
             # We can safely ignore this, as it means we're in the clear and our path is fine
             pass
 
+    def save(self, *args, **kwargs):
+        super(Page, self).save(*args, **kwargs)
+
+        # Now we tell our children to update their real paths
+        # This will happen recursively, so we don't need to worry about that logic here
+        children = Page.objects.filter(parent__id__exact=self.id)
+
+        for child in children:
+            child.real_path = '%s/%s' % (self.real_path, child.path)
+            child.save()
+
     def __unicode__(self):
         return self.title
 
