@@ -8,7 +8,10 @@ from make_mozilla.core import fields
 
 class Page(models.Model):
     title = models.CharField(max_length=255)
-    path = models.SlugField(unique=True)
+    path = models.SlugField()
+    real_path = models.CharField(max_length=1024, unique=True, blank=True)
+    parent = models.ForeignKey('self', blank=True, null=True,
+        help_text='This will allow you to use URLs like /about/foo - parent.path + path')
     show_subnav = models.BooleanField(default=False,
         verbose_name='Show sub-navigation menu')
     subnav_title = models.CharField(max_length=100, blank=True, null=True,
