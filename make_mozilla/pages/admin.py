@@ -25,9 +25,19 @@ class PageAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PageAdminForm, self).__init__(*args, **kwargs)
-        # In theory this could be extended to preclude parent/child loops,
-        # but that's an exercise left to the reader for now!
-        self.fields['parent'].queryset = models.Page.objects.exclude(id__exact=self.instance.id)
+
+        # Get all the pages, excluding ourself
+        pages = models.Page.objects.exclude(id=self.instance.id).order_by('real_path')
+
+        # Exclude all pages that are our descendants
+        choices = [(page.id, page.indented_title) for page in pages
+                        if not page.has_ancestor(self.instance)]
+
+        # Put the null option back into the list
+        choices.insert(0, ('', '---------'))
+
+        # Set choices to correctly available pages
+        self.fields['parent'].choices = choices
 
 
 class PageAdmin(admin.ModelAdmin):
