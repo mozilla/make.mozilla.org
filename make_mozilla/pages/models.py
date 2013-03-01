@@ -59,6 +59,13 @@ class Page(models.Model):
     def __unicode__(self):
         return self.title
 
+    @property
+    def indented_title(self):
+        indent = len(self.real_path.split('/')) - 1
+        if not indent:
+            return self.title
+        return '%s %s' % ('-' * indent, self.title)
+
 
 class PageSection(models.Model):
     title = models.CharField(max_length=255)

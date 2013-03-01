@@ -31,9 +31,8 @@ class PageAdminForm(forms.ModelForm):
 
 
 class PageAdmin(admin.ModelAdmin):
-    def indented_title(obj):
-        indent = '-' * (len(obj.real_path.split('/')) - 1)
-        return '%s %s' % (indent, obj.title)
+    def indented_title(page):
+        return page.indented_title
     indented_title.short_description = 'Title'
 
     form = PageAdminForm
