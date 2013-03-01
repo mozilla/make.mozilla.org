@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
@@ -64,6 +65,9 @@ class Page(models.Model):
         if not indent:
             return self.title
         return '%s %s' % ('-' * indent, self.title)
+
+    def get_absolute_url(self):
+        return reverse('page', args=[self.real_path])
 
 
 class PageSection(models.Model):
