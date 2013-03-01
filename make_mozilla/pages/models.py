@@ -11,7 +11,8 @@ class Page(models.Model):
     path = models.SlugField()
     real_path = models.CharField(max_length=1024, unique=True, blank=True)
     parent = models.ForeignKey('self', blank=True, null=True,
-        help_text='This will allow you to use URLs like /about/foo - parent.path + path')
+        help_text='This will allow you to use URLs like /about/foo - parent.path + path',
+        related_name='children')
     show_subnav = models.BooleanField(default=False,
         verbose_name='Show sub-navigation menu')
     subnav_title = models.CharField(max_length=100, blank=True, null=True,
@@ -50,9 +51,7 @@ class Page(models.Model):
 
         # Now we tell our children to update their real paths
         # This will happen recursively, so we don't need to worry about that logic here
-        children = Page.objects.filter(parent__id__exact=self.id)
-
-        for child in children:
+        for child in self.children.all():
             child.real_path = '%s/%s' % (self.real_path, child.path)
             child.save()
 
