@@ -18,12 +18,22 @@ class Page(models.Model):
         verbose_name='Menu title', help_text='This can be left blank if you do not need a title')
     additional_content = models.TextField(blank=True, null=True)
 
+    def has_ancestor(self, page):
+        if not self.parent:
+            return False
+        if self.parent.id == page.id:
+            return True
+        return self.parent.has_ancestor(page)
+
     def clean(self):
         from django.core.exceptions import ValidationError
 
         self.path = self.path.strip('/')
 
         if self.parent:
+            if self.parent.has_ancestor(self):
+                raise ValidationError('Cannot set page parent to one of its descendants')
+
             self.real_path = '%s/%s' % (self.parent.real_path, self.path)
         else:
             self.real_path = self.path
