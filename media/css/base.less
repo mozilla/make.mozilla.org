@@ -548,6 +548,16 @@ object {
 	background: 50% 50% no-repeat;
 }
 
+.content-page section .thumb-left {
+	float: left;
+	margin-right: 20px;
+}
+
+.content-page section .thumb-right {
+	float: right;
+	margin-left: 20px;
+}
+
 .content-page section .content {
 	font-size: 1.286em;
 	float: left;
@@ -820,7 +830,15 @@ object {
 		border-top: none;
 	}
 }
-
+@media screen and (max-width: 320px) {
+	.content-page section .thumb-left,
+	.content-page section .thumb-right {
+		float: none;
+		margin: 0 0 0.3em;
+		width: 100%;
+		height: auto;
+	}
+}
 .content-page section .content .simple-list {
 	border: none;
 	padding-left: 0;
@@ -1799,6 +1817,10 @@ ul.tri-set img {
 	box-sizing: border-box;
 	width: 100%;
 	height: 2.5em;
+}
+
+.content-page #content section aside form label.help {
+	line-height: 0.9;
 }
 
 @media screen and (max-width: 600px) {
