@@ -19,13 +19,40 @@ class PageSectionInline(admin.StackedInline):
     filter_horizontal = ('quotes',)
 
 
+class PageAdminForm(forms.ModelForm):
+    class Meta:
+        model = models.Page
+
+    def __init__(self, *args, **kwargs):
+        super(PageAdminForm, self).__init__(*args, **kwargs)
+
+        # Get all the pages, excluding ourself
+        pages = models.Page.objects.exclude(id=self.instance.id).order_by('real_path')
+
+        # Exclude all pages that are our descendants
+        choices = [(page.id, page.indented_title) for page in pages
+                        if not page.has_ancestor(self.instance)]
+
+        # Put the null option back into the list
+        choices.insert(0, ('', '---------'))
+
+        # Set choices to correctly available pages
+        self.fields['parent'].choices = choices
+
+
 class PageAdmin(admin.ModelAdmin):
+    def indented_title(page):
+        return page.indented_title
+    indented_title.short_description = 'Title'
+
+    form = PageAdminForm
+    ordering = ('real_path',)
     inlines = [PageSectionInline]
     prepopulated_fields = {'path': ('title',)}
-    list_display = ('title', 'path',)
+    list_display = (indented_title, 'path', )
     fieldsets = (
         (None, {
-            'fields': ('title', 'path',),
+            'fields': ('title', 'path', 'parent',),
         }),
         ('Sub-navigation', {
             'classes': ('collapse',),
