@@ -13,9 +13,6 @@ MINIFY_BUNDLES = {
             'css/ext/normalize.css',
             'css/base.less',
         ),
-        'make_desktop': (
-            'css/desktop.less',
-        ),
     },
     'js': {
         'jquery': (
