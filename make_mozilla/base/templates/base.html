@@ -11,10 +11,8 @@
         {% block site_css %}
             {{ css('make_devices') }}
         {% endblock %}
-        {{ css('make_desktop', 'all and (min-width: 30em)') }}
         <!--[if lt IE 9]>
             <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-            {{ css('make_desktop') }}
         <![endif]-->
         {{ js('jquery') }}
         {% if not waffle.switch('no_track') %}
@@ -108,13 +106,5 @@
         </div>
         {% endblock %}
         <script src="//www.mozilla.org/tabzilla/media/js/tabzilla.js"></script>
-        {% if not waffle.switch('no_track') %}
-        <!-- START OF SmartSource Data Collector TAG v10.2.0 -->
-        <!-- Copyright (c) 2012 Webtrends Inc.  All rights reserved. -->
-        <script src="{{ MEDIA_URL }}js/webtrends_include.js"></script>
-        <noscript><img alt="dcsimg" id="dcsimg" width="1" height="1" src="//statse.webtrendslive.com/dcskwfzfcvz5bdn0s9jvut4xm_7u5b/njs.gif?dcsuri=/nojavascript&amp;WT.js=No&amp;WT.tv=10.2.0&amp;dcssip=www.webmaker.org"/></noscript>
-    <!-- END OF SmartSource Data Collector TAG v10.2.0 -->
-        {% endif %}
-        {% block extra_js %}{% endblock %}
     </body>
 </html>
