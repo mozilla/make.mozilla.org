@@ -13,9 +13,6 @@ MINIFY_BUNDLES = {
             'css/ext/normalize.css',
             'css/base.less',
         ),
-        'make_desktop': (
-            'css/desktop.less',
-        ),
     },
     'js': {
         'jquery': (
@@ -24,6 +21,9 @@ MINIFY_BUNDLES = {
         ),
         'core_js': (
             'js/core.js',
+        ),
+        'video-tools': (
+            'js/mozilla-video-tools.js',
         ),
         'maps_js': (
             'js/map.js',

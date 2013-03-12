@@ -2,3 +2,9 @@
 
 {% block section_type %}pages{% endblock %}
 {% block page_class %}{{ super() }} content-page{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+    {{ js('core_js') }}
+    {{ js('video-tools') }}
+{% endblock %}
