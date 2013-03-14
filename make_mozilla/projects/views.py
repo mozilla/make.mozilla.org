@@ -46,7 +46,7 @@ class Index(object):
         if skill is not None:
             query['skills'] = skill
 
-        return models.Project.objects.filter(**query)
+        return models.Project.objects.public_projects().filter(**query)
 
     def paginated_results(self, page=1, difficulty=None, topic=None, tool=None, skill=None, results_per_page=8):
 
@@ -69,7 +69,7 @@ class Index(object):
         tool = self.extract_tool(request)
         skill = self.extract_skill(request)
 
-        featured = models.Project.objects.filter(featured=True)
+        featured = models.Project.objects.public_projects().filter(featured=True)
         pagination = self.paginated_results(page, difficulty, topic, tool, skill)
 
         invitation = models.Project(
@@ -114,7 +114,7 @@ index = Index()
 
 
 def submit(request):
-    return jingo.render(request, 'projects/submit.html');
+    return jingo.render(request, 'projects/submit.html')
 
 
 def details(request, slug):
@@ -126,4 +126,4 @@ def details(request, slug):
 
     return jingo.render(request, 'projects/detail.html', {
         'project': project
-    });
+    })

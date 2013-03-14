@@ -51,6 +51,8 @@ MINIFY_BUNDLES = {
 # Defines the views served for root URLs.
 ROOT_URLCONF = 'make_mozilla.urls'
 
+SUPPORTED_NONLOCALES += ['robots.txt', ]
+
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     'django.contrib.admin',
     'django.contrib.gis',

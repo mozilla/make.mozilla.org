@@ -6,13 +6,13 @@ from make_mozilla.tools import models
 
 def index_static(request):
     thimble_qs = models.Tool.objects.filter(slug='thimble')
-    thimble_projects = projects.models.Project.objects.filter(tools__in=thimble_qs).order_by('?')[:3]
+    thimble_projects = projects.models.Project.objects.public_projects().filter(tools__in=thimble_qs).order_by('?')[:3]
 
     goggles_qs = models.Tool.objects.filter(slug='x-ray-goggles')
-    goggles_projects = projects.models.Project.objects.filter(tools__in=goggles_qs).order_by('?')[:3]
+    goggles_projects = projects.models.Project.objects.public_projects().filter(tools__in=goggles_qs).order_by('?')[:3]
 
     popcorn_qs = models.Tool.objects.filter(slug='popcorn')
-    popcorn_projects = projects.models.Project.objects.filter(tools__in=popcorn_qs).order_by('?')[:3]
+    popcorn_projects = projects.models.Project.objects.public_projects().filter(tools__in=popcorn_qs).order_by('?')[:3]
 
     return jingo.render(request, 'tools/index_static.html', {
         'projects': {

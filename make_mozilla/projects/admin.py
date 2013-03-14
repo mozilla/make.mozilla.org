@@ -7,16 +7,16 @@ class ProjectStepInline(admin.TabularInline):
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'featured', 'contributor', )
-    list_editable = ('featured', )
+    list_display = ('name', 'featured', 'contributor', 'public',)
+    list_editable = ('featured', 'public', )
     list_filter = ('contributor', 'difficulties', 'topics', 'tools', 'skills', )
     exclude = ('url_hash',)
-    prepopulated_fields = {'slug': ('name',),}
+    prepopulated_fields = {'slug': ('name',), }
     # inlines = [ProjectStepInline,]
 
 
 class TagAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'value':('label',),}
+    prepopulated_fields = {'value': ('label',), }
     fieldsets = (
         (None, {
             'fields': ('label', 'value', ),

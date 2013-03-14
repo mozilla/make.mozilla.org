@@ -30,6 +30,8 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
 
+    (r'^robots.txt$', 'make_mozilla.base.views.root.robots'),
+
     (r'', include(make_mozilla.pages.urls)),
 )
 

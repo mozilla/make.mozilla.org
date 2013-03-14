@@ -8,9 +8,13 @@ from django.db import models
 from make_mozilla import tools
 from make_mozilla import events
 from make_mozilla.core import fields
+from make_mozilla.projects.managers import ProjectsManager
 
 
 class Project(models.Model):
+
+    objects = ProjectsManager()
+
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, default='')
     teaser = models.TextField()
@@ -34,9 +38,11 @@ class Project(models.Model):
     topics = models.ManyToManyField('Topic', blank=True, null=True)
     tools = models.ManyToManyField(tools.models.Tool, blank=True, null=True)
     skills = models.ManyToManyField('Skill', blank=True, null=True)
+    public = models.BooleanField(default=False,
+        help_text="Check this box when you're happy with the project content and want users to see it")
 
     class Meta:
-        ordering = ['-added',]
+        ordering = ['-added', ]
 
     def __init__(self, *args, **kwargs):
         super(Project, self).__init__(*args, **kwargs)
@@ -147,7 +153,7 @@ class Contributor(models.Model):
     def website(self):
         if self.partner:
             return self.partner.website
-        return none
+        return None
 
     @property
     def logo(self):

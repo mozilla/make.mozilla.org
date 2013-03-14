@@ -1,0 +1,10 @@
+{% if DEBUG %}
+User-agent: *
+Disallow: /
+{% else %}
+User-agent: *
+
+{% for p in hidden_projects %}
+Disallow: {{ p.get_absolute_url() }}
+{% endfor %}
+{% endif %}
