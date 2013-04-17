@@ -11,7 +11,11 @@
             {% if waffle.switch('teach_in_nav') %}
                 <li class="teach"><a href="{{ url('page', 'teach') }}">Teach</a></li>
             {% endif %}
-            <li class="about"><a href="{{ url('page', 'about') }}">About</a></li>
+            {% if waffle.switch('party_in_nav') %}
+                <li class="party"><a href="{{ url('page', 'party') }}">Party</a></li>
+            {% else %}
+                <li class="about"><a href="{{ url('page', 'about') }}">About</a></li>
+            {% endif %}
         </ul>
     </div>
 </div>
