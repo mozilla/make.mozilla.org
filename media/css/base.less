@@ -257,7 +257,8 @@ object {
 #page-kits #header .teach a,
 #page-connect #header .teach a,
 #page-network #header .teach a,
-.section-teach #header .teach a {
+.section-teach #header .teach a,
+#page-party #header .party a {
 	background: #ED1C24;
 	color: #FFF;
 	border: none;
@@ -274,7 +275,8 @@ object {
 #page-network #header .teach a::after,
 #page-kits #header .teach a::after,
 .section-news #header .news a::after,
-.section-teach #header .teach a::after  {
+.section-teach #header .teach a::after,
+#page-party #header .party a::after  {
 	content: "";
 	position: absolute;
 	top: 100%;
@@ -311,7 +313,13 @@ object {
 	.section-tools #header .tools a::after,
 	.section-events #header .events a::after,
 	#page-about #header .about a::after,
-	.section-news #header .news a::after {
+	.section-news #header .news a::after,
+	#page-teach #header .teach a::after,
+	#page-connect #header .teach a::after,
+	#page-network #header .teach a::after,
+	#page-kits #header .teach a::after,
+	.section-teach #header .teach a::after,
+	#page-party #header .party a::after {
 		border-width: 20px 40px 0 40px;
 	}
 }
@@ -342,7 +350,13 @@ object {
 	.section-tools #header .tools a::after,
 	.section-events #header .events a::after,
 	#page-about #header .about a::after,
-	.section-news #header .news a::after {
+	.section-news #header .news a::after,
+	#page-teach #header .teach a::after,
+	#page-connect #header .teach a::after,
+	#page-network #header .teach a::after,
+	#page-kits #header .teach a::after,
+	.section-teach #header .teach a::after,
+	#page-party #header .party a::after {
 		border-width: 0;
 	}
 }
@@ -5237,6 +5251,7 @@ a.mozilla-video-control-overlay {
 .mozilla-video-player-content .video-download-links a:hover {
     color: #888;
 }
+
 /** a bunch of hacks for the ITU page **/
 .itu section .content ul {
 	border-left: none;
@@ -5316,4 +5331,228 @@ a.mozilla-video-control-overlay {
 }
 #videos article iframe {
 	margin-bottom: 1em;
+
+/* 2013 Maker party hacks */
+#page-party {
+	#content .constrained {
+		text-align: center;
+		h1 {
+			font-size: 4em;
+			margin-top: 0;
+			span {
+				display: block;
+				font-size: 0.6em;
+			}
+		}
+	}
+	#section-1 {
+		header {
+			box-shadow: none;
+			margin-bottom: 0;
+		}
+		h2 {
+			color: #73cee2;
+			text-transform: uppercase;
+			font-size: 0.8em;
+			letter-spacing: 0.2em;
+		}
+		p.shout {
+			font-size: 2em;
+			line-height: 1.5;
+			margin-top: 0;
+		}
+		#party_form {
+			background: #06364a url(../img/party/wavy-bg.png) repeat 0 0;
+			margin: 2em;
+			box-shadow: none;
+			text-align: left;
+			overflow: hidden;
+			label {
+				float: left;
+				width: auto;
+				margin-left: 0;
+				line-height: 1.5;
+				text-align: left;
+				font-size: 0.8em;
+				text-shadow: none;
+				color: #fff;
+				cursor: pointer; 
+			}
+			label[for="email"] {
+				background: #fff url(../img/party-email.png) no-repeat 20px 16px;
+				height: 73px;
+				width: 112px;
+				border-right: 2px solid #000;
+				position: absolute;
+				left: 0;
+				top: 0;
+				text-indent: -99999px;
+				padding: 0;
+			}
+			input {
+				padding: 2em;
+				border-radius: 0;
+				height: auto;
+				line-height: auto;
+				font-size: 0.8em;
+				border: none;
+				width: auto;
+			}
+			input[type="email"] {
+				padding-left: 130px;
+				width: 100%;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				max-width: none;
+				line-height: 1;
+			}
+			input[type="submit"] {
+				text-transform: uppercase;
+				padding: 2em 4em;
+				margin-left: 1px;
+				color: #fff;
+				background: #73cee2;
+				background: rgba(115, 206, 226, 0.8);
+				font-weight: bold;
+			}
+			input[type="submit"]:hover {
+				background: #73cee2;
+			}
+			.form_fields {
+				overflow: hidden;
+				width: 74%;
+				float: left;
+				position: relative;
+			}
+			.extra {
+				overflow: hidden;
+				margin-top: 0.2em;
+				input {
+					float: left;
+				}
+				label {
+					width: 90%;
+				}
+			}
+		}
+	}
+	#section-2 {
+		background: #f3f3f4;
+		margin: -18px 0.2em 0 0.2em;
+		header {
+			box-shadow: none;
+			background: #f3f3f4;
+			margin-bottom: 0;
+		}
+		ul {
+			margin: 0;
+			padding: 0 0 1em;
+			border-left: none;
+			list-style-type: none;
+			text-align: left;
+		}
+		.party_hosts {
+			overflow: hidden;
+			margin-left: -2%;
+			text-align: center;
+			li {
+				float: left;
+				width: 31%;
+				margin-left: 2%;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+				padding: 0;
+				background: #fff;
+				border-radius: 4px;
+			}
+			img {
+				padding: 2em 0;
+				display: block;
+				margin: 0 auto;
+			}
+		}
+		header h2,
+		.mini {
+			font-size: 14px;
+			color: #000;
+			font-weight: bold;
+		}
+		.commitment {
+			.org-name {
+				margin-bottom: 0;
+			}
+			p {
+				margin-top: 0;
+			}
+		}
+		h3 {
+			text-align: left;
+		}
+	}
+}
+@media screen and (max-width: 950px) {
+	#page-party {
+		#section-1 {
+			#party_form {
+				.form_fields {
+					width: 60%;
+				}
+			}
+		}
+	}
+}
+@media screen and (max-width: 700px) {
+	#page-party {
+		#section-1 {
+			#party_form {
+				.form_fields {
+					width: 100%;
+					margin-bottom: 1em;
+				}
+				label[for="email"] {
+					position: absolute;
+					left: -99999em;
+					height: 1px;
+					overflow: hidden;
+				}
+				input[type="email"] {
+					padding-left: 2em;
+				}
+				input[type="submit"] {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+@media screen and (max-width: 500px) {
+	#page-party {
+		#section-2 {
+			.party_hosts {
+				margin-left: 0;
+				li {
+					float: none;
+					margin-left: 0;
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+@media screen and (max-width: 400px) {
+	#page-party {
+		#section-1 {
+			#party_form {
+				padding: 1em 20px;
+				label {
+					display: inline;
+					margin-right: 0;
+					float: none;
+				}
+				input[type="checkbox"] {
+					display: inline;
+				}
+			}
+		}
+	}
 }

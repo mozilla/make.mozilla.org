@@ -110,10 +110,11 @@ def edit_or_update(request, event):
             models.EventAndVenueUpdater.update(event, new_event, event.venue, new_venue)
             return http.HttpResponseRedirect(reverse('event', kwargs={'event_hash': event.hash}))
     else:
-        ef = forms.EventForm(instance = event)
-        vf = forms.VenueForm(instance = event.venue)
+        ef = forms.EventForm(instance=event)
+        vf = forms.VenueForm(instance=event.venue)
         lf = forms.PrivacyAndLegalForm()
-    return _render_event_creation_form(request, ef, vf, lf, template = 'events/edit.html', event = event)
+    return _render_event_creation_form(request, ef, vf, lf, template='events/edit.html', event=event)
+
 
 @login_required
 @verified_ownership
@@ -129,7 +130,7 @@ def delete(request, event):
     return jingo.render(request, 'events/delete.html', {'event': event})
 
 
-def _render_event_creation_form(request, event_form, venue_form, privacy_and_legal_form, template = 'events/new.html', event = None):
+def _render_event_creation_form(request, event_form, venue_form, privacy_and_legal_form, template='events/new.html', event=None):
     fieldsets = [
         forms.Fieldset(event_form, ('kind',)),
         forms.Fieldset(event_form, ('name', 'event_url', 'description', 'public')),
@@ -177,6 +178,7 @@ def details(request, event_hash):
     event = get_object_or_404(models.Event, url_hash=event_hash)
     return jingo.render(request, 'events/detail.html', {'event': event})
 
+
 @login_required
 def mine(request):
     return jingo.render(request, 'events/mine.html', {
@@ -190,16 +192,23 @@ def search(request):
     location = request.GET.get('location')
 
     if location:
-        url="http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % urlquote_plus(location)
-        response = urllib2.urlopen(url)
-        results = json.loads(response.read()).get('results', ())
+        url = "http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % urlquote_plus(location)
+        # it was possible to cause a 500 by sending in a big string
+        # to urllib2 (raises a 414), working around that and returning
+        # an empty list
+        # https://bugzilla.mozilla.org/show_bug.cgi?id=847258
+        try:
+            response = urllib2.urlopen(url)
+            results = json.loads(response.read()).get('results', ())
+        except urllib2.URLError:
+            results = ()
     else:
         results = ()
 
     if len(results) == 1:
         return http.HttpResponseRedirect("%s?%s" % (reverse('events.near'), urlencode({
-            'lat': results[0].get('geometry',{}).get('location',{}).get('lat',''),
-            'lng': results[0].get('geometry',{}).get('location',{}).get('lng',''),
+            'lat': results[0].get('geometry', {}).get('location', {}).get('lat', ''),
+            'lng': results[0].get('geometry', {}).get('location', {}).get('lng', ''),
         })))
 
     return jingo.render(request, 'events/search.html', {'results': results, 'location': location})
