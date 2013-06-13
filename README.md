@@ -1,3 +1,9 @@
+****
+**This repo is now deprecated**
+
+webmaker.org can now been found at https://github.com/mozilla/webmaker.org
+****
+
 Local development
 =================
 
