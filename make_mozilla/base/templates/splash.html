@@ -3,50 +3,18 @@
 {% block section_type %}homepage{% endblock %}
 
 {% block content %}
-<div class="amuse pager pager-with-tabs pager-auto-rotate pager-no-history" id="home-promo">
+<div class="amuse pager" id="home-promo">
     <div class="default-page pager-content">
     	<div class="pager-page" id="page-promo-webmakers">
-            <a href="http://mozilla.org/webmaker/videos/">
-                <img src="{{ MEDIA_URL }}img/carousel/webmaker-video.jpg" alt="" />
+            <a href="{{ url('page', 'party') }}">
+                <img src="{{ MEDIA_URL }}img/carousel/party-hero.jpg" alt="" />
                 <div class="pager-text">
-                    <h2 class="pager-title">Meet the webmakers</h2>
-                    <p>Let's teach the world the web. Meet some of the global community making it happen.</p>	
+                    <h2 class="pager-title">Join the Maker Party!</h2>
+                    <p>From now until September 15, thousands of Webmakers from around the world are throwing parties to make and share amazing projects on the web.</p>
+                    <p>Join Us</p>
                 </div>
         	</a>
         </div>
-        <div class="pager-page" id="page-promo-code-party">
-            <a href="https://webmaker.org/events/">
-                <img src="{{ MEDIA_URL }}img/carousel/SCP.gif" alt="" />
-                <div class="pager-text">
-                    <h2 class="pager-title">Summer Code Party</h2>
-                    <p>Meet, make, and share your creations with friends to learn some code this summer.</p>  
-                </div>
-            </a>
-        </div>
-        <div class="pager-page" id="page-promo-popcorn">
-            <a href="http://maker.mozillapopcorn.org">
-                <img src="{{ MEDIA_URL }}img/carousel/popcorn.jpg" alt="" />
-                <div class="pager-text">
-                    <h2 class="pager-title">Supercharge web video with Popcorn</h2>
-                    <p>Popcorn is revolutionizing video on the web. It's free, open and easy to use. Try it today.</p>
-                </div>
-            </a>
-        </div>
-        <div class="pager-page" id="page-promo-join">
-            <a href="https://sendto.mozilla.org/page/contribute/join-mozilla?source=webmaker_home">
-                <img src="{{ MEDIA_URL }}img/carousel/join.jpg" alt="" />
-                <div class="pager-text">
-                    <h2 class="pager-title">Join Mozilla</h2>
-                    <p>Make a donation today to support Mozilla's work building a generation of webmakers.</p>  
-                </div>
-            </a>
-        </div>
-    <ul class="pager-tabs">
-        <li id="tab-webmakers"><a href="#" class="selected">● <span>read about Make the webmakers</span></a></li>
-        <li id="tab-code-party"><a href="#">● <span>read about Summer Code Party</span></a></li>
-        <li id="tab-popcorn"><a href="#">● <span>read about Make video pop with Popcorn</span></a></li>
-        <li id="tab-join"><a href="#">● <span>read about Join Mozilla</span></a></li>
-    </ul>
     </div>
 </div>
 <div class="veg">
