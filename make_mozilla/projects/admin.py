@@ -28,6 +28,16 @@ class TagAdmin(admin.ModelAdmin):
     )
 
 
+class GroupAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name', ), }
+
+
+class GroupMembershipAdmin(admin.ModelAdmin):
+    list_display = ('project', 'group', 'order', )
+    list_editable = ('order', )
+    list_filter = ('group', )
+
+
 class TopicAdmin(TagAdmin):
     pass
 
@@ -45,6 +55,8 @@ class ContributorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Project, ProjectAdmin)
+admin.site.register(models.Group, GroupAdmin)
+admin.site.register(models.GroupMembership, GroupMembershipAdmin)
 admin.site.register(models.Topic, TopicAdmin)
 admin.site.register(models.Difficulty, DifficultyAdmin)
 admin.site.register(models.Skill, SkillAdmin)

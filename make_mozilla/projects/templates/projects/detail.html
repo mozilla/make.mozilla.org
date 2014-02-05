@@ -29,6 +29,14 @@
             {% endif %}
         {% endfor %}
     </dl>
+    {% if project.groups %}
+        <h4>A project from:</h4>
+        <ul>
+            {% for g in project.groups %}
+                <li><a href="{{ g.get_absolute_url() }}">The {{ g.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </div>
 
 {% if project.contributor %}
