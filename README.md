@@ -89,7 +89,7 @@ GeoDjango
 ---------
 
 GeoDjango is installed as part of Django. You need to take a look at the installation 
-instructions at [https://docs.djangoproject.com/en/1.3/ref/contrib/gis/install/#post-installation] 
+instructions at [https://docs.djangoproject.com/en/1.10/ref/contrib/gis/install/postgis/#post-installation] 
 to get PostGIS configured properly with Django. Ubuntu's version ships with a postgis-template generation script, which you can see used in `./puppet/manifests/classes/postgis.pp`
 
 Once you've installed postgis, you need to create a template for it, and then
