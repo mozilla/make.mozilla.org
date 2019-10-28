@@ -11,7 +11,7 @@ In addition to the more specific requirements below you need the standard set of
 to get playdoh installed:
 
 * Xcode (with the Command Line Tools installed)
-* mySQL (a playdoh dependancy - though we're not using it for this project)
+* mySQL (a playdoh dependency - though we're not using it for this project)
 * node and lessc
 * wget
 
